@@ -20,10 +20,11 @@ public class WallBounce : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         Rigidbody rigidbody = collision.collider.attachedRigidbody;
+        Vector3 coll = collision.gameObject.transform.position;
 
-        if(rigidbody != null)
+        if (rigidbody != null)
         {
-            Vector3 forceDirection = collision.gameObject.transform.position - transform.position;
+            Vector3 forceDirection = new Vector3 ( coll.x, coll.y, -coll.z);
             rigidbody.AddForce(forceDirection * forceMagnitude , ForceMode.Impulse);
         }
     }

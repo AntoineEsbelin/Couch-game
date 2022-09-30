@@ -336,7 +336,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f32a2ddc9bac984fa172c11714e1f9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forceMagnitude: 3
+  forceMagnitude: 1
 --- !u!1 &524563413
 GameObject:
   m_ObjectHideFlags: 0
@@ -644,7 +644,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f32a2ddc9bac984fa172c11714e1f9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forceMagnitude: 3
+  forceMagnitude: 1
 --- !u!1 &1107482853
 GameObject:
   m_ObjectHideFlags: 0
@@ -756,7 +756,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f32a2ddc9bac984fa172c11714e1f9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forceMagnitude: 3
+  forceMagnitude: 1
 --- !u!1 &1467982538
 GameObject:
   m_ObjectHideFlags: 0
@@ -1103,7 +1103,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2031043956}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 6ca05e0c21da0c9489544c26bd352712, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -1248,4 +1248,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f32a2ddc9bac984fa172c11714e1f9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forceMagnitude: 3
+  forceMagnitude: 1
