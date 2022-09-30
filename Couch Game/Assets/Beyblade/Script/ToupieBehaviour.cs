@@ -25,7 +25,8 @@ public class ToupieBehaviour : MonoBehaviour
     private Vector3 impact = Vector3.zero;
     private bool playerHit;
     public float impactForce;
-    private Vector3 lastVelocity;
+    private Vector3 reflect;
+    
 
     [Header("Charge")]
     public float chargeSpeed;
@@ -114,7 +115,6 @@ public class ToupieBehaviour : MonoBehaviour
         
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
-        lastVelocity = controller.velocity;
         if (chargeState)
         {
             StartCoroutine(Rushing());
@@ -126,14 +126,12 @@ public class ToupieBehaviour : MonoBehaviour
             
         }
         
-        
-        
     }
 
     IEnumerator Repulsion()
     {
-        controller.Move(impact * Time.deltaTime);
-        yield return new WaitForSeconds(1f);
+        controller.SimpleMove(reflect * 10);
+        yield return new WaitForSeconds(0.5f);
         playerHit = false;
     }
 
@@ -155,12 +153,6 @@ public class ToupieBehaviour : MonoBehaviour
         return repulse;
     }
 
-    private void OnControllerColliderHit(ControllerColliderHit hit)
-    {
-        
-        
-    }
-    
     private void OnCollisionEnter(Collision coll)
     {
         if (coll.collider.CompareTag("Wall"))
@@ -168,14 +160,12 @@ public class ToupieBehaviour : MonoBehaviour
             print("hit");
             if (chargeState)
                 chargeState = false;
+            playerHit = true;
             
-            
-            
-            var reflect = Vector3.Reflect(controller.velocity,coll.contacts[0].normal);
+            reflect = Quaternion.AngleAxis(180, coll.contacts[0].normal) * transform.forward * -1;
             reflect.Normalize();
             
-            impact = AddImpact(reflect, (20));
-            playerHit = true;
+            
 
         }
         

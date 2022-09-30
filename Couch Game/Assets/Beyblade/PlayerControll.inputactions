@@ -157,6 +157,17 @@
                 },
                 {
                     "name": "",
+                    "id": "5d6e0cbf-62de-4192-81ea-6f98d112f9ee",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Charge",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "6754091a-00e5-4325-8f40-fd3029463cd7",
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "Hold",
