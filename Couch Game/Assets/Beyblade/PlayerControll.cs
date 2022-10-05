@@ -183,7 +183,7 @@ public partial class @PlayerControll : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Charge"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -192,7 +192,7 @@ public partial class @PlayerControll : IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""6754091a-00e5-4325-8f40-fd3029463cd7"",
                     ""path"": ""<Gamepad>/buttonSouth"",
-                    ""interactions"": ""Hold"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Jump"",
@@ -205,7 +205,7 @@ public partial class @PlayerControll : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false

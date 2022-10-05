@@ -11,9 +11,7 @@ public class ToupieBehaviour : MonoBehaviour
 
     [Header("Input")]
     public PlayerControll playerControl;
-    private InputAction move;
     private InputAction charge;
-    private InputAction jump;
 
     [Header("Mouvement")]
     public float speed = 6f;
@@ -26,6 +24,8 @@ public class ToupieBehaviour : MonoBehaviour
     private bool playerHit;
     public float impactForce;
     private Vector3 reflect;
+    private Vector3 direction;
+    private float jumpInput;
     
 
     [Header("Charge")]
@@ -46,17 +46,27 @@ public class ToupieBehaviour : MonoBehaviour
     
     private void OnEnable()
     {
-        move = playerControl.Player.Move;
         charge = playerControl.Player.Charge;
-        jump = playerControl.Player.Jump;
-        
-        jump.Enable();
-        move.Enable();
         charge.Enable();
 
         charge.performed += PreCharge;
         charge.canceled += Rush;
 
+    }
+    
+    private void OnDisable()
+    {
+        charge.Disable();
+    }
+
+    public void OnMove(InputAction.CallbackContext obj)
+    {
+        direction = obj.ReadValue<Vector3>().normalized;
+    }
+    
+    public void OnJump(InputAction.CallbackContext obj)
+    {
+        jumpInput = obj.ReadValue<float>();
     }
 
     private void Rush(InputAction.CallbackContext obj)
@@ -72,18 +82,12 @@ public class ToupieBehaviour : MonoBehaviour
         speed = 0;
     }
 
-    private void OnDisable()
-    {
-        jump.Disable();
-        move.Disable();
-        charge.Disable();
-        
-    }
+    
     
     void FixedUpdate()
     {
         
-        Vector3 direction = move.ReadValue<Vector3>().normalized;
+        
         if (direction.magnitude >= 0.1f && chargeState == false)
         {
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
@@ -98,11 +102,7 @@ public class ToupieBehaviour : MonoBehaviour
     }
     void Update()
     {
-        
-        
-        float jumpInput = jump.ReadValue<float>();
-        
-       isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
         if (isGrounded && velocity.y < 0)
         {
             velocity.y = -2f;
