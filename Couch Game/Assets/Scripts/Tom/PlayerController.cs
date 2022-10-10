@@ -47,15 +47,17 @@ public class PlayerController : MonoBehaviour
             if (isMoving)
             {
                 move = input.move * movement.speed;
+
+                Quaternion q = Quaternion.LookRotation(moveDirection.normalized);
+            
+                refs.mesh.rotation = Quaternion.RotateTowards(refs.mesh.rotation, q, movement.rotationSpeed * Time.deltaTime);
             }
             else
             {
                 move = Vector2.MoveTowards(move, Vector2.zero, movement.dx);
             }
             //if (moveDirection == Vector3.zero) return;
-            Quaternion q = Quaternion.LookRotation(moveDirection.normalized);
             
-            refs.mesh.rotation = Quaternion.RotateTowards(refs.mesh.rotation, q, movement.rotationSpeed * Time.deltaTime);
         }
 
         void ApplyMovement()
