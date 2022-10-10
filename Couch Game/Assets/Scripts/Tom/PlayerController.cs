@@ -83,5 +83,15 @@ public class PlayerController : MonoBehaviour
             input.move = v.Get<Vector2>();
         }
 
+        void OnSpin(InputValue v)
+        {
+            Debug.Log("spin");
+        }
+
+        void OnQuickSpin(InputValue v)
+        {
+            Debug.Log("quick spin");
+        }
+
     #endregion
 }
