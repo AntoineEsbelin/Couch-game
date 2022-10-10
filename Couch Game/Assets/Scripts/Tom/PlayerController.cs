@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
     public References refs;
 
     bool isMoving;
+    bool dashing;
+    Vector3 dashDir;
 
     #region Updates
 
@@ -21,8 +23,23 @@ public class PlayerController : MonoBehaviour
         {
             isMoving = input.move != Vector2.zero;
 
+            if (input.spinRelease)
+            {
+                input.spinRelease = false;
+                dashing = true;
+                dashDir = refs.mesh.rotation.eulerAngles;
+                dashDuration = movement.dashDurationMax; //mettre une fonction qui calcule le temps de dash en avec le temps de charge du spin
+            }
+
             Movement();
             ApplyMovement();
+            if (dashDuration > 0) DashMovement();
+
+            #region Timers
+
+                if (dashDuration > 0) dashDuration = Mathf.Clamp(dashDuration - Time.deltaTime, 0, movement.dashDurationMax);
+
+            #endregion
         }
 
     #endregion
@@ -35,18 +52,28 @@ public class PlayerController : MonoBehaviour
             public float speed = 8f;
             public float dx = 4f; //décélération
             public float rotationSpeed = 800f;
+
+            public float dashSpeedMax = 30f;
+            public float dashDurationMax = 3f;
         }
         public MovementSettings movement;
 
         Vector2 move;
 
+        float dashDuration;
+
         void Movement()
         {
             var moveDirection = refs.orientation.forward * input.move.y + refs.orientation.right * input.move.x;
 
+            if (dashDuration > 0) return;
+
             if (isMoving)
             {
-                move = input.move * movement.speed;
+                if (input.spinCharge)
+                    move = Vector2.zero;
+                else
+                    move = input.move * movement.speed;
 
                 Quaternion q = Quaternion.LookRotation(moveDirection.normalized);
             
@@ -58,6 +85,11 @@ public class PlayerController : MonoBehaviour
             }
             //if (moveDirection == Vector3.zero) return;
             
+        }
+
+        void DashMovement()
+        {
+            move = dashDir * movement.dashSpeedMax;
         }
 
         void ApplyMovement()
@@ -73,25 +105,34 @@ public class PlayerController : MonoBehaviour
         [System.Serializable] public class Inputs
         {
             public Vector2 move;
+            public bool spinCharge;
+            public bool spinRelease;
         }
 
         [HideInInspector] public Inputs input;
 
 
-        void OnMove(InputValue v)
+        public void OnMove(InputAction.CallbackContext ctx)
         {
-            input.move = v.Get<Vector2>();
+            input.move = ctx.ReadValue<Vector2>();
         }
 
-        void OnSpin(InputValue v)
+        public void OnSpin(InputAction.CallbackContext ctx)
         {
-            Debug.Log("spin");
+            if (ctx.performed)
+                input.spinCharge = true;
+            
+            if (ctx.canceled)
+            {
+                input.spinCharge = false;
+                input.spinRelease = true;
+            }
         }
 
-        void OnQuickSpin(InputValue v)
-        {
-            Debug.Log("quick spin");
-        }
+        // public void OnQuickSpin(InputAction.CallbackContext ctx)
+        // {
+        //     Debug.Log("quick spin");
+        // }
 
     #endregion
 }
