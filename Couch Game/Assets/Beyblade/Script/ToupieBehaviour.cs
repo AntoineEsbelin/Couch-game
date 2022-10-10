@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
 public class ToupieBehaviour : MonoBehaviour
 {
     
@@ -13,6 +14,8 @@ public class ToupieBehaviour : MonoBehaviour
     [Header("Input")]
     public PlayerControll playerControl;
     private InputAction charge;
+    [HideInInspector]public int playerID = 0;
+    public Vector3 startPos;
 
     public StateParam param;
     public enum StateParam
@@ -59,6 +62,12 @@ public class ToupieBehaviour : MonoBehaviour
     private void Awake()
     {
         playerControl = new PlayerControll();
+        transform.position = startPos;
+    }
+
+    private void Start()
+    {
+        
     }
     
     private void OnEnable()
