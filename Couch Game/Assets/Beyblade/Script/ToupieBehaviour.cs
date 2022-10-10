@@ -25,6 +25,8 @@ public class ToupieBehaviour : MonoBehaviour
     private Vector3 impact = Vector3.zero;
     private bool playerHit;
     public float impactForce;
+    private Vector3 reflect;
+    
 
     [Header("Charge")]
     public float chargeSpeed;
@@ -75,6 +77,7 @@ public class ToupieBehaviour : MonoBehaviour
         jump.Disable();
         move.Disable();
         charge.Disable();
+        
     }
     
     void FixedUpdate()
@@ -95,12 +98,11 @@ public class ToupieBehaviour : MonoBehaviour
     }
     void Update()
     {
+        
+        
         float jumpInput = jump.ReadValue<float>();
         
-        print("vel = " + Mathf.Abs(controller.velocity.x));
-        print(" impact = "+ Mathf.Abs(controller.velocity.x) * impactForce);
-        
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+       isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
         if (isGrounded && velocity.y < 0)
         {
             velocity.y = -2f;
@@ -113,7 +115,6 @@ public class ToupieBehaviour : MonoBehaviour
         
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
-
         if (chargeState)
         {
             StartCoroutine(Rushing());
@@ -129,8 +130,8 @@ public class ToupieBehaviour : MonoBehaviour
 
     IEnumerator Repulsion()
     {
-        controller.Move(impact * Time.deltaTime);
-        yield return new WaitForSeconds(1f);
+        controller.SimpleMove(reflect * 10);
+        yield return new WaitForSeconds(0.5f);
         playerHit = false;
     }
 
@@ -152,29 +153,20 @@ public class ToupieBehaviour : MonoBehaviour
         return repulse;
     }
 
-    private void OnControllerColliderHit(ControllerColliderHit hit)
+    private void OnCollisionEnter(Collision coll)
     {
-        
-        if (hit.collider.tag == "Wall")
+        if (coll.collider.CompareTag("Wall"))
         {
+            print("hit");
             if (chargeState)
                 chargeState = false;
+            playerHit = true;
             
-            print("hit");
-            Rigidbody body = hit.collider.attachedRigidbody;
+            reflect = Quaternion.AngleAxis(180, coll.contacts[0].normal) * transform.forward * -1;
+            reflect.Normalize();
             
-            if (body != null)
-            {
-                Vector3 direction = transform.position - hit.collider.transform.position;
-                direction.y = 0;
-                direction.Normalize();
-                
-                impact = AddImpact(direction, (impactForce));
-                playerHit = true;
-                
+            
 
-            }
-            
         }
         
     }
