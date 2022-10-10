@@ -164,16 +164,18 @@ public class ToupieBehaviour : MonoBehaviour
     }
     
 
-    private void OnCollisionEnter(Collision coll)
+    private void OnControllerColliderHit(ControllerColliderHit coll)
     {
+        
         if (coll.collider.CompareTag("Wall"))
         {
+            print("hit");
             if (chargeParam.chargeState)
                 chargeParam.chargeState = false;
             
             playerHit = true;
             
-            reflect = Quaternion.AngleAxis(180, coll.contacts[0].normal) * transform.forward * -1;
+            reflect = Quaternion.AngleAxis(180, coll.normal) * transform.forward * -1;
             reflect.Normalize();
 
         }

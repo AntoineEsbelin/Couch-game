@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEditor;
 
-[CustomEditor(typeof(ToupieBehaviour))]
+// [CustomEditor(typeof(Transform))]
 public class ToupieBehaviourEditor : Editor
 {
     public override void OnInspectorGUI()
@@ -35,7 +35,8 @@ public class ToupieBehaviourEditor : Editor
         
         playerB.groundDistance = EditorGUILayout.Slider("GroundCheck Distance",playerB.groundDistance, 0f, 1f);
         
-        playerB.groundMask = EditorGUILayout.LayerField("Ground Layer",playerB.groundMask);
+        
+        playerB.groundMask = EditorGUILayout.LayerField("Ground Layer", playerB.groundMask);
         
         EditorGUILayout.Space(10);
         playerB.repulseForce = EditorGUILayout.Slider("Repulse Force",playerB.repulseForce, .1f, 10f);
