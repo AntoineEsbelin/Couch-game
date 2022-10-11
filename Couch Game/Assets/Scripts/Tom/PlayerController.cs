@@ -11,11 +11,13 @@ public class PlayerController : MonoBehaviour
         public Transform orientation;
         public Transform mesh;
         public TrailRenderer trail;
+        public CapsuleCollider collider;
     }
     public References refs;
 
     bool isMoving;
     [SerializeField] private bool isSpinning;
+    
 
     bool dashing;
     bool canDash;
@@ -153,6 +155,8 @@ public class PlayerController : MonoBehaviour
             public bool spinCharge;
             public bool spinRelease;
             public bool counter;
+            [HideInInspector]public int playerID = 0;
+            public Vector3 startPos;
         }
 
         [HideInInspector] public Inputs input;
@@ -293,6 +297,18 @@ public class PlayerController : MonoBehaviour
             return true;
         }
         else return false;
+    }
+    
+    public IEnumerator DeathState()
+    {
+        refs.mesh.gameObject.SetActive(false);
+        refs.rb.isKinematic = true;
+        refs.collider.enabled = false;
+        transform.position = PlayerSpawnManager.instance.spawnLocations[input.playerID - 1].position;
+        yield return new WaitForSeconds(3f);
+        refs.mesh.gameObject.SetActive(true);
+        refs.rb.isKinematic = false;
+        refs.collider.enabled = true;
     }
     #endregion
 
