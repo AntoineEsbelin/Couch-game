@@ -205,16 +205,16 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4090859829251398628}
-  - component: {fileID: 4090859829251398630}
   - component: {fileID: 4353759886911780740}
-  - component: {fileID: 7108222460556794070}
+  - component: {fileID: 3506582711729914389}
+  - component: {fileID: 1112591704289274439}
   m_Layer: 0
   m_Name: ThirdPersoPlayer
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4090859829251398628
 Transform:
   m_ObjectHideFlags: 0
@@ -232,24 +232,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!143 &4090859829251398630
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4090859829251398619}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Height: 2
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4353759886911780740
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -277,7 +259,7 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7108222460556794070}
+      - m_Target: {fileID: 1112591704289274439}
         m_TargetAssemblyTypeName: ToupieBehaviour, Assembly-CSharp
         m_MethodName: OnMove
         m_Mode: 0
@@ -297,7 +279,7 @@ MonoBehaviour:
     m_ActionName: Player/Charge[/XInputControllerWindows/buttonWest,/Keyboard/q]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7108222460556794070}
+      - m_Target: {fileID: 1112591704289274439}
         m_TargetAssemblyTypeName: ToupieBehaviour, Assembly-CSharp
         m_MethodName: OnJump
         m_Mode: 0
@@ -356,7 +338,25 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &7108222460556794070
+--- !u!143 &3506582711729914389
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4090859829251398619}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1112591704289274439
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -368,7 +368,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d19017be09e7d8c4589bfd520bd2aa78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 4090859829251398630}
+  controller: {fileID: 3506582711729914389}
   playerID: 0
   startPos: {x: 0, y: 0, z: 0}
   param: 0
@@ -379,7 +379,7 @@ MonoBehaviour:
     jumpHeight: 3
   repulseForce: 5
   chargeParam:
-    chargeSpeed: 10
+    chargeSpeed: 5
     chargeState: 0
   groundCheck: {fileID: 4090859830285618530}
   groundDistance: 0.4

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-
+[RequireComponent(typeof(CharacterController))]
 public class ToupieBehaviour : MonoBehaviour
 {
     
@@ -62,12 +62,11 @@ public class ToupieBehaviour : MonoBehaviour
     private void Awake()
     {
         playerControl = new PlayerControll();
-        transform.position = startPos;
     }
 
     private void Start()
     {
-        
+        transform.position = startPos;
     }
     
     private void OnEnable()

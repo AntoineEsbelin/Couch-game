@@ -134,6 +134,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ThirdPersoPlayer
       objectReference: {fileID: 0}
+    - target: {fileID: 4090859829251398619, guid: e2a4eb7ae006ac645a0939ef5b801582, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4090859829251398628, guid: e2a4eb7ae006ac645a0939ef5b801582, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -178,6 +182,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4353759886911780740, guid: e2a4eb7ae006ac645a0939ef5b801582, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 706757074}
     - target: {fileID: 4353759886911780740, guid: e2a4eb7ae006ac645a0939ef5b801582, type: 3}
       propertyPath: m_NeverAutoSwitchControlSchemes
       value: 1
@@ -784,19 +792,7 @@ MonoBehaviour:
   m_JoinBehavior: 0
   m_PlayerJoinedEvent:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1845305317}
-        m_TargetAssemblyTypeName: PlayerSpawnManager, Assembly-CSharp
-        m_MethodName: OnPlayerJoined
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_PlayerLeftEvent:
     m_PersistentCalls:
       m_Calls: []
