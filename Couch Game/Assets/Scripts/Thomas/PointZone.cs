@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PointZone : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class PointZone : MonoBehaviour
         if(coll.CompareTag("Player"))
         {
             PlayerController deadPlayer = coll.GetComponent<PlayerController>();
+            PlayerInput playerInput = coll.GetComponent<PlayerInput>();
             //Give a certain amount of point at the last player touched
             if(deadPlayer.playersInteract.lastPlayerContact != null)
             {
@@ -36,7 +38,10 @@ public class PointZone : MonoBehaviour
                 Debug.Log($"{deadPlayer.name} SUICIDED !");
             }
             //MORT DU JOUEUR TOMBÉ
-
+                //Character Controller
+                    //coll.GetComponent<ToupieBehaviour>().StartCoroutine(coll.GetComponent<ToupieBehaviour>().DeathState());
+                //Rigidbody
+                
         }
     }
 }

@@ -10,6 +10,8 @@ public class ToupieBehaviour : MonoBehaviour
     
     [Header("Component")]
     public CharacterController controller;
+    public GameObject body;
+    
 
     [Header("Input")]
     public PlayerControll playerControl;
@@ -42,6 +44,7 @@ public class ToupieBehaviour : MonoBehaviour
     private float jumpInput;
 
     public float repulseForce = 10f;
+    [HideInInspector]public bool playerDead;
     
 
     public ChargeParam chargeParam;
@@ -172,6 +175,18 @@ public class ToupieBehaviour : MonoBehaviour
     
         }
         
+    }
+    
+    public IEnumerator DeathState()
+    {
+        body.SetActive(false);
+        controller.enabled = false;
+        moveParam.speed = 0;
+        transform.position = PlayerSpawnManager.instance.spawnLocations[playerID - 1].position;
+        yield return new WaitForSeconds(3f);
+        body.SetActive(true);
+        controller.enabled = true;
+        moveParam.speed = 6;
     }
     
     public void OnDrawGizmos()

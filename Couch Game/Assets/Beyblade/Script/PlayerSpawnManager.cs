@@ -7,10 +7,16 @@ using UnityEngine.InputSystem;
 public class PlayerSpawnManager : MonoBehaviour
 {
     public Transform[] spawnLocations;
-    
+    public static PlayerSpawnManager instance;
+
+    private void Awake()
+    {
+        if(instance != null)Destroy(gameObject);
+        instance = this;
+    }
     private void OnPlayerJoined(PlayerInput playerInput) 
     {
-        Debug.Log("PlayerInput ID: " + playerInput.playerIndex);
+        
         
         // Set the player ID, add one to the index to start at Player 1
         playerInput.gameObject.GetComponent<ToupieBehaviour>().playerID = playerInput.playerIndex + 1;
