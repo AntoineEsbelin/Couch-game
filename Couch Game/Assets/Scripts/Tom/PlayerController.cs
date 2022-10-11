@@ -25,36 +25,33 @@ public class PlayerController : MonoBehaviour
 
         void FixedUpdate()
         {
-            isMoving = input.move != Vector3.zero;
-
-            if (input.spinRelease)
-            {
-                input.spinRelease = false;
-                dashing = true;
-                //dashDir = refs.orientation.forward;
-                if (input.move == Vector3.zero)
-                {
-                    
-                }
-                dashDir = input.move;
-                dashDuration = movement.dashDurationMax; //mettre une fonction qui calcule le temps de dash avec le temps de charge du spin
-            }
-
-            Movement();
-            ApplyMovement();
-            if (dashDuration > 0) DashMovement();
-
-            #region Timers
-
-                if (dashDuration > 0) dashDuration = Mathf.Clamp(dashDuration - Time.deltaTime, 0, movement.dashDurationMax);
-
-            #endregion
             if(!CheckAllStatus())
             {
-                isMoving = input.move != Vector2.zero;
+                isMoving = input.move != Vector3.zero;
+
+                if (input.spinRelease)
+                {
+                    input.spinRelease = false;
+                    dashing = true;
+                    //dashDir = refs.orientation.forward;
+                    if (input.move == Vector3.zero)
+                    {
+                        
+                    }
+                    dashDir = input.move;
+                    dashDuration = movement.dashDurationMax; //mettre une fonction qui calcule le temps de dash avec le temps de charge du spin
+                }
 
                 Movement();
                 ApplyMovement();
+                if (dashDuration > 0) DashMovement();
+
+                #region Timers
+
+                    if (dashDuration > 0) dashDuration = Mathf.Clamp(dashDuration - Time.deltaTime, 0, movement.dashDurationMax);
+
+                #endregion
+
                 Countering();
                 TimerLastPlayer();
             }
@@ -155,7 +152,6 @@ public class PlayerController : MonoBehaviour
             public Vector3 move;
             public bool spinCharge;
             public bool spinRelease;
-            public Vector2 move;
             public bool counter;
         }
 

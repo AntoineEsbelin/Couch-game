@@ -19,6 +19,16 @@ public class PointZone : MonoBehaviour
                 //DEBUG
                 Debug.Log($"{deadPlayer.name} EJECTED !");
                 Debug.Log($"GIVE {pointGiven} points to {deadPlayer.playersInteract.lastPlayerContact.name}");
+
+                if(GameManager.instance.drawTimer)
+                {
+                    if(deadPlayer.playersInteract.lastPlayerContact.playersInteract.playerPoint > GameManager.instance.drawMaxPoint)
+                    {
+                        Debug.Log($"{deadPlayer.playersInteract.lastPlayerContact.name} WINNN");
+                        GameManager.instance.timeOut = true;
+                        //STOP THE ROUND
+                    }
+                }
             }
             else
             {
