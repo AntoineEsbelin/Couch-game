@@ -10,25 +10,33 @@ public class PlayerController : MonoBehaviour
         public Rigidbody rb;
         public Transform orientation;
         public Transform mesh;
+        public TrailRenderer trail;
     }
     public References refs;
 
     bool isMoving;
+
     bool dashing;
+    bool canDash;
     Vector3 dashDir;
 
     #region Updates
 
         void FixedUpdate()
         {
-            isMoving = input.move != Vector2.zero;
+            isMoving = input.move != Vector3.zero;
 
             if (input.spinRelease)
             {
                 input.spinRelease = false;
                 dashing = true;
-                dashDir = refs.mesh.rotation.eulerAngles;
-                dashDuration = movement.dashDurationMax; //mettre une fonction qui calcule le temps de dash en avec le temps de charge du spin
+                //dashDir = refs.orientation.forward;
+                if (input.move == Vector3.zero)
+                {
+                    
+                }
+                dashDir = input.move;
+                dashDuration = movement.dashDurationMax; //mettre une fonction qui calcule le temps de dash avec le temps de charge du spin
             }
 
             Movement();
@@ -58,7 +66,7 @@ public class PlayerController : MonoBehaviour
         }
         public MovementSettings movement;
 
-        Vector2 move;
+        Vector3 move;
 
         float dashDuration;
 
@@ -71,7 +79,7 @@ public class PlayerController : MonoBehaviour
             if (isMoving)
             {
                 if (input.spinCharge)
-                    move = Vector2.zero;
+                    move = Vector3.zero;
                 else
                     move = input.move * movement.speed;
 
@@ -81,7 +89,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                move = Vector2.MoveTowards(move, Vector2.zero, movement.dx);
+                move = Vector3.MoveTowards(move, Vector2.zero, movement.dx);
             }
             //if (moveDirection == Vector3.zero) return;
             
@@ -89,7 +97,9 @@ public class PlayerController : MonoBehaviour
 
         void DashMovement()
         {
-            move = dashDir * movement.dashSpeedMax;
+            Vector3 forward = refs.orientation.TransformDirection(Vector3.forward); 
+            move = forward * movement.dashSpeedMax;
+            Debug.Log(move);
         }
 
         void ApplyMovement()
@@ -104,7 +114,7 @@ public class PlayerController : MonoBehaviour
 
         [System.Serializable] public class Inputs
         {
-            public Vector2 move;
+            public Vector3 move;
             public bool spinCharge;
             public bool spinRelease;
         }
