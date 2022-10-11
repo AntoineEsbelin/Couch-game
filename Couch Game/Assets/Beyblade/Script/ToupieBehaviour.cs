@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(CharacterController))]
 public class ToupieBehaviour : MonoBehaviour
 {
     
@@ -13,6 +14,8 @@ public class ToupieBehaviour : MonoBehaviour
     [Header("Input")]
     public PlayerControll playerControl;
     private InputAction charge;
+    [HideInInspector]public int playerID = 0;
+    public Vector3 startPos;
 
     public StateParam param;
     public enum StateParam
@@ -60,22 +63,27 @@ public class ToupieBehaviour : MonoBehaviour
     {
         playerControl = new PlayerControll();
     }
+
+    private void Start()
+    {
+        transform.position = startPos;
+    }
     
     private void OnEnable()
     {
         charge = playerControl.Player.Charge;
         charge.Enable();
-
+    
         charge.performed += PreCharge;
         charge.canceled += Rush;
-
+    
     }
     
     private void OnDisable()
     {
         charge.Disable();
     }
-
+    
     public void OnMove(InputAction.CallbackContext obj)
     {
         direction = obj.ReadValue<Vector3>().normalized;
@@ -85,20 +93,20 @@ public class ToupieBehaviour : MonoBehaviour
     {
         jumpInput = obj.ReadValue<float>();
     }
-
+    
     private void Rush(InputAction.CallbackContext obj)
     {
-
+    
         chargeParam.chargeState = true;
         moveParam.speed = 6;
-
+    
     }
-
+    
     private void PreCharge(InputAction.CallbackContext obj)
     {
         moveParam.speed = 0;
     }
-
+    
     
     
     void FixedUpdate()
@@ -115,31 +123,15 @@ public class ToupieBehaviour : MonoBehaviour
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             
             controller.Move(moveDir * moveParam.speed * Time.fixedDeltaTime);
-            
         }
     }
     void Update()
     {
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-        
-        if (isGrounded && velocity.y < 0)
-        {
-            velocity.y = -2f;
-        }
-
-        if (jumpInput > 0 && isGrounded)
-        {
-            velocity.y = Mathf.Sqrt(moveParam.jumpHeight * -2f * moveParam.gravity);
-        }
-        
-        velocity.y += moveParam.gravity * Time.deltaTime;
-        controller.Move(velocity * Time.deltaTime);
-        
         if (chargeParam.chargeState)
         {
             StartCoroutine(Rushing());
         }
-
+    
         if (playerHit)
         {
             StartCoroutine(Repulsion());
@@ -147,14 +139,14 @@ public class ToupieBehaviour : MonoBehaviour
         }
         
     }
-
+    
     IEnumerator Repulsion()
     {
         controller.SimpleMove(reflect * repulseForce);
         yield return new WaitForSeconds(0.5f);
         playerHit = false;
     }
-
+    
     IEnumerator Rushing()
     {
         Vector3 forward = transform.TransformDirection(Vector3.forward);
@@ -163,23 +155,25 @@ public class ToupieBehaviour : MonoBehaviour
         chargeParam.chargeState = false;
     }
     
-
-    private void OnCollisionEnter(Collision coll)
+    
+    private void OnControllerColliderHit(ControllerColliderHit coll)
     {
+        
         if (coll.collider.CompareTag("Wall"))
         {
+            print("hit");
             if (chargeParam.chargeState)
                 chargeParam.chargeState = false;
             
             playerHit = true;
             
-            reflect = Quaternion.AngleAxis(180, coll.contacts[0].normal) * transform.forward * -1;
+            reflect = Quaternion.AngleAxis(180, coll.normal) * transform.forward * -1;
             reflect.Normalize();
-
+    
         }
         
     }
-
+    
     public void OnDrawGizmos()
     {
         if (isGrounded)
