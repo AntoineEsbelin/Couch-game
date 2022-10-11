@@ -32,11 +32,12 @@ public class ToupieBehaviour : MonoBehaviour
     {
         [Range(0, 10f)]public float speed = 6f;
         [Range(.01f, .5f)]public float turnSmoothTime = 0.1f;
+        [HideInInspector] public float turnSmoothVelocity;
         public float gravity = -9.81f;
         [Range(.1f, 5f)]public float jumpHeight = 3f;
     } 
     
-    private float turnSmoothVelocity;
+    
     private Vector3 velocity;
     private bool playerHit;
     private Vector3 reflect;
@@ -120,7 +121,7 @@ public class ToupieBehaviour : MonoBehaviour
         {
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, 
-                ref turnSmoothVelocity, moveParam.turnSmoothTime);
+                ref moveParam.turnSmoothVelocity, moveParam.turnSmoothTime);
             
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;

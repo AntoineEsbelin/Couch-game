@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
 
     #region Updates
 
+    
         void FixedUpdate()
         {
             if(!CheckAllStatus())
@@ -43,9 +44,22 @@ public class PlayerController : MonoBehaviour
                     dashDir = input.move;
                     dashDuration = movement.dashDurationMax; //mettre une fonction qui calcule le temps de dash avec le temps de charge du spin
                 }
+                
+                // juste en dessous est le déplacement du joueur que j'ai fait tu peux enlever stv tkt
+                if (input.move.magnitude >= 0.1f && input.spinCharge == false)
+                {
+                    float targetAngle = Mathf.Atan2(input.move.x, input.move.z) * Mathf.Rad2Deg;
+                    float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, 
+                        ref movement.turnSmoothVelocity, movement.turnSmoothTime);
+            
+                    transform.rotation = Quaternion.Euler(0f, angle, 0f);
+                    Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
 
-                Movement();
-                ApplyMovement();
+                    refs.rb.velocity = new Vector3(moveDir.x,0f,moveDir.z)* movement.speed * Time.fixedDeltaTime;
+                }
+
+                // Movement();
+                // ApplyMovement();
                 if (dashDuration > 0) DashMovement();
 
                 #region Timers
@@ -97,6 +111,8 @@ public class PlayerController : MonoBehaviour
             public float speed = 8f;
             public float dx = 4f; //décélération
             public float rotationSpeed = 800f;
+            [Range(.01f, .5f)]public float turnSmoothTime = 0.1f;
+            [HideInInspector] public float turnSmoothVelocity;
 
             public float dashSpeedMax = 30f;
             public float dashDurationMax = 3f;
@@ -109,26 +125,30 @@ public class PlayerController : MonoBehaviour
 
         void Movement()
         {
-            var moveDirection = refs.orientation.forward * input.move.y + refs.orientation.right * input.move.x;
-
-            if (dashDuration > 0) return;
-
-            if (isMoving)
-            {
-                if (input.spinCharge)
-                    move = Vector3.zero;
-                else
-                    move = input.move * movement.speed;
-
-                Quaternion q = Quaternion.LookRotation(moveDirection.normalized);
+            //Ne marchais pas du tout quand j'ai testé avec manette et clavier (j'ai changé ton input Action et mis les valeur en Vector 3)
             
-                refs.mesh.rotation = Quaternion.RotateTowards(refs.mesh.rotation, q, movement.rotationSpeed * Time.deltaTime);
-            }
-            else
-            {
-                move = Vector3.MoveTowards(move, Vector2.zero, movement.dx);
-            }
+            // var moveDirection = refs.orientation.forward * input.move.y + refs.orientation.right * input.move.x;
+            //
+            // if (dashDuration > 0) return;
+            //
+            // if (isMoving)
+            // {
+            //     if (input.spinCharge)
+            //         move = Vector3.zero;
+            //     else
+            //         move = input.move * movement.speed;
+            //
+            //     Quaternion q = Quaternion.LookRotation(moveDirection.normalized);
+            //
+            //     refs.mesh.rotation = Quaternion.RotateTowards(refs.mesh.rotation, q, movement.rotationSpeed * Time.deltaTime);
+            // }
+            // else
+            // {
+            //     move = Vector3.MoveTowards(move, Vector3.zero, movement.dx);
+            // }
             //if (moveDirection == Vector3.zero) return;
+            
+           
             
         }
 
@@ -136,7 +156,7 @@ public class PlayerController : MonoBehaviour
         {
             Vector3 forward = refs.orientation.TransformDirection(Vector3.forward); 
             move = forward * movement.dashSpeedMax;
-            Debug.Log(move);
+            
         }
 
         void ApplyMovement()
@@ -161,10 +181,13 @@ public class PlayerController : MonoBehaviour
 
         [HideInInspector] public Inputs input;
 
-
+        private void Start()
+        {
+            transform.position = input.startPos;
+        }
         public void OnMove(InputAction.CallbackContext ctx)
         {
-            input.move = ctx.ReadValue<Vector2>();
+            input.move = ctx.ReadValue<Vector3>();
         }
 
         public void OnSpin(InputAction.CallbackContext ctx)
@@ -184,9 +207,9 @@ public class PlayerController : MonoBehaviour
         //     Debug.Log("quick spin");
         // }
 
-        private void OnCounter(InputValue v)
+        public void OnCounter(InputAction.CallbackContext ctx)
         {
-            if(v.isPressed)input.counter = true;
+            if(ctx.performed)input.counter = true;
 
             if(!counter.prepCounter)
             {

@@ -44,7 +44,7 @@ public class PointZone : MonoBehaviour
             }
             else
             {
-                coll.GetComponent<PlayerController>().StartCoroutine(coll.GetComponent<ToupieBehaviour>().DeathState());
+                coll.GetComponent<PlayerController>().StartCoroutine(coll.GetComponent<PlayerController>().DeathState());
             }
                 
                 
