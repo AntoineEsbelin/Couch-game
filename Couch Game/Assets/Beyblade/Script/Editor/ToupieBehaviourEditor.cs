@@ -30,14 +30,7 @@ public class ToupieBehaviourEditor : Editor
         EditorGUILayout.Space(10);
         EditorGUILayout.LabelField("GroundCheck",EditorStyles.boldLabel);
         EditorGUILayout.Space(3);
-        playerB.groundCheck = (Transform)EditorGUILayout.ObjectField("Character Controller", 
-            playerB.groundCheck, typeof(Transform), true);
-        
-        playerB.groundDistance = EditorGUILayout.Slider("GroundCheck Distance",playerB.groundDistance, 0f, 1f);
-        
-        
-        playerB.groundMask = EditorGUILayout.LayerField("Ground Layer", playerB.groundMask);
-        
+
         EditorGUILayout.Space(10);
         playerB.repulseForce = EditorGUILayout.Slider("Repulse Force",playerB.repulseForce, .1f, 10f);
         
