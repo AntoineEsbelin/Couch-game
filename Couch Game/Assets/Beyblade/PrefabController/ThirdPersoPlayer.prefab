@@ -356,24 +356,13 @@ MonoBehaviour:
   controller: {fileID: 3506582711729914389}
   body: {fileID: 4090859828822750426}
   playerID: 0
-  startPos: {x: 0, y: 0, z: 0}
+  startPos: {x: 0, y: 4, z: 0}
   param: 0
   moveParam:
-    speed: 6
-    turnSmoothTime: 0.1
-    turnSmoothVelocity: 0
+    speed: 3
     gravity: -9.81
-    jumpHeight: 3
   repulseForce: 5
   playerDead: 0
-  chargeParam:
-    chargeSpeed: 5
-    chargeState: 0
-  groundCheck: {fileID: 4090859830285618530}
-  groundDistance: 0.4
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!1 &4090859830285618529
 GameObject:
   m_ObjectHideFlags: 0
