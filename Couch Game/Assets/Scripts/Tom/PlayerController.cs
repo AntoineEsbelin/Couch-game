@@ -23,6 +23,8 @@ public class PlayerController : MonoBehaviour
     bool canDash;
     Vector3 dashDir;
 
+    public Color playerStartingColor;
+
     #region Updates
 
     
@@ -87,13 +89,17 @@ public class PlayerController : MonoBehaviour
 
         public void TimerLastPlayer()
         {
-            if(playersInteract.lastPlayerTimer <= 0)
+            if(playersInteract.lastPlayerContact != null)
             {
-                UpdateLastPlayerTouched(null);
-            }
-            else
-            {
-                playersInteract.lastPlayerTimer -= Time.deltaTime;
+                if(playersInteract.lastPlayerTimer <= 0)
+                {
+                    refs.mesh.GetComponentInChildren<MeshRenderer>().material.color = playerStartingColor;
+                    UpdateLastPlayerTouched(null);
+                }
+                else
+                {
+                    playersInteract.lastPlayerTimer -= Time.deltaTime;
+                }
             }
         }
         public void UpdateLastPlayerTouched(PlayerController player)
@@ -174,7 +180,6 @@ public class PlayerController : MonoBehaviour
             public Vector3 move;
             public bool spinCharge;
             public bool spinRelease;
-            public bool counter;
             [HideInInspector]public int playerID = 0;
             public Vector3 startPos;
         }
@@ -184,6 +189,7 @@ public class PlayerController : MonoBehaviour
         private void Start()
         {
             transform.position = input.startPos;
+            playerStartingColor = refs.mesh.GetComponentInChildren<MeshRenderer>().material.color;
         }
         public void OnMove(InputAction.CallbackContext ctx)
         {
@@ -209,12 +215,15 @@ public class PlayerController : MonoBehaviour
 
         public void OnCounter(InputAction.CallbackContext ctx)
         {
-            if(ctx.performed)input.counter = true;
-
-            if(!counter.prepCounter)
+            if(ctx.performed)
             {
-                counter.counterPrepTime = counter.maxCounterTime;
-                counter.prepCounter = true;
+                if(counter.prepCounter == false && counter.isCountering == false)
+                {
+                    counter.prepCounter = true;
+                    counter.counterPrepTime = counter.maxCounterTime;
+                    
+                    refs.mesh.GetComponentInChildren<MeshRenderer>().material.color = Color.yellow;
+                }
             }
         }
 
@@ -256,13 +265,14 @@ public class PlayerController : MonoBehaviour
                 }
                 else
                 {
-                    input.counter = false;
                     counter.prepCounter = false;
                     counter.isCountering = true;
                     counter.counteringTime = counter.maxCounteringTime;
+                    refs.mesh.GetComponentInChildren<MeshRenderer>().material.color = Color.magenta;
                     Debug.Log("START COUNTERING");
                 }
             }
+        
 
             //is actually countering
             if(counter.isCountering)
@@ -286,6 +296,8 @@ public class PlayerController : MonoBehaviour
                             Debug.Log("PLAYER REPOUSSED");
                             enemyPlayer.refs.rb.AddForce(-(transform.position - enemyPlayer.transform.position).normalized * counter.counterForce, ForceMode.Impulse);
                         }
+                        
+                        enemyPlayer.GetComponentInChildren<MeshRenderer>().material.color = Color.red;
 
                         //Set Last touched player timer
                         enemyPlayer.UpdateLastPlayerTouched(this);
@@ -296,6 +308,7 @@ public class PlayerController : MonoBehaviour
                 else
                 {
                     counter.isCountering = false;
+                    refs.mesh.GetComponentInChildren<MeshRenderer>().material.color = playerStartingColor;
                     Debug.Log("STOP COUNTERING");
                 }
             }
