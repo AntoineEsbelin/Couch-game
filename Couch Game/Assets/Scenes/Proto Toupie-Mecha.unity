@@ -1014,7 +1014,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1112909653}
   - {fileID: 538137897}
@@ -1384,7 +1384,7 @@ Transform:
   m_GameObject: {fileID: 1140384751}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.2, y: 1, z: 1.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 374116594}
@@ -1499,6 +1499,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1188005328}
   - component: {fileID: 1188005327}
+  - component: {fileID: 1188005331}
   - component: {fileID: 1188005329}
   - component: {fileID: 1188005330}
   m_Layer: 0
@@ -1530,7 +1531,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1188005326}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 4}
+  m_LocalPosition: {x: 0, y: 1, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1625,6 +1626,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &1188005331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1188005326}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 049f76207832d7a40bf0a8c556f4599d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToStretch: {fileID: 1188005328}
+  desireStretch: {x: 1.5, y: 0.3, z: 1.5}
+  stretchSpeed: 2
+  unstretchSpeed: 6
+  noStretch: 0
 --- !u!1 &1713200562
 GameObject:
   m_ObjectHideFlags: 0

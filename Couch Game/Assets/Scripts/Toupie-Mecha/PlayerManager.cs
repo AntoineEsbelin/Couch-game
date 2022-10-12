@@ -30,10 +30,12 @@ public class PlayerManager : MonoBehaviour
         if (ctx.performed)
         {
             normalPlayer.GetComponent<NormalControler>().spinCharging = true;
+            this.GetComponent<Stretch>().enabled = true;
         }
 
         if(ctx.canceled)
         {
+            this.GetComponent<Stretch>().noStretch = true;
             normalPlayer.GetComponent<NormalControler>().spinCharging = false;
             normalPlayer.SetActive(false);
             spinnerPlayer.SetActive(true);
