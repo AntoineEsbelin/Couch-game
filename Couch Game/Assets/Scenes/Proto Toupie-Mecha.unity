@@ -986,7 +986,7 @@ MonoBehaviour:
   spinCharging: 0
   movementSettings:
     moveSpeed: 500
-    dx: 4
+    dx: 1
     rotationSpeed: 800
     turnSmoothTime: 0.01
     turnSmoothVelocity: 0
@@ -1498,9 +1498,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1188005328}
+  - component: {fileID: 1188005329}
   - component: {fileID: 1188005327}
   - component: {fileID: 1188005331}
-  - component: {fileID: 1188005329}
   - component: {fileID: 1188005330}
   m_Layer: 0
   m_Name: Player

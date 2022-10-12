@@ -17,6 +17,9 @@ public class NormalControler : MonoBehaviour
     public Vector3 move;
     public Rigidbody rb;
 
+    Vector3 moveDir;
+    Vector3 theMove;
+
     public bool isMoving;
     public bool spinCharging;
 
@@ -32,13 +35,7 @@ public class NormalControler : MonoBehaviour
     {
         move = ctx.ReadValue<Vector3>();
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
     private void FixedUpdate()
     {
         isMoving = move != Vector3.zero;
@@ -47,17 +44,24 @@ public class NormalControler : MonoBehaviour
 
     public void Moving()
     {
-        if (move.magnitude >= 0.1f)
+
+        if (isMoving)
         {
             float targetAngle = Mathf.Atan2(move.x, move.z) * Mathf.Rad2Deg;
             float angle = Mathf.SmoothDampAngle(rb.transform.eulerAngles.y, targetAngle, 
                 ref movementSettings.turnSmoothVelocity, movementSettings.turnSmoothTime);
-
             rb.transform.rotation = Quaternion.Euler(0f, angle, 0f);
-            Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            if(!spinCharging)rb.velocity = new Vector3(moveDir.x,0f,moveDir.z)* movementSettings.moveSpeed * Time.fixedDeltaTime;
+            moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+            if (!spinCharging) theMove = new Vector3(moveDir.x,0f,moveDir.z)* movementSettings.moveSpeed * Time.fixedDeltaTime;
         }
-        if(spinCharging)rb.velocity = Vector3.zero;
+        else if (theMove != Vector3.zero)
+        {
+            theMove = Vector3.MoveTowards(moveDir, Vector3.zero, movementSettings.dx);
+        }
+        
+        if(spinCharging)theMove = Vector3.zero;
+
+        rb.velocity = new Vector3 (theMove.x, rb.velocity.y, theMove.z);
 
         //AJOUTER DECELERATION PLUS TARD
         /*else if(move.magnitude < 0.1f && !isMoving)
