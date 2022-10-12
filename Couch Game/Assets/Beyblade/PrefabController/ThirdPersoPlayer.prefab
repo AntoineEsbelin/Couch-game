@@ -229,7 +229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 2e9bb59e972d96947bb46b9173a11847, type: 3}
+  m_Actions: {fileID: -944628639613478452, guid: 66a84e6774a61e749826868192116f7d, type: 3}
   m_NotificationBehavior: 2
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
@@ -361,9 +361,11 @@ MonoBehaviour:
   moveParam:
     speed: 6
     turnSmoothTime: 0.1
+    turnSmoothVelocity: 0
     gravity: -9.81
     jumpHeight: 3
   repulseForce: 5
+  playerDead: 0
   chargeParam:
     chargeSpeed: 5
     chargeState: 0
