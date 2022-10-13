@@ -45,12 +45,12 @@ public class SpinnerControler : MonoBehaviour
         isSpinning = true;
         moveDir = transform.forward;
         dashDuration = refs.dashDurationMax;
-        Debug.Log(dashDuration);
     }
 
     private void OnDisable()
     {
         repoussed = false;
+        isSpinning = false;
         refs.normalControler.SetActive(true);
     }
 

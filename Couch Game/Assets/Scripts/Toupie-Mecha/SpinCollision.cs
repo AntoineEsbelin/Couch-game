@@ -8,6 +8,7 @@ public class SpinCollision : MonoBehaviour
     BounceWall bounceWall;
     BounceSpinner bounceSpinner;
     BouncePlayer bouncePlayer;
+    public GameObject epxlosionParticle;
 
     void Start()
     {
@@ -22,6 +23,9 @@ public class SpinCollision : MonoBehaviour
         if (!other.isTrigger) return;
         if (other.gameObject.tag == "Player")
         {
+            other.GetComponentInParent<PlayerManager>().lastPlayerContacted = this.GetComponentInParent<PlayerManager>();
+            other.GetComponentInParent<PlayerManager>().timeLastPlayer = other.GetComponentInParent<PlayerManager>().maxTimeLastPlayer;
+            Instantiate(epxlosionParticle, this.transform.position, Quaternion.identity);
             if (other.gameObject.layer == 7) bouncePlayer.enabled = true;
             if (other.gameObject.layer == 8) bounceSpinner.enabled = true;
         }

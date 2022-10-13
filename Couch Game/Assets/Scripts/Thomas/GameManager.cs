@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private PlayerController[] allPlayer;
+    public List<PlayerManager> allPlayer;
 
     [SerializeField] private float timer;
     public float maxTimer = 60f;
@@ -24,7 +24,6 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        allPlayer = FindObjectsOfType<PlayerController>();
         timer = maxTimer;
     }
 

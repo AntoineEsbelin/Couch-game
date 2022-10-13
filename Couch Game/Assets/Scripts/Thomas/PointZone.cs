@@ -6,27 +6,26 @@ using UnityEngine.InputSystem;
 public class PointZone : MonoBehaviour
 {
     [SerializeField] private int pointGiven;
-    public bool isController;
 
     private void OnTriggerEnter(Collider coll)
     {
         if(coll.CompareTag("Player"))
         {
-            PlayerController deadPlayer = coll.GetComponent<PlayerController>();
+            PlayerManager deadPlayer = coll.GetComponentInParent<PlayerManager>();
             //Give a certain amount of point at the last player touched
-            if(deadPlayer.playersInteract.lastPlayerContact != null)
+            if(deadPlayer.lastPlayerContacted != null)
             {
-                deadPlayer.playersInteract.lastPlayerContact.playersInteract.playerPoint += pointGiven;
+                deadPlayer.lastPlayerContacted.playerPoint += pointGiven;
             
                 //DEBUG
                 Debug.Log($"{deadPlayer.name} EJECTED !");
-                Debug.Log($"GIVE {pointGiven} points to {deadPlayer.playersInteract.lastPlayerContact.name}");
+                Debug.Log($"GIVE {pointGiven} points to {deadPlayer.lastPlayerContacted.name}");
 
                 if(GameManager.instance.drawTimer)
                 {
-                    if(deadPlayer.playersInteract.lastPlayerContact.playersInteract.playerPoint > GameManager.instance.drawMaxPoint)
+                    if(deadPlayer.lastPlayerContacted.playerPoint > GameManager.instance.drawMaxPoint)
                     {
-                        Debug.Log($"{deadPlayer.playersInteract.lastPlayerContact.name} WINNN");
+                        Debug.Log($"{deadPlayer.lastPlayerContacted.name} WINNN");
                         GameManager.instance.timeOut = true;
                         //STOP THE ROUND
                     }
@@ -37,16 +36,7 @@ public class PointZone : MonoBehaviour
                 //DEBUG
                 Debug.Log($"{deadPlayer.name} SUICIDED !");
             }
-            //MORT DU JOUEUR TOMBÉ
-            if (isController)
-            {
-                coll.GetComponent<ToupieBehaviour>().StartCoroutine(coll.GetComponent<ToupieBehaviour>().DeathState());
-            }
-            else
-            {
-                coll.GetComponent<PlayerController>().StartCoroutine(coll.GetComponent<PlayerController>().DeathState());
-            }
-                
+            deadPlayer.GetComponent<PlayerRespawn>().enabled = true;
                 
         }
     }

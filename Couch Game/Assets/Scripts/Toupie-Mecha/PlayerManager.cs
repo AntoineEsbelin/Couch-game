@@ -10,13 +10,23 @@ public class PlayerManager : MonoBehaviour
 
     SpinnerControler spinnerControler;
 
-    public Vector3 spawnPos;
-
     //charge spin timer
     public bool startCharging;
     public float maintainTimer = 1f;
     public float spinTimer = 0f;
     public float timeMaxAttain = 5f;
+
+    //last player contacted
+    public PlayerManager lastPlayerContacted;
+    public float maxTimeLastPlayer = 5f;
+     public float timeLastPlayer;
+
+    public int playerPoint;
+    public SpawnPlayer spawnPlayer;
+    public int playerId;
+
+    public GameObject normalFBX;
+    public GameObject spinnerFBX;
 
     private void OnEnable()
     {
@@ -24,26 +34,40 @@ public class PlayerManager : MonoBehaviour
         spinnerPlayer.SetActive(false);
 
         spinnerControler = spinnerPlayer.GetComponent<SpinnerControler>();
+        transform.position = spawnPlayer.spawnPoints[playerId].position;
+    }
+
+    private void OnDisable()
+    {
+        spawnPlayer.RespawnPlayer(this.gameObject);
     }
     
     void Start()
     {
-        transform.position = spawnPos;
+        /*GameObject normalGO = Instantiate(normalFBX, normalPlayer.transform);
+        GameObject spinPlayerGO = Instantiate(spinnerFBX, spinnerPlayer.transform);
+        GameObject spinnerGO = Instantiate(spinnerFBX, spinPlayerGO.transform);*/
+        //normalGO.transform.rotation = new Quaternion(0f, 0.8f, 0f, 0.7f);
+        GameManager.instance.allPlayer.Add(this);
     }
 
     void FixedUpdate()
     {
         if(startCharging)spinTimer += Time.deltaTime;
+        UpdateLastPlayer();
     }
 
     public void OnSpin(InputAction.CallbackContext ctx)
     {
         if (ctx.performed)
         {
-            normalPlayer.GetComponent<NormalControler>().spinCharging = true;
-            normalPlayer.GetComponent<NormalControler>().SlowSpeedModifier();
-            this.GetComponent<Stretch>().enabled = true;
-            startCharging = true;
+            if(!spinnerControler.repoussed && !spinnerControler.isSpinning)
+            {
+                normalPlayer.GetComponent<NormalControler>().spinCharging = true;
+                normalPlayer.GetComponent<NormalControler>().SlowSpeedModifier();
+                this.GetComponent<Stretch>().enabled = true;
+                startCharging = true;
+            }
         }
 
         if(ctx.canceled)
@@ -60,6 +84,15 @@ public class PlayerManager : MonoBehaviour
             normalPlayer.GetComponent<NormalControler>().spinCharging = false;
             startCharging = false;
             spinTimer = 0f;
+        }
+    }
+
+    private void UpdateLastPlayer()
+    {
+        if(lastPlayerContacted != null)
+        {
+            if(timeLastPlayer > 0)timeLastPlayer -= Time.deltaTime;
+            else lastPlayerContacted = null;
         }
     }
 }
