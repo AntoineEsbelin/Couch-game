@@ -15,29 +15,27 @@ public class SpinnerControler : MonoBehaviour
 
         public float rotationSpeed = 800f;
 
-        [Range(.01f, .5f)]public float turnSmoothTime = 0.1f;
+        public float turnSmoothTime = 0.5f;
         [HideInInspector] public float turnSmoothVelocity;
     }
 
     public Refs refs;
     public bool isSpinning;
+    public bool isMoving;
+    Vector3 moveDir;
 
 
     // Start each time script is enable
     private void OnEnable()
     {
         isSpinning = true;
+        moveDir = transform.forward;
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
+        isMoving = refs.move != Vector3.zero;
         Spinning();
-    }
-
-    public void ChargingSpin()
-    {
-        
     }
 
     /*public void ReleaseSpin(InputAction.CallbackContext ctx)
@@ -56,9 +54,18 @@ public class SpinnerControler : MonoBehaviour
     {
         if(isSpinning)
         {
-            Vector3 moveDir = refs.rb.transform.rotation.eulerAngles;
+            if (isMoving)
+            {
+                float targetAngle = Mathf.Atan2(refs.move.x, refs.move.z) * Mathf.Rad2Deg;
+                float angle = Mathf.SmoothDampAngle(refs.rb.transform.eulerAngles.y, targetAngle, 
+                    ref refs.turnSmoothVelocity, refs.turnSmoothTime);
+                refs.rb.transform.rotation = Quaternion.Euler(0f, angle, 0f);
+                moveDir = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
+            }
+
+            //Vector3 moveDir = refs.rb.transform.forward;
             refs.rb.velocity = new Vector3(moveDir.x,0f,moveDir.z)* refs.moveSpeed * Time.fixedDeltaTime;
-           
+
         }
     }
 
@@ -66,4 +73,13 @@ public class SpinnerControler : MonoBehaviour
     {
         this.gameObject.SetActive(false);
     }
+
+    #region Inputs
+
+        public void OnMove(InputAction.CallbackContext ctx)
+        {
+            refs.move = ctx.ReadValue<Vector3>();
+        }
+
+    #endregion
 }

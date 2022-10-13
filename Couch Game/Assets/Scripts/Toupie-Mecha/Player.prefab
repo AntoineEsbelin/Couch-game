@@ -77,6 +77,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 6853132077661441926}
+        m_TargetAssemblyTypeName: SpinnerControler, Assembly-CSharp
+        m_MethodName: OnMove
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 9bd4fd7a-f111-46ad-a78c-d9e8e19eeefe
     m_ActionName: Player/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
   - m_PersistentCalls:
@@ -122,6 +134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   normalPlayer: {fileID: 6853132077936097904}
   spinnerPlayer: {fileID: 6853132077661441948}
+  spawnPos: {x: 0, y: 0, z: 0}
 --- !u!114 &6853132077579053472
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -305,12 +318,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   refs:
     rb: {fileID: 6853132077579053473}
-    moveSpeed: 3
+    moveSpeed: 900
     move: {x: 0, y: 0, z: 0}
     rotationSpeed: 800
-    turnSmoothTime: 0.1
+    turnSmoothTime: 1.2
     turnSmoothVelocity: 0
   isSpinning: 0
+  isMoving: 0
 --- !u!114 &6853132077661441927
 MonoBehaviour:
   m_ObjectHideFlags: 0
