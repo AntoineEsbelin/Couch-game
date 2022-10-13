@@ -8,20 +8,23 @@ public class PlayerManager : MonoBehaviour
     public GameObject normalPlayer;
     public GameObject spinnerPlayer;
 
+    SpinnerControler spinnerControler;
+
     public Vector3 spawnPos;
 
     private void OnEnable()
     {
         normalPlayer.SetActive(true);
         spinnerPlayer.SetActive(false);
+
+        spinnerControler = spinnerPlayer.GetComponent<SpinnerControler>();
     }
-    // Start is called before the first frame update
+    
     void Start()
     {
         transform.position = spawnPos;
     }
 
-    // Update is called once per frame
     void Update()
     {
         

@@ -318,11 +318,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   refs:
     rb: {fileID: 6853132077579053473}
+    normalControler: {fileID: 6853132077936097904}
     moveSpeed: 900
     move: {x: 0, y: 0, z: 0}
     rotationSpeed: 800
     turnSmoothTime: 1.2
     turnSmoothVelocity: 0
+    dashDurationMax: 2
   isSpinning: 0
   isMoving: 0
 --- !u!114 &6853132077661441927

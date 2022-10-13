@@ -9,6 +9,9 @@ public class SpinnerControler : MonoBehaviour
     public class Refs
     {
         public Rigidbody rb;
+
+        public GameObject normalControler;
+
         public float moveSpeed = 8f;
         
         public Vector3 move;
@@ -17,6 +20,9 @@ public class SpinnerControler : MonoBehaviour
 
         public float turnSmoothTime = 0.5f;
         [HideInInspector] public float turnSmoothVelocity;
+
+        public float dashDurationMax = 2f;
+        
     }
 
     public Refs refs;
@@ -24,18 +30,30 @@ public class SpinnerControler : MonoBehaviour
     public bool isMoving;
     Vector3 moveDir;
 
+    float dashDuration;
+
 
     // Start each time script is enable
     private void OnEnable()
     {
         isSpinning = true;
         moveDir = transform.forward;
+        dashDuration = refs.dashDurationMax;
+    }
+
+    private void OnDisable()
+    {
+        isSpinning = false;
+        refs.normalControler.SetActive(true);
     }
 
     void FixedUpdate()
     {
         isMoving = refs.move != Vector3.zero;
         Spinning();
+
+        if (dashDuration > 0) dashDuration = Mathf.Clamp(dashDuration - Time.deltaTime, 0, refs.dashDurationMax);
+        else StopSpin();
     }
 
     /*public void ReleaseSpin(InputAction.CallbackContext ctx)
