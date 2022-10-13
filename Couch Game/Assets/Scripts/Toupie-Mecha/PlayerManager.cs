@@ -12,6 +12,12 @@ public class PlayerManager : MonoBehaviour
 
     public Vector3 spawnPos;
 
+    //charge spin timer
+    public bool startCharging;
+    public float maintainTimer = 1f;
+    public float spinTimer = 0f;
+    public float timeMaxAttain = 5f;
+
     private void OnEnable()
     {
         normalPlayer.SetActive(true);
@@ -25,9 +31,9 @@ public class PlayerManager : MonoBehaviour
         transform.position = spawnPos;
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        
+        if(startCharging)spinTimer += Time.deltaTime;
     }
 
     public void OnSpin(InputAction.CallbackContext ctx)
@@ -37,15 +43,23 @@ public class PlayerManager : MonoBehaviour
             normalPlayer.GetComponent<NormalControler>().spinCharging = true;
             normalPlayer.GetComponent<NormalControler>().SlowSpeedModifier();
             this.GetComponent<Stretch>().enabled = true;
+            startCharging = true;
         }
 
         if(ctx.canceled)
         {
+            if(spinTimer > maintainTimer)
+            {
+                if(spinTimer > timeMaxAttain)spinTimer = timeMaxAttain;
+                normalPlayer.SetActive(false);
+                spinnerPlayer.SetActive(true);
+            }
+            spinnerControler.chargedDuration = spinTimer;
             normalPlayer.GetComponent<NormalControler>().NormalSpeedModifier();
             this.GetComponent<Stretch>().noStretch = true;
             normalPlayer.GetComponent<NormalControler>().spinCharging = false;
-            normalPlayer.SetActive(false);
-            spinnerPlayer.SetActive(true);
+            startCharging = false;
+            spinTimer = 0f;
         }
     }
 }

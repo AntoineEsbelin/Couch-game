@@ -12,7 +12,8 @@ public class SpinnerControler : MonoBehaviour
 
         public GameObject normalControler;
 
-        public float moveSpeed = 8f;
+        public float maxMoveSpeed = 8f;
+        public float moveSpeed;
         
         public Vector3 move;
 
@@ -32,6 +33,8 @@ public class SpinnerControler : MonoBehaviour
 
     float dashDuration;
 
+    public float chargedDuration;
+    public float chargeMultiplier;
 
     // Start each time script is enable
     private void OnEnable()
@@ -39,6 +42,7 @@ public class SpinnerControler : MonoBehaviour
         isSpinning = true;
         moveDir = transform.forward;
         dashDuration = refs.dashDurationMax;
+        Debug.Log(dashDuration);
     }
 
     private void OnDisable()
@@ -70,6 +74,8 @@ public class SpinnerControler : MonoBehaviour
 
     public void Spinning()
     {
+        //refs.moveSpeed = Mathf.Pow((refs.maxMoveSpeed - dashDuration), 3) * chargedDuration;
+        refs.moveSpeed = (Mathf.Pow((dashDuration / (refs.dashDurationMax - 1)), 3) + 1) * chargedDuration * chargeMultiplier;
         if(isSpinning)
         {
             if (isMoving)
