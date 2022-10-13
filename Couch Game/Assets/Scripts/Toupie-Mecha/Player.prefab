@@ -34,7 +34,6 @@ Transform:
   m_Children:
   - {fileID: 6853132077936097915}
   - {fileID: 6853132077661441924}
-  - {fileID: 6853132078999831585}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -287,6 +286,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6853132078912650369}
+  - {fileID: 6853132078999831585}
   m_Father: {fileID: 6853132077579053475}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -858,8 +858,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6853132077579053475}
-  m_RootOrder: 2
+  m_Father: {fileID: 6853132077661441924}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 90}
 --- !u!96 &6853132078999831584
 TrailRenderer:
