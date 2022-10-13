@@ -261,12 +261,14 @@ GameObject:
   m_Component:
   - component: {fileID: 6853132077661441924}
   - component: {fileID: 6853132077661441925}
+  - component: {fileID: 8588756904839644289}
   - component: {fileID: 6853132077661441926}
+  - component: {fileID: 4771427012510866416}
   - component: {fileID: 6853132077661441927}
   - component: {fileID: 6853132077661441920}
   - component: {fileID: 6853132077661441921}
   - component: {fileID: 6853132077661441922}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Spinner
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -304,6 +306,19 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!135 &8588756904839644289
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6853132077661441948}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6853132077661441926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -327,6 +342,18 @@ MonoBehaviour:
     dashDurationMax: 2
   isSpinning: 0
   isMoving: 0
+--- !u!114 &4771427012510866416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6853132077661441948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0461d78247348ef4dae292b2e17e5791, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6853132077661441927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -388,7 +415,7 @@ GameObject:
   - component: {fileID: 6853132077936097909}
   - component: {fileID: 6853132077936097910}
   - component: {fileID: 6853132077936097914}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Normal
   m_TagString: Player
   m_Icon: {fileID: 0}

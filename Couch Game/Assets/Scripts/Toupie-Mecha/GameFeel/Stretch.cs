@@ -41,12 +41,10 @@ public class Stretch : MonoBehaviour
         if(!noStretch)
         {
             objectToStretch.localScale = Vector3.MoveTowards(objectToStretch.localScale, desireStretch , stretchSpeed * Time.fixedDeltaTime);
-            Debug.Log("STRETCH");
         }
         else
         {
             objectToStretch.localScale = Vector3.MoveTowards(objectToStretch.localScale, initialStretch, unstretchSpeed * Time.fixedDeltaTime);
-            Debug.Log("NO STRETCH ?");
             if(objectToStretch.localScale == initialStretch)this.enabled = false;    
         }
     }
