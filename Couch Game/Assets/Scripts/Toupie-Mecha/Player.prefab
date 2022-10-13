@@ -347,8 +347,11 @@ MonoBehaviour:
     dashDurationMax: 2
   isSpinning: 0
   isMoving: 0
+  moveDir: {x: 0, y: 0, z: 0}
+  dashDuration: 0
   chargedDuration: 0
   chargeMultiplier: 200
+  repoussed: 0
 --- !u!114 &4771427012510866416
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -385,6 +388,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 470c7e7bb4d884b43aab5c135544d5e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  epxlosionParticle: {fileID: 3438996937471707301, guid: a2be7fac82fbeea43911cac21ce707ef, type: 3}
 --- !u!114 &6853132077661441921
 MonoBehaviour:
   m_ObjectHideFlags: 0

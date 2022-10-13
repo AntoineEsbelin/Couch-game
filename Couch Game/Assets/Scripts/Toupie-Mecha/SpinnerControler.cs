@@ -29,16 +29,19 @@ public class SpinnerControler : MonoBehaviour
     public Refs refs;
     public bool isSpinning;
     public bool isMoving;
-    Vector3 moveDir;
+    [HideInInspector] public Vector3 moveDir;
 
-    float dashDuration;
+    [HideInInspector] public float dashDuration;
 
     public float chargedDuration;
     public float chargeMultiplier;
 
+    public bool repoussed;
+
     // Start each time script is enable
     private void OnEnable()
     {
+        repoussed = false;
         isSpinning = true;
         moveDir = transform.forward;
         dashDuration = refs.dashDurationMax;
@@ -47,7 +50,7 @@ public class SpinnerControler : MonoBehaviour
 
     private void OnDisable()
     {
-        isSpinning = false;
+        repoussed = false;
         refs.normalControler.SetActive(true);
     }
 
@@ -78,17 +81,21 @@ public class SpinnerControler : MonoBehaviour
         refs.moveSpeed = (Mathf.Pow((dashDuration / (refs.dashDurationMax - 1)), 3) + 1) * chargedDuration * chargeMultiplier;
         if(isSpinning)
         {
-            if (isMoving)
+            if(!repoussed)
             {
-                float targetAngle = Mathf.Atan2(refs.move.x, refs.move.z) * Mathf.Rad2Deg;
-                float angle = Mathf.SmoothDampAngle(refs.rb.transform.eulerAngles.y, targetAngle, 
-                    ref refs.turnSmoothVelocity, refs.turnSmoothTime);
-                refs.rb.transform.rotation = Quaternion.Euler(0f, angle, 0f);
-                moveDir = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
-            }
+                if (isMoving)
+                {
+                    float targetAngle = Mathf.Atan2(refs.move.x, refs.move.z) * Mathf.Rad2Deg;
+                    float angle = Mathf.SmoothDampAngle(refs.rb.transform.eulerAngles.y, targetAngle, 
+                        ref refs.turnSmoothVelocity, refs.turnSmoothTime);
+                    refs.rb.transform.rotation = Quaternion.Euler(0f, angle, 0f);
+                    moveDir = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
+                }
 
-            //Vector3 moveDir = refs.rb.transform.forward;
-            refs.rb.velocity = new Vector3(moveDir.x,0f,moveDir.z)* refs.moveSpeed * Time.fixedDeltaTime;
+                //Vector3 moveDir = refs.rb.transform.forward;
+
+            }
+                refs.rb.velocity = new Vector3(moveDir.x,0f,moveDir.z)* refs.moveSpeed * Time.fixedDeltaTime;
 
         }
     }
@@ -102,7 +109,7 @@ public class SpinnerControler : MonoBehaviour
 
         public void OnMove(InputAction.CallbackContext ctx)
         {
-            refs.move = ctx.ReadValue<Vector3>();
+            if(!repoussed)refs.move = ctx.ReadValue<Vector3>();
         }
 
     #endregion
