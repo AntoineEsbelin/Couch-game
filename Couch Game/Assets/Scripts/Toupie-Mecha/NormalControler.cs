@@ -11,6 +11,10 @@ public class NormalControler : MonoBehaviour
         public float dx = 4f; //décélération
         public float rotationSpeed = 800f;
 
+        public float speedModifier = 1;
+        public float slowSpeedModifier = .5f;
+        public float normalSpeedModifier = 1f;
+
         [Range(.01f, .5f)]public float turnSmoothTime = 0.1f;
         [HideInInspector] public float turnSmoothVelocity;
     }
@@ -52,14 +56,14 @@ public class NormalControler : MonoBehaviour
                 ref movementSettings.turnSmoothVelocity, movementSettings.turnSmoothTime);
             rb.transform.rotation = Quaternion.Euler(0f, angle, 0f);
             moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            if (!spinCharging) theMove = new Vector3(moveDir.x,0f,moveDir.z)* movementSettings.moveSpeed * Time.fixedDeltaTime;
+            theMove = new Vector3(moveDir.x,0f,moveDir.z)* (movementSettings.moveSpeed * movementSettings.speedModifier) * Time.fixedDeltaTime;
         }
         else if (theMove != Vector3.zero)
         {
             theMove = Vector3.MoveTowards(moveDir, Vector3.zero, movementSettings.dx);
         }
         
-        if(spinCharging)theMove = Vector3.zero;
+        //if(spinCharging)theMove = Vector3.zero;
 
         rb.velocity = new Vector3 (theMove.x, rb.velocity.y, theMove.z);
 
@@ -69,5 +73,15 @@ public class NormalControler : MonoBehaviour
             //rb.velocity = new Vector3(moveDir.x,0f,moveDir.z)* movementSettings.moveSpeed * Time.fixedDeltaTime;
             rb.velocity = Vector3.MoveTowards(moveDir, Vector3.zero, movementSettings.dx);
         }*/
+    }
+
+    public void SlowSpeedModifier()
+    {
+        movementSettings.speedModifier = movementSettings.slowSpeedModifier;
+    }
+
+    public void NormalSpeedModifier()
+    {
+        movementSettings.speedModifier = movementSettings.normalSpeedModifier;
     }
 }
