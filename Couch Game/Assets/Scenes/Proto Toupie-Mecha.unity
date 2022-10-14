@@ -1292,7 +1292,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0461d78247348ef4dae292b2e17e5791, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bounceWall: {fileID: 0}
+  bounceSpinner: {fileID: 0}
+  bouncePlayer: {fileID: 0}
   epxlosionParticle: {fileID: 0}
+  spinnerControler: {fileID: 0}
+  timer: 0
 --- !u!114 &2006672617
 MonoBehaviour:
   m_ObjectHideFlags: 0
