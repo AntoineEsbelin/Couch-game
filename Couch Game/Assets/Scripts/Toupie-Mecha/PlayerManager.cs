@@ -39,7 +39,7 @@ public class PlayerManager : MonoBehaviour
 
     private void OnDisable()
     {
-        spawnPlayer.RespawnPlayer(this.gameObject);
+        this.GetComponent<Stretch>().enabled = false;
     }
     
     void Start()

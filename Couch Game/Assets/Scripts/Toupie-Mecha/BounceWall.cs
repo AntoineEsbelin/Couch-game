@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class BounceWall : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public Vector3 playerDirection;
+    public Vector3 normalizedWall;
 
-    // Update is called once per frame
-    void Update()
+    void OnEnable()
     {
+        this.GetComponent<SpinnerControler>().moveDir = Vector3.Reflect(playerDirection, normalizedWall);
         
+        Debug.Log("REFLECT");
+        this.enabled = false;
     }
 }

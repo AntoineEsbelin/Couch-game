@@ -44,12 +44,4 @@ public class SpawnPlayer : MonoBehaviour
     {
         
     }
-
-    public void RespawnPlayer(GameObject respawnedPlayer)
-    {
-        if(!respawnedPlayer.activeSelf)
-        {
-            
-        }
-    }
 }

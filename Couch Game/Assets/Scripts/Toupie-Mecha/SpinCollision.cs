@@ -31,4 +31,22 @@ public class SpinCollision : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter(Collision other)
+    {
+            Debug.Log("Collision");
+    
+        if(other.gameObject.tag == "Wall")
+        {
+            Debug.Log("Walled");
+            bounceWall.normalizedWall = other.contacts[0].normal;
+            bounceWall.enabled = true;
+            bounceWall.playerDirection = this.GetComponent<SpinnerControler>().moveDir;
+        }
+    }
+
+    private void OnCollisionStay(Collision stay)
+    {
+        Debug.Log("ui");
+    }
+
 }

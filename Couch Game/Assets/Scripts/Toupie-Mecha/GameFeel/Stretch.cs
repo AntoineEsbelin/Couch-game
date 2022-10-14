@@ -16,13 +16,12 @@ public class Stretch : MonoBehaviour
     {
         initialStretch = objectToStretch.localScale;
         noStretch = false;
-        this.GetComponent<Rigidbody>().useGravity = false;
     }
     
     private void OnDisable()
     {
+        objectToStretch.localScale = initialStretch;
         noStretch = true;
-        this.GetComponent<Rigidbody>().useGravity = true;
     }
     // Start is called before the first frame update
     void Start()
