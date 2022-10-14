@@ -11,7 +11,6 @@ public class ToupieBehaviour : MonoBehaviour
     private float SaveSpinDuration;
     private bool spin_Pressed;
     private float SpinPresstimer;
-    private float SpinReleasetimer;
     private Vector3 accelVelocity = Vector3.zero;
     private PlayerInput input;
     
@@ -23,8 +22,7 @@ public class ToupieBehaviour : MonoBehaviour
 
     [Header("Input")]
     public PlayerControll playerControl;
-    private InputAction spinStateStart;
-    private InputAction spinStateFinish;
+    private InputAction spinState;
     [HideInInspector]public int playerID = 0;
     public Vector3 startPos;
     private float spinDuration;
@@ -62,45 +60,44 @@ public class ToupieBehaviour : MonoBehaviour
         transform.position = startPos;
         input = GetComponent<PlayerInput>();
     }
+
+    private void OnEnable()
+    {
+        spinState = playerControl.Player.SpinState;
+        spinState.Enable();
+    }
     
+    private void OnDisable()
+    {
+        spinState.Disable();
+    }
     
     public void OnMove(InputAction.CallbackContext obj)
     {
         direction = obj.ReadValue<Vector3>().normalized;
     }
-
-    private void OnEnable()
+    public void OnSpin(InputAction.CallbackContext obj)
     {
-        spinStateStart = playerControl.Player.SpinStateStart;
-        spinStateStart.Enable();
         
-        spinStateFinish = playerControl.Player.SpinStateFinish;
-        spinStateFinish.Enable();
-
         if (!isSpinning)
         {
-            spinStateStart.performed += context =>
+            switch (obj.ReadValue<float>())
             {
-                spin_Pressed = true;
-                spinDuration += 0.5f;
-                moveParam.spinSpeed += 3;
-            };
+                case 1:
+                    print("Press");
+                    spin_Pressed = true;
+                    spinDuration += 0.5f;
+                    moveParam.spinSpeed += 3;
+                    break;
+                
+                case 0:
+                    print("Release");
+                    spin_Pressed = false;
+                    isSpinning = true;
+                    break;
+            }
+            
         }
-        
-        spinStateFinish.performed += context =>
-        {
-                spin_Pressed = false;
-                isSpinning = true;
-        };
-
-
-    }
-    private void OnDisable()
-    {
-        input.actions = null;
-        spinStateStart.Disable();
-        spinStateFinish.Disable();
-        
     }
     
     
@@ -118,7 +115,6 @@ public class ToupieBehaviour : MonoBehaviour
             
             controller.Move(moveDir * moveParam.speed * Time.fixedDeltaTime);
         }
-        
         
     }
 
@@ -182,15 +178,12 @@ public class ToupieBehaviour : MonoBehaviour
         if (spinDuration < 0.1f)
         {
             isSpinning = false;
-            SpinReleasetimer = 0;
             accel = Vector3.zero;
         }
     }
     
     void Update()
     {
-        
-        
         
         if(spin_Pressed)
         {
@@ -212,8 +205,7 @@ public class ToupieBehaviour : MonoBehaviour
             float maxAccel = 3f;
             accel.x = maxAccel * SpinDir.x;
             accel.z = maxAccel * SpinDir.z;
-            print("accel : " + accel);
-            print("direction : " + SpinDir);
+            
         }
         else
         {
@@ -257,14 +249,25 @@ public class ToupieBehaviour : MonoBehaviour
     private void OnControllerColliderHit(ControllerColliderHit coll)
     {
         
-        if (coll.collider.CompareTag("Wall") || coll.collider.CompareTag("Player"))
+        if (coll.collider.CompareTag("Wall"))
         {
             playerHit = true;
             
             reflect = Quaternion.AngleAxis(180, coll.normal) * transform.forward * -1;
             reflect.Normalize();
-            accel = -accel + reflect;
+            
+            
 
+        }
+
+        if (coll.collider.CompareTag("Player"))
+        {
+            playerHit = true;
+
+            Vector3 collDir = coll.transform.position - transform.position;
+            reflect = Quaternion.AngleAxis(180, coll.normal) * transform.forward * -1 + collDir;
+            reflect.Normalize();
+            
         }
         
     }

@@ -306,6 +306,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 72.442, y: 0, z: 0}
+--- !u!114 &711837881 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1112591704289274439, guid: e2a4eb7ae006ac645a0939ef5b801582, type: 3}
+  m_PrefabInstance: {fileID: 1002041422}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d19017be09e7d8c4589bfd520bd2aa78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &753278113
 GameObject:
   m_ObjectHideFlags: 0
@@ -427,10 +438,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1112591704289274439, guid: e2a4eb7ae006ac645a0939ef5b801582, type: 3}
-      propertyPath: startPos.y
-      value: 2.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1112591704289274439, guid: e2a4eb7ae006ac645a0939ef5b801582, type: 3}
       propertyPath: spinDuration
       value: 1
       objectReference: {fileID: 0}
@@ -485,6 +492,126 @@ PrefabInstance:
     - target: {fileID: 4090859829251398628, guid: e2a4eb7ae006ac645a0939ef5b801582, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4353759886911780740, guid: e2a4eb7ae006ac645a0939ef5b801582, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4353759886911780740, guid: e2a4eb7ae006ac645a0939ef5b801582, type: 3}
+      propertyPath: m_NeverAutoSwitchControlSchemes
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4353759886911780740, guid: e2a4eb7ae006ac645a0939ef5b801582, type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_ActionId
+      value: e4599603-aa53-4156-9e57-b4ae085b6376
+      objectReference: {fileID: 0}
+    - target: {fileID: 4353759886911780740, guid: e2a4eb7ae006ac645a0939ef5b801582, type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_ActionId
+      value: 472f5946-95a3-4766-822b-0344181995a4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4353759886911780740, guid: e2a4eb7ae006ac645a0939ef5b801582, type: 3}
+      propertyPath: m_ActionEvents.Array.data[4].m_ActionId
+      value: 28972e88-ca5c-4e27-a1b4-fba1556869eb
+      objectReference: {fileID: 0}
+    - target: {fileID: 4353759886911780740, guid: e2a4eb7ae006ac645a0939ef5b801582, type: 3}
+      propertyPath: m_ActionEvents.Array.data[5].m_ActionId
+      value: 2929f75e-188b-4a86-80c0-d95405a1d106
+      objectReference: {fileID: 0}
+    - target: {fileID: 4353759886911780740, guid: e2a4eb7ae006ac645a0939ef5b801582, type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_ActionId
+      value: acf01bfc-8abd-477e-a7f0-8b13bd2b94fd
+      objectReference: {fileID: 0}
+    - target: {fileID: 4353759886911780740, guid: e2a4eb7ae006ac645a0939ef5b801582, type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_ActionId
+      value: a67f5b5f-b104-4173-8e5f-58ec0efc3bde
+      objectReference: {fileID: 0}
+    - target: {fileID: 4353759886911780740, guid: e2a4eb7ae006ac645a0939ef5b801582, type: 3}
+      propertyPath: m_ActionEvents.Array.data[8].m_ActionId
+      value: ce0e5d6a-809c-438a-b1da-a1abbcffd708
+      objectReference: {fileID: 0}
+    - target: {fileID: 4353759886911780740, guid: e2a4eb7ae006ac645a0939ef5b801582, type: 3}
+      propertyPath: m_ActionEvents.Array.data[9].m_ActionId
+      value: 34071bcc-3f36-4d75-9600-a4c88d1318af
+      objectReference: {fileID: 0}
+    - target: {fileID: 4353759886911780740, guid: e2a4eb7ae006ac645a0939ef5b801582, type: 3}
+      propertyPath: m_ActionEvents.Array.data[10].m_ActionId
+      value: ef84bda4-9653-4dfe-9b9f-830c582b6c1c
+      objectReference: {fileID: 0}
+    - target: {fileID: 4353759886911780740, guid: e2a4eb7ae006ac645a0939ef5b801582, type: 3}
+      propertyPath: m_ActionEvents.Array.data[11].m_ActionId
+      value: dc4dec36-7a48-41c0-841c-03ea7de4e72f
+      objectReference: {fileID: 0}
+    - target: {fileID: 4353759886911780740, guid: e2a4eb7ae006ac645a0939ef5b801582, type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_ActionId
+      value: c165eda6-17e9-4770-8f08-9c1451b73120
+      objectReference: {fileID: 0}
+    - target: {fileID: 4353759886911780740, guid: e2a4eb7ae006ac645a0939ef5b801582, type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_ActionName
+      value: UI/Navigate[/XInputControllerWindows/leftStick/up,/XInputControllerWindows/rightStick/up,/XInputControllerWindows/leftStick/down,/XInputControllerWindows/rightStick/down,/XInputControllerWindows/leftStick/left,/XInputControllerWindows/rightStick/left,/XInputControllerWindows/leftStick/right,/XInputControllerWindows/rightStick/right,/XInputControllerWindows/dpad,/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+      objectReference: {fileID: 0}
+    - target: {fileID: 4353759886911780740, guid: e2a4eb7ae006ac645a0939ef5b801582, type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_ActionName
+      value: UI/Submit[/Keyboard/enter,/XInputControllerWindows/buttonSouth]
+      objectReference: {fileID: 0}
+    - target: {fileID: 4353759886911780740, guid: e2a4eb7ae006ac645a0939ef5b801582, type: 3}
+      propertyPath: m_ActionEvents.Array.data[4].m_ActionName
+      value: UI/Cancel[/Keyboard/escape,/XInputControllerWindows/buttonEast]
+      objectReference: {fileID: 0}
+    - target: {fileID: 4353759886911780740, guid: e2a4eb7ae006ac645a0939ef5b801582, type: 3}
+      propertyPath: m_ActionEvents.Array.data[5].m_ActionName
+      value: UI/Point[/Mouse/position]
+      objectReference: {fileID: 0}
+    - target: {fileID: 4353759886911780740, guid: e2a4eb7ae006ac645a0939ef5b801582, type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_ActionName
+      value: UI/Click[/Mouse/leftButton]
+      objectReference: {fileID: 0}
+    - target: {fileID: 4353759886911780740, guid: e2a4eb7ae006ac645a0939ef5b801582, type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_ActionName
+      value: UI/ScrollWheel[/Mouse/scroll]
+      objectReference: {fileID: 0}
+    - target: {fileID: 4353759886911780740, guid: e2a4eb7ae006ac645a0939ef5b801582, type: 3}
+      propertyPath: m_ActionEvents.Array.data[8].m_ActionName
+      value: UI/MiddleClick[/Mouse/middleButton]
+      objectReference: {fileID: 0}
+    - target: {fileID: 4353759886911780740, guid: e2a4eb7ae006ac645a0939ef5b801582, type: 3}
+      propertyPath: m_ActionEvents.Array.data[9].m_ActionName
+      value: UI/RightClick[/Mouse/rightButton]
+      objectReference: {fileID: 0}
+    - target: {fileID: 4353759886911780740, guid: e2a4eb7ae006ac645a0939ef5b801582, type: 3}
+      propertyPath: m_ActionEvents.Array.data[10].m_ActionName
+      value: UI/TrackedDevicePosition
+      objectReference: {fileID: 0}
+    - target: {fileID: 4353759886911780740, guid: e2a4eb7ae006ac645a0939ef5b801582, type: 3}
+      propertyPath: m_ActionEvents.Array.data[11].m_ActionName
+      value: UI/TrackedDeviceOrientation
+      objectReference: {fileID: 0}
+    - target: {fileID: 4353759886911780740, guid: e2a4eb7ae006ac645a0939ef5b801582, type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_ActionName
+      value: Player/SpinStateFinish[/XInputControllerWindows/rightTrigger,/Keyboard/q]
+      objectReference: {fileID: 0}
+    - target: {fileID: 4353759886911780740, guid: e2a4eb7ae006ac645a0939ef5b801582, type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4353759886911780740, guid: e2a4eb7ae006ac645a0939ef5b801582, type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4353759886911780740, guid: e2a4eb7ae006ac645a0939ef5b801582, type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 711837881}
+    - target: {fileID: 4353759886911780740, guid: e2a4eb7ae006ac645a0939ef5b801582, type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnSpinFinish
+      objectReference: {fileID: 0}
+    - target: {fileID: 4353759886911780740, guid: e2a4eb7ae006ac645a0939ef5b801582, type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ToupieBehaviour, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4353759886911780740, guid: e2a4eb7ae006ac645a0939ef5b801582, type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2a4eb7ae006ac645a0939ef5b801582, type: 3}

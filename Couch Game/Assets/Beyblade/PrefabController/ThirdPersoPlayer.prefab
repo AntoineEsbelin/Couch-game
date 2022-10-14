@@ -199,7 +199,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4090859829251398628
 Transform:
   m_ObjectHideFlags: 0
@@ -259,7 +259,19 @@ MonoBehaviour:
     m_ActionId: 248c85ad-67fb-412b-80af-5a184a52bc7e
     m_ActionName: Player/Move[/Keyboard/a,/Keyboard/d,/Keyboard/w,/Keyboard/s,/XInputControllerWindows/leftStick/left,/XInputControllerWindows/leftStick/right,/XInputControllerWindows/leftStick/up,/XInputControllerWindows/leftStick/down]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1112591704289274439}
+        m_TargetAssemblyTypeName: ToupieBehaviour, Assembly-CSharp
+        m_MethodName: OnSpin
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: d05ac769-a33a-4150-bbd6-90ee3d26b3c7
     m_ActionName: Player/Charge[/XInputControllerWindows/buttonWest,/Keyboard/q]
   - m_PersistentCalls:
@@ -315,7 +327,19 @@ MonoBehaviour:
     m_ActionId: ef84bda4-9653-4dfe-9b9f-830c582b6c1c
     m_ActionName: UI/TrackedDevicePosition
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1112591704289274439}
+        m_TargetAssemblyTypeName: ToupieBehaviour, Assembly-CSharp
+        m_MethodName: OnSpinFinish
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: dc4dec36-7a48-41c0-841c-03ea7de4e72f
     m_ActionName: UI/TrackedDeviceOrientation
   m_NeverAutoSwitchControlSchemes: 0
@@ -356,13 +380,16 @@ MonoBehaviour:
   controller: {fileID: 3506582711729914389}
   body: {fileID: 4090859828822750426}
   playerID: 0
-  startPos: {x: 0, y: 4, z: 0}
-  param: 0
+  startPos: {x: 0, y: 2.4, z: 0}
   moveParam:
     speed: 3
+    spinSpeed: 3
+    turnSmoothVelocity: 0
+    turnSmoothTime: 0.1
     gravity: -9.81
   repulseForce: 5
   playerDead: 0
+  spinDurationLimit: 4
 --- !u!1 &4090859830285618529
 GameObject:
   m_ObjectHideFlags: 0
