@@ -14,6 +14,11 @@ GameObject:
   - component: {fileID: 6853132077579053472}
   - component: {fileID: 2220648167988956125}
   - component: {fileID: 6853132077579053473}
+  - component: {fileID: 7279539468119450364}
+  - component: {fileID: 6527334327840487395}
+  - component: {fileID: 3459432271661710956}
+  - component: {fileID: 2648372140871015440}
+  - component: {fileID: 957177068204180527}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -195,6 +200,75 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &7279539468119450364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6853132077579053501}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0461d78247348ef4dae292b2e17e5791, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bounceWall: {fileID: 0}
+  bounceSpinner: {fileID: 0}
+  bouncePlayer: {fileID: 0}
+  epxlosionParticle: {fileID: 3438996937471707301, guid: a2be7fac82fbeea43911cac21ce707ef, type: 3}
+  spinnerControler: {fileID: 6853132077661441926}
+--- !u!114 &6527334327840487395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6853132077579053501}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 470c7e7bb4d884b43aab5c135544d5e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dashDurationReduction: 2
+--- !u!114 &3459432271661710956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6853132077579053501}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ec49dc39c8955b48b3a82c66c58962b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerDirection: {x: 0, y: 0, z: 0}
+  normalizedWall: {x: 0, y: 0, z: 0}
+  spinerControler: {fileID: 6853132077661441926}
+--- !u!114 &2648372140871015440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6853132077579053501}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e17bda9b998e2744ebff8cbdd47496ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &957177068204180527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6853132077579053501}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1afe3a041f0650b4abc9e9d5b36305af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6853132077638159143
 GameObject:
   m_ObjectHideFlags: 0
@@ -291,11 +365,6 @@ GameObject:
   - component: {fileID: 6853132077661441925}
   - component: {fileID: 8588756904839644289}
   - component: {fileID: 6853132077661441926}
-  - component: {fileID: 4771427012510866416}
-  - component: {fileID: 6853132077661441927}
-  - component: {fileID: 6853132077661441920}
-  - component: {fileID: 6853132077661441921}
-  - component: {fileID: 6853132077661441922}
   m_Layer: 8
   m_Name: Spinner
   m_TagString: Player
@@ -377,70 +446,7 @@ MonoBehaviour:
   chargedDuration: 0
   chargeMultiplier: 200
   repoussed: 0
---- !u!114 &4771427012510866416
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6853132077661441948}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0461d78247348ef4dae292b2e17e5791, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  epxlosionParticle: {fileID: 3438996937471707301, guid: a2be7fac82fbeea43911cac21ce707ef, type: 3}
---- !u!114 &6853132077661441927
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6853132077661441948}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ec49dc39c8955b48b3a82c66c58962b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerDirection: {x: 0, y: 0, z: 0}
-  normalizedWall: {x: 0, y: 0, z: 0}
---- !u!114 &6853132077661441920
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6853132077661441948}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 470c7e7bb4d884b43aab5c135544d5e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dashDurationReduction: 2
---- !u!114 &6853132077661441921
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6853132077661441948}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e17bda9b998e2744ebff8cbdd47496ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &6853132077661441922
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6853132077661441948}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1afe3a041f0650b4abc9e9d5b36305af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  spinCollision: {fileID: 7279539468119450364}
 --- !u!1 &6853132077936097904
 GameObject:
   m_ObjectHideFlags: 0

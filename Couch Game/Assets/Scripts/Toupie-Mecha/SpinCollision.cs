@@ -5,18 +5,25 @@ using UnityEngine;
 public class SpinCollision : MonoBehaviour
 {
 
-    BounceWall bounceWall;
-    BounceSpinner bounceSpinner;
-    BouncePlayer bouncePlayer;
+    public BounceWall bounceWall;
+    public BounceSpinner bounceSpinner;
+    public BouncePlayer bouncePlayer;
     public GameObject epxlosionParticle;
+    public SpinnerControler spinnerControler;
 
-    void Start()
+    public float timer;
+
+    void OnEnable()
     {
         bounceWall = GetComponent<BounceWall>();
         bounceSpinner = GetComponent<BounceSpinner>();
         bouncePlayer = GetComponent<BouncePlayer>();
     }
 
+    private void FixedUpdate()
+    {
+        BounceWallTimer();
+    }
 
     void OnTriggerEnter(Collider other)
     {
@@ -33,20 +40,23 @@ public class SpinCollision : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-            Debug.Log("Collision");
     
         if(other.gameObject.tag == "Wall")
         {
             Debug.Log("Walled");
             bounceWall.normalizedWall = other.contacts[0].normal;
+            bounceWall.playerDirection = spinnerControler.moveDir;
+            timer = .5f;
             bounceWall.enabled = true;
-            bounceWall.playerDirection = this.GetComponent<SpinnerControler>().moveDir;
         }
     }
 
-    private void OnCollisionStay(Collision stay)
+    private void BounceWallTimer()
     {
-        Debug.Log("ui");
+        if(bounceWall.spinerControler.walled)
+        {
+            if(timer > 0)timer -=Time.deltaTime;
+            else bounceWall.spinerControler.walled = false;
+        }
     }
-
 }

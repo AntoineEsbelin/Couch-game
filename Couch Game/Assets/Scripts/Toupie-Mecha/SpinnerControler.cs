@@ -29,15 +29,18 @@ public class SpinnerControler : MonoBehaviour
     public Refs refs;
     public bool isSpinning;
     public bool isMoving;
-    [HideInInspector] public Vector3 moveDir;
+    public Vector3 moveDir;
 
     [HideInInspector] public float dashDuration;
 
     public float chargedDuration;
     public float chargeMultiplier;
 
+    [Header("Repousse")]
     public bool repoussed;
+    public bool walled;
 
+    public SpinCollision spinCollision;
     // Start each time script is enable
     private void OnEnable()
     {
@@ -45,6 +48,7 @@ public class SpinnerControler : MonoBehaviour
         isSpinning = true;
         moveDir = transform.forward;
         dashDuration = refs.dashDurationMax;
+        spinCollision.enabled = true;
     }
 
     private void OnDisable()
@@ -81,7 +85,7 @@ public class SpinnerControler : MonoBehaviour
         refs.moveSpeed = (Mathf.Pow((dashDuration / (refs.dashDurationMax - 1)), 3) + 1) * chargedDuration * chargeMultiplier;
         if(isSpinning)
         {
-            if(!repoussed)
+            if(!repoussed && !walled)
             {
                 if (isMoving)
                 {
@@ -109,7 +113,7 @@ public class SpinnerControler : MonoBehaviour
 
         public void OnMove(InputAction.CallbackContext ctx)
         {
-            if(!repoussed)refs.move = ctx.ReadValue<Vector3>();
+            if(!repoussed && !walled)refs.move = ctx.ReadValue<Vector3>();
         }
 
     #endregion
