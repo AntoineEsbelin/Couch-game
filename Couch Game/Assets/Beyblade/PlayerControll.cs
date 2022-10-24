@@ -37,21 +37,12 @@ public partial class @PlayerControll : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""SpinStateStart"",
+                    ""name"": ""SpinState"",
                     ""type"": ""Button"",
                     ""id"": ""d05ac769-a33a-4150-bbd6-90ee3d26b3c7"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Press"",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""SpinStateFinish"",
-                    ""type"": ""Button"",
-                    ""id"": ""c165eda6-17e9-4770-8f08-9c1451b73120"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": ""Press(behavior=1)"",
+                    ""interactions"": """",
                     ""initialStateCheck"": false
                 }
             ],
@@ -114,7 +105,7 @@ public partial class @PlayerControll : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""Gamepad"",
                     ""id"": ""030d2c49-1b5c-437e-aa19-5d010b7bd9d0"",
-                    ""path"": ""3DVector(mode=1)"",
+                    ""path"": ""3DVector"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -170,10 +161,10 @@ public partial class @PlayerControll : IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""143bb1cd-cc10-4eca-a2f0-a3664166fe91"",
                     ""path"": ""<Gamepad>/rightTrigger"",
-                    ""interactions"": ""Press"",
+                    ""interactions"": ""Press(pressPoint=0.1,behavior=2)"",
                     ""processors"": """",
                     ""groups"": "";Gamepad"",
-                    ""action"": ""SpinStateStart"",
+                    ""action"": ""SpinState"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -181,32 +172,10 @@ public partial class @PlayerControll : IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""5d6e0cbf-62de-4192-81ea-6f98d112f9ee"",
                     ""path"": ""<Keyboard>/q"",
-                    ""interactions"": ""Press"",
+                    ""interactions"": ""Press(pressPoint=0.1,behavior=2)"",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""SpinStateStart"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""a481da8f-af22-4c20-b399-f611b8aac542"",
-                    ""path"": ""<Gamepad>/rightTrigger"",
-                    ""interactions"": ""Press(behavior=1)"",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""SpinStateFinish"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""d8edfe63-031d-43f5-b018-854364b5f389"",
-                    ""path"": ""<Keyboard>/q"",
-                    ""interactions"": ""Press(behavior=1)"",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""SpinStateFinish"",
+                    ""action"": ""SpinState"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -795,8 +764,7 @@ public partial class @PlayerControll : IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
-        m_Player_SpinStateStart = m_Player.FindAction("SpinStateStart", throwIfNotFound: true);
-        m_Player_SpinStateFinish = m_Player.FindAction("SpinStateFinish", throwIfNotFound: true);
+        m_Player_SpinState = m_Player.FindAction("SpinState", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -869,15 +837,13 @@ public partial class @PlayerControll : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player;
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_Move;
-    private readonly InputAction m_Player_SpinStateStart;
-    private readonly InputAction m_Player_SpinStateFinish;
+    private readonly InputAction m_Player_SpinState;
     public struct PlayerActions
     {
         private @PlayerControll m_Wrapper;
         public PlayerActions(@PlayerControll wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
-        public InputAction @SpinStateStart => m_Wrapper.m_Player_SpinStateStart;
-        public InputAction @SpinStateFinish => m_Wrapper.m_Player_SpinStateFinish;
+        public InputAction @SpinState => m_Wrapper.m_Player_SpinState;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -890,12 +856,9 @@ public partial class @PlayerControll : IInputActionCollection2, IDisposable
                 @Move.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
-                @SpinStateStart.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSpinStateStart;
-                @SpinStateStart.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSpinStateStart;
-                @SpinStateStart.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSpinStateStart;
-                @SpinStateFinish.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSpinStateFinish;
-                @SpinStateFinish.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSpinStateFinish;
-                @SpinStateFinish.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSpinStateFinish;
+                @SpinState.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSpinState;
+                @SpinState.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSpinState;
+                @SpinState.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSpinState;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -903,12 +866,9 @@ public partial class @PlayerControll : IInputActionCollection2, IDisposable
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
-                @SpinStateStart.started += instance.OnSpinStateStart;
-                @SpinStateStart.performed += instance.OnSpinStateStart;
-                @SpinStateStart.canceled += instance.OnSpinStateStart;
-                @SpinStateFinish.started += instance.OnSpinStateFinish;
-                @SpinStateFinish.performed += instance.OnSpinStateFinish;
-                @SpinStateFinish.canceled += instance.OnSpinStateFinish;
+                @SpinState.started += instance.OnSpinState;
+                @SpinState.performed += instance.OnSpinState;
+                @SpinState.canceled += instance.OnSpinState;
             }
         }
     }
@@ -1066,8 +1026,7 @@ public partial class @PlayerControll : IInputActionCollection2, IDisposable
     public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
-        void OnSpinStateStart(InputAction.CallbackContext context);
-        void OnSpinStateFinish(InputAction.CallbackContext context);
+        void OnSpinState(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

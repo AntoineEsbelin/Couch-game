@@ -6,9 +6,12 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(CharacterController))]
 public class ToupieBehaviour : MonoBehaviour
 {
+    private float t;
+    private float SaveSpinSpeed;
+    private float SaveSpinDuration;
     private bool spin_Pressed;
     private float SpinPresstimer;
-    private float SpinReleasetimer;
+    private Vector3 accelVelocity = Vector3.zero;
     private PlayerInput input;
     
     
@@ -19,8 +22,7 @@ public class ToupieBehaviour : MonoBehaviour
 
     [Header("Input")]
     public PlayerControll playerControl;
-    private InputAction spinStateStart;
-    private InputAction spinStateFinish;
+    private InputAction spinState;
     [HideInInspector]public int playerID = 0;
     public Vector3 startPos;
     private float spinDuration;
@@ -30,7 +32,8 @@ public class ToupieBehaviour : MonoBehaviour
     [System.Serializable]
     public class MouvementParam
     {
-        [Range(0, 5f)]public float speed = 6f;
+        [Range(0, 5f)]public float speed = 3f;
+        [Range(0, 5f)]public float spinSpeed = 3f;
         [HideInInspector]public float turnSmoothVelocity;
         public float turnSmoothTime = 0.1f;
         public float gravity = -9.81f;
@@ -57,30 +60,44 @@ public class ToupieBehaviour : MonoBehaviour
         transform.position = startPos;
         input = GetComponent<PlayerInput>();
     }
+
+    private void OnEnable()
+    {
+        spinState = playerControl.Player.SpinState;
+        spinState.Enable();
+    }
     
+    private void OnDisable()
+    {
+        spinState.Disable();
+    }
     
     public void OnMove(InputAction.CallbackContext obj)
     {
         direction = obj.ReadValue<Vector3>().normalized;
     }
-
-    private void OnEnable()
+    public void OnSpin(InputAction.CallbackContext obj)
     {
-        spinStateStart = playerControl.Player.SpinStateStart;
-        spinStateStart.Enable();
         
-        spinStateFinish = playerControl.Player.SpinStateFinish;
-        spinStateFinish.Enable();
-
-        spinStateStart.performed += context => spin_Pressed = true;
-        spinStateFinish.performed += context => spin_Pressed = false;
-    }
-    private void OnDisable()
-    {
-        input.actions = null;
-        spinStateStart.Disable();
-        spinStateFinish.Disable();
-        
+        if (!isSpinning)
+        {
+            switch (obj.ReadValue<float>())
+            {
+                case 1:
+                    print("Press");
+                    spin_Pressed = true;
+                    spinDuration += 0.5f;
+                    moveParam.spinSpeed += 3;
+                    break;
+                
+                case 0:
+                    print("Release");
+                    spin_Pressed = false;
+                    isSpinning = true;
+                    break;
+            }
+            
+        }
     }
     
     
@@ -98,7 +115,6 @@ public class ToupieBehaviour : MonoBehaviour
             
             controller.Move(moveDir * moveParam.speed * Time.fixedDeltaTime);
         }
-        
         
     }
 
@@ -122,7 +138,7 @@ public class ToupieBehaviour : MonoBehaviour
         //     accel.z -= 1;
         // }
 
-        accel += direction / 10;
+        accel += direction / 50;
         switch (accel.x)
         {
             case > 5:
@@ -155,15 +171,11 @@ public class ToupieBehaviour : MonoBehaviour
         //         accel.z += 0.2f;
         // }
         
-        controller.Move(accel * moveParam.speed * Time.deltaTime);
-        
-        if (SpinReleasetimer > 1)
-        {
-            moveParam.speed--;  
-        }
+       
+        controller.Move(accel * moveParam.spinSpeed * Time.deltaTime);
         
 
-        if (spinDuration <= 0)
+        if (spinDuration < 0.1f)
         {
             isSpinning = false;
             accel = Vector3.zero;
@@ -175,32 +187,48 @@ public class ToupieBehaviour : MonoBehaviour
         
         if(spin_Pressed)
         {
+            moveParam.speed = 1;
+            
             SpinPresstimer+=Time.deltaTime;
             if (SpinPresstimer > 1)
             {
               SpinPresstimer-=1;
               spinDuration++;
-              moveParam.speed++;  
-              isSpinning = true;
+              moveParam.spinSpeed++;
             }
+
+            t = 0;
+            SaveSpinDuration = spinDuration;
+            SaveSpinSpeed = moveParam.spinSpeed;
+            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+            Vector3 SpinDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+            float maxAccel = 3f;
+            accel.x = maxAccel * SpinDir.x;
+            accel.z = maxAccel * SpinDir.z;
+            
         }
         else
         {
-            SpinReleasetimer+=Time.deltaTime;
-            if (SpinReleasetimer > 1)
+            moveParam.speed = 3;
+            
+            
+            if (isSpinning)
             {
-                SpinReleasetimer-=1;
-                spinDuration--;
-                moveParam.speed--;  
+                Spinning();
+                if (t < SaveSpinDuration)
+                {
+                    moveParam.spinSpeed = Mathf.Lerp( SaveSpinSpeed, 0, t/SaveSpinDuration);
+                    spinDuration = Mathf.Lerp( SaveSpinSpeed, 0, t/SaveSpinDuration);
+                    t +=Time.deltaTime;
+                }
+                
             }
         }
 
-        if (isSpinning)
-        {
-            Spinning();
-        }
+        
 
-        moveParam.speed = Mathf.Clamp(moveParam.speed, 3, 5);
+        moveParam.speed = Mathf.Clamp(moveParam.speed, 1, 5);
+        moveParam.spinSpeed = Mathf.Clamp(moveParam.spinSpeed, 0, 4);
         spinDuration = Mathf.Clamp(spinDuration, 0, 4);
         
         
@@ -223,12 +251,23 @@ public class ToupieBehaviour : MonoBehaviour
         
         if (coll.collider.CompareTag("Wall"))
         {
-            
             playerHit = true;
             
             reflect = Quaternion.AngleAxis(180, coll.normal) * transform.forward * -1;
             reflect.Normalize();
-    
+            
+            
+
+        }
+
+        if (coll.collider.CompareTag("Player"))
+        {
+            playerHit = true;
+
+            Vector3 collDir = coll.transform.position - transform.position;
+            reflect = Quaternion.AngleAxis(180, coll.normal) * transform.forward * -1 + collDir;
+            reflect.Normalize();
+            
         }
         
     }
