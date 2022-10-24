@@ -139,6 +139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   normalPlayer: {fileID: 6853132077936097904}
   spinnerPlayer: {fileID: 6853132077661441948}
+  spinnerControler: {fileID: 0}
   startCharging: 0
   maintainTimer: 0.5
   spinTimer: 0
@@ -153,6 +154,7 @@ MonoBehaviour:
   spinnerFBX: {fileID: 0}
   slowSpeed: 0
   knockbackMagn: 0
+  cameraTarget: {fileID: 0}
 --- !u!114 &6853132077579053472
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,9 +216,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0461d78247348ef4dae292b2e17e5791, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bounceWall: {fileID: 0}
-  bounceSpinner: {fileID: 0}
-  bouncePlayer: {fileID: 0}
+  bounceWall: {fileID: 3459432271661710956}
+  bounceSpinner: {fileID: 6527334327840487395}
+  bouncePlayer: {fileID: 2648372140871015440}
   spinnerControler: {fileID: 6853132077661441926}
   playerManager: {fileID: 0}
   timer: 0
@@ -267,6 +269,7 @@ MonoBehaviour:
   normalControler: {fileID: 6853132077936097909}
   timer: 0
   maxTimer: 2
+  bumped: 0
 --- !u!114 &957177068204180527
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -281,7 +284,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   normalControler: {fileID: 6853132077936097909}
   spinnerKnockbacking: {fileID: 0}
-  playerManager: {fileID: 6853132077579053500}
+  knockBackSpeed: 0.000005
+  maxTimer: 1
 --- !u!1 &6853132077638159143
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,6 +9,7 @@ public class BouncePlayer : MonoBehaviour
     public NormalControler normalControler;
     [SerializeField] private float timer;
     public float maxTimer;
+    public bool bumped;
 
     private void OnEnable()
     {
@@ -17,6 +18,7 @@ public class BouncePlayer : MonoBehaviour
         
         //stop spinning and go to normal state
         spinnerControler.StopSpin();
+        bumped = true;
         
         //player can't move before this script disable
         normalControler.SetSpeedModifier(0f);
@@ -34,6 +36,7 @@ public class BouncePlayer : MonoBehaviour
     {
         normalControler.NormalSpeedModifier();
         normalControler.enabled = true;
+        bumped = false;
         Debug.Log("ZEBi");
     }
 
