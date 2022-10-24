@@ -8,7 +8,6 @@ public class SpinCollision : MonoBehaviour
     public BounceWall bounceWall;
     public BounceSpinner bounceSpinner;
     public BouncePlayer bouncePlayer;
-    public GameObject epxlosionParticle;
     public SpinnerControler spinnerControler;
 
     public float timer;
@@ -30,24 +29,33 @@ public class SpinCollision : MonoBehaviour
         if (!other.isTrigger) return;
         if (other.gameObject.tag == "Player")
         {
-            other.GetComponentInParent<PlayerManager>().lastPlayerContacted = this.GetComponentInParent<PlayerManager>();
+            other.GetComponentInParent<PlayerManager>().lastPlayerContacted = this.GetComponent<PlayerManager>();
             other.GetComponentInParent<PlayerManager>().timeLastPlayer = other.GetComponentInParent<PlayerManager>().maxTimeLastPlayer;
-            Instantiate(epxlosionParticle, this.transform.position, Quaternion.identity);
-            if (other.gameObject.layer == 7) bouncePlayer.enabled = true;
-            if (other.gameObject.layer == 8) bounceSpinner.enabled = true;
+            if(spinnerControler.isSpinning)
+            {
+                Debug.Log(other.name);
+
+                //Si le joueur est pas stun
+
+                if (other.gameObject.layer == 7) bouncePlayer.enabled = true;
+                if (other.gameObject.layer == 8) bounceSpinner.enabled = true;
+            }
         }
     }
 
     private void OnCollisionEnter(Collision other)
     {
-    
+        
         if(other.gameObject.tag == "Wall")
         {
-            Debug.Log("Walled");
-            bounceWall.normalizedWall = other.contacts[0].normal;
-            bounceWall.playerDirection = spinnerControler.moveDir;
-            timer = .5f;
-            bounceWall.enabled = true;
+            if(spinnerControler.isSpinning)
+            {
+                //Debug.Log("Walled");
+                bounceWall.normalizedWall = other.contacts[0].normal;
+                bounceWall.playerDirection = spinnerControler.moveDir;
+                timer = .5f;
+                bounceWall.enabled = true;
+            }
         }
     }
 

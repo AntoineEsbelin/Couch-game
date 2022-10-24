@@ -215,7 +215,6 @@ MonoBehaviour:
   bounceWall: {fileID: 0}
   bounceSpinner: {fileID: 0}
   bouncePlayer: {fileID: 0}
-  epxlosionParticle: {fileID: 3438996937471707301, guid: a2be7fac82fbeea43911cac21ce707ef, type: 3}
   spinnerControler: {fileID: 6853132077661441926}
   timer: 0
 --- !u!114 &6527334327840487395
@@ -230,6 +229,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 470c7e7bb4d884b43aab5c135544d5e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosion: {fileID: 3438996937471707301, guid: a2be7fac82fbeea43911cac21ce707ef, type: 3}
+  spinnerControler: {fileID: 6853132077661441926}
   dashDurationReduction: 2
 --- !u!114 &3459432271661710956
 MonoBehaviour:
@@ -258,6 +259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e17bda9b998e2744ebff8cbdd47496ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosion: {fileID: 3438996937471707301, guid: a2be7fac82fbeea43911cac21ce707ef, type: 3}
 --- !u!114 &957177068204180527
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -414,7 +416,7 @@ SphereCollider:
   m_GameObject: {fileID: 6853132077661441948}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Radius: 2.9176784
   m_Center: {x: 0, y: 2.024857, z: 0.5732591}

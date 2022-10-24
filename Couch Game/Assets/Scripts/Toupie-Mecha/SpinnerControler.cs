@@ -106,6 +106,7 @@ public class SpinnerControler : MonoBehaviour
 
     public void StopSpin()
     {
+        spinCollision.enabled = false;
         this.gameObject.SetActive(false);
     }
 

@@ -9,10 +9,10 @@ public class BounceWall : MonoBehaviour
     public SpinnerControler spinerControler;
     void OnEnable()
     {
-        Debug.Log("A " + spinerControler.moveDir);
+        //Debug.Log("A " + spinerControler.moveDir);
         spinerControler.moveDir = Vector3.Reflect(playerDirection, normalizedWall);
         spinerControler.walled = true;
-        Debug.Log("B " +spinerControler.moveDir);
+        //Debug.Log("B " +spinerControler.moveDir);
         
         this.enabled = false;
     }
