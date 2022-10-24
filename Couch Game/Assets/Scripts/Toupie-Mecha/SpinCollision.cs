@@ -9,6 +9,7 @@ public class SpinCollision : MonoBehaviour
     public BounceSpinner bounceSpinner;
     public BouncePlayer bouncePlayer;
     public SpinnerControler spinnerControler;
+    public PlayerManager playerManager;
 
     public float timer;
 
@@ -17,6 +18,7 @@ public class SpinCollision : MonoBehaviour
         bounceWall = GetComponent<BounceWall>();
         bounceSpinner = GetComponent<BounceSpinner>();
         bouncePlayer = GetComponent<BouncePlayer>();
+        playerManager = GetComponent<PlayerManager>();
     }
 
     private void FixedUpdate()
@@ -29,16 +31,32 @@ public class SpinCollision : MonoBehaviour
         if (!other.isTrigger) return;
         if (other.gameObject.tag == "Player")
         {
-            other.GetComponentInParent<PlayerManager>().lastPlayerContacted = this.GetComponent<PlayerManager>();
-            other.GetComponentInParent<PlayerManager>().timeLastPlayer = other.GetComponentInParent<PlayerManager>().maxTimeLastPlayer;
-            if(spinnerControler.isSpinning)
+            
+            if(spinnerControler.gameObject.activeSelf)
             {
-                Debug.Log(other.name);
+                other.GetComponentInParent<PlayerManager>().lastPlayerContacted = this.GetComponent<PlayerManager>();
+                other.GetComponentInParent<PlayerManager>().timeLastPlayer = other.GetComponentInParent<PlayerManager>().maxTimeLastPlayer;
 
-                //Si le joueur est pas stun
 
-                if (other.gameObject.layer == 7) bouncePlayer.enabled = true;
+                //Debug.Log(other.name);
+
+                //Si le joueur est pas stun [???]
+
+                if (other.gameObject.layer == 7)
+                {
+                    //activate bounce player of this spinner
+                    this.bouncePlayer.enabled = true;
+
+                    //activate knockback for triggered player >:(
+                    other.GetComponentInParent<Knockback>().spinnerKnockbacking = this.spinnerControler;
+                    other.GetComponentInParent<Knockback>().enabled = true;
+                    
+                }
                 if (other.gameObject.layer == 8) bounceSpinner.enabled = true;
+                
+                /*if(spinnerControler.isSpinning)
+                {
+                }*/
             }
         }
     }

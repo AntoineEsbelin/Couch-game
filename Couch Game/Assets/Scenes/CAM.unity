@@ -334,9 +334,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0940a2eab8c156d4d8dca3cccfbc8053, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targets:
-  - {fileID: 906803151}
-  - {fileID: 253184848}
+  targets: []
   offset: {x: 0, y: 20, z: -9.76}
   smoothTime: 0.5
   minZoom: 85
@@ -911,6 +909,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1afe3a041f0650b4abc9e9d5b36305af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  normalControler: {fileID: 0}
+  spinnerKnockbacking: {fileID: 0}
 --- !u!114 &253184839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -923,6 +923,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e17bda9b998e2744ebff8cbdd47496ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosion: {fileID: 0}
+  spinnerControler: {fileID: 0}
+  normalControler: {fileID: 0}
+  timer: 0
+  maxTimer: 0
 --- !u!114 &253184840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -950,6 +955,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 470c7e7bb4d884b43aab5c135544d5e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosion: {fileID: 0}
+  spinnerControler: {fileID: 0}
   dashDurationReduction: 2
 --- !u!114 &253184842
 MonoBehaviour:
@@ -966,8 +973,8 @@ MonoBehaviour:
   bounceWall: {fileID: 0}
   bounceSpinner: {fileID: 0}
   bouncePlayer: {fileID: 0}
-  epxlosionParticle: {fileID: 3438996937471707301, guid: a2be7fac82fbeea43911cac21ce707ef, type: 3}
   spinnerControler: {fileID: 403326384}
+  playerManager: {fileID: 0}
   timer: 0
 --- !u!54 &253184843
 Rigidbody:
@@ -1044,6 +1051,9 @@ MonoBehaviour:
   playerId: 0
   normalFBX: {fileID: 919132149155446097, guid: 5c301ae36d15f07478f27a845d473678, type: 3}
   spinnerFBX: {fileID: 919132149155446097, guid: a5ff0e0c6d6a20b49a110f6d51714da1, type: 3}
+  slowSpeed: 0
+  knockbackMagn: 0
+  cameraTarget: {fileID: 0}
 --- !u!114 &253184847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2003,6 +2013,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1afe3a041f0650b4abc9e9d5b36305af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  normalControler: {fileID: 0}
+  spinnerKnockbacking: {fileID: 0}
 --- !u!114 &658624569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3355,6 +3367,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1afe3a041f0650b4abc9e9d5b36305af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  normalControler: {fileID: 0}
+  spinnerKnockbacking: {fileID: 0}
 --- !u!114 &906803142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3367,6 +3381,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e17bda9b998e2744ebff8cbdd47496ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosion: {fileID: 0}
+  spinnerControler: {fileID: 0}
+  normalControler: {fileID: 0}
+  timer: 0
+  maxTimer: 0
 --- !u!114 &906803143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3394,6 +3413,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 470c7e7bb4d884b43aab5c135544d5e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosion: {fileID: 0}
+  spinnerControler: {fileID: 0}
   dashDurationReduction: 2
 --- !u!114 &906803145
 MonoBehaviour:
@@ -3410,8 +3431,8 @@ MonoBehaviour:
   bounceWall: {fileID: 0}
   bounceSpinner: {fileID: 0}
   bouncePlayer: {fileID: 0}
-  epxlosionParticle: {fileID: 3438996937471707301, guid: a2be7fac82fbeea43911cac21ce707ef, type: 3}
   spinnerControler: {fileID: 973856314}
+  playerManager: {fileID: 0}
   timer: 0
 --- !u!54 &906803146
 Rigidbody:
@@ -3488,6 +3509,9 @@ MonoBehaviour:
   playerId: 0
   normalFBX: {fileID: 919132149155446097, guid: 5c301ae36d15f07478f27a845d473678, type: 3}
   spinnerFBX: {fileID: 919132149155446097, guid: a5ff0e0c6d6a20b49a110f6d51714da1, type: 3}
+  slowSpeed: 0
+  knockbackMagn: 0
+  cameraTarget: {fileID: 0}
 --- !u!114 &906803150
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3775,6 +3799,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1afe3a041f0650b4abc9e9d5b36305af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  normalControler: {fileID: 0}
+  spinnerKnockbacking: {fileID: 0}
 --- !u!114 &1026815187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6086,8 +6112,8 @@ MonoBehaviour:
   bounceWall: {fileID: 0}
   bounceSpinner: {fileID: 0}
   bouncePlayer: {fileID: 0}
-  epxlosionParticle: {fileID: 0}
   spinnerControler: {fileID: 0}
+  playerManager: {fileID: 0}
   timer: 0
 --- !u!114 &2006672617
 MonoBehaviour:
@@ -6101,6 +6127,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 470c7e7bb4d884b43aab5c135544d5e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosion: {fileID: 0}
+  spinnerControler: {fileID: 0}
   dashDurationReduction: 2
 --- !u!114 &2006672618
 MonoBehaviour:
@@ -6128,6 +6156,9 @@ MonoBehaviour:
   playerId: 0
   normalFBX: {fileID: 0}
   spinnerFBX: {fileID: 0}
+  slowSpeed: 0
+  knockbackMagn: 0
+  cameraTarget: {fileID: 0}
 --- !u!1 &2038239478
 GameObject:
   m_ObjectHideFlags: 0

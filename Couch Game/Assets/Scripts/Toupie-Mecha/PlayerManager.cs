@@ -28,6 +28,12 @@ public class PlayerManager : MonoBehaviour
     public GameObject normalFBX;
     public GameObject spinnerFBX;
 
+    public float slowSpeed;
+
+    public float knockbackMagn;
+
+    public CameraTarget cameraTarget;
+
     private void OnEnable()
     {
         normalPlayer.SetActive(true);
@@ -48,6 +54,8 @@ public class PlayerManager : MonoBehaviour
         GameObject spinPlayerGO = Instantiate(spinnerFBX, spinnerPlayer.transform);
         GameObject spinnerGO = Instantiate(spinnerFBX, spinPlayerGO.transform);*/
         //normalGO.transform.rotation = new Quaternion(0f, 0.8f, 0f, 0.7f);
+        cameraTarget = GameObject.FindWithTag("MainCamera").GetComponent<CameraTarget>();
+        cameraTarget.targets.Add(transform);
         GameManager.instance.allPlayer.Add(this);
     }
 
@@ -64,6 +72,7 @@ public class PlayerManager : MonoBehaviour
             if(!spinnerControler.repoussed && !spinnerControler.isSpinning)
             {
                 normalPlayer.GetComponent<NormalControler>().spinCharging = true;
+                normalPlayer.GetComponent<NormalControler>().SetSpeedModifier(slowSpeed);
                 normalPlayer.GetComponent<NormalControler>().SlowSpeedModifier();
                 this.GetComponent<Stretch>().enabled = true;
                 startCharging = true;

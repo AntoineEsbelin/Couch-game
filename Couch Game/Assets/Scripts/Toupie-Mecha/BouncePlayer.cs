@@ -5,21 +5,49 @@ using UnityEngine;
 public class BouncePlayer : MonoBehaviour
 {
     public GameObject explosion;
+    public SpinnerControler spinnerControler;
+    public NormalControler normalControler;
+    [SerializeField] private float timer;
+    public float maxTimer;
 
-    void OnEnable()
+    private void OnEnable()
     {
+        //Particle spawned
         Instantiate(explosion, this.transform.position, Quaternion.identity);
-        this.enabled = false;
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
         
+        //stop spinning and go to normal state
+        spinnerControler.StopSpin();
+        
+        //player can't move before this script disable
+        normalControler.SetSpeedModifier(0f);
+        normalControler.enabled = false;
+        normalControler.SlowSpeedModifier();
+        normalControler.rb.velocity = new Vector3(0f, normalControler.rb.velocity.y, 0f);
+        //animation knockback below :
+        //---
+
+        timer = maxTimer;
+        Debug.Log("I AM ACTIVATE");
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDisable()
     {
-        
+        normalControler.NormalSpeedModifier();
+        normalControler.enabled = true;
+        Debug.Log("ZEBi");
+    }
+
+    private void FixedUpdate()
+    {
+        Timer();
+    }
+
+    private void Timer()
+    {
+        if(timer > 0)
+        {
+            timer -= Time.deltaTime;
+        }
+        else this.enabled = false;
     }
 }

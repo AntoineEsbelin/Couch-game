@@ -75,6 +75,11 @@ public class NormalControler : MonoBehaviour
         }*/
     }
 
+    public void SetSpeedModifier(float sped)
+    {
+        movementSettings.speedModifier = sped;
+    }
+
     public void SlowSpeedModifier()
     {
         movementSettings.speedModifier = movementSettings.slowSpeedModifier;
