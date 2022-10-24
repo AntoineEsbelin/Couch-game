@@ -53,6 +53,7 @@ public class SpinnerControler : MonoBehaviour
 
     private void OnDisable()
     {
+        //this.GetComponentInParent<PlayerManager>().canSpin = true;
         repoussed = false;
         isSpinning = false;
         refs.normalControler.SetActive(true);

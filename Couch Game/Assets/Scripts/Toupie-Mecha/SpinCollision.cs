@@ -21,6 +21,11 @@ public class SpinCollision : MonoBehaviour
         playerManager = GetComponent<PlayerManager>();
     }
 
+    void OnDisable()
+    {
+        playerManager.ResetAllInteraction();
+    }
+
     private void FixedUpdate()
     {
         BounceWallTimer();

@@ -8,7 +8,7 @@ public class PlayerManager : MonoBehaviour
     public GameObject normalPlayer;
     public GameObject spinnerPlayer;
 
-    SpinnerControler spinnerControler;
+    public SpinnerControler spinnerControler;
 
     //charge spin timer
     public bool startCharging;
@@ -69,7 +69,7 @@ public class PlayerManager : MonoBehaviour
     {
         if (ctx.performed)
         {
-            if(!spinnerControler.repoussed && !spinnerControler.isSpinning)
+            if(CanSpin())
             {
                 normalPlayer.GetComponent<NormalControler>().spinCharging = true;
                 normalPlayer.GetComponent<NormalControler>().SetSpeedModifier(slowSpeed);
@@ -81,18 +81,22 @@ public class PlayerManager : MonoBehaviour
 
         if(ctx.canceled)
         {
-            if(spinTimer > maintainTimer)
+            if(!CanSpin()) return;
+            if(startCharging)
             {
-                if(spinTimer > timeMaxAttain)spinTimer = timeMaxAttain;
-                normalPlayer.SetActive(false);
-                spinnerPlayer.SetActive(true);
+                if(spinTimer > maintainTimer)
+                {
+                    if(spinTimer > timeMaxAttain)spinTimer = timeMaxAttain;
+                    normalPlayer.SetActive(false);
+                    spinnerPlayer.SetActive(true);
+                }
+                spinnerControler.chargedDuration = spinTimer;
+                normalPlayer.GetComponent<NormalControler>().NormalSpeedModifier();
+                this.GetComponent<Stretch>().noStretch = true;
+                normalPlayer.GetComponent<NormalControler>().spinCharging = false;
+                startCharging = false;
+                spinTimer = 0f;
             }
-            spinnerControler.chargedDuration = spinTimer;
-            normalPlayer.GetComponent<NormalControler>().NormalSpeedModifier();
-            this.GetComponent<Stretch>().noStretch = true;
-            normalPlayer.GetComponent<NormalControler>().spinCharging = false;
-            startCharging = false;
-            spinTimer = 0f;
         }
     }
 
@@ -103,5 +107,18 @@ public class PlayerManager : MonoBehaviour
             if(timeLastPlayer > 0)timeLastPlayer -= Time.deltaTime;
             else lastPlayerContacted = null;
         }
+    }
+
+    public bool CanSpin()
+    {
+        return !spinnerControler.repoussed && !spinnerControler.walled && !spinnerControler.spinCollision.bouncePlayer.bumped && !spinnerControler.isSpinning;
+    }
+
+    public void ResetAllInteraction()
+    {
+        spinnerControler.repoussed = false;
+        spinnerControler.walled = false;
+        spinnerControler.spinCollision.bouncePlayer.bumped = false;
+        spinnerControler.isSpinning = false;
     }
 }
