@@ -16,7 +16,6 @@ public class CounterA : MonoBehaviour
     public float attackCD;
     public float forceApplied = 20;
     public bool canAtk;
-    public bool zbi;
 
     private void Awake()
     {      
@@ -24,7 +23,6 @@ public class CounterA : MonoBehaviour
         canAtk = false;
         hitbox = GameObject.FindGameObjectWithTag("hitbox").GetComponent<BoxCollider>();
         orientation = transform;
-        zbi = false;
     }
 
     private void FixedUpdate()
@@ -35,16 +33,12 @@ public class CounterA : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            zbi = true;
-        }
-
-        if (zbi)
-        {
             if (canAtk)
             {
                 Attack();
             }
         }
+
     }
 
     public void Attack()
@@ -55,7 +49,7 @@ public class CounterA : MonoBehaviour
 
 
         rb.AddForce(forceToApply * Time.deltaTime, ForceMode.Impulse);
-        zbi = false;
+        
          //canAtk = false;
                    
     }
