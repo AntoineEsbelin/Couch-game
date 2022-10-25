@@ -10,6 +10,8 @@ public class PlayerManager : MonoBehaviour
 
     public SpinnerControler spinnerControler;
 
+    public CameraTarget cam;
+
     //charge spin timer
     public bool startCharging;
     public float maintainTimer = 1f;
@@ -57,6 +59,9 @@ public class PlayerManager : MonoBehaviour
         cameraTarget = GameObject.FindWithTag("MainCamera").GetComponent<CameraTarget>();
         cameraTarget.targets.Add(transform);
         GameManager.instance.allPlayer.Add(this);
+
+        cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraTarget>();
+        cam.targets.Add(transform);
     }
 
     void FixedUpdate()
