@@ -44,6 +44,7 @@ public class SpinnerControler : MonoBehaviour
     // Start each time script is enable
     private void OnEnable()
     {
+        Debug.Log("ouais");
         repoussed = false;
         isSpinning = true;
         moveDir = transform.forward;
