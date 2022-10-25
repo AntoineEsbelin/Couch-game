@@ -11,6 +11,9 @@ public class Knockback : MonoBehaviour
     private float timer;
     [SerializeField] private float maxTimer;
     private Vector3 knockbackDir;
+
+    Vector3 normalizedWall;
+
     private void OnEnable()
     {
 
@@ -18,9 +21,9 @@ public class Knockback : MonoBehaviour
         knockbackDir = (this.transform.position - spinnerKnockbacking.transform.position).normalized;
         
         
-        Debug.Log("KONCKBACKDIR : " + knockbackDir);
-        Debug.Log("MAGNITUDE : " + spinnerKnockbacking.refs.moveSpeed);
-        Debug.Log("KNOCKBACK : " + knockback);
+        // Debug.Log("KONCKBACKDIR : " + knockbackDir);
+        // Debug.Log("MAGNITUDE : " + spinnerKnockbacking.refs.moveSpeed);
+        // Debug.Log("KNOCKBACK : " + knockback);
         //Debug.Log("KNOCKBACKING : " + spinnerKnockbacking.name);
         //player can't move
         timer = maxTimer;
@@ -43,5 +46,16 @@ public class Knockback : MonoBehaviour
             this.normalControler.rb.AddForce(knockback, ForceMode.Impulse);
         }
         else this.enabled = false;
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        
+        if(other.gameObject.tag == "Wall")
+        {
+            //Debug.Log("Walled");
+            normalizedWall = other.contacts[0].normal;
+            knockbackDir = Vector3.Reflect(knockbackDir, normalizedWall);
+        }
     }
 }

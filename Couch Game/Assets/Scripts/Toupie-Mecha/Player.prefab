@@ -268,7 +268,7 @@ MonoBehaviour:
   spinnerControler: {fileID: 6853132077661441926}
   normalControler: {fileID: 6853132077936097909}
   timer: 0
-  maxTimer: 2
+  maxTimer: 0.5
   bumped: 0
 --- !u!114 &957177068204180527
 MonoBehaviour:
