@@ -16,13 +16,12 @@ public class Stretch : MonoBehaviour
     {
         initialStretch = objectToStretch.localScale;
         noStretch = false;
-        this.GetComponent<Rigidbody>().useGravity = false;
     }
     
     private void OnDisable()
     {
+        objectToStretch.localScale = initialStretch;
         noStretch = true;
-        this.GetComponent<Rigidbody>().useGravity = true;
     }
     // Start is called before the first frame update
     void Start()
@@ -41,12 +40,10 @@ public class Stretch : MonoBehaviour
         if(!noStretch)
         {
             objectToStretch.localScale = Vector3.MoveTowards(objectToStretch.localScale, desireStretch , stretchSpeed * Time.fixedDeltaTime);
-            Debug.Log("STRETCH");
         }
         else
         {
             objectToStretch.localScale = Vector3.MoveTowards(objectToStretch.localScale, initialStretch, unstretchSpeed * Time.fixedDeltaTime);
-            Debug.Log("NO STRETCH ?");
             if(objectToStretch.localScale == initialStretch)this.enabled = false;    
         }
     }

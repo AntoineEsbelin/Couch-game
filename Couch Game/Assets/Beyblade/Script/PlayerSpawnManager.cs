@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 public class PlayerSpawnManager : MonoBehaviour
 {
     public Transform[] spawnLocations;
+    
     public static PlayerSpawnManager instance;
     public bool isController;
 
