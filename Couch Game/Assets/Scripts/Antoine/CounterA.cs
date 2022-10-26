@@ -10,19 +10,20 @@ public class CounterA : MonoBehaviour
     public Transform orientation;
     public BoxCollider hitbox;
     public Rigidbody rb;
-    private PlayerManager pm;
+    public PlayerManager pm;
 
     [Header("AttackStats")]
-    public float attackCD;
+    public float attackCD = 3.0f;
     public float forceApplied = 20;
     public bool canAtk;
 
     private void Awake()
-    {      
-        pm = GetComponent<PlayerManager>();
-        canAtk = false;
+    {
+        rb = null;
+        //pm = GetComponent<PlayerManager>();
         hitbox = GameObject.FindGameObjectWithTag("hitbox").GetComponent<BoxCollider>();
         orientation = transform;
+        canAtk = true;
     }
 
     private void FixedUpdate()
@@ -33,30 +34,24 @@ public class CounterA : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (canAtk)
+            if (canAtk && rb != null)
             {
-                Attack();
+                canAtk = false;
+                StartCoroutine(Attack());
             }
         }
 
     }
 
-    public void Attack()
-    {      
-        
-         Debug.Log("Attack");
-         Vector3 forceToApply = orientation.forward * forceApplied;
+    public IEnumerator Attack()
+    {
+        Debug.Log("Attack");
+        Vector3 forceToApply = orientation.forward * forceApplied;
 
 
         rb.AddForce(forceToApply * Time.deltaTime, ForceMode.Impulse);
-        
-         //canAtk = false;
-                   
-    }
-
-    public IEnumerator Cooldown()
-    {
         yield return new WaitForSeconds(attackCD);
+        Debug.Log("CD applied");
         canAtk = true;
     }
 

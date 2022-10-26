@@ -5,17 +5,17 @@ using UnityEngine;
 public class Hitbox : MonoBehaviour
 {
     public CounterA counterAtk;
-    public Rigidbody rigid;
     private void Awake()
     {
         counterAtk = GetComponentInParent<CounterA>();
     }
-    private void OnTriggerStay(Collider collider)
+
+    private void OnTriggerStay(Collider other)
     {
-        if (collider.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
-            counterAtk.canAtk = true;
-            counterAtk.rb = collider.attachedRigidbody;
+            counterAtk.rb = other.attachedRigidbody;
+            counterAtk.pm = other.attachedRigidbody.GetComponent<PlayerManager>();
         }
     }
 
@@ -23,8 +23,8 @@ public class Hitbox : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            counterAtk.canAtk = false;
             counterAtk.rb = null;
+            counterAtk.pm = null;
         }
     }
 
