@@ -10,6 +10,7 @@ public class PlayerRespawn : MonoBehaviour
 
     public GameObject normalPlayer;
     public PlayerManager playerManager;
+    public Rigidbody rb;
     private void OnEnable()
     {
         respawnTime = maxRespawnTime;

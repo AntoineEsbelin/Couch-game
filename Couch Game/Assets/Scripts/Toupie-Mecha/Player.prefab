@@ -189,6 +189,7 @@ MonoBehaviour:
   respawnTime: 0
   normalPlayer: {fileID: 6853132077936097904}
   playerManager: {fileID: 6853132077579053500}
+  rb: {fileID: 6853132077579053473}
 --- !u!54 &6853132077579053473
 Rigidbody:
   m_ObjectHideFlags: 0
