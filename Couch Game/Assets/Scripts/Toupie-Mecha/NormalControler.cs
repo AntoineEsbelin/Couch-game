@@ -24,8 +24,12 @@ public class NormalControler : MonoBehaviour
     Vector3 moveDir;
     Vector3 theMove;
 
+    public int stunDuration;
+
     public bool isMoving;
     public bool spinCharging;
+    public bool canMove;
+    public bool stunned;
 
 
     public MovementSettings movementSettings;
@@ -33,6 +37,8 @@ public class NormalControler : MonoBehaviour
     private void OnEnable()
     {
         //prend les paramètres de mouvements de la data
+        canMove = true;
+        stunned = false;
     }
 
     public void OnMove(InputAction.CallbackContext ctx)
@@ -43,7 +49,15 @@ public class NormalControler : MonoBehaviour
     private void FixedUpdate()
     {
         isMoving = move != Vector3.zero;
+
+        if(canMove)
         Moving();
+
+        if (stunned)
+        {
+            StartCoroutine(StunCountdown());
+            stunned = false;
+        }
     }
 
     public void Moving()
@@ -88,5 +102,12 @@ public class NormalControler : MonoBehaviour
     public void NormalSpeedModifier()
     {
         movementSettings.speedModifier = movementSettings.normalSpeedModifier;
+    }
+
+    public IEnumerator StunCountdown()
+    {
+        canMove = false;
+        yield return new WaitForSeconds(stunDuration);
+        canMove = true;
     }
 }

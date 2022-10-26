@@ -294,6 +294,7 @@ MonoBehaviour:
   rb: {fileID: 159566906}
   isMoving: 0
   spinCharging: 0
+  canMove: 0
   movementSettings:
     moveSpeed: 500
     dx: 1
@@ -1135,6 +1136,7 @@ MonoBehaviour:
   hitbox: {fileID: 0}
   rb: {fileID: 0}
   pm: {fileID: 0}
+  norm: {fileID: 0}
   attackCD: 1
   forceApplied: 2000
   canAtk: 0
@@ -1151,7 +1153,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   counterAtk: {fileID: 0}
-  rigid: {fileID: 0}
 --- !u!1 &171007885
 GameObject:
   m_ObjectHideFlags: 0
@@ -6622,9 +6623,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   move: {x: 0, y: 0, z: 0}
-  rb: {fileID: 0}
+  rb: {fileID: 232394356}
   isMoving: 0
   spinCharging: 0
+  canMove: 0
   movementSettings:
     moveSpeed: 500
     dx: 1

@@ -16,6 +16,7 @@ public class Hitbox : MonoBehaviour
         {
             counterAtk.rb = other.attachedRigidbody;
             counterAtk.pm = other.attachedRigidbody.GetComponent<PlayerManager>();
+            counterAtk.norm = other.attachedRigidbody.GetComponentInChildren<NormalControler>();
         }
     }
 
@@ -25,6 +26,7 @@ public class Hitbox : MonoBehaviour
         {
             counterAtk.rb = null;
             counterAtk.pm = null;
+            counterAtk.norm = null;
         }
     }
 

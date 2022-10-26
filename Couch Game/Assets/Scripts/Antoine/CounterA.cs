@@ -11,6 +11,7 @@ public class CounterA : MonoBehaviour
     public BoxCollider hitbox;
     public Rigidbody rb;
     public PlayerManager pm;
+    public NormalControler norm;
 
     [Header("AttackStats")]
     public float attackCD = 3.0f;
@@ -47,7 +48,18 @@ public class CounterA : MonoBehaviour
     {
         Debug.Log("Attack");
         Vector3 forceToApply = orientation.forward * forceApplied;
+        norm.stunned = true;
+        norm.stunDuration = 1;
 
+        // Quand les states seront là. 
+        //if (pm.spin)
+        //{
+        //    norm.stunned = true;
+        //    norm.stunDuration = 2;
+        //    rb.AddForce(forceToApply / 4 * Time.deltaTime, ForceMode.Impulse);
+        //    norm.state = normal;
+
+        //}
 
         rb.AddForce(forceToApply * Time.deltaTime, ForceMode.Impulse);
         yield return new WaitForSeconds(attackCD);
