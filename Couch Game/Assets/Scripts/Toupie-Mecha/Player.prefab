@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 3459432271661710956}
   - component: {fileID: 2648372140871015440}
   - component: {fileID: 957177068204180527}
+  - component: {fileID: 4787672141412673828}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -221,7 +222,7 @@ MonoBehaviour:
   bouncePlayer: {fileID: 2648372140871015440}
   spinnerControler: {fileID: 6853132077661441926}
   playerManager: {fileID: 0}
-  timer: 0
+  timerCount: 0
 --- !u!114 &6527334327840487395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -252,6 +253,7 @@ MonoBehaviour:
   playerDirection: {x: 0, y: 0, z: 0}
   normalizedWall: {x: 0, y: 0, z: 0}
   spinerControler: {fileID: 6853132077661441926}
+  playerRotation: {x: 0, y: 0, z: 0}
 --- !u!114 &2648372140871015440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -286,6 +288,21 @@ MonoBehaviour:
   spinnerKnockbacking: {fileID: 0}
   knockBackSpeed: 0.000005
   maxTimer: 1
+--- !u!114 &4787672141412673828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6853132077579053501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5e54b34ae9ee514eb2515c8d45fe2e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layer:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!1 &6853132077638159143
 GameObject:
   m_ObjectHideFlags: 0
@@ -465,6 +482,7 @@ MonoBehaviour:
   repoussed: 0
   walled: 0
   spinCollision: {fileID: 7279539468119450364}
+  spinnerAngle: 0
 --- !u!1 &6853132077936097904
 GameObject:
   m_ObjectHideFlags: 0

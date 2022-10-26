@@ -362,7 +362,7 @@ GameObject:
   - component: {fileID: 127733821}
   - component: {fileID: 127733820}
   - component: {fileID: 127733819}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall (5)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -553,7 +553,7 @@ GameObject:
   - component: {fileID: 382990856}
   - component: {fileID: 382990855}
   - component: {fileID: 382990854}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall (2)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -1208,7 +1208,7 @@ GameObject:
   - component: {fileID: 852506167}
   - component: {fileID: 852506166}
   - component: {fileID: 852506165}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall (3)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -1546,7 +1546,7 @@ GameObject:
   - component: {fileID: 1620758789}
   - component: {fileID: 1620758788}
   - component: {fileID: 1620758787}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall (9)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -1845,7 +1845,7 @@ GameObject:
   - component: {fileID: 1790157890}
   - component: {fileID: 1790157889}
   - component: {fileID: 1790157888}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -2072,7 +2072,7 @@ GameObject:
   - component: {fileID: 1849724429}
   - component: {fileID: 1849724428}
   - component: {fileID: 1849724427}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall (4)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -2274,7 +2274,7 @@ MonoBehaviour:
   bouncePlayer: {fileID: 0}
   spinnerControler: {fileID: 0}
   playerManager: {fileID: 0}
-  timer: 0
+  timerCount: 0
 --- !u!114 &2006672617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2332,7 +2332,7 @@ GameObject:
   - component: {fileID: 2017755410}
   - component: {fileID: 2017755409}
   - component: {fileID: 2017755408}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall (7)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -2429,7 +2429,7 @@ GameObject:
   - component: {fileID: 2040542248}
   - component: {fileID: 2040542247}
   - component: {fileID: 2040542246}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
