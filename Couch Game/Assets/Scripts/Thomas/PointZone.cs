@@ -12,6 +12,17 @@ public class PointZone : MonoBehaviour
         if(coll.CompareTag("Player"))
         {
             PlayerManager deadPlayer = coll.GetComponentInParent<PlayerManager>();
+            if(deadPlayer.normalPlayer.activeSelf)
+            {
+                deadPlayer.normalPlayer.SetActive(false);
+                deadPlayer.normalPlayer.GetComponent<NormalControler>().enabled = false;
+            }
+            else if(deadPlayer.spinnerPlayer.activeSelf)
+            {
+                deadPlayer.spinnerPlayer.SetActive(false);
+                deadPlayer.spinnerControler.GetComponent<SpinnerControler>().enabled = false;
+            }
+            deadPlayer.GetComponent<Rigidbody>().velocity = Vector3.zero;
             //Give a certain amount of point at the last player touched
             if(deadPlayer.lastPlayerContacted != null)
             {
