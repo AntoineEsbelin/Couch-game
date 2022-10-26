@@ -18,6 +18,6 @@ public class DrawRayWall : MonoBehaviour
     }
     private void OnDrawGizmos()
     {
-        if(normal != null)Gizmos.DrawRay(this.transform.position, (this.transform.position + normal));
+        if(normal != null)Gizmos.DrawRay(this.transform.position, normal * 10);
     }
 }
