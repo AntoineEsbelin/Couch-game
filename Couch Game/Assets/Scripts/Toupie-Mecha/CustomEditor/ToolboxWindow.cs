@@ -85,6 +85,13 @@ public class ToolboxWindow : EditorWindow
                 EditorGUILayout.HelpBox($"No path existing in path {aled}", MessageType.Warning);
             }
         }
+        else
+        {
+            if(GUILayout.Button("Reload Game"))
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
+        }
     }
 
     private string NameWithoutExt(string sceneName)
