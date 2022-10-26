@@ -51,6 +51,8 @@ public class ToupieBehaviour : MonoBehaviour
     [HideInInspector]public bool playerDead;
     public int spinDurationLimit = 4;
 
+    public int playerScore;
+
 
     private void Awake()
     {
