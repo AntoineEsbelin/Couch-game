@@ -89,6 +89,7 @@ public class PlayerManager : MonoBehaviour
                     if(spinTimer > timeMaxAttain)spinTimer = timeMaxAttain;
                     normalPlayer.SetActive(false);
                     spinnerPlayer.SetActive(true);
+                    spinnerPlayer.GetComponent<SpinnerControler>().enabled = true;
                 }
                 spinnerControler.chargedDuration = spinTimer;
                 normalPlayer.GetComponent<NormalControler>().NormalSpeedModifier();

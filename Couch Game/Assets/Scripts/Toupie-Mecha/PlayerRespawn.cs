@@ -16,6 +16,7 @@ public class PlayerRespawn : MonoBehaviour
         normalPlayer.SetActive(false);
         playerManager.enabled = false;
         playerManager.GetComponent<Stretch>().enabled = false;
+        normalPlayer.GetComponent<NormalControler>().enabled = true;
     }
 
     private void OnDisable()

@@ -10,21 +10,21 @@ public class CounterA : MonoBehaviour
     public Transform orientation;
     public BoxCollider hitbox;
     public Rigidbody rb;
-    private PlayerManager pm;
+    public PlayerManager pm;
+    public NormalControler norm;
 
     [Header("AttackStats")]
-    public float attackCD;
+    public float attackCD = 3.0f;
     public float forceApplied = 20;
     public bool canAtk;
-    public bool zbi;
 
     private void Awake()
-    {      
-        pm = GetComponent<PlayerManager>();
-        canAtk = false;
+    {
+        rb = null;
+        //pm = GetComponent<PlayerManager>();
         hitbox = GameObject.FindGameObjectWithTag("hitbox").GetComponent<BoxCollider>();
         orientation = transform;
-        zbi = false;
+        canAtk = true;
     }
 
     private void FixedUpdate()
@@ -35,34 +35,35 @@ public class CounterA : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            zbi = true;
-        }
-
-        if (zbi)
-        {
-            if (canAtk)
+            if (canAtk && rb != null)
             {
-                Attack();
+                canAtk = false;
+                StartCoroutine(Attack());
             }
         }
+
     }
 
-    public void Attack()
-    {      
-        
-         Debug.Log("Attack");
-         Vector3 forceToApply = orientation.forward * forceApplied;
+    public IEnumerator Attack()
+    {
+        Debug.Log("Attack");
+        Vector3 forceToApply = orientation.forward * forceApplied;
+        norm.stunned = true;
+        norm.stunDuration = 1;
 
+        // Quand les states seront là. 
+        //if (pm.spin)
+        //{
+        //    norm.stunned = true;
+        //    norm.stunDuration = 2;
+        //    rb.AddForce(forceToApply / 4 * Time.deltaTime, ForceMode.Impulse);
+        //    norm.state = normal;
+
+        //}
 
         rb.AddForce(forceToApply * Time.deltaTime, ForceMode.Impulse);
-        zbi = false;
-         //canAtk = false;
-                   
-    }
-
-    public IEnumerator Cooldown()
-    {
         yield return new WaitForSeconds(attackCD);
+        Debug.Log("CD applied");
         canAtk = true;
     }
 

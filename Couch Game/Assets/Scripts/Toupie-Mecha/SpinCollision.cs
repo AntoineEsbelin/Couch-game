@@ -11,7 +11,8 @@ public class SpinCollision : MonoBehaviour
     public SpinnerControler spinnerControler;
     public PlayerManager playerManager;
 
-    public float timer;
+    private float timer;
+    public float timerCount;
 
     void OnEnable()
     {
@@ -75,8 +76,9 @@ public class SpinCollision : MonoBehaviour
             {
                 //Debug.Log("Walled");
                 bounceWall.normalizedWall = other.contacts[0].normal;
+                other.gameObject.GetComponent<DrawRayWall>().normal = other.contacts[0].normal;
                 bounceWall.playerDirection = spinnerControler.moveDir;
-                timer = .5f;
+                timer = timerCount;
                 bounceWall.enabled = true;
             }
         }

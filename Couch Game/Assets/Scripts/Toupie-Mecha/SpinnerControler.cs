@@ -41,6 +41,8 @@ public class SpinnerControler : MonoBehaviour
     public bool walled;
 
     public SpinCollision spinCollision;
+
+    public float spinnerAngle;
     // Start each time script is enable
     private void OnEnable()
     {
@@ -92,10 +94,10 @@ public class SpinnerControler : MonoBehaviour
                 if (isMoving)
                 {
                     float targetAngle = Mathf.Atan2(refs.move.x, refs.move.z) * Mathf.Rad2Deg;
-                    float angle = Mathf.SmoothDampAngle(refs.rb.transform.eulerAngles.y, targetAngle, 
+                    spinnerAngle = Mathf.SmoothDampAngle(refs.rb.transform.eulerAngles.y, targetAngle, 
                         ref refs.turnSmoothVelocity, refs.turnSmoothTime);
-                    refs.rb.transform.rotation = Quaternion.Euler(0f, angle, 0f);
-                    moveDir = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
+                    refs.rb.transform.rotation = Quaternion.Euler(0f, spinnerAngle, 0f);
+                    moveDir = Quaternion.Euler(0f, spinnerAngle, 0f) * Vector3.forward;
                 }
 
                 //Vector3 moveDir = refs.rb.transform.forward;
@@ -116,8 +118,14 @@ public class SpinnerControler : MonoBehaviour
 
         public void OnMove(InputAction.CallbackContext ctx)
         {
-            if(!repoussed && !walled)refs.move = ctx.ReadValue<Vector3>();
+            if(!repoussed)refs.move = ctx.ReadValue<Vector3>();
         }
 
     #endregion
+
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawRay(this.transform.position, (this.transform.forward) * 10);
+    }
 }
