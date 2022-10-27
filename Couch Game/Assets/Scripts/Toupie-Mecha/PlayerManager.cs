@@ -39,6 +39,9 @@ public class PlayerManager : MonoBehaviour
         normalPlayer.SetActive(true);
         spinnerPlayer.SetActive(false);
 
+        cameraTarget = GameObject.FindWithTag("MainCamera").GetComponent<CameraTarget>();
+        cameraTarget.targets.Add(transform);
+        
         spinnerControler = spinnerPlayer.GetComponent<SpinnerControler>();
         transform.position = spawnPlayer.spawnPoints[playerId].position;
     }
@@ -54,8 +57,7 @@ public class PlayerManager : MonoBehaviour
         GameObject spinPlayerGO = Instantiate(spinnerFBX, spinnerPlayer.transform);
         GameObject spinnerGO = Instantiate(spinnerFBX, spinPlayerGO.transform);*/
         //normalGO.transform.rotation = new Quaternion(0f, 0.8f, 0f, 0.7f);
-        cameraTarget = GameObject.FindWithTag("MainCamera").GetComponent<CameraTarget>();
-        cameraTarget.targets.Add(transform);
+        
         GameManager.instance.allPlayer.Add(this);
     }
 
