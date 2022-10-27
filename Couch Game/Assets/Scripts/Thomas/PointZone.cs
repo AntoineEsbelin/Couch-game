@@ -49,7 +49,7 @@ public class PointZone : MonoBehaviour
         if(deadPlayer.lastPlayerContacted != null)
         {
             deadPlayer.lastPlayerContacted.playerPoint += pointGiven;
-        
+            deadPlayer.lastPlayerContacted.UpdateScore(deadPlayer.lastPlayerContacted.playerPoint);
             //DEBUG
             Debug.Log($"{deadPlayer.name} EJECTED !");
             Debug.Log($"GIVE {pointGiven} points to {deadPlayer.lastPlayerContacted.name}");

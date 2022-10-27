@@ -199,7 +199,7 @@ public class ToupieBehaviour : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.C) && playerID == 2)
         {
-            IncreaseScore(1);   
+            IncreaseScore(1);
         }
         
         
