@@ -76,41 +76,48 @@ public class PlayerManager : MonoBehaviour
     {
         if (ctx.performed)
         {
-            if(CanSpin())
+            if(this.enabled)
             {
-                normalPlayer.GetComponent<NormalControler>().spinCharging = true;
-                normalPlayer.GetComponent<NormalControler>().SetSpeedModifier(slowSpeed);
-                normalPlayer.GetComponent<NormalControler>().SlowSpeedModifier();
-                this.GetComponent<Stretch>().enabled = true;
-                startCharging = true;
+                if(CanSpin())
+                {
+                    normalPlayer.GetComponent<NormalControler>().spinCharging = true;
+                    normalPlayer.GetComponent<NormalControler>().SetSpeedModifier(slowSpeed);
+                    normalPlayer.GetComponent<NormalControler>().SlowSpeedModifier();
+                    this.GetComponent<Stretch>().enabled = true;
+                    startCharging = true;
+                }
+
             }
         }
 
         if(ctx.canceled)
         {
-            if(!CanSpin()) return;
-            if(startCharging)
+            if(this.enabled)
             {
-                for(int i = 0; i < bonusSpeedPerPhase.Length; i++)
+                if(!CanSpin()) return;
+                if(startCharging)
                 {
-                    if(spinTimer < timerPerPhase[i] || (spinTimer >= timerPerPhase[timerPerPhase.Length - 1] && i == timerPerPhase.Length))
+                    for(int i = 0; i < bonusSpeedPerPhase.Length; i++)
                     {
-                        //transform to spin
-                        normalPlayer.SetActive(false);
-                        spinnerPlayer.SetActive(true);
-                        spinnerPlayer.GetComponent<SpinnerControler>().enabled = true;
-                        spinnerControler.refs.bonusMoveSpeed = bonusSpeedPerPhase[i];
-                    
-                        break;
+                        if(spinTimer < timerPerPhase[i] || (spinTimer >= timerPerPhase[timerPerPhase.Length - 1] && i == (timerPerPhase.Length - 1)))
+                        {
+                            //transform to spin
+                            normalPlayer.SetActive(false);
+                            spinnerPlayer.SetActive(true);
+                            spinnerPlayer.GetComponent<SpinnerControler>().enabled = true;
+                            spinnerControler.refs.bonusMoveSpeed = bonusSpeedPerPhase[i];
+                            Debug.Log("VROUM");
+                            break;
+                        }
                     }
-                }
 
-                //reset properties
-                normalPlayer.GetComponent<NormalControler>().NormalSpeedModifier();
-                this.GetComponent<Stretch>().noStretch = true;
-                normalPlayer.GetComponent<NormalControler>().spinCharging = false;
-                startCharging = false;
-                spinTimer = 0f;
+                    //reset properties
+                    normalPlayer.GetComponent<NormalControler>().NormalSpeedModifier();
+                    this.GetComponent<Stretch>().noStretch = true;
+                    normalPlayer.GetComponent<NormalControler>().spinCharging = false;
+                    startCharging = false;
+                    spinTimer = 0f;
+                }
             }
         }
     }

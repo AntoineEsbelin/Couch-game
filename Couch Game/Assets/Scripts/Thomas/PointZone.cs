@@ -49,6 +49,7 @@ public class PointZone : MonoBehaviour
                 Debug.Log($"{deadPlayer.name} SUICIDED !");
             }
             deadPlayer.GetComponent<PlayerRespawn>().enabled = true;
+            deadPlayer.enabled = false;
                 
         }
     }
