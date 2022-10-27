@@ -100,6 +100,7 @@ public class ToolboxWindow : EditorWindow
                         numberOfConvexConverted += 1;
                     }
                 }
+                EditorSceneManager.SaveScene(EditorSceneManager.GetActiveScene());
                 Debug.Log($"Make {numberOfConvexConverted} Mesh Collider into convex");
                 numberOfConvexConverted = 0;
 
