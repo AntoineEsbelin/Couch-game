@@ -156,6 +156,12 @@ MonoBehaviour:
   slowSpeed: 0
   knockbackMagn: 0
   cameraTarget: {fileID: 0}
+  bonusSpeedPerPhase:
+  - 0
+  - 800
+  timerPerPhase:
+  - 0.3
+  - 1
 --- !u!114 &6853132077579053472
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -466,9 +472,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   refs:
     rb: {fileID: 6853132077579053473}
-    normalControler: {fileID: 6853132077936097904}
+    normalControler: {fileID: 6853132077936097909}
     maxMoveSpeed: 8
-    moveSpeed: 900
+    moveSpeed: 100
+    bonusMoveSpeed: 0
     move: {x: 0, y: 0, z: 0}
     rotationSpeed: 800
     turnSmoothTime: 1.2

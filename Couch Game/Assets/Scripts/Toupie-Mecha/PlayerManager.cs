@@ -34,6 +34,11 @@ public class PlayerManager : MonoBehaviour
 
     public CameraTarget cameraTarget;
 
+    [Header("Spin charging properties")]
+    public float[] bonusSpeedPerPhase;
+    public float[] timerPerPhase;
+
+
     private void OnEnable()
     {
         normalPlayer.SetActive(true);
@@ -86,14 +91,21 @@ public class PlayerManager : MonoBehaviour
             if(!CanSpin()) return;
             if(startCharging)
             {
-                if(spinTimer > maintainTimer)
+                for(int i = 0; i < bonusSpeedPerPhase.Length; i++)
                 {
-                    if(spinTimer > timeMaxAttain)spinTimer = timeMaxAttain;
-                    normalPlayer.SetActive(false);
-                    spinnerPlayer.SetActive(true);
-                    spinnerPlayer.GetComponent<SpinnerControler>().enabled = true;
+                    if(spinTimer < timerPerPhase[i] || (spinTimer >= timerPerPhase[timerPerPhase.Length - 1] && i == timerPerPhase.Length))
+                    {
+                        //transform to spin
+                        normalPlayer.SetActive(false);
+                        spinnerPlayer.SetActive(true);
+                        spinnerPlayer.GetComponent<SpinnerControler>().enabled = true;
+                        spinnerControler.refs.bonusMoveSpeed = bonusSpeedPerPhase[i];
+                    
+                        break;
+                    }
                 }
-                spinnerControler.chargedDuration = spinTimer;
+
+                //reset properties
                 normalPlayer.GetComponent<NormalControler>().NormalSpeedModifier();
                 this.GetComponent<Stretch>().noStretch = true;
                 normalPlayer.GetComponent<NormalControler>().spinCharging = false;

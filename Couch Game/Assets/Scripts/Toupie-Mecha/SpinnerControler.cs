@@ -10,10 +10,11 @@ public class SpinnerControler : MonoBehaviour
     {
         public Rigidbody rb;
 
-        public GameObject normalControler;
+        public NormalControler normalControler;
 
         public float maxMoveSpeed = 8f;
         public float moveSpeed;
+        public float bonusMoveSpeed = 0f;
         
         public Vector3 move;
 
@@ -59,7 +60,7 @@ public class SpinnerControler : MonoBehaviour
         //this.GetComponentInParent<PlayerManager>().canSpin = true;
         repoussed = false;
         isSpinning = false;
-        refs.normalControler.SetActive(true);
+        refs.normalControler.gameObject.SetActive(true);
     }
 
     void FixedUpdate()
@@ -86,7 +87,8 @@ public class SpinnerControler : MonoBehaviour
     public void Spinning()
     {
         //refs.moveSpeed = Mathf.Pow((refs.maxMoveSpeed - dashDuration), 3) * chargedDuration;
-        refs.moveSpeed = (Mathf.Pow((dashDuration / (refs.dashDurationMax - 1)), 3) + 1) * chargedDuration * chargeMultiplier;
+        refs.moveSpeed = (Mathf.Pow((dashDuration / (refs.dashDurationMax - 1)), 3) + 1) * chargeMultiplier;
+        if(refs.moveSpeed < refs.normalControler.movementSettings.moveSpeed)dashDuration = 0;
         if(isSpinning)
         {
             if(!repoussed && !walled)
@@ -103,7 +105,7 @@ public class SpinnerControler : MonoBehaviour
                 //Vector3 moveDir = refs.rb.transform.forward;
 
             }
-                refs.rb.velocity = new Vector3(moveDir.x,0f,moveDir.z)* refs.moveSpeed * Time.fixedDeltaTime;
+                refs.rb.velocity = new Vector3(moveDir.x,0f,moveDir.z)* (refs.moveSpeed + refs.bonusMoveSpeed) * Time.fixedDeltaTime;
 
         }
     }
@@ -111,6 +113,7 @@ public class SpinnerControler : MonoBehaviour
     public void StopSpin()
     {
         spinCollision.enabled = false;
+        refs.bonusMoveSpeed = 0f;
         this.gameObject.SetActive(false);
     }
 
