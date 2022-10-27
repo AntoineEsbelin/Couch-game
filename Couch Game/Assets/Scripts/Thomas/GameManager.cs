@@ -54,7 +54,29 @@ public class GameManager : MonoBehaviour
     
     private void LeftAction(InputAction.CallbackContext ctx)
     {
-        throw new System.NotImplementedException();
+        if (playersList.Count > 1)
+        {
+            foreach (var player in playersList)
+            {
+                foreach (var device in player.devices)
+                {
+                    if (device != null && ctx.control.device == device)
+                    {
+                        UnregisterPlayer(player);
+                        return;
+                    }
+                }
+            }
+        }
+    }
+
+    private void UnregisterPlayer(PlayerInput playerInput)
+    {
+        playersList.Remove(playerInput);
+        if (PlayerLeftGame != null)
+            PlayerLeftGame(playerInput);
+        
+        Destroy(playerInput.transform.gameObject);
     }
 
 

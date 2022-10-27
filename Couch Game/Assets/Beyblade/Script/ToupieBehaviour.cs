@@ -25,7 +25,7 @@ public class ToupieBehaviour : MonoBehaviour
     [Header("Input")]
     public PlayerControll playerControl;
     private InputAction spinState;
-    [HideInInspector]public int playerID = 0;
+    public int playerID = 0;
     public Vector3 startPos;
     private float spinDuration;
     private bool isSpinning;
@@ -53,6 +53,7 @@ public class ToupieBehaviour : MonoBehaviour
 
     public int playerScore;
 
+    public event System.Action<int> OnScoreChanged;
 
     private void Awake()
     {
@@ -63,6 +64,9 @@ public class ToupieBehaviour : MonoBehaviour
     {
         transform.position = startPos;
         input = GetComponent<PlayerInput>();
+        
+        if (OnScoreChanged != null)
+            OnScoreChanged(playerScore);
     }
 
     private void OnEnable()
@@ -189,6 +193,16 @@ public class ToupieBehaviour : MonoBehaviour
     
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.A) && playerID == 1)
+        {
+            IncreaseScore(1);   
+        }
+        else if (Input.GetKeyDown(KeyCode.C) && playerID == 2)
+        {
+            IncreaseScore(1);   
+        }
+        
+        
         impact = Vector3.Lerp(impact, Vector3.zero, 5*Time.deltaTime);   
         if(spin_Pressed)
         {
@@ -290,7 +304,14 @@ public class ToupieBehaviour : MonoBehaviour
         controller.enabled = true;
         moveParam.speed = 6;
     }
-    
-    
-    
+
+    public void IncreaseScore(int value)
+    {
+        playerScore += value;
+        if (OnScoreChanged != null)
+            OnScoreChanged(playerScore);
+    }
+
+
+
 }

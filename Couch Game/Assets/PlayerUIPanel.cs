@@ -28,7 +28,13 @@ public class PlayerUIPanel : MonoBehaviour
     {
         if (players != null)
         {
-            playerScore.text = "Score : " + players.playerScore.ToString();
+            players.OnScoreChanged += UpdateScore;
+           
         }
+    }
+
+    private void UpdateScore(int score)
+    {
+        playerScore.text = "Score : " + score.ToString();
     }
 }
