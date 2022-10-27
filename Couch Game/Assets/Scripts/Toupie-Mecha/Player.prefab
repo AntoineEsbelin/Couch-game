@@ -121,6 +121,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: b31bd85e-9fce-4709-986c-beb8a44b1a59
     m_ActionName: Player/Counter[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6853132077661441926}
+        m_TargetAssemblyTypeName: SpinnerControler, Assembly-CSharp
+        m_MethodName: OnBrake
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 99d6dd1a-ee6b-47ee-9079-62e02e8d5930
+    m_ActionName: Player/Brake[/Keyboard/shift,/XInputControllerWindows/leftTrigger]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -481,6 +497,10 @@ MonoBehaviour:
     turnSmoothTime: 1.2
     turnSmoothVelocity: 0
     dashDurationMax: 2
+    brakeManiabilityModifier: 0.5
+    brakeManiability: 0
+    brakeSpeedModifier: 0.5
+    brakeSpeed: 0
   isSpinning: 0
   isMoving: 0
   moveDir: {x: 0, y: 0, z: 0}
@@ -1166,7 +1186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91ecc4afb191b324db0ee12c59ffcf00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spinningSpeed: 0
+  rotationDegree: 180
 --- !u!1001 &4562294100070732258
 PrefabInstance:
   m_ObjectHideFlags: 0

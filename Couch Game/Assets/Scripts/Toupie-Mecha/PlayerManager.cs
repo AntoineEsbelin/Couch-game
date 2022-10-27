@@ -106,7 +106,7 @@ public class PlayerManager : MonoBehaviour
                             spinnerPlayer.SetActive(true);
                             spinnerPlayer.GetComponent<SpinnerControler>().enabled = true;
                             spinnerControler.refs.bonusMoveSpeed = bonusSpeedPerPhase[i];
-                            Debug.Log("VROUM");
+                            //Debug.Log("VROUM");
                             break;
                         }
                     }

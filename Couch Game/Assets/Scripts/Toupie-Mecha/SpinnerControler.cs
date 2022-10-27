@@ -25,6 +25,16 @@ public class SpinnerControler : MonoBehaviour
 
         public float dashDurationMax = 2f;
         
+        [Space]
+        [Header("Brake values")]
+        [Tooltip("0.1 = très maniable, 0.9 = presque normal")]
+        [Range(0.1f, 0.9f)]
+        public float brakeManiabilityModifier = 0.5f;
+        [HideInInspector] public float brakeManiability;
+        [Range(0.1f, 0.9f)]
+        public float brakeSpeedModifier = 0.5f;
+        [HideInInspector] public float brakeSpeed;
+        
     }
 
     public Refs refs;
@@ -47,12 +57,13 @@ public class SpinnerControler : MonoBehaviour
     // Start each time script is enable
     private void OnEnable()
     {
-        Debug.Log("ouais");
         repoussed = false;
         isSpinning = true;
         moveDir = transform.forward;
         dashDuration = refs.dashDurationMax;
         spinCollision.enabled = true;
+        refs.brakeManiability = 1f;
+        refs.brakeSpeed = 1f;
     }
 
     private void OnDisable()
@@ -97,7 +108,7 @@ public class SpinnerControler : MonoBehaviour
                 {
                     float targetAngle = Mathf.Atan2(refs.move.x, refs.move.z) * Mathf.Rad2Deg;
                     spinnerAngle = Mathf.SmoothDampAngle(refs.rb.transform.eulerAngles.y, targetAngle, 
-                        ref refs.turnSmoothVelocity, refs.turnSmoothTime);
+                        ref refs.turnSmoothVelocity, refs.turnSmoothTime * refs.brakeManiability);
                     refs.rb.transform.rotation = Quaternion.Euler(0f, spinnerAngle, 0f);
                     moveDir = Quaternion.Euler(0f, spinnerAngle, 0f) * Vector3.forward;
                 }
@@ -105,7 +116,7 @@ public class SpinnerControler : MonoBehaviour
                 //Vector3 moveDir = refs.rb.transform.forward;
 
             }
-                refs.rb.velocity = new Vector3(moveDir.x,0f,moveDir.z)* (refs.moveSpeed + refs.bonusMoveSpeed) * Time.fixedDeltaTime;
+                refs.rb.velocity = new Vector3(moveDir.x,0f,moveDir.z)* (refs.moveSpeed + refs.bonusMoveSpeed) * refs.brakeSpeed * Time.fixedDeltaTime;
 
         }
     }
@@ -114,6 +125,8 @@ public class SpinnerControler : MonoBehaviour
     {
         spinCollision.enabled = false;
         refs.bonusMoveSpeed = 0f;
+        refs.brakeManiability = 1f;
+        refs.brakeSpeed = 1f;
         this.gameObject.SetActive(false);
     }
 
@@ -122,6 +135,24 @@ public class SpinnerControler : MonoBehaviour
         public void OnMove(InputAction.CallbackContext ctx)
         {
             if(!repoussed)refs.move = ctx.ReadValue<Vector3>();
+        }
+
+        public void OnBrake(InputAction.CallbackContext ctx)
+        {
+            if (!isSpinning) return;
+
+            if (ctx.performed)
+            {
+                Debug.Log("start brake");
+                refs.brakeManiability = refs.brakeManiabilityModifier;
+                refs.brakeSpeed = refs.brakeSpeedModifier;
+            }
+
+            if (ctx.canceled)
+            {
+                Debug.Log("stop brake");
+                refs.brakeManiability = 1f;
+            }
         }
 
     #endregion
