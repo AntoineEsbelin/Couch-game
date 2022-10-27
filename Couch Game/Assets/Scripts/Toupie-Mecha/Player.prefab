@@ -177,7 +177,7 @@ MonoBehaviour:
   objectToStretch: {fileID: 6853132077579053475}
   desireStretch: {x: 1.5, y: 0.3, z: 1.5}
   stretchSpeed: 2
-  unstretchSpeed: 6
+  unstretchSpeed: 1000
   noStretch: 0
 --- !u!114 &2220648167988956125
 MonoBehaviour:
@@ -438,7 +438,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6853132077661441948}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 70aff830f49f6a748b7f75aba431d125, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
@@ -536,7 +536,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6853132077936097904}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 70aff830f49f6a748b7f75aba431d125, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 1.3856261

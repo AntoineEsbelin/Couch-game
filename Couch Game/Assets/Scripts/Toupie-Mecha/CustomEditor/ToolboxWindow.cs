@@ -84,6 +84,26 @@ public class ToolboxWindow : EditorWindow
             {
                 EditorGUILayout.HelpBox($"No path existing in path {aled}", MessageType.Warning);
             }
+        
+
+            if(GUILayout.Button("Make all wall convex"))
+            {
+                GameObject[] allMeshColl = GameObject.FindGameObjectsWithTag("Wall");
+                int numberOfConvexConverted = 0;
+                for(int i = 0; i < allMeshColl.Length; i++)
+                {
+                    MeshCollider aMesh = allMeshColl[i].GetComponent<MeshCollider>();
+                    if(aMesh.convex)continue;
+                    else
+                    {
+                        aMesh.convex = true;
+                        numberOfConvexConverted += 1;
+                    }
+                }
+                Debug.Log($"Make {numberOfConvexConverted} Mesh Collider into convex");
+                numberOfConvexConverted = 0;
+
+            }
         }
         else
         {
