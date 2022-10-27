@@ -111,15 +111,20 @@ public class PlayerManager : MonoBehaviour
                         }
                     }
 
-                    //reset properties
-                    normalPlayer.GetComponent<NormalControler>().NormalSpeedModifier();
-                    this.GetComponent<Stretch>().noStretch = true;
-                    normalPlayer.GetComponent<NormalControler>().spinCharging = false;
-                    startCharging = false;
-                    spinTimer = 0f;
+                    ResetCharging();
                 }
             }
         }
+    }
+
+    public void ResetCharging()
+    {
+        //reset properties
+        normalPlayer.GetComponent<NormalControler>().NormalSpeedModifier();
+        this.GetComponent<Stretch>().noStretch = true;
+        normalPlayer.GetComponent<NormalControler>().spinCharging = false;
+        startCharging = false;
+        spinTimer = 0f;
     }
 
     private void UpdateLastPlayer()
