@@ -10,15 +10,16 @@ public class PlayerSpawnManager : MonoBehaviour
     
     public static PlayerSpawnManager instance;
     public bool isController;
+    [HideInInspector]public PlayerInput _playerInput;
 
     private void Awake()
     {
         if(instance != null)Destroy(gameObject);
         instance = this;
     }
-    private void OnPlayerJoined(PlayerInput playerInput) 
+    private void OnPlayerJoined(PlayerInput playerInput)
     {
-        
+        _playerInput = playerInput;
         if (isController)
         {
             // Set the player ID, add one to the index to start at Player 1

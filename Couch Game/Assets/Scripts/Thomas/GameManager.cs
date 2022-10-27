@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
     public List<PlayerManager> allPlayer;
+    public List<PlayerInput> playersList = new List<PlayerInput>();
 
     [SerializeField] private float timer;
     public float maxTimer = 60f;
@@ -14,12 +16,69 @@ public class GameManager : MonoBehaviour
     public bool timeOut = false;
 
     public static GameManager instance;
-
+    //Input
+    public InputAction joinAction;
+    public InputAction leftAction;
+    
+    //Event
+    public event System.Action<PlayerInput> PlayerJoinedGame;
+    public event System.Action<PlayerInput> PlayerLeftGame;
+    
+    private void OnPlayerJoined(PlayerInput playerInput)
+    {
+        playersList.Add(playerInput);
+        if (PlayerJoinedGame != null)
+            PlayerJoinedGame(playerInput);
+    }
+    
+    private void OnPlayerLeft(PlayerInput playerInput)
+    {
+        print("aled");
+    }
     private void Awake()
     {
         if(instance != null)Destroy(gameObject);
         instance = this;
+        
+        joinAction.Enable();
+        joinAction.performed += ctx => JoinAction(ctx);
+        
+        leftAction.Enable();
+        leftAction.performed += ctx => LeftAction(ctx);
     }
+
+    private void JoinAction(InputAction.CallbackContext ctx)
+    {
+        PlayerInputManager.instance.JoinPlayerFromActionIfNotAlreadyJoined(ctx);
+    }
+    
+    private void LeftAction(InputAction.CallbackContext ctx)
+    {
+        if (playersList.Count > 1)
+        {
+            foreach (var player in playersList)
+            {
+                foreach (var device in player.devices)
+                {
+                    if (device != null && ctx.control.device == device)
+                    {
+                        UnregisterPlayer(player);
+                        return;
+                    }
+                }
+            }
+        }
+    }
+
+    private void UnregisterPlayer(PlayerInput playerInput)
+    {
+        playersList.Remove(playerInput);
+        if (PlayerLeftGame != null)
+            PlayerLeftGame(playerInput);
+        
+        Destroy(playerInput.transform.gameObject);
+    }
+
 
     // Start is called before the first frame update
     private void Start()
