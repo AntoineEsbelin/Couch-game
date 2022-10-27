@@ -43,6 +43,7 @@ public class PointZone : MonoBehaviour
             deadPlayer.spinnerControler.GetComponent<SpinnerControler>().enabled = false;
         }
         deadPlayer.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        deadPlayer.ResetCharging();
         deadPlayer.cameraTarget.targets.Remove(deadPlayer.transform);
         //Give a certain amount of point at the last player touched
         if(deadPlayer.lastPlayerContacted != null)
