@@ -497,7 +497,7 @@ MonoBehaviour:
     turnSmoothTime: 1.2
     turnSmoothVelocity: 0
     dashDurationMax: 2
-    brakeManiabilityModifier: 0.5
+    brakeManiabilityModifier: 0.25
     brakeManiability: 0
     brakeSpeedModifier: 0.5
     brakeSpeed: 0
