@@ -10,7 +10,7 @@ public class BounceDebug : MonoBehaviour
     void Start()
     {
         playerTransform = this.transform;
-        Debug.Log("coucou");
+        // Debug.Log("coucou");
     }
 
     void FixedUpdate() 

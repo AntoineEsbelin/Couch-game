@@ -16,7 +16,8 @@ public class GameManager : MonoBehaviour
     public bool timeOut = false;
 
     public static GameManager instance;
-    //Input
+    
+    //Input Join and Leave
     public InputAction joinAction;
     public InputAction leftAction;
     
@@ -45,6 +46,12 @@ public class GameManager : MonoBehaviour
         
         leftAction.Enable();
         leftAction.performed += ctx => LeftAction(ctx);
+    }
+    
+    private void OnDisable()
+    {
+        joinAction.Disable();
+        leftAction.Disable();
     }
 
     private void JoinAction(InputAction.CallbackContext ctx)

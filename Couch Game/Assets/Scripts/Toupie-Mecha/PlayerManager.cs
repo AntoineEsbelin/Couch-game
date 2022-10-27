@@ -37,7 +37,8 @@ public class PlayerManager : MonoBehaviour
     [Header("Spin charging properties")]
     public float[] bonusSpeedPerPhase;
     public float[] timerPerPhase;
-
+    
+    public event System.Action<int> OnScoreChanged;
 
     private void OnEnable()
     {
@@ -64,6 +65,9 @@ public class PlayerManager : MonoBehaviour
         //normalGO.transform.rotation = new Quaternion(0f, 0.8f, 0f, 0.7f);
         
         GameManager.instance.allPlayer.Add(this);
+        
+        if (OnScoreChanged != null)
+            OnScoreChanged(playerPoint);
     }
 
     void FixedUpdate()
@@ -147,5 +151,11 @@ public class PlayerManager : MonoBehaviour
         spinnerControler.walled = false;
         spinnerControler.spinCollision.bouncePlayer.bumped = false;
         spinnerControler.isSpinning = false;
+    }
+
+    public void UpdateScore(int value)
+    {
+        if (OnScoreChanged != null)
+            OnScoreChanged(value);
     }
 }
