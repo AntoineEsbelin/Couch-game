@@ -24,6 +24,7 @@ public class PlayerRespawn : MonoBehaviour
     {
         normalPlayer.SetActive(true);
         playerManager.enabled = true;
+        //rb.velocity = Vector3.zero;
     }
 
     // Update is called once per frame

@@ -156,6 +156,12 @@ MonoBehaviour:
   slowSpeed: 0
   knockbackMagn: 0
   cameraTarget: {fileID: 0}
+  bonusSpeedPerPhase:
+  - 0
+  - 800
+  timerPerPhase:
+  - 0.3
+  - 1
 --- !u!114 &6853132077579053472
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,7 +177,7 @@ MonoBehaviour:
   objectToStretch: {fileID: 6853132077579053475}
   desireStretch: {x: 1.5, y: 0.3, z: 1.5}
   stretchSpeed: 2
-  unstretchSpeed: 6
+  unstretchSpeed: 1000
   noStretch: 0
 --- !u!114 &2220648167988956125
 MonoBehaviour:
@@ -432,7 +438,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6853132077661441948}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 70aff830f49f6a748b7f75aba431d125, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
@@ -466,9 +472,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   refs:
     rb: {fileID: 6853132077579053473}
-    normalControler: {fileID: 6853132077936097904}
+    normalControler: {fileID: 6853132077936097909}
     maxMoveSpeed: 8
-    moveSpeed: 900
+    moveSpeed: 100
+    bonusMoveSpeed: 0
     move: {x: 0, y: 0, z: 0}
     rotationSpeed: 800
     turnSmoothTime: 1.2
@@ -529,7 +536,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6853132077936097904}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 70aff830f49f6a748b7f75aba431d125, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 1.3856261
@@ -1142,6 +1149,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a5ff0e0c6d6a20b49a110f6d51714da1, type: 3}
+--- !u!1 &1984107613827619253 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: a5ff0e0c6d6a20b49a110f6d51714da1, type: 3}
+  m_PrefabInstance: {fileID: 1678046665310397668}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6547725667470733285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1984107613827619253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91ecc4afb191b324db0ee12c59ffcf00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spinningSpeed: 0
 --- !u!1001 &4562294100070732258
 PrefabInstance:
   m_ObjectHideFlags: 0
