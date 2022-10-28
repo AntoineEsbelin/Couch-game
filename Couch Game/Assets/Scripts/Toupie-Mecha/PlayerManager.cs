@@ -12,7 +12,8 @@ public class PlayerManager : MonoBehaviour
 
     public Vector3 startPos;
 
-    public GameObject[] playerSkins;
+    public GameObject[] normalSkins;
+    public GameObject[] spinSkins;
     
     //charge spin timer
     public bool startCharging;
@@ -70,7 +71,8 @@ public class PlayerManager : MonoBehaviour
         //normalGO.transform.rotation = new Quaternion(0f, 0.8f, 0f, 0.7f);
         GameManager.instance.allPlayer.Add(this);
 
-        playerSkins[playerId].SetActive(true);
+        normalSkins[playerId].SetActive(true);
+        spinSkins[playerId].SetActive(true);
         
         
         if (OnScoreChanged != null)
