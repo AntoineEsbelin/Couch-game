@@ -616,7 +616,7 @@ MonoBehaviour:
   moveDir: {x: 0, y: 0, z: 0}
   dashDuration: 0
   chargedDuration: 0
-  chargeMultiplier: 200
+  chargeMultiplier: 600
   repoussed: 0
   walled: 0
   spinCollision: {fileID: 7279539468119450364}
@@ -708,7 +708,7 @@ MonoBehaviour:
   canMove: 0
   stunned: 0
   movementSettings:
-    moveSpeed: 500
+    moveSpeed: 1000
     dx: 1
     rotationSpeed: 800
     speedModifier: 1
