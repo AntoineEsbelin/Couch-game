@@ -29,7 +29,7 @@ public class BouncePlayer : MonoBehaviour
         //---
 
         timer = maxTimer;
-        Debug.Log("I AM ACTIVATE");
+        //Debug.Log("I AM ACTIVATE");
     }
 
     private void OnDisable()
@@ -37,7 +37,7 @@ public class BouncePlayer : MonoBehaviour
         normalControler.NormalSpeedModifier();
         normalControler.enabled = true;
         bumped = false;
-        Debug.Log("ZEBi");
+        //Debug.Log("ZEBi");
     }
 
     private void FixedUpdate()

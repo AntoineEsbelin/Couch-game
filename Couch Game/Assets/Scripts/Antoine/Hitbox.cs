@@ -7,16 +7,17 @@ public class Hitbox : MonoBehaviour
     public CounterA counterAtk;
     private void Awake()
     {
-        counterAtk = GetComponentInParent<CounterA>();
+        counterAtk = GetComponent<CounterA>();
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            counterAtk.rb = other.attachedRigidbody;
-            counterAtk.pm = other.attachedRigidbody.GetComponent<PlayerManager>();
-            counterAtk.norm = other.attachedRigidbody.GetComponentInChildren<NormalControler>();
+            Rigidbody rb = other.GetComponentInParent<Rigidbody>();
+            counterAtk.rb = rb;
+            counterAtk.pm = rb.GetComponent<PlayerManager>();
+            counterAtk.norm = counterAtk.pm.normalPlayer;
         }
     }
 

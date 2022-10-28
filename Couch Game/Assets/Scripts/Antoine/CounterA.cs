@@ -20,6 +20,10 @@ public class CounterA : MonoBehaviour
     public float forceApplied = 20;
     public bool canAtk = false;
 
+    public int normalStun;
+    public int spinStun;
+
+
     private void Awake()
     {
         rb = null;
@@ -48,24 +52,25 @@ public class CounterA : MonoBehaviour
             Vector3 forceToApply = orientation.forward * forceApplied;
             
              
-            if (pm.isInSpinMode)
+            if (pm.isInSpinMode && pm != null)
             {
                 norm.stunned = true;
-                norm.stunDuration = 2;
+                norm.stunDuration = spinStun;
                 rb.AddForce(forceToApply / 4 * Time.deltaTime, ForceMode.Impulse);
+                Debug.Log("YEE");
                 
             }
-            else if (!pm.isInSpinMode)
+            else if (!pm.isInSpinMode && pm != null)
             {
                 norm.stunned = true;
-                norm.stunDuration = 1;
+                norm.stunDuration = normalStun;
                 rb.AddForce(forceToApply * Time.deltaTime, ForceMode.Impulse);
             }
 
             
-            yield return new WaitForSeconds(attackCD);
-            Debug.Log("CD applied");
+            //Debug.Log("CD applied");
             canAtk = false;
+            yield return new WaitForSeconds(attackCD);
         }
         
     }

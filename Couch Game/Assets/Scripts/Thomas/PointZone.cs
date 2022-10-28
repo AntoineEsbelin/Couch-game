@@ -32,10 +32,10 @@ public class PointZone : MonoBehaviour
 
     private void DispawnPlayer(PlayerManager deadPlayer)
     {
-        if(deadPlayer.normalPlayer.activeSelf)
+        if(deadPlayer.normalPlayer.gameObject.activeSelf)
         {
-            deadPlayer.normalPlayer.SetActive(false);
-            deadPlayer.normalPlayer.GetComponent<NormalControler>().enabled = false;
+            deadPlayer.normalPlayer.gameObject.SetActive(false);
+            deadPlayer.normalPlayer.gameObject.GetComponent<NormalControler>().enabled = false;
         }
         else if(deadPlayer.spinnerPlayer.activeSelf)
         {

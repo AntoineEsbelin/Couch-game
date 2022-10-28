@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerManager : MonoBehaviour
 {
-    public GameObject normalPlayer;
+    public NormalControler normalPlayer;
     public GameObject spinnerPlayer;
 
     public SpinnerControler spinnerControler;
@@ -43,7 +43,7 @@ public class PlayerManager : MonoBehaviour
 
     private void OnEnable()
     {
-        normalPlayer.SetActive(true);
+        normalPlayer.gameObject.SetActive(true);
         spinnerPlayer.SetActive(false);
 
         cameraTarget = GameObject.FindWithTag("MainCamera").GetComponent<CameraTarget>();
@@ -93,9 +93,9 @@ public class PlayerManager : MonoBehaviour
             {
                 if(CanSpin())
                 {
-                    normalPlayer.GetComponent<NormalControler>().spinCharging = true;
-                    normalPlayer.GetComponent<NormalControler>().SetSpeedModifier(slowSpeed);
-                    normalPlayer.GetComponent<NormalControler>().SlowSpeedModifier();
+                    normalPlayer.spinCharging = true;
+                    normalPlayer.SetSpeedModifier(slowSpeed);
+                    normalPlayer.SlowSpeedModifier();
                     this.GetComponent<Stretch>().enabled = true;
                     startCharging = true;
                 }
@@ -115,7 +115,7 @@ public class PlayerManager : MonoBehaviour
                         if(spinTimer < timerPerPhase[i] || (spinTimer >= timerPerPhase[timerPerPhase.Length - 1] && i == (timerPerPhase.Length - 1)))
                         {
                             //transform to spin
-                            normalPlayer.SetActive(false);
+                            normalPlayer.gameObject.SetActive(false);
                             spinnerPlayer.SetActive(true);
                             spinnerPlayer.GetComponent<SpinnerControler>().enabled = true;
                             spinnerControler.refs.bonusMoveSpeed = bonusSpeedPerPhase[i];
@@ -133,9 +133,9 @@ public class PlayerManager : MonoBehaviour
     public void ResetCharging()
     {
         //reset properties
-        normalPlayer.GetComponent<NormalControler>().NormalSpeedModifier();
+        normalPlayer.NormalSpeedModifier();
         this.GetComponent<Stretch>().noStretch = true;
-        normalPlayer.GetComponent<NormalControler>().spinCharging = false;
+        normalPlayer.spinCharging = false;
         startCharging = false;
         spinTimer = 0f;
     }
