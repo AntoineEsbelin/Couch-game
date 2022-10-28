@@ -10,6 +10,10 @@ public class PlayerManager : MonoBehaviour
 
     public SpinnerControler spinnerControler;
 
+    public Vector3 startPos;
+
+    public GameObject[] playerSkins;
+    
     //charge spin timer
     public bool startCharging;
     public bool isInSpinMode;
@@ -23,7 +27,7 @@ public class PlayerManager : MonoBehaviour
      public float timeLastPlayer;
 
     public int playerPoint;
-    public SpawnPlayer spawnPlayer;
+    // public SpawnPlayer spawnPlayer;
     public int playerId;
 
     public GameObject normalFBX;
@@ -50,7 +54,7 @@ public class PlayerManager : MonoBehaviour
         cameraTarget.targets.Add(transform);
         
         spinnerControler = spinnerPlayer.GetComponent<SpinnerControler>();
-        transform.position = spawnPlayer.spawnPoints[playerId].position;
+        // transform.position = spawnPlayer.spawnPoints[playerId].position;
     }
 
     private void OnDisable()
@@ -64,8 +68,11 @@ public class PlayerManager : MonoBehaviour
         GameObject spinPlayerGO = Instantiate(spinnerFBX, spinnerPlayer.transform);
         GameObject spinnerGO = Instantiate(spinnerFBX, spinPlayerGO.transform);*/
         //normalGO.transform.rotation = new Quaternion(0f, 0.8f, 0f, 0.7f);
-        
+        transform.position = startPos;
         GameManager.instance.allPlayer.Add(this);
+
+        playerSkins[playerId].SetActive(true);
+        
         
         if (OnScoreChanged != null)
             OnScoreChanged(playerPoint);

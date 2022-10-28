@@ -1637,8 +1637,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 358435066}
-  - component: {fileID: 358435068}
-  - component: {fileID: 358435067}
   m_Layer: 0
   m_Name: PlayerSpawner
   m_TagString: Untagged
@@ -1665,91 +1663,6 @@ Transform:
   m_Father: {fileID: 1533427034}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &358435067
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 358435065}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03b8bd593c64428428a7b445bb819bc8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnPoints:
-  - {fileID: 1837788326}
-  - {fileID: 132908533}
-  - {fileID: 1260687618}
-  - {fileID: 509402732}
-  charactersFBX:
-  - {fileID: 919132149155446097, guid: 5c301ae36d15f07478f27a845d473678, type: 3}
-  - {fileID: 919132149155446097, guid: b51bb03e69ec5f5489dab7554e6b67d2, type: 3}
-  - {fileID: 919132149155446097, guid: 54f5a5f7041c4aa46a328a740edbcf08, type: 3}
-  - {fileID: 919132149155446097, guid: 3568b57f873175648952c4e45f08c3b7, type: 3}
-  spinnersFBX:
-  - {fileID: 919132149155446097, guid: a5ff0e0c6d6a20b49a110f6d51714da1, type: 3}
-  - {fileID: 919132149155446097, guid: 4f5733c23f1c5214f82380eab50a38e9, type: 3}
-  - {fileID: 919132149155446097, guid: 5d8d5ce205a9f404096299d6f7bbf6ea, type: 3}
-  - {fileID: 919132149155446097, guid: 4abb9458314e70e419f45c0358756ad9, type: 3}
-  characterFBXAlreadySpawned: []
-  playerJoined: 0
---- !u!114 &358435068
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 358435065}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 621567455fd1c4ceb811cc8a00b6a1a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_NotificationBehavior: 2
-  m_MaxPlayerCount: 4
-  m_AllowJoining: 1
-  m_JoinBehavior: 0
-  m_PlayerJoinedEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 358435067}
-        m_TargetAssemblyTypeName: SpawnPlayer, Assembly-CSharp
-        m_MethodName: OnPlayerJoined
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  m_PlayerLeftEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_JoinAction:
-    m_UseReference: 0
-    m_Action:
-      m_Name: Join
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: dd3554d9-4387-4396-99bd-f541c977003a
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: 0}
-  m_PlayerPrefab: {fileID: 6853132077579053501, guid: 5fd2f6aded985234ebed2163e13292ab, type: 3}
-  m_SplitScreen: 0
-  m_MaintainAspectRatioInSplitScreen: 0
-  m_FixedNumberOfSplitScreens: -1
-  m_SplitScreenRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
 --- !u!1 &378884578
 GameObject:
   m_ObjectHideFlags: 0

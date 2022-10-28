@@ -11,13 +11,19 @@ public class SpawnPlayer : MonoBehaviour
 
     [SerializeField] private List<GameObject> characterFBXAlreadySpawned;
     public int playerJoined = 0;
+    public static SpawnPlayer instance;
+    private void Awake()
+    {
+        if(instance != null)Destroy(gameObject);
+        instance = this;
+    }
 
     public void OnPlayerJoined(PlayerInput input)
     {   
         if(playerJoined < this.GetComponent<PlayerInputManager>().maxPlayerCount)
         {
             input.GetComponent<PlayerManager>().playerId = playerJoined;
-            input.GetComponent<PlayerManager>().spawnPlayer = this;
+            input.gameObject.GetComponent<PlayerManager>().startPos = spawnPoints[input.playerIndex].position;
             RandomSpawnFBX(input);
             //assigne le model 3D selon le joueur
             playerJoined+= 1;
@@ -39,9 +45,5 @@ public class SpawnPlayer : MonoBehaviour
         input.GetComponent<PlayerManager>().spinnerFBX = spinnersFBX[randomCharacter];
         characterFBXAlreadySpawned.Add(charactersFBX[randomCharacter]);
     }
-
-    private void FixedUpdate()
-    {
-        
-    }
+    
 }
