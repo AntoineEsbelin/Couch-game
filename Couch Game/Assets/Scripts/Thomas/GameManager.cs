@@ -91,7 +91,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         timer = maxTimer;
-        PlayerInputManager.instance.JoinPlayer(0, -1, null);
+        
     }
 
     // Update is called once per frame
