@@ -12,6 +12,7 @@ public class PlayerManager : MonoBehaviour
 
     //charge spin timer
     public bool startCharging;
+    public bool isInSpinMode;
     public float maintainTimer = 1f;
     public float spinTimer = 0f;
     public float timeMaxAttain = 5f;
@@ -74,6 +75,14 @@ public class PlayerManager : MonoBehaviour
     {
         if(startCharging)spinTimer += Time.deltaTime;
         UpdateLastPlayer();
+    }
+
+    private void Update()
+    {
+        if (spinnerControler.isSpinning == false)
+            isInSpinMode = false;
+        else if (spinnerControler.isSpinning)
+            isInSpinMode = true;
     }
 
     public void OnSpin(InputAction.CallbackContext ctx)

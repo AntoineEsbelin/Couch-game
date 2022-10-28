@@ -45,22 +45,24 @@ public class CounterA : MonoBehaviour
     {
         if(canAtk && rb != null)
         {
-            //Debug.Log("Attack");
             Vector3 forceToApply = orientation.forward * forceApplied;
-            norm.stunned = true;
-            norm.stunDuration = 1;
+            
+             
+            if (pm.isInSpinMode)
+            {
+                norm.stunned = true;
+                norm.stunDuration = 2;
+                rb.AddForce(forceToApply / 4 * Time.deltaTime, ForceMode.Impulse);
+                
+            }
+            else if (!pm.isInSpinMode)
+            {
+                norm.stunned = true;
+                norm.stunDuration = 1;
+                rb.AddForce(forceToApply * Time.deltaTime, ForceMode.Impulse);
+            }
 
-            // Quand les states seront l�. 
-            //if (pm.spin)
-            //{
-            //    norm.stunned = true;
-            //    norm.stunDuration = 2;
-            //    rb.AddForce(forceToApply / 4 * Time.deltaTime, ForceMode.Impulse);
-            //    norm.state = normal;
-
-            //}
-
-            rb.AddForce(forceToApply * Time.deltaTime, ForceMode.Impulse);
+            
             yield return new WaitForSeconds(attackCD);
             Debug.Log("CD applied");
             canAtk = false;
