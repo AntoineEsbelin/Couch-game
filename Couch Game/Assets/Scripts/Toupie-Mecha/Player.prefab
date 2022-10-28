@@ -226,8 +226,8 @@ MonoBehaviour:
   spinSkins:
   - {fileID: 4502980274811459227}
   - {fileID: 8882752044537038698}
-  - {fileID: 8523036354341879220}
   - {fileID: 6055322570918688543}
+  - {fileID: 8523036354341879220}
   startCharging: 0
   isInSpinMode: 0
   maintainTimer: 0.5
@@ -550,8 +550,8 @@ Transform:
   m_Children:
   - {fileID: 3834283052826758177}
   - {fileID: 8074407981287022032}
-  - {fileID: 9010639372667184910}
   - {fileID: 6864333998541450661}
+  - {fileID: 9010639372667184910}
   - {fileID: 6853132078912650369}
   - {fileID: 6853132078999831585}
   m_Father: {fileID: 6853132077579053475}
@@ -1481,7 +1481,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: a75fe4dc306965848afa15df22428da3, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a75fe4dc306965848afa15df22428da3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1822,7 +1822,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 313ddb4f0d23bfa4a84a8719b7de99f2, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 313ddb4f0d23bfa4a84a8719b7de99f2, type: 3}
       propertyPath: m_LocalPosition.x
