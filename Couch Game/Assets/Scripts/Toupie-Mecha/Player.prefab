@@ -166,7 +166,19 @@ MonoBehaviour:
     m_ActionId: 5afa8af4-84be-499f-957b-f09a14a0245f
     m_ActionName: Player/Spin[/Mouse/leftButton]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6617685168821820613}
+        m_TargetAssemblyTypeName: CounterA, Assembly-CSharp
+        m_MethodName: OnStartAttack
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: b31bd85e-9fce-4709-986c-beb8a44b1a59
     m_ActionName: Player/Counter[/Keyboard/space]
   - m_PersistentCalls:
@@ -366,7 +378,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6853132077579053501}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5e54b34ae9ee514eb2515c8d45fe2e0, type: 3}
   m_Name: 

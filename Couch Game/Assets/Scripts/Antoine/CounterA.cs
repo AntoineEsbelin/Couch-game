@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
+
 
 public class CounterA : MonoBehaviour
 {    
@@ -16,7 +18,7 @@ public class CounterA : MonoBehaviour
     [Header("AttackStats")]
     public float attackCD = 3.0f;
     public float forceApplied = 20;
-    public bool canAtk;
+    public bool canAtk = false;
 
     private void Awake()
     {
@@ -24,47 +26,46 @@ public class CounterA : MonoBehaviour
         //pm = GetComponent<PlayerManager>();
         hitbox = GameObject.FindGameObjectWithTag("hitbox").GetComponent<BoxCollider>();
         orientation = transform;
-        canAtk = true;
+        canAtk = false;
     }
-
     private void FixedUpdate()
-    {       
-
-    }
-    private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            if (canAtk && rb != null)
-            {
-                canAtk = false;
-                StartCoroutine(Attack());
-            }
-        }
+        StartCoroutine(Attack());
+    }
 
+    public void OnStartAttack(InputAction.CallbackContext ctx)
+    {
+        if(ctx.performed)
+        {
+            canAtk = true;
+        }
     }
 
     public IEnumerator Attack()
     {
-        Debug.Log("Attack");
-        Vector3 forceToApply = orientation.forward * forceApplied;
-        norm.stunned = true;
-        norm.stunDuration = 1;
+        if(canAtk && rb != null)
+        {
+            //Debug.Log("Attack");
+            Vector3 forceToApply = orientation.forward * forceApplied;
+            norm.stunned = true;
+            norm.stunDuration = 1;
 
-        // Quand les states seront là. 
-        //if (pm.spin)
-        //{
-        //    norm.stunned = true;
-        //    norm.stunDuration = 2;
-        //    rb.AddForce(forceToApply / 4 * Time.deltaTime, ForceMode.Impulse);
-        //    norm.state = normal;
+            // Quand les states seront lï¿½. 
+            //if (pm.spin)
+            //{
+            //    norm.stunned = true;
+            //    norm.stunDuration = 2;
+            //    rb.AddForce(forceToApply / 4 * Time.deltaTime, ForceMode.Impulse);
+            //    norm.state = normal;
 
-        //}
+            //}
 
-        rb.AddForce(forceToApply * Time.deltaTime, ForceMode.Impulse);
-        yield return new WaitForSeconds(attackCD);
-        Debug.Log("CD applied");
-        canAtk = true;
+            rb.AddForce(forceToApply * Time.deltaTime, ForceMode.Impulse);
+            yield return new WaitForSeconds(attackCD);
+            Debug.Log("CD applied");
+            canAtk = false;
+        }
+        
     }
 
 }

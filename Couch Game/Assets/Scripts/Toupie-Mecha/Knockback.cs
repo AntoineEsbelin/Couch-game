@@ -47,7 +47,7 @@ public class Knockback : MonoBehaviour
             timer -= Time.deltaTime;
             knockback = knockbackDir * (spinnerKnockbacking.refs.moveSpeed * Time.deltaTime);
 
-            this.normalControler.rb.AddForce(knockback, ForceMode.Impulse);
+            this.normalControler.rb.AddForce(knockback.x, 0f, knockback.z, ForceMode.Impulse);
         }
         else this.enabled = false;
     }

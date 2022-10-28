@@ -1,4 +1,4 @@
-using System.Collections;
+/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -121,4 +121,4 @@ public class ToolboxWindow : EditorWindow
         string removedExtension = copy.Replace(".unity", "");
         return removedExtension;
     }
-}
+}*/
