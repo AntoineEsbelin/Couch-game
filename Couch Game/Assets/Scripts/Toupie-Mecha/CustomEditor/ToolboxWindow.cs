@@ -1,4 +1,4 @@
-/*using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -6,6 +6,7 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 using System.IO;
 
+#if UNITY_EDITOR
 public class ToolboxWindow : EditorWindow
 {
     [MenuItem("Tools/Custom Tool Box")]
@@ -121,4 +122,5 @@ public class ToolboxWindow : EditorWindow
         string removedExtension = copy.Replace(".unity", "");
         return removedExtension;
     }
-}*/
+}
+#endif
