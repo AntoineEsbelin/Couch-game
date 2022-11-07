@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,6 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 using System.IO;
 
-#if UNITY_EDITOR
 public class ToolboxWindow : EditorWindow
 {
     [MenuItem("Tools/Custom Tool Box")]
@@ -86,7 +86,7 @@ public class ToolboxWindow : EditorWindow
                 EditorGUILayout.HelpBox($"No path existing in path {aled}", MessageType.Warning);
             }
         
-
+            GUILayout.BeginHorizontal();
             if(GUILayout.Button("Make all wall convex"))
             {
                 GameObject[] allMeshColl = GameObject.FindGameObjectsWithTag("Wall");
@@ -106,6 +106,12 @@ public class ToolboxWindow : EditorWindow
                 numberOfConvexConverted = 0;
 
             }
+
+            if(GUILayout.Button("Open Player Prefab"))
+            {
+                AssetDatabase.OpenAsset(AssetDatabase.LoadMainAssetAtPath("Assets/Prefab/Player.prefab"));
+            }
+            GUILayout.EndHorizontal();
         }
         else
         {
