@@ -19,7 +19,7 @@ public class Knockback : MonoBehaviour
         if(normalControler.spinCharging)
         {
             PlayerManager playerManager = normalControler.GetComponentInParent<PlayerManager>();
-            playerManager.ResetCharging();
+            /////playerManager.ResetCharging();
         }
         //cancel charge if charging
         knockbackDir = (this.transform.position - spinnerKnockbacking.transform.position).normalized;

@@ -22,8 +22,8 @@ public class SpawnPlayer : MonoBehaviour
     {   
         if(playerJoined < this.GetComponent<PlayerInputManager>().maxPlayerCount)
         {
-            input.GetComponent<PlayerManager>().playerId = playerJoined;
-            input.GetComponent<PlayerManager>().spawnPlayer = this;
+            ////input.GetComponent<PlayerManager>().playerId = playerJoined;
+            ////input.GetComponent<PlayerManager>().spawnPlayer = this;
             RandomSpawnFBX(input);
             //assigne le model 3D selon le joueur
             playerJoined+= 1;
@@ -41,8 +41,8 @@ public class SpawnPlayer : MonoBehaviour
                 return;
             }
         }
-        input.GetComponent<PlayerManager>().normalFBX = charactersFBX[randomCharacter];
-        input.GetComponent<PlayerManager>().spinnerFBX = spinnersFBX[randomCharacter];
+        ////input.GetComponent<PlayerManager>().normalFBX = charactersFBX[randomCharacter];
+        ////input.GetComponent<PlayerManager>().spinnerFBX = spinnersFBX[randomCharacter];
         characterFBXAlreadySpawned.Add(charactersFBX[randomCharacter]);
     }
     

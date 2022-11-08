@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Hitbox : MonoBehaviour
 {
+    /*
     public CounterA counterAtk;
     private void Awake()
     {
@@ -30,5 +31,7 @@ public class Hitbox : MonoBehaviour
             counterAtk.norm = null;
         }
     }
+
+    */
 
 }

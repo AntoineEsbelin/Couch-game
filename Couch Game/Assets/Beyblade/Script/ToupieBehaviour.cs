@@ -298,7 +298,7 @@ public class ToupieBehaviour : MonoBehaviour
         body.SetActive(false);
         controller.enabled = false;
         moveParam.speed = 0;
-        transform.position = PlayerSpawnManager.instance.spawnLocations[playerID - 1].position;
+        //transform.position = PlayerSpawnManager.instance.spawnLocations[playerID - 1].position;
         yield return new WaitForSeconds(3f);
         body.SetActive(true);
         controller.enabled = true;

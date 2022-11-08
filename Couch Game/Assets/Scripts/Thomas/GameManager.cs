@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
-    public List<PlayerManager> allPlayer;
+    public List<PlayerController> allPlayer;
     public List<PlayerInput> playersList = new List<PlayerInput>();
 
     [SerializeField] private float timer;

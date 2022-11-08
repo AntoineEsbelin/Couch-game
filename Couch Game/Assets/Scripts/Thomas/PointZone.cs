@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PointZone : MonoBehaviour
 {
+    /*
     [SerializeField] private int pointGiven;
     [SerializeField] private bool isField;
 
@@ -71,5 +72,5 @@ public class PointZone : MonoBehaviour
         }
         deadPlayer.GetComponent<PlayerRespawn>().enabled = true;
         deadPlayer.enabled = false;
-    }
+    }*/
 }

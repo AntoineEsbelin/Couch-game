@@ -24,7 +24,7 @@ public class SpinCollision : MonoBehaviour
 
     void OnDisable()
     {
-        playerManager.ResetAllInteraction();
+        /////playerManager.ResetAllInteraction();
     }
 
     private void FixedUpdate()
@@ -40,8 +40,8 @@ public class SpinCollision : MonoBehaviour
             
             if(spinnerControler.gameObject.activeSelf)
             {
-                other.GetComponentInParent<PlayerManager>().lastPlayerContacted = this.GetComponent<PlayerManager>();
-                other.GetComponentInParent<PlayerManager>().timeLastPlayer = other.GetComponentInParent<PlayerManager>().maxTimeLastPlayer;
+                ////other.GetComponentInParent<PlayerManager>().lastPlayerContacted = this.GetComponent<PlayerManager>();
+                ////other.GetComponentInParent<PlayerManager>().timeLastPlayer = other.GetComponentInParent<PlayerManager>().maxTimeLastPlayer;
 
 
                 //Debug.Log(other.name);

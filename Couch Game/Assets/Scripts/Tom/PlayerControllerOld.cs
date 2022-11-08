@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class PlayerControllerOld : MonoBehaviour
 {
+    /*
     [System.Serializable] public class References
     {
         public Rigidbody rb;
@@ -355,4 +356,6 @@ public class PlayerController : MonoBehaviour
         if(counter.counterPos != null)Gizmos.DrawRay(counter.counterPos.position, counter.counterPos.forward * counter.maxDistance);
     }
     #endregion
+
+    */
 }   

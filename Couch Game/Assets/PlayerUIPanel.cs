@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class PlayerUIPanel : MonoBehaviour
 {
     public TextMeshProUGUI playerScore;
-    public PlayerManager players;
+    public PlayerController players;
     
 
     public void AssignPlayer(int index)
@@ -19,7 +19,7 @@ public class PlayerUIPanel : MonoBehaviour
     IEnumerator AssignPlayerDelay(int index)
     {
         yield return new WaitForSeconds(0.01f);
-        players = GameManager.instance.playersList[index].GetComponent<PlayerManager>();
+        players = GameManager.instance.playersList[index].GetComponent<PlayerController>();
 
         SetUpInfoPanel();
     }

@@ -12,7 +12,7 @@ public class CounterA : MonoBehaviour
     public Transform orientation;
     public BoxCollider hitbox;
     public Rigidbody rb;
-    public PlayerManager pm;
+    public PlayerController pm;
     public NormalControler norm;
 
     [Header("AttackStats")]
@@ -27,7 +27,7 @@ public class CounterA : MonoBehaviour
     private void Awake()
     {
         rb = null;
-        //pm = GetComponent<PlayerManager>();
+        pm = GetComponent<PlayerController>();
         hitbox = GameObject.FindGameObjectWithTag("hitbox").GetComponent<BoxCollider>();
         orientation = transform;
         canAtk = false;
@@ -52,7 +52,7 @@ public class CounterA : MonoBehaviour
             Vector3 forceToApply = orientation.forward * forceApplied;
             
              
-            if (pm.isInSpinMode && pm != null)
+            if (pm.currentState == pm.SpinnerState && pm != null)
             {
                 norm.stunned = true;
                 norm.stunDuration = spinStun;
@@ -60,7 +60,7 @@ public class CounterA : MonoBehaviour
                 Debug.Log("YEE");
                 
             }
-            else if (!pm.isInSpinMode && pm != null)
+            else if (pm.currentState == pm.NormalState && pm != null)
             {
                 norm.stunned = true;
                 norm.stunDuration = normalStun;
