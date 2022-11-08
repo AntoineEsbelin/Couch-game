@@ -20,13 +20,15 @@ public class GameManager : MonoBehaviour
     //Input Join and Leave
     public InputAction joinAction;
     public InputAction leftAction;
-    
+    public AudioClip clip;
+
     //Event
     public event System.Action<PlayerInput> PlayerJoinedGame;
     public event System.Action<PlayerInput> PlayerLeftGame;
     
     private void OnPlayerJoined(PlayerInput playerInput)
     {
+        
         playersList.Add(playerInput);
         if (PlayerJoinedGame != null)
             PlayerJoinedGame(playerInput);
@@ -97,6 +99,10 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            AudioManager.instance.PlayClipAt(clip,transform.position);
+        }
         //RoundTimer();
     }
 
