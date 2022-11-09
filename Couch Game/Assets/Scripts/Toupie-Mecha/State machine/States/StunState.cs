@@ -10,9 +10,10 @@ public class StunState : PlayerState
         timer = timerMax;
         if(player.lastPlayerContacted != null) // A AMELIORER, SOLUTION TEMPORAIRE ZBI (pas utiliser lastplayermachin)
         {
-            knockbackDir = (player.transform.position - player.lastPlayerContacted.transform.position).normalized;
-            kbSpeed = player.lastPlayerContacted.SpinnerState.mSettings.moveSpeed;
+            stunplayer = player.lastPlayerContacted;
         }
+        knockbackDir = (player.transform.position - stunplayer.transform.position).normalized;
+        kbSpeed = stunplayer.SpinnerState.mSettings.moveSpeed;
     }
 
     public override void UpdateState(PlayerController player)
@@ -39,6 +40,8 @@ public class StunState : PlayerState
 
     float timer;
     public float timerMax = 1f;
+
+    public PlayerController stunplayer;
 
     void Timer()
     {

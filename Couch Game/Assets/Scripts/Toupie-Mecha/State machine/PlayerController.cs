@@ -47,6 +47,9 @@ public class PlayerController : MonoBehaviour
     public float stunDurationKnockback = 1f;
     public float stunDurationSpinEnd = 0.3f;
 
+    public GameObject explosion;
+    public int dashDurationReduction = 2;
+
     void OnEnable()
     {
         currentState = NormalState;
@@ -209,14 +212,14 @@ public class PlayerController : MonoBehaviour
                         triggerPlayer.StunState.timerMax = triggerPlayer.stunDurationKnockback;
                         triggerPlayer.stateMachine.SwitchState(triggerPlayer.StunState);
 
+                        StunState.timerMax = stunDurationSpinEnd;
+                        stateMachine.SwitchState(StunState);
                         //activate knockback for triggered player >:(
                         //other.GetComponentInParent<Knockback>().spinnerKnockbacking = this.spinnerControler;
                         
                     }
-                    //////////if (other.gameObject.layer == 8) bounceSpinner.enabled = true;
+                    if (triggerPlayer.currentState == triggerPlayer.SpinnerState && !SpinnerState.repoussed) BounceSpinner();
                     
-                    triggerPlayer.StunState.timerMax = stunDurationSpinEnd;
-                    stateMachine.SwitchState(StunState);
                 }
             }
         }
@@ -243,6 +246,17 @@ public class PlayerController : MonoBehaviour
             
             if(timer > 0)timer -=Time.deltaTime;
             else walled = false;
+        }
+
+        void BounceSpinner()
+        {
+            Instantiate(explosion, this.transform.position, Quaternion.identity);
+            Debug.Log("bounce");
+            SpinnerState.moveDir = -SpinnerState.moveDir;
+            move = -move;
+            //transform.rotation = Quaternion.Euler(-transform.rotation.eulerAngles);
+            //SpinnerState.mSettings.dashDuration /= dashDurationReduction;
+            SpinnerState.repoussed = true;
         }
 
     #endregion

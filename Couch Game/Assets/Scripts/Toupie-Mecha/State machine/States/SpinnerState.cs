@@ -13,6 +13,8 @@ public class SpinnerState : PlayerState
         
         mSettings.brakeManiability = 1f;
         mSettings.brakeSpeed = 1f;
+
+        repoussed = false;
     }
 
     public override void UpdateState(PlayerController player)
@@ -25,6 +27,7 @@ public class SpinnerState : PlayerState
 
     public override void ExitState(PlayerController player)
     {
+        repoussed = false;
         StopSpin();
     }
 
@@ -59,6 +62,7 @@ public class SpinnerState : PlayerState
     public Vector3 moveDir;
 
     public float spinnerAngle;
+    public bool repoussed;
 
     public void Spinning()
     {
@@ -67,7 +71,7 @@ public class SpinnerState : PlayerState
         if(mSettings.moveSpeed < playerController.NormalState.mSettings.moveSpeed) mSettings.dashDuration = 0; 
 
             
-        if (playerController.isMoving && !playerController.walled)
+        if (playerController.isMoving && !playerController.walled && !repoussed)
         {
             float targetAngle = Mathf.Atan2(playerController.move.x, playerController.move.z) * Mathf.Rad2Deg;
             spinnerAngle = Mathf.SmoothDampAngle(playerController.rb.transform.eulerAngles.y, targetAngle, 

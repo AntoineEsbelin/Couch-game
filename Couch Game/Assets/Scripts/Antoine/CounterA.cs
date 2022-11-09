@@ -13,7 +13,8 @@ public class CounterA : MonoBehaviour
     public BoxCollider hitbox;
     public Rigidbody rb;
     public PlayerController pm;
-    public NormalControler norm;
+
+    public PlayerController plctrl;
 
     [Header("AttackStats")]
     public float attackCD = 3.0f;
@@ -26,8 +27,9 @@ public class CounterA : MonoBehaviour
 
     private void Awake()
     {
+        pm = null;
         rb = null;
-        pm = GetComponent<PlayerController>();
+        //pm = GetComponent<PlayerController>();
         hitbox = GameObject.FindGameObjectWithTag("hitbox").GetComponent<BoxCollider>();
         orientation = transform;
         canAtk = false;
@@ -47,24 +49,30 @@ public class CounterA : MonoBehaviour
 
     public IEnumerator Attack()
     {
-        if(canAtk && rb != null)
+        if(canAtk)
         {
             Vector3 forceToApply = orientation.forward * forceApplied;
             
              
-            if (pm.currentState == pm.SpinnerState && pm != null)
+            if (pm != null && pm.currentState == pm.SpinnerState)
             {
-                norm.stunned = true;
-                norm.stunDuration = spinStun;
-                rb.AddForce(forceToApply / 4 * Time.deltaTime, ForceMode.Impulse);
+                pm.StunState.timerMax = spinStun;
+                pm.lastPlayerContacted = plctrl;
+                pm.StunState.knockbackDir = forceToApply;
+                pm.stateMachine.SwitchState(pm.StunState);
+                //rb.AddForce(forceToApply / 4 * Time.deltaTime, ForceMode.Impulse);
                 Debug.Log("YEE");
                 
             }
-            else if (pm.currentState == pm.NormalState && pm != null)
+            else if (pm != null && pm.currentState == pm.NormalState)
             {
-                norm.stunned = true;
-                norm.stunDuration = normalStun;
-                rb.AddForce(forceToApply * Time.deltaTime, ForceMode.Impulse);
+                pm.StunState.timerMax = normalStun;
+                Debug.Log(forceToApply);
+                pm.lastPlayerContacted = plctrl;
+                pm.StunState.knockbackDir = forceToApply;
+                pm.stateMachine.SwitchState(pm.StunState);
+                //rb.AddForce(forceToApply * Time.deltaTime, ForceMode.Impulse);
+                Debug.Log("EE");
             }
 
             

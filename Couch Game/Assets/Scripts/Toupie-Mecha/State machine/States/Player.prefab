@@ -1710,6 +1710,7 @@ MonoBehaviour:
   rb: {fileID: 2402394259002358179}
   cameraTarget: {fileID: 0}
   spawnPlayer: {fileID: 0}
+  playerId: 0
   normalSkins: []
   spinSkins: []
   playerPoint: 0
@@ -1727,6 +1728,8 @@ MonoBehaviour:
   isMoving: 0
   stunDurationKnockback: 1
   stunDurationSpinEnd: 0.3
+  explosion: {fileID: 3438996937471707301, guid: a2be7fac82fbeea43911cac21ce707ef, type: 3}
+  dashDurationReduction: 2
   move: {x: 0, y: 0, z: 0}
   normalizedWall: {x: 0, y: 0, z: 0}
   playerDirection: {x: 0, y: 0, z: 0}
@@ -1795,6 +1798,7 @@ MonoBehaviour:
     brakeSpeed: 0
   moveDir: {x: 0, y: 0, z: 0}
   spinnerAngle: 0
+  repoussed: 0
 --- !u!114 &1966433780568224509
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1810,6 +1814,7 @@ MonoBehaviour:
   playerController: {fileID: 0}
   knockbackDir: {x: 0, y: 0, z: 0}
   timerMax: 1
+  stunplayer: {fileID: 0}
 --- !u!114 &1966433780568224504
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1971,7 +1976,7 @@ MonoBehaviour:
   hitbox: {fileID: 0}
   rb: {fileID: 0}
   pm: {fileID: 0}
-  norm: {fileID: 0}
+  plctrl: {fileID: 1966433780568224508}
   attackCD: 3
   forceApplied: 20
   canAtk: 0
@@ -1989,6 +1994,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36234ed81d4a422478c847e62f9c9ff7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  counterAtk: {fileID: 0}
 --- !u!1 &2402394259079551781
 GameObject:
   m_ObjectHideFlags: 0

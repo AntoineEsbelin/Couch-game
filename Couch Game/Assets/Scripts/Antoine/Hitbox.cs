@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Hitbox : MonoBehaviour
 {
-    /*
     public CounterA counterAtk;
     private void Awake()
     {
@@ -15,10 +14,11 @@ public class Hitbox : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            other.GetComponentInParent<PlayerController>().lastPlayerContacted = GetComponent<PlayerController>();//ça marche pas à refaire (pb de collision point d'interrogation)
             Rigidbody rb = other.GetComponentInParent<Rigidbody>();
             counterAtk.rb = rb;
-            counterAtk.pm = rb.GetComponent<PlayerManager>();
-            counterAtk.norm = counterAtk.pm.normalPlayer;
+            counterAtk.pm = rb.GetComponent<PlayerController>();
+            if (other.GetComponentInParent<PlayerController>().playerId == this.GetComponent<PlayerController>().playerId) counterAtk.pm = null;
         }
     }
 
@@ -28,10 +28,7 @@ public class Hitbox : MonoBehaviour
         {
             counterAtk.rb = null;
             counterAtk.pm = null;
-            counterAtk.norm = null;
         }
     }
-
-    */
 
 }
