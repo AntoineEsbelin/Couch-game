@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PointZone : MonoBehaviour
 {
-    /*
+    
     [SerializeField] private int pointGiven;
     [SerializeField] private bool isField;
 
@@ -14,7 +14,7 @@ public class PointZone : MonoBehaviour
         if(coll.CompareTag("Player"))
         {
             if(isField)return;
-            PlayerManager deadPlayer = coll.GetComponentInParent<PlayerManager>();
+            PlayerController deadPlayer = coll.GetComponentInParent<PlayerController>();
             DispawnPlayer(deadPlayer);
         }
     }
@@ -24,29 +24,15 @@ public class PointZone : MonoBehaviour
         if(coll.CompareTag("Player"))
         {
             if(!isField)return;
-            PlayerManager deadPlayer = coll.GetComponentInParent<PlayerManager>();
+            PlayerController deadPlayer = coll.GetComponentInParent<PlayerController>();
             DispawnPlayer(deadPlayer);
 
         }
     }
 
 
-    private void DispawnPlayer(PlayerManager deadPlayer)
+    private void DispawnPlayer(PlayerController deadPlayer)
     {
-        if(deadPlayer.normalPlayer.gameObject.activeSelf)
-        {
-            deadPlayer.normalPlayer.gameObject.SetActive(false);
-            deadPlayer.normalPlayer.gameObject.GetComponent<NormalControler>().enabled = false;
-        }
-        else if(deadPlayer.spinnerPlayer.activeSelf)
-        {
-            deadPlayer.spinnerPlayer.SetActive(false);
-            deadPlayer.spinnerControler.GetComponent<SpinnerControler>().enabled = false;
-        }
-        deadPlayer.GetComponent<Rigidbody>().velocity = Vector3.zero;
-        deadPlayer.ResetCharging();
-        deadPlayer.cameraTarget.targets.Remove(deadPlayer.transform);
-        //Give a certain amount of point at the last player touched
         if(deadPlayer.lastPlayerContacted != null)
         {
             deadPlayer.lastPlayerContacted.playerPoint += pointGiven;
@@ -70,7 +56,11 @@ public class PointZone : MonoBehaviour
             //DEBUG
             Debug.Log($"{deadPlayer.name} SUICIDED !");
         }
-        deadPlayer.GetComponent<PlayerRespawn>().enabled = true;
-        deadPlayer.enabled = false;
-    }*/
+        if(deadPlayer.gameObject.activeSelf)
+        {
+            deadPlayer.stateMachine.SwitchState(deadPlayer.DeathState);
+        }
+        
+        
+    }
 }

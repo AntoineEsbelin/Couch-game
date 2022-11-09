@@ -6,11 +6,11 @@ public class SpinnerState : PlayerState
 {
     public override void EnterState(PlayerController player)
     {
-        Debug.Log("dash = "+ mSettings.dashDuration);
         playerController = player;
 
         moveDir = player.transform.forward;
         mSettings.dashDuration = mSettings.dashDurationMax;
+        
         mSettings.brakeManiability = 1f;
         mSettings.brakeSpeed = 1f;
     }
@@ -18,14 +18,13 @@ public class SpinnerState : PlayerState
     public override void UpdateState(PlayerController player)
     {
         Spinning();
-
-        if (mSettings.dashDuration > 0) mSettings.dashDuration = Mathf.Clamp(mSettings.dashDuration - Time.deltaTime, 0, mSettings.dashDurationMax);
+        if (mSettings.dashDuration > 0)
+            mSettings.dashDuration = Mathf.Clamp(mSettings.dashDuration - Time.deltaTime, 0, mSettings.dashDurationMax);
         else player.stateMachine.SwitchState(playerController.NormalState);
     }
 
     public override void ExitState(PlayerController player)
     {
-        Debug.Log("stop");
         StopSpin();
     }
 
@@ -34,7 +33,6 @@ public class SpinnerState : PlayerState
         [HideInInspector] public float dashDuration;
         public float dashDurationMax = 2f;
 
-        public float maxMoveSpeed = 8f;
         public float moveSpeed;
         public float bonusMoveSpeed = 0f;
 
@@ -65,11 +63,11 @@ public class SpinnerState : PlayerState
     public void Spinning()
     {
         //refs.moveSpeed = Mathf.Pow((refs.maxMoveSpeed - dashDuration), 3) * chargedDuration;
-        mSettings.moveSpeed = (Mathf.Pow((mSettings.dashDuration / (mSettings.dashDurationMax - 1)), 3) + 1) * mSettings.chargeMultiplier;
-        if(mSettings.moveSpeed < playerController.NormalState.mSettings.moveSpeed) mSettings.dashDuration = 0;
-        
+        mSettings.moveSpeed = (Mathf.Pow((mSettings.dashDuration / (mSettings.dashDurationMax - 1)), 3) + 1) * mSettings.bonusMoveSpeed;
+        if(mSettings.moveSpeed < playerController.NormalState.mSettings.moveSpeed) mSettings.dashDuration = 0; 
+
             
-        if (playerController.isMoving)
+        if (playerController.isMoving && !playerController.walled)
         {
             float targetAngle = Mathf.Atan2(playerController.move.x, playerController.move.z) * Mathf.Rad2Deg;
             spinnerAngle = Mathf.SmoothDampAngle(playerController.rb.transform.eulerAngles.y, targetAngle, 
@@ -80,7 +78,7 @@ public class SpinnerState : PlayerState
 
         //Vector3 moveDir = mSettings.rb.transform.forward;
 
-        playerController.rb.velocity = new Vector3(moveDir.x,0f,moveDir.z)* (mSettings.moveSpeed + mSettings.bonusMoveSpeed) * mSettings.brakeSpeed * Time.fixedDeltaTime;
+        playerController.rb.velocity = new Vector3(moveDir.x,0f,moveDir.z)* (mSettings.moveSpeed) * mSettings.brakeSpeed * Time.fixedDeltaTime;
 
     }
 

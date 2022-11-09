@@ -22,8 +22,9 @@ public class SpawnPlayer : MonoBehaviour
     {   
         if(playerJoined < this.GetComponent<PlayerInputManager>().maxPlayerCount)
         {
-            ////input.GetComponent<PlayerManager>().playerId = playerJoined;
-            ////input.GetComponent<PlayerManager>().spawnPlayer = this;
+            input.GetComponent<PlayerController>().playerId = playerJoined;
+            input.GetComponent<PlayerController>().spawnPlayer = this;
+            input.GetComponent<PlayerController>().RespawnPlayer();
             RandomSpawnFBX(input);
             //assigne le model 3D selon le joueur
             playerJoined+= 1;

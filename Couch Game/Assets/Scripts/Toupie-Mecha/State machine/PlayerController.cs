@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     #region States
         public PlayerStateMachine stateMachine;
 
-        [HideInInspector] public PlayerState currentState;
+         public PlayerState currentState;
 
         // public NormalState NormalState = new NormalState();
         // public SpinnerState SpinnerState = new SpinnerState();
@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
         public NormalState NormalState;
         public SpinnerState SpinnerState;
         public StunState StunState;
+        public DeathState DeathState;
     #endregion
 
     public Rigidbody rb;
@@ -24,16 +25,16 @@ public class PlayerController : MonoBehaviour
     public CameraTarget cameraTarget;
 
     public SpawnPlayer spawnPlayer;
-    int playerId;
+    public int playerId;
 
     public GameObject[] normalSkins;
     public GameObject[] spinSkins;
     public event System.Action<int> OnScoreChanged;
     public int playerPoint;
 
+    [Header("Spin charging properties")]
     public bool startCharging;
     public float spinTimer = 0f;
-    [Header("Spin charging properties")]
     public float[] bonusSpeedPerPhase;
     public float[] timerPerPhase;
 
@@ -42,6 +43,9 @@ public class PlayerController : MonoBehaviour
     public float timeLastPlayer;
 
     public bool isMoving;
+
+    public float stunDurationKnockback = 1f;
+    public float stunDurationSpinEnd = 0.3f;
 
     void OnEnable()
     {
@@ -68,7 +72,6 @@ public class PlayerController : MonoBehaviour
         // normalSkins[playerId].SetActive(true);
         // spinSkins[playerId].SetActive(true);
         
-        
         if (OnScoreChanged != null)
             OnScoreChanged(playerPoint);
     }
@@ -80,6 +83,8 @@ public class PlayerController : MonoBehaviour
 
         isMoving = move != Vector3.zero;
         currentState.UpdateState(this);
+
+        BounceWallTimer();
     }
 
     private void UpdateLastPlayer()
@@ -106,7 +111,7 @@ public class PlayerController : MonoBehaviour
             {
                 if(currentState == NormalState)
                 {
-                    NormalState.SetSpeedModifier(NormalState.mSettings.slowSpeed);
+                    //NormalState.SetSpeedModifier(NormalState.mSettings.slowSpeed);
                     NormalState.SlowSpeedModifier();
                     this.GetComponent<Stretch>().enabled = true;
                     startCharging = true;
@@ -149,4 +154,107 @@ public class PlayerController : MonoBehaviour
 
     #endregion
 
+    #region Collisions
+
+        public Vector3 normalizedWall;
+        public Vector3 playerDirection;
+
+        public bool walled;
+
+        private float timer;
+        public float timerCount;
+
+        private void OnCollisionEnter(Collision other)
+        {
+            
+            if(other.gameObject.tag == "Wall")
+            {
+                if(currentState == SpinnerState)
+                {
+
+                    normalizedWall = other.contacts[0].normal;
+                    playerDirection = SpinnerState.moveDir;
+                    timer = timerCount;
+                    //mettre timer
+                    BounceWall();
+                }
+
+                if (currentState == StunState)
+                {
+                    normalizedWall = other.contacts[0].normal;
+                    playerDirection = StunState.knockbackDir;
+                    BounceWallStuned();
+                }
+            }
+        }
+
+        void OnTriggerEnter(Collider other)
+        {
+            if (!other.isTrigger) return;
+            if (other.gameObject.tag == "Player")
+            {
+                
+                if(currentState == SpinnerState)
+                {
+                    PlayerController triggerPlayer = other.GetComponentInParent<PlayerController>();
+
+                    triggerPlayer.lastPlayerContacted = this;
+                    triggerPlayer.timeLastPlayer = triggerPlayer.maxTimeLastPlayer;
+
+                    //Si le joueur est pas stun [???]
+
+                    if (triggerPlayer.currentState == triggerPlayer.NormalState)
+                    {
+                        //activate bounce player of this spinner
+                        triggerPlayer.StunState.timerMax = triggerPlayer.stunDurationKnockback;
+                        triggerPlayer.stateMachine.SwitchState(triggerPlayer.StunState);
+
+                        //activate knockback for triggered player >:(
+                        //other.GetComponentInParent<Knockback>().spinnerKnockbacking = this.spinnerControler;
+                        
+                    }
+                    //////////if (other.gameObject.layer == 8) bounceSpinner.enabled = true;
+                    
+                    triggerPlayer.StunState.timerMax = stunDurationSpinEnd;
+                    stateMachine.SwitchState(StunState);
+                }
+            }
+        }
+
+        void BounceWall()
+        {
+            SpinnerState.moveDir = Vector3.Reflect(playerDirection, normalizedWall);
+            float newAngle = Vector3.SignedAngle(playerDirection, SpinnerState.moveDir, Vector3.up);
+
+            Vector3 newVector = new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y + newAngle, transform.rotation.eulerAngles.z);
+            transform.rotation = Quaternion.Euler(newVector);
+
+            walled = true;
+        }
+
+        void BounceWallStuned()
+        {
+            StunState.knockbackDir = Vector3.Reflect(StunState.knockbackDir, normalizedWall);
+        }
+
+        private void BounceWallTimer()
+        {
+            if (!walled) return;
+            
+            if(timer > 0)timer -=Time.deltaTime;
+            else walled = false;
+        }
+
+    #endregion
+
+    public void UpdateScore(int value)
+    {
+        if (OnScoreChanged != null)
+            OnScoreChanged(value);
+    }
+
+    public void RespawnPlayer()
+    {
+        transform.position = spawnPlayer.spawnPoints[playerId].position;
+    }
 }

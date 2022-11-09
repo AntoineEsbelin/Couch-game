@@ -22,7 +22,7 @@ public class NormalState : PlayerState
     [System.Serializable] public class MovementSettings
     {
         public float moveSpeed = 8f;
-        public float slowSpeed;
+        //public float slowSpeed;
         public float dx = 4f; //décélération
         public float rotationSpeed = 800f;
 
@@ -36,7 +36,7 @@ public class NormalState : PlayerState
 
     public MovementSettings mSettings;
 
-    Vector3 moveDir;
+    public Vector3 moveDir;
     Vector3 theMove;
 
     public void Moving()
