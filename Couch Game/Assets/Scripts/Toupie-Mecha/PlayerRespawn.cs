@@ -16,7 +16,6 @@ public class PlayerRespawn : MonoBehaviour
         respawnTime = maxRespawnTime;
         normalPlayer.SetActive(false);
         playerManager.enabled = false;
-        playerManager.GetComponent<Stretch>().enabled = false;
         normalPlayer.GetComponent<NormalControler>().enabled = true;
     }
 

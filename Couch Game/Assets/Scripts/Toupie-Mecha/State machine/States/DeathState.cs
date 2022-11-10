@@ -10,7 +10,6 @@ public class DeathState : PlayerState
     {
         player.rb.velocity = Vector3.zero;
         player.ResetCharging();
-        player.GetComponent<Stretch>().enabled = false;
         player.cameraTarget.targets.Remove(player.transform);
         respawnTime = maxRespawnTime;
         //visuel off :
