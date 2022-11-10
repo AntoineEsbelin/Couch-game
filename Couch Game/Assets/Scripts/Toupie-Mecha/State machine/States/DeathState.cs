@@ -14,7 +14,7 @@ public class DeathState : PlayerState
         player.cameraTarget.targets.Remove(player.transform);
         respawnTime = maxRespawnTime;
         //visuel off :
-        Debug.Log("VISUEL OFF");
+        player.playerFBX.SetActive(false);
     }
     public override void UpdateState(PlayerController player)
     {
@@ -26,6 +26,7 @@ public class DeathState : PlayerState
         //visuel on :
         Debug.Log("VISUEL ON");
         player.cameraTarget.targets.Add(transform);
+        player.playerFBX.SetActive(true);
         player.RespawnPlayer();
     }
 }

@@ -27,7 +27,6 @@ public class GameManager : MonoBehaviour
 
     public Transform[] spawnPoints;
     public GameObject[] charactersFBX;
-    public GameObject[] spinnersFBX;
     
     private void OnPlayerJoined(PlayerInput playerInput)
     {
@@ -37,10 +36,10 @@ public class GameManager : MonoBehaviour
             PlayerJoinedGame(playerInput);
         PlayerController playerController = playerInput.GetComponent<PlayerController>(); 
         playerController.playerId = playersList.Count;
-        playerController.transform.position = spawnPoints[playerController.playerId].position;
-        Instantiate(charactersFBX[playerController.playerId], playerController.transform);        
-        
-
+        playerController.transform.position = spawnPoints[playerController.playerId - 1].position;
+        playerController.playerFBX = Instantiate(charactersFBX[playerController.playerId - 1], playerController.transform);    
+        playerController.toupieFBX = playerController.playerFBX.GetComponentInChildren<SpinningAnim>().gameObject;
+        playerController.toupieFBX.SetActive(false);
     }
     
     private void OnPlayerLeft(PlayerInput playerInput)

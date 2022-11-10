@@ -50,6 +50,14 @@ public class PlayerController : MonoBehaviour
     public GameObject explosion;
     public int dashDurationReduction = 2;
 
+    private Animator playerAnimator;
+    public Animator PlayerAnimator
+    {
+        get => playerAnimator ; private set{}
+    }
+
+    public GameObject playerFBX;
+    public GameObject toupieFBX;
     void OnEnable()
     {
         currentState = NormalState;
@@ -58,7 +66,7 @@ public class PlayerController : MonoBehaviour
 
         cameraTarget = GameObject.FindWithTag("MainCamera").GetComponent<CameraTarget>();
         cameraTarget.targets.Add(transform);
-        
+        playerAnimator = this.GetComponentInChildren<Animator>();
         //transform.position = spawnPlayer.spawnPoints[playerId].position;
     }
 
@@ -105,7 +113,12 @@ public class PlayerController : MonoBehaviour
 
         public void OnMove(InputAction.CallbackContext ctx)
         {
-            move = ctx.ReadValue<Vector3>();
+            if(ctx.performed)
+            {
+                move = ctx.ReadValue<Vector3>();
+                playerAnimator.SetBool("IsWalking", true);
+            }
+            else if(ctx.canceled)playerAnimator.SetBool("IsWalking", false);
         }
 
         public void OnSpin(InputAction.CallbackContext ctx)
@@ -209,6 +222,7 @@ public class PlayerController : MonoBehaviour
                     if (triggerPlayer.currentState == triggerPlayer.NormalState)
                     {
                         //activate bounce player of this spinner
+                        Instantiate(explosion, this.transform.position, Quaternion.identity);
                         triggerPlayer.StunState.timerMax = triggerPlayer.stunDurationKnockback;
                         triggerPlayer.stateMachine.SwitchState(triggerPlayer.StunState);
 
@@ -251,7 +265,7 @@ public class PlayerController : MonoBehaviour
         void BounceSpinner()
         {
             Instantiate(explosion, this.transform.position, Quaternion.identity);
-            Debug.Log("bounce");
+            //Debug.Log("bounce");
             SpinnerState.moveDir = -SpinnerState.moveDir;
             move = -move;
             //transform.rotation = Quaternion.Euler(-transform.rotation.eulerAngles);
@@ -269,6 +283,6 @@ public class PlayerController : MonoBehaviour
 
     public void RespawnPlayer()
     {
-        transform.position = spawnPlayer.spawnPoints[playerId].position;
+        transform.position = GameManager.instance.spawnPoints[playerId - 1].position;
     }
 }

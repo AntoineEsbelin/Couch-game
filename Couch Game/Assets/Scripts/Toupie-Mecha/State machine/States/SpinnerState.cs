@@ -13,8 +13,10 @@ public class SpinnerState : PlayerState
         
         mSettings.brakeManiability = 1f;
         mSettings.brakeSpeed = 1f;
-
+        playerController.PlayerAnimator.SetBool("IsSpinning", true);
         repoussed = false;
+        playerController.transform.position = new Vector3(playerController.transform.position.x, playerController.transform.position.y + 3f, playerController.transform.position.z);
+        playerController.toupieFBX.SetActive(true);
     }
 
     public override void UpdateState(PlayerController player)
@@ -91,5 +93,8 @@ public class SpinnerState : PlayerState
         mSettings.bonusMoveSpeed = 0f;
         mSettings.brakeManiability = 1f;
         mSettings.brakeSpeed = 1f;
+        playerController.PlayerAnimator.SetBool("IsSpinning", false);
+        playerController.transform.position = new Vector3(playerController.transform.position.x, playerController.transform.position.y - 3f, playerController.transform.position.z);
+        playerController.toupieFBX.SetActive(false);
     }
 }

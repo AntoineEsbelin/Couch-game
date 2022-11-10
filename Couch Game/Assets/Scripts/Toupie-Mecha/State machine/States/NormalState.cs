@@ -7,7 +7,6 @@ public class NormalState : PlayerState
     public override void EnterState(PlayerController player)
     {
         playerController = player;
-        
     }
 
     public override void UpdateState(PlayerController player)
@@ -44,6 +43,7 @@ public class NormalState : PlayerState
 
         if (playerController.isMoving)
         {
+            playerController.PlayerAnimator.SetBool("IsWalking", true);
             float targetAngle = Mathf.Atan2(playerController.move.x, playerController.move.z) * Mathf.Rad2Deg;
             float angle = Mathf.SmoothDampAngle(playerController.transform.eulerAngles.y, targetAngle,
                 ref mSettings.turnSmoothVelocity, mSettings.turnSmoothTime);
@@ -55,6 +55,7 @@ public class NormalState : PlayerState
         {
             theMove = Vector3.MoveTowards(moveDir, Vector3.zero, mSettings.dx);
         }
+        else playerController.PlayerAnimator.SetBool("IsWalking", false);
 
         playerController.rb.velocity = new Vector3 (theMove.x, playerController.rb.velocity.y, theMove.z);
 

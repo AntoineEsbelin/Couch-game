@@ -24,6 +24,8 @@ public class CounterA : MonoBehaviour
     public int normalStun;
     public int spinStun;
 
+    bool inCD = false;
+
 
     private void Awake()
     {
@@ -43,14 +45,16 @@ public class CounterA : MonoBehaviour
     {
         if(ctx.performed)
         {
-            canAtk = true;
+            if(plctrl.currentState == plctrl.NormalState)canAtk = true;
         }
     }
 
     public IEnumerator Attack()
     {
-        if(canAtk)
+        if(canAtk && !inCD)
         {
+            
+            if(!plctrl.PlayerAnimator.GetBool("Counter"))plctrl.PlayerAnimator.SetBool("Counter", true);
             Vector3 forceToApply = orientation.forward * forceApplied;
             
              
@@ -78,7 +82,10 @@ public class CounterA : MonoBehaviour
             
             //Debug.Log("CD applied");
             canAtk = false;
+            inCD = true;
             yield return new WaitForSeconds(attackCD);
+            plctrl.PlayerAnimator.SetBool("Counter", false);
+            inCD = false;
         }
         
     }
