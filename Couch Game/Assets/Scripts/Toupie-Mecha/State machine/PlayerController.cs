@@ -224,6 +224,8 @@ public class PlayerController : MonoBehaviour
                         //activate bounce player of this spinner
                         Instantiate(explosion, this.transform.position, Quaternion.identity);
                         triggerPlayer.StunState.timerMax = triggerPlayer.stunDurationKnockback;
+                        triggerPlayer.lastPlayerContacted = this;
+                        AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("Spin Hit Spin"), transform.position);
                         triggerPlayer.stateMachine.SwitchState(triggerPlayer.StunState);
 
                         StunState.timerMax = stunDurationSpinEnd;
@@ -245,7 +247,7 @@ public class PlayerController : MonoBehaviour
 
             Vector3 newVector = new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y + newAngle, transform.rotation.eulerAngles.z);
             transform.rotation = Quaternion.Euler(newVector);
-
+            AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("Spin Hit Wall"), transform.position);
             walled = true;
         }
 
@@ -271,6 +273,7 @@ public class PlayerController : MonoBehaviour
             //transform.rotation = Quaternion.Euler(-transform.rotation.eulerAngles);
             //SpinnerState.mSettings.dashDuration /= dashDurationReduction;
             SpinnerState.repoussed = true;
+            AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("Spin Hit Spin"), transform.position);
         }
 
     #endregion

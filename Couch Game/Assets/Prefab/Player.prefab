@@ -188,6 +188,7 @@ MonoBehaviour:
   stunDurationSpinEnd: 0.3
   explosion: {fileID: 3438996937471707301, guid: a2be7fac82fbeea43911cac21ce707ef, type: 3}
   dashDurationReduction: 2
+  playerFBX: {fileID: 0}
   toupieFBX: {fileID: 0}
   move: {x: 0, y: 0, z: 0}
   normalizedWall: {x: 0, y: 0, z: 0}
@@ -338,7 +339,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &2655307893436311521
 MonoBehaviour:
   m_ObjectHideFlags: 0

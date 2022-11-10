@@ -4,15 +4,24 @@ using UnityEngine;
 
 public class StunState : PlayerState
 {
+
+    public MovementSettings mSettings;
+
+     public Vector3 knockbackDir;
+    private Vector3 knockback;
+    float kbSpeed;
+
+    float timer;
+    public float timerMax = 1f;
+
+    public PlayerController stunplayer;
     public override void EnterState(PlayerController player)
     {
         playerController = player;
         timer = timerMax;
-        if(player.lastPlayerContacted != null) // A AMELIORER, SOLUTION TEMPORAIRE ZBI (pas utiliser lastplayermachin)
-        {
-            stunplayer = player.lastPlayerContacted;
-        }
-        knockbackDir = (player.transform.position - stunplayer.transform.position).normalized;
+        if(player.lastPlayerContacted == null)return;
+        stunplayer = player.lastPlayerContacted;
+        knockbackDir = (playerController.transform.position - stunplayer.transform.position).normalized;
         kbSpeed = stunplayer.SpinnerState.mSettings.moveSpeed;
     }
 
@@ -31,17 +40,6 @@ public class StunState : PlayerState
     {
         
     }
-
-    public MovementSettings mSettings;
-
-    [HideInInspector] public Vector3 knockbackDir;
-    private Vector3 knockback;
-    float kbSpeed;
-
-    float timer;
-    public float timerMax = 1f;
-
-    public PlayerController stunplayer;
 
     void Timer()
     {

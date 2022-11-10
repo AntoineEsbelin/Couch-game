@@ -7,12 +7,28 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
     public AudioMixerGroup soundEffectMixer;
+    public AudioMixerGroup ostMixer;
+
+    [System.Serializable]
+    public class KeyValue
+    {
+        public string audioName;
+        public AudioClip audio;
+    }
+    public List<KeyValue> yes = new List<KeyValue>();
+    public Dictionary<string, AudioClip> allAudio = new Dictionary<string, AudioClip>();
 
     private void Awake()
     {
         if (instance != null)
             return;
         instance = this;
+
+        foreach(var ui in yes)
+        {
+            allAudio[ui.audioName] = ui.audio;
+        }
+        
     }
 
     public AudioSource PlayClipAt(AudioClip clip, Vector3 pos)
@@ -26,7 +42,8 @@ public class AudioManager : MonoBehaviour
         audioSource.clip = clip;
         //Get the audio mixer
         audioSource.outputAudioMixerGroup = soundEffectMixer;
-        audioSource.Play();
+        if(audioSource.isPlaying)audioSource.PlayOneShot(audioSource.clip);
+        else audioSource.Play();
         //Destroy at the lenght of the clip
         Destroy(tempGO, clip.length);
         return audioSource;

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SpinnerState : PlayerState
 {
+    private AudioSource audioSource;
     public override void EnterState(PlayerController player)
     {
         playerController = player;
@@ -17,6 +18,8 @@ public class SpinnerState : PlayerState
         repoussed = false;
         playerController.transform.position = new Vector3(playerController.transform.position.x, playerController.transform.position.y + 3f, playerController.transform.position.z);
         playerController.toupieFBX.SetActive(true);
+        audioSource = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("Spin Move"), playerController.transform.position);
+        
     }
 
     public override void UpdateState(PlayerController player)
@@ -96,5 +99,6 @@ public class SpinnerState : PlayerState
         playerController.PlayerAnimator.SetBool("IsSpinning", false);
         playerController.transform.position = new Vector3(playerController.transform.position.x, playerController.transform.position.y - 3f, playerController.transform.position.z);
         playerController.toupieFBX.SetActive(false);
+        Destroy(audioSource.gameObject);
     }
 }

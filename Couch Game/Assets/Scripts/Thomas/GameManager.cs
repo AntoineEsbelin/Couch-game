@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
 
     public Transform[] spawnPoints;
     public GameObject[] charactersFBX;
+    public AudioClip clip;
     
     private void OnPlayerJoined(PlayerInput playerInput)
     {

@@ -24,7 +24,6 @@ public class DeathState : PlayerState
     public override void ExitState(PlayerController player)
     {
         //visuel on :
-        Debug.Log("VISUEL ON");
         player.cameraTarget.targets.Add(transform);
         player.playerFBX.SetActive(true);
         player.RespawnPlayer();
