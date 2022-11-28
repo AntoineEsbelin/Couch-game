@@ -11,17 +11,6 @@ public class ToupieBehaviourEditor : Editor
         ToupieBehaviour playerB = (ToupieBehaviour) target;
         
         EditorGUILayout.PropertyField(serializedObject.FindProperty("param"));
-
-        switch (playerB.param)
-        {
-            case ToupieBehaviour.StateParam.MOVE:
-                EditorGUILayout.PropertyField(serializedObject.FindProperty("moveParam"));
-                break;
-            
-            case ToupieBehaviour.StateParam.CHARGE:
-                EditorGUILayout.PropertyField(serializedObject.FindProperty("chargeParam"));
-                break;
-        }
         
         EditorGUILayout.Space(10);
         playerB.controller = (CharacterController)EditorGUILayout.ObjectField("Character Controller", 

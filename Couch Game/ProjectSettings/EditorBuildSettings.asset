@@ -5,7 +5,62 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: Assets/Scenes/Duck.unity
+    guid: 0f9b49f0aae97b248a985f0fff49f963
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
-  m_configObjects: {}
+    path: Assets/Scenes/Proto Toupie-Mecha.unity
+    guid: bf53a0af43df9b342b61b8d294de58c7
+  - enabled: 0
+    path: Assets/Scenes/Proto2.unity
+    guid: 129c42c3a9a53734da68b48daa04e9ee
+  - enabled: 0
+    path: Assets/Scenes/Thomas.unity
+    guid: 16accb1fac8b1a44ababdd963ffea8ae
+  - enabled: 0
+    path: Assets/Scenes/Tom.unity
+    guid: e1234f490146e9c40b59af2bba254413
+  - enabled: 0
+    path: Assets/Scenes/Antoine.unity
+    guid: 4f28fa5aaaf7d6c44b8c2840a87733c5
+  - enabled: 0
+    path: Assets/Scenes/Arena_proto 1.unity
+    guid: 3ad5643039cfe994c815bc4a6d86ab19
+  - enabled: 0
+    path: Assets/Scenes/babyfoot.unity
+    guid: 496f8a5a615f20e4c8194877c769f7da
+  - enabled: 0
+    path: Assets/Scenes/beyblade 1.unity
+    guid: bcca81bdeaa176c4e8bc7bb97fa9214e
+  - enabled: 0
+    path: Assets/Scenes/Billard.unity
+    guid: 435ff6fae7538204aadafa1c03054027
+  - enabled: 0
+    path: Assets/Scenes/CAM.unity
+    guid: f03efde4f52588849999dec824bfbf8a
+  - enabled: 0
+    path: Assets/Scenes/Duck02.unity
+    guid: c97054f0cd5f638448af81b44763e331
+  - enabled: 0
+    path: Assets/Scenes/Duck03.unity
+    guid: ccb7b5c41c573544195f72d335ce11a5
+  - enabled: 0
+    path: Assets/Scenes/ElJudy.unity
+    guid: 4fe3ab42d4b80b841b0742670a6c8436
+  - enabled: 0
+    path: Assets/Scenes/Gaetan.unity
+    guid: a7553712a37d1bb43abcf0648440da5a
+  - enabled: 0
+    path: Assets/Scenes/LastMouf.unity
+    guid: 02034a751494ac340b7cd8bdaba7b0db
+  - enabled: 0
+    path: Assets/Scenes/MainMenu.unity
+    guid: 89c264fc3ee03a94bae550b39634da19
+  - enabled: 0
+    path: Assets/Scenes/Mouf.unity
+    guid: f91e036c4437a124b9a3bd083c8df343
+  m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: 04ae95cf63d315e459275c71ea4123f8, type: 2}

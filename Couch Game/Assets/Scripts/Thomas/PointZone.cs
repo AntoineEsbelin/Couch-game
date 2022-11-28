@@ -5,49 +5,71 @@ using UnityEngine.InputSystem;
 
 public class PointZone : MonoBehaviour
 {
+    
     [SerializeField] private int pointGiven;
-    public bool isController;
+    [SerializeField] private bool isField;
+    [SerializeField] private GameObject explosion;
+    [SerializeField] private int explosionMultiplier = 1;
 
     private void OnTriggerEnter(Collider coll)
     {
         if(coll.CompareTag("Player"))
         {
-            PlayerController deadPlayer = coll.GetComponent<PlayerController>();
-            //Give a certain amount of point at the last player touched
-            if(deadPlayer.playersInteract.lastPlayerContact != null)
-            {
-                deadPlayer.playersInteract.lastPlayerContact.playersInteract.playerPoint += pointGiven;
-            
-                //DEBUG
-                Debug.Log($"{deadPlayer.name} EJECTED !");
-                Debug.Log($"GIVE {pointGiven} points to {deadPlayer.playersInteract.lastPlayerContact.name}");
+            if(isField)return;
+            PlayerController deadPlayer = coll.GetComponentInParent<PlayerController>();
+            GameObject expl = Instantiate(explosion, this.transform.position, Quaternion.identity);
+            expl.transform.localScale *= explosionMultiplier;
+            DispawnPlayer(deadPlayer);
+        }
+    }
 
-                if(GameManager.instance.drawTimer)
+    private void OnTriggerExit(Collider coll)
+    {
+        if(coll.CompareTag("Player"))
+        {
+            if(!isField)return;
+            PlayerController deadPlayer = coll.GetComponentInParent<PlayerController>();
+            GameObject expl = Instantiate(explosion, deadPlayer.transform.position, Quaternion.identity);
+            expl.transform.localScale *= 2;
+            DispawnPlayer(deadPlayer);
+
+        }
+    }
+
+
+    private void DispawnPlayer(PlayerController deadPlayer)
+    {
+        AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("Goal"), this.transform.position);
+        if(deadPlayer.lastPlayerContacted != null)
+        {
+            deadPlayer.lastPlayerContacted.playerPoint += pointGiven;
+            deadPlayer.lastPlayerContacted.UpdateScore(deadPlayer.lastPlayerContacted.playerPoint);
+            //DEBUG
+            Debug.Log($"{deadPlayer.name} EJECTED !");
+            Debug.Log($"GIVE {pointGiven} points to {deadPlayer.lastPlayerContacted.name}");
+
+            AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("Crowd Shouting"), this.transform.position);
+            
+            if(GameManager.instance.drawTimer)
+            {
+                if(deadPlayer.lastPlayerContacted.playerPoint > GameManager.instance.drawMaxPoint)
                 {
-                    if(deadPlayer.playersInteract.lastPlayerContact.playersInteract.playerPoint > GameManager.instance.drawMaxPoint)
-                    {
-                        Debug.Log($"{deadPlayer.playersInteract.lastPlayerContact.name} WINNN");
-                        GameManager.instance.timeOut = true;
-                        //STOP THE ROUND
-                    }
+                    Debug.Log($"{deadPlayer.lastPlayerContacted.name} WINNN");
+                    GameManager.instance.timeOut = true;
+                    //STOP THE ROUND
                 }
             }
-            else
-            {
-                //DEBUG
-                Debug.Log($"{deadPlayer.name} SUICIDED !");
-            }
-            //MORT DU JOUEUR TOMBÉ
-            if (isController)
-            {
-                coll.GetComponent<ToupieBehaviour>().StartCoroutine(coll.GetComponent<ToupieBehaviour>().DeathState());
-            }
-            else
-            {
-                coll.GetComponent<PlayerController>().StartCoroutine(coll.GetComponent<PlayerController>().DeathState());
-            }
-                
-                
         }
+        else
+        {
+            //DEBUG
+            Debug.Log($"{deadPlayer.name} SUICIDED !");
+        }
+        if(deadPlayer.gameObject.activeSelf)
+        {
+            deadPlayer.stateMachine.SwitchState(deadPlayer.DeathState);
+        }
+        
+        
     }
 }
