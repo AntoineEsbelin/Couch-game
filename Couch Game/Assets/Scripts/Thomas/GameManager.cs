@@ -8,13 +8,6 @@ public class GameManager : MonoBehaviour
     public List<PlayerController> allPlayer;
     public List<PlayerInput> playersList = new List<PlayerInput>();
 
-    [SerializeField] private float timer;
-    public float maxTimer = 60f;
-
-    public bool drawTimer = false;
-    public int drawMaxPoint = 0;
-    public bool timeOut = false;
-
     public static GameManager instance;
     
     //Input Join and Leave
@@ -28,6 +21,18 @@ public class GameManager : MonoBehaviour
     public Transform[] spawnPoints;
     public GameObject[] charactersFBX;
     public AudioClip clip;
+
+    [System.Serializable]
+    public class GameTimer
+    {
+        public float timer;
+        public float maxTimer = 60f;
+
+        public bool drawTimer = false;
+        public int drawMaxPoint = 0;
+        public bool timeOut = false;
+    }
+    public GameTimer gameTimer;
     
     private void OnPlayerJoined(PlayerInput playerInput)
     {
@@ -101,8 +106,9 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        timer = maxTimer;
-        
+        gameTimer.timer = gameTimer.maxTimer;
+        AudioSource ost = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("OST"), transform.position, AudioManager.instance.ostMixer);
+        ost.loop = true;
     }
 
     // Update is called once per frame

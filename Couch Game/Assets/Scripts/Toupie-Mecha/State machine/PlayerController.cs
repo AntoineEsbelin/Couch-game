@@ -95,6 +95,7 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateLastPlayer()
     {
+        //make last player null when this player didn't get touched in time
         if(lastPlayerContacted != null)
         {
             if(timeLastPlayer > 0)timeLastPlayer -= Time.deltaTime;
@@ -110,6 +111,7 @@ public class PlayerController : MonoBehaviour
         {
             if(ctx.performed)
             {
+                if(walled)return;
                 move = ctx.ReadValue<Vector3>();
                 playerAnimator.SetBool("IsWalking", true);
             }
@@ -161,6 +163,24 @@ public class PlayerController : MonoBehaviour
             spinTimer = 0f;
         }
 
+        public void OnBrake(InputAction.CallbackContext ctx)
+        {
+            if (currentState != SpinnerState) return;
+
+            if (ctx.performed)
+            {
+                Debug.Log("start brake");
+                SpinnerState.mSettings.brakeManiability = SpinnerState.mSettings.brakeManiabilityModifier;
+                SpinnerState.mSettings.brakeSpeed = SpinnerState.mSettings.brakeSpeedModifier;
+            }
+
+            if (ctx.canceled)
+            {
+                Debug.Log("stop brake");
+                SpinnerState.mSettings.brakeManiability = 1f;
+            }
+        }
+
     #endregion
 
     #region Collisions
@@ -170,7 +190,7 @@ public class PlayerController : MonoBehaviour
 
         public bool walled;
 
-        private float timer;
+        [SerializeField]private float timer;
         public float timerCount;
 
         private void OnCollisionEnter(Collision other)
@@ -184,6 +204,7 @@ public class PlayerController : MonoBehaviour
                     normalizedWall = other.contacts[0].normal;
                     playerDirection = SpinnerState.moveDir;
                     timer = timerCount;
+                    //Debug.Log("I");
                     //mettre timer
                     BounceWall();
                 }
@@ -218,7 +239,7 @@ public class PlayerController : MonoBehaviour
                         Instantiate(explosion, this.transform.position, Quaternion.identity);
                         triggerPlayer.StunState.timerMax = triggerPlayer.stunDurationKnockback;
                         triggerPlayer.lastPlayerContacted = this;
-                        AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("Spin Hit Spin"), transform.position);
+                        AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("Spin Hit Spin"), transform.position, AudioManager.instance.soundEffectMixer);
                         triggerPlayer.stateMachine.SwitchState(triggerPlayer.StunState);
 
                         StunState.timerMax = stunDurationSpinEnd;
@@ -235,12 +256,17 @@ public class PlayerController : MonoBehaviour
 
         void BounceWall()
         {
+            //Bounce on the wall
             SpinnerState.moveDir = Vector3.Reflect(playerDirection, normalizedWall);
-            float newAngle = Vector3.SignedAngle(playerDirection, SpinnerState.moveDir, Vector3.up);
-
+            //Debug.Log("MAGNITUDE : " + rb.velocity.magnitude);
+            //rb.velocity = Vector3.Reflect(-rb.velocity, normalizedWall);
+            float newAngle = Vector3.SignedAngle(playerDirection, SpinnerState.moveDir, Vector3.forward); //
+            //Debug.Log("NEW ANGLE :" + newAngle);
+            //solution 1 : mettre une petite impulsion/vitesse au personnage quand il bounce sur un mur
+            //
             Vector3 newVector = new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y + newAngle, transform.rotation.eulerAngles.z);
             transform.rotation = Quaternion.Euler(newVector);
-            AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("Spin Hit Wall"), transform.position);
+            AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("Spin Hit Wall"), transform.position, AudioManager.instance.soundEffectMixer);
             walled = true;
         }
 
@@ -259,6 +285,7 @@ public class PlayerController : MonoBehaviour
 
         void BounceSpinner()
         {
+            //Bounce against other player
             Instantiate(explosion, this.transform.position, Quaternion.identity);
             //Debug.Log("bounce");
             SpinnerState.moveDir = -SpinnerState.moveDir;
@@ -266,7 +293,7 @@ public class PlayerController : MonoBehaviour
             //transform.rotation = Quaternion.Euler(-transform.rotation.eulerAngles);
             //SpinnerState.mSettings.dashDuration /= dashDurationReduction;
             SpinnerState.repoussed = true;
-            AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("Spin Hit Spin"), transform.position);
+            AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("Spin Hit Spin"), transform.position, AudioManager.instance.soundEffectMixer);
         }
 
     #endregion

@@ -39,7 +39,7 @@ public class PointZone : MonoBehaviour
 
     private void DispawnPlayer(PlayerController deadPlayer)
     {
-        AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("Goal"), this.transform.position);
+        AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("Goal"), this.transform.position, AudioManager.instance.soundEffectMixer);
         if(deadPlayer.lastPlayerContacted != null)
         {
             deadPlayer.lastPlayerContacted.playerPoint += pointGiven;
@@ -48,14 +48,14 @@ public class PointZone : MonoBehaviour
             Debug.Log($"{deadPlayer.name} EJECTED !");
             Debug.Log($"GIVE {pointGiven} points to {deadPlayer.lastPlayerContacted.name}");
 
-            AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("Crowd Shouting"), this.transform.position);
+            AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("Crowd Shouting"), this.transform.position, AudioManager.instance.soundEffectMixer);
             
-            if(GameManager.instance.drawTimer)
+            if(GameManager.instance.gameTimer.drawTimer)
             {
-                if(deadPlayer.lastPlayerContacted.playerPoint > GameManager.instance.drawMaxPoint)
+                if(deadPlayer.lastPlayerContacted.playerPoint > GameManager.instance.gameTimer.drawMaxPoint)
                 {
                     Debug.Log($"{deadPlayer.lastPlayerContacted.name} WINNN");
-                    GameManager.instance.timeOut = true;
+                    GameManager.instance.gameTimer.timeOut = true;
                     //STOP THE ROUND
                 }
             }

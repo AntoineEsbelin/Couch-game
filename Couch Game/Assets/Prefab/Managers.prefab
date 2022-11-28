@@ -221,6 +221,8 @@ MonoBehaviour:
     audio: {fileID: 8300000, guid: 6a14638fb23736940a1f3592ba29d726, type: 3}
   - audioName: Goal
     audio: {fileID: 8300000, guid: 6594efde3d3198f4ba6e15a19adb2c21, type: 3}
+  - audioName: OST
+    audio: {fileID: 8300000, guid: f15216cce73356c49b5481c28cffea69, type: 3}
 --- !u!1 &1896850882551273286
 GameObject:
   m_ObjectHideFlags: 0
