@@ -185,7 +185,7 @@ public class PlayerController : MonoBehaviour
 
     #region Collisions
 
-        public Vector3 normalizedWall;
+        public Vector3 wallNormal;
         public Vector3 playerDirection;
 
         public bool walled;
@@ -201,17 +201,22 @@ public class PlayerController : MonoBehaviour
                 if(currentState == SpinnerState)
                 {
 
-                    normalizedWall = other.contacts[0].normal;
+                    wallNormal = other.contacts[0].normal;
                     playerDirection = SpinnerState.moveDir;
+                    wallNormal.y = 0;
+                    playerDirection.y = 0;
                     timer = timerCount;
                     //Debug.Log("I");
+                    if(Vector3.Dot(wallNormal, playerDirection) < 0)
+                    {
+                        BounceWall();
+                    }
                     //mettre timer
-                    BounceWall();
                 }
 
                 if (currentState == StunState)
                 {
-                    normalizedWall = other.contacts[0].normal;
+                    wallNormal = other.contacts[0].normal;
                     playerDirection = StunState.knockbackDir;
                     BounceWallStuned();
                 }
@@ -256,14 +261,9 @@ public class PlayerController : MonoBehaviour
 
         void BounceWall()
         {
-            //Bounce on the wall
-            SpinnerState.moveDir = Vector3.Reflect(playerDirection, normalizedWall);
-            //Debug.Log("MAGNITUDE : " + rb.velocity.magnitude);
-            //rb.velocity = Vector3.Reflect(-rb.velocity, normalizedWall);
-            float newAngle = Vector3.SignedAngle(playerDirection, SpinnerState.moveDir, Vector3.forward); //
-            //Debug.Log("NEW ANGLE :" + newAngle);
-            //solution 1 : mettre une petite impulsion/vitesse au personnage quand il bounce sur un mur
-            //
+            SpinnerState.moveDir = Vector3.Reflect(playerDirection, wallNormal);
+            float newAngle = Vector3.SignedAngle(playerDirection, SpinnerState.moveDir, Vector3.up);
+
             Vector3 newVector = new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y + newAngle, transform.rotation.eulerAngles.z);
             transform.rotation = Quaternion.Euler(newVector);
             AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("Spin Hit Wall"), transform.position, AudioManager.instance.soundEffectMixer);
@@ -272,7 +272,7 @@ public class PlayerController : MonoBehaviour
 
         void BounceWallStuned()
         {
-            StunState.knockbackDir = Vector3.Reflect(StunState.knockbackDir, normalizedWall);
+            StunState.knockbackDir = Vector3.Reflect(StunState.knockbackDir, wallNormal);
         }
 
         private void BounceWallTimer()
