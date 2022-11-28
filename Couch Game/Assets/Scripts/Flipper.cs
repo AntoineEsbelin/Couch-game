@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Flipper : MonoBehaviour
 {
+    public BoxCollider flipperCollider;
     [Header("Joint")]
     public float restPos = 0;
     public float pressPos = 45f;
@@ -12,8 +13,8 @@ public class Flipper : MonoBehaviour
 
     private HingeJoint hingeJoint;
     private JointSpring spring;
-    private Animator _animator;
-    private string NameAnim;
+    public Animator _animator;
+    public string NameAnim;
     private float timer;
     
     
@@ -29,6 +30,7 @@ public class Flipper : MonoBehaviour
     
     void Start()
     {
+        flipperCollider = GetComponent<BoxCollider>();
         _animator = GetComponent<Animator>();
         hingeJoint = GetComponent<HingeJoint>();
         hingeJoint.useSpring = true;
@@ -67,14 +69,14 @@ public class Flipper : MonoBehaviour
 
     private IEnumerator PressedFlippers()
     {
-        _animator.Play(NameAnim);
-        yield return new WaitForSeconds(_animator.GetCurrentAnimatorStateInfo(0).length);
+        _animator.Play(NameAnim, -1, 0f);
+        yield return new WaitForSeconds(2f);
         timer = Random.Range(2, 10);
     }
     
     private void OnCollisionEnter(Collision col)
     {
-        if (col.collider.CompareTag("Player"))
+        if (col.collider.CompareTag("Player") && flipperCollider.enabled)
         {
             player = col.gameObject;
             

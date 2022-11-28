@@ -1175,7 +1175,7 @@ GameObject:
   - component: {fileID: 993541309}
   - component: {fileID: 993541308}
   m_Layer: 0
-  m_Name: Plane
+  m_Name: Ice
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2652,6 +2652,14 @@ PrefabInstance:
     - target: {fileID: 3026472709075169041, guid: dbab35e9cfe1684448c0f0c8cca1b8a6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4015275762910194709, guid: dbab35e9cfe1684448c0f0c8cca1b8a6, type: 3}
+      propertyPath: NameAnim
+      value: Base Layer.FlipperL
+      objectReference: {fileID: 0}
+    - target: {fileID: 5677023541864709910, guid: dbab35e9cfe1684448c0f0c8cca1b8a6, type: 3}
+      propertyPath: NameAnim
+      value: Base Layer.FlipperR
       objectReference: {fileID: 0}
     - target: {fileID: 6758959814051946040, guid: dbab35e9cfe1684448c0f0c8cca1b8a6, type: 3}
       propertyPath: m_Name
