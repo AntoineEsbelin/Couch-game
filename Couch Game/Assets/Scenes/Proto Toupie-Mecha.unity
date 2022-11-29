@@ -1983,7 +1983,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointGiven: 0
   isField: 1
-  explosion: {fileID: 0}
+  explosion: {fileID: 3438996937471707301, guid: a2be7fac82fbeea43911cac21ce707ef, type: 3}
   explosionMultiplier: 0
 --- !u!65 &1316811824
 BoxCollider:
@@ -2380,18 +2380,19 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1558651046}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0940a2eab8c156d4d8dca3cccfbc8053, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   targets: []
-  offset: {x: 0, y: 20, z: -9.75}
-  smoothTime: 0.5
+  offset: {x: 0, y: 40, z: -25}
+  smoothTime: 0.75
   minZoom: 25
   maxZoom: 10
   zoomLimiter: 50
   boundsSize: 0
+  BoundSizeLimiter: 4.5
 --- !u!81 &1558651048
 AudioListener:
   m_ObjectHideFlags: 0
