@@ -14,6 +14,8 @@ public class PlayerStateMachine : MonoBehaviour
 
     public void SwitchState (PlayerState state)
     {
+        if (playerController.currentState == null) return;
+        
         playerController.currentState.ExitState(playerController);
         playerController.currentState = state;
         state.EnterState(playerController);

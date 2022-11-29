@@ -18,7 +18,7 @@ public class SpinnerState : PlayerState
         repoussed = false;
         playerController.transform.position = new Vector3(playerController.transform.position.x, playerController.transform.position.y + 3f, playerController.transform.position.z);
         playerController.toupieFBX.SetActive(true);
-        audioSource = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("Spin Move"), playerController.transform.position);
+        audioSource = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("Spin Move"), playerController.transform.position, AudioManager.instance.soundEffectMixer);
         
     }
 

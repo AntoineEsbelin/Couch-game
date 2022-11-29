@@ -221,6 +221,28 @@ MonoBehaviour:
     audio: {fileID: 8300000, guid: 6a14638fb23736940a1f3592ba29d726, type: 3}
   - audioName: Goal
     audio: {fileID: 8300000, guid: 6594efde3d3198f4ba6e15a19adb2c21, type: 3}
+  - audioName: OST
+    audio: {fileID: 8300000, guid: f15216cce73356c49b5481c28cffea69, type: 3}
+  - audioName: Voice 321
+    audio: {fileID: 8300000, guid: d6e237adeb244cd43825b4b10329a738, type: 3}
+  - audioName: Voice Praise 1
+    audio: {fileID: 8300000, guid: 2dd057c2646cf2d4a9a99ba1df8279c0, type: 3}
+  - audioName: Voice Praise 2
+    audio: {fileID: 8300000, guid: 2824c00cbaa48d14aa115750d0679387, type: 3}
+  - audioName: Voice Praise 3
+    audio: {fileID: 8300000, guid: c529331ebb31e6b459666c20b3c7d0e3, type: 3}
+  - audioName: Voice Praise 4
+    audio: {fileID: 8300000, guid: af6aa620cd549374dab09d0333279e8d, type: 3}
+  - audioName: Voice Praise 5
+    audio: {fileID: 8300000, guid: 60591c195858caf4eb374453b2d8d059, type: 3}
+  - audioName: Voice Praise 6
+    audio: {fileID: 8300000, guid: 8b951f75425e115428a80ea3c83b5003, type: 3}
+  - audioName: Voice Praise 7
+    audio: {fileID: 8300000, guid: 0b00043615ed17d42860a08081a1d10b, type: 3}
+  - audioName: Voice Sudden Death
+    audio: {fileID: 8300000, guid: 27640502765e9d145aaa6d4b77511d66, type: 3}
+  - audioName: Voice Victory
+    audio: {fileID: 8300000, guid: b4231318a0d24e440a6820505cccc409, type: 3}
 --- !u!1 &1896850882551273286
 GameObject:
   m_ObjectHideFlags: 0
@@ -355,11 +377,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allPlayer: []
   playersList: []
-  timer: 0
-  maxTimer: 60
-  drawTimer: 0
-  drawMaxPoint: 0
-  timeOut: 0
   joinAction:
     m_Name: Join
     m_Type: 0
@@ -421,3 +438,11 @@ MonoBehaviour:
   - {fileID: 3349722740465586604, guid: 524371afa03209f4782c80dd25a58cd4, type: 3}
   - {fileID: 5933910288364768573, guid: 27d399e6ceeeab648a77e5aff49c4a1b, type: 3}
   clip: {fileID: 0}
+  gameTimer:
+    timer: 0
+    maxTimer: 60
+    drawTimer: 0
+    drawMaxPoint: 0
+    timeOut: 0
+    timerTXT: {fileID: 0}
+    comparetimerTXT: {fileID: 0}

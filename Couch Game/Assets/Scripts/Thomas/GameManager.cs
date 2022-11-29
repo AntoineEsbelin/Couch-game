@@ -2,18 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
     public List<PlayerController> allPlayer;
     public List<PlayerInput> playersList = new List<PlayerInput>();
-
-    [SerializeField] private float timer;
-    public float maxTimer = 60f;
-
-    public bool drawTimer = false;
-    public int drawMaxPoint = 0;
-    public bool timeOut = false;
 
     public static GameManager instance;
     
@@ -28,6 +22,23 @@ public class GameManager : MonoBehaviour
     public Transform[] spawnPoints;
     public GameObject[] charactersFBX;
     public AudioClip clip;
+
+    [System.Serializable]
+    public class GameTimer
+    {
+        public float timer;
+        public float maxTimer = 60f;
+
+        public bool drawTimer = false;
+        public int drawMaxPoint = 0;
+        public bool timeOut = false;
+        
+        public TMP_Text timerTXT;
+        public TMP_Text comparetimerTXT;
+
+        public bool nearTimeOut = false;
+    }
+    public GameTimer gameTimer;
     
     private void OnPlayerJoined(PlayerInput playerInput)
     {
@@ -101,59 +112,90 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        timer = maxTimer;
-        
+        gameTimer.timer = gameTimer.maxTimer;
+        AudioSource ost = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("OST"), transform.position, AudioManager.instance.ostMixer);
+        ost.loop = true;
     }
 
     // Update is called once per frame
-    private void Update()
+    private void FixedUpdate()
     {
-        //RoundTimer();
+        RoundTimer();
     }
 
-    // private void RoundTimer()
-    // {
-    //     if(!timeOut)
-    //     {
-    //         if(!drawTimer)
-    //         {
-    //             if(timer > 0)
-    //             {
-    //                 timer -= Time.deltaTime;
-    //             }
-    //             else
-    //             {
-    //                 int playerPoint = 0;
-    //                 PlayerController playerMaxPoint = null;
-    //                 for(int i = 0; i < allPlayer.Length; i++)
-    //                 {
-    //                     if(allPlayer[i].playersInteract.playerPoint > playerPoint)
-    //                     {
-    //                         playerPoint = allPlayer[i].playersInteract.playerPoint;
-    //                         playerMaxPoint = allPlayer[i];
-    //                     }
-    //                 }
+    private void RoundTimer()
+    {
+        if(!gameTimer.drawTimer)
+        {
+            if(gameTimer.timer > 0)
+            {
+                gameTimer.timer -= Time.deltaTime;
+                if(gameTimer.timer > 10)
+                {
+                    gameTimer.timerTXT.text = Mathf.Round(gameTimer.timer).ToString();
+                    gameTimer.comparetimerTXT.text = Mathf.Round(gameTimer.timer).ToString();
+                }
+                else
+                {
+                    gameTimer.timerTXT.text = gameTimer.timer.ToString("0.00");
+                    gameTimer.comparetimerTXT.text = gameTimer.timer.ToString("0.0");
                     
-    //                 int equalTime = 0;
-    //                 for(int i = 0; i < allPlayer.Length; i++)
-    //                 {
-    //                     if(playerPoint == allPlayer[i].playersInteract.playerPoint)equalTime += 1;
-    //                 }
+                    PlayVoiceAtTime(3, ref gameTimer.nearTimeOut, AudioManager.instance.allAudio["Voice 321"]);
+                    
+                }
+            }
+            else
+            {
+                int playerPoint = 0;
+                PlayerController playerMaxPoint = null;
+                //get max point + player
+                for(int i = 0; i < allPlayer.Count; i++)
+                {
+                    if(allPlayer[i].playerPoint >= playerPoint)
+                    {
+                        playerPoint = allPlayer[i].playerPoint;
+                        playerMaxPoint = allPlayer[i];
+                    }
+                }
+                
+                int equalTime = 0;
+                //if 2 player has same point,
+                for(int i = 0; i < allPlayer.Count; i++)
+                {
+                    if(playerPoint == allPlayer[i].playerPoint)equalTime += 1;
+                }
 
-    //                 if(equalTime > 1)
-    //                 {
-    //                     Debug.Log("DRAWWW TIMME");
-    //                     drawTimer = true;
-    //                     drawMaxPoint = playerPoint;
-    //                 }
-    //                 else
-    //                 {
-    //                     Debug.Log($"{playerMaxPoint.name} WIN WITH {playerMaxPoint.playersInteract.playerPoint} POINTS !");
-    //                     timeOut = true;
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
+                //it's draw time !
+                if(equalTime >= 1)
+                {
+                    gameTimer.drawTimer = true;
+                    gameTimer.drawMaxPoint = playerPoint;
+                    gameTimer.timerTXT.text = "SUDDEN DEATH !";
+                    AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Voice Sudden Death"], this.transform.position, AudioManager.instance.soundEffectMixer);
+                }
+                else
+                {
+                    PlayerWin(playerMaxPoint);
+                }
+            }
+        }
+        
+    }
 
+    public void PlayerWin(PlayerController playerWinner)
+    {
+        Debug.Log($"{playerWinner.name} WIN WITH {playerWinner.playerPoint} POINTS !");
+        gameTimer.timeOut = true;
+        
+        //general victory voice sound
+        AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Voice Victory"], this.transform.position, AudioManager.instance.soundEffectMixer);
+    }
+
+    private void PlayVoiceAtTime(float time, ref bool alreadyPlayed, AudioClip voice)
+    {
+        if(alreadyPlayed)return;
+        if(gameTimer.timer > time)return;
+        AudioManager.instance.PlayClipAt(voice, this.transform.position, AudioManager.instance.soundEffectMixer);
+        alreadyPlayed = true;
+    }
 }
