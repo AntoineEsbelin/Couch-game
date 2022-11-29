@@ -21,7 +21,6 @@ public class ToolboxWindow : EditorWindow
 
 
     private string aled = "Assets/Scenes/";
-    private string entitiesPath = "Script/BattleRelated/Entity/";
     private Vector2 scrollPos;
     private void OnGUI()
     {

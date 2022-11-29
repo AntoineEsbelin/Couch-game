@@ -48,16 +48,20 @@ public class PointZone : MonoBehaviour
             Debug.Log($"{deadPlayer.name} EJECTED !");
             Debug.Log($"GIVE {pointGiven} points to {deadPlayer.lastPlayerContacted.name}");
 
-            AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("Crowd Shouting"), this.transform.position, AudioManager.instance.soundEffectMixer);
+            AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Crowd Shouting"]/*.GetValueOrDefault("Crowd Shouting")*/, this.transform.position, AudioManager.instance.soundEffectMixer);
             
             if(GameManager.instance.gameTimer.drawTimer)
             {
                 if(deadPlayer.lastPlayerContacted.playerPoint > GameManager.instance.gameTimer.drawMaxPoint)
                 {
-                    Debug.Log($"{deadPlayer.lastPlayerContacted.name} WINNN");
-                    GameManager.instance.gameTimer.timeOut = true;
+                    GameManager.instance.PlayerWin(deadPlayer.lastPlayerContacted);
                     //STOP THE ROUND
                 }
+            }
+            else
+            {
+                int randomPraise = Random.Range(0, 8);
+                AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"Voice Praise {randomPraise}"], this.transform.position, AudioManager.instance.soundEffectMixer);
             }
         }
         else
