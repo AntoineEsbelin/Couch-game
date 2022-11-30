@@ -60,6 +60,15 @@ public class PlayerController : MonoBehaviour
     public GameObject toupieFBX;
 
     public GameObject troupieVFX;
+    private CapsuleCollider capsuleCol;
+    private SphereCollider sphereCol;
+
+    [Header("Respawn invincibility")]
+
+    public float invincibilityTimerMax = 3f;
+    float invincibilityTimer;
+    bool invincible;
+
     void OnEnable()
     {
         currentState = NormalState;
@@ -79,9 +88,14 @@ public class PlayerController : MonoBehaviour
 
         // normalSkins[playerId].SetActive(true);
         // spinSkins[playerId].SetActive(true);
+
+        capsuleCol = GetComponent<CapsuleCollider>();
+        sphereCol = GetComponent<SphereCollider>();
         
         if (OnScoreChanged != null)
             OnScoreChanged(playerPoint);
+        
+        invincibilityTimer = 0;
     }
 
     void FixedUpdate()
@@ -93,6 +107,9 @@ public class PlayerController : MonoBehaviour
         currentState.UpdateState(this);
 
         BounceWallTimer();
+
+        if (invincibilityTimer > 0) invincibilityTimer = Mathf.Clamp(invincibilityTimer - Time.deltaTime, 0, invincibilityTimerMax);
+        else if (invincible) StopInvincibility();
     }
 
     private void UpdateLastPlayer()
@@ -211,8 +228,7 @@ public class PlayerController : MonoBehaviour
                     wallNormal.y = 0;
                     playerDirection.y = 0;
                     timer = timerCount;
-                    //Debug.Log("I");
-                    if(Vector3.Dot(wallNormal, playerDirection) < 0)
+                    if(Vector3.Dot(wallNormal, playerDirection) < 0) //produit scalaire
                     {
                         BounceWall();
                     }
@@ -233,7 +249,7 @@ public class PlayerController : MonoBehaviour
             if (!other.isTrigger) return;
             if (other.gameObject.tag == "Player")
             {
-                
+                Debug.Log("haha");
                 if(currentState == SpinnerState)
                 {
                     PlayerController triggerPlayer = other.GetComponentInParent<PlayerController>();
@@ -312,5 +328,32 @@ public class PlayerController : MonoBehaviour
     public void RespawnPlayer()
     {
         transform.position = GameManager.instance.spawnPoints[playerId - 1].position;
+        //capsuleCol.enabled = false;
+        sphereCol.enabled = false;
+        //Physics.IgnoreLayerCollision(6, 6);
+
+        for (int i=10; i < 14; i++)
+        {
+            Physics.IgnoreLayerCollision(gameObject.layer, i);
+        }
+
+        MeshCollider[] cols = toupieFBX.GetComponentsInChildren<MeshCollider>();
+        foreach(MeshCollider c in cols)
+        {
+            c.enabled = false;
+        }
+
+        invincibilityTimer = invincibilityTimerMax;
+        invincible = true;
+    }
+
+    void StopInvincibility()
+    {
+        invincible = false;
+        sphereCol.enabled = true;
+        for (int i=10; i < 14; i++)
+        {
+            Physics.IgnoreLayerCollision(gameObject.layer, i, false);
+        }
     }
 }

@@ -62,11 +62,27 @@ public class GameManager : MonoBehaviour
         playerController.playerFBX = Instantiate(charactersFBX[playerController.playerId - 1], playerController.transform);    
         playerController.toupieFBX = playerController.playerFBX.GetComponentInChildren<SpinningAnim>().gameObject;
         playerController.toupieFBX.SetActive(false);
+        
+        switch(playerController.playerId)
+        {
+            case 1 : playerController.gameObject.layer = 10;
+                break;
+            case 2 : playerController.gameObject.layer = 11;
+                break;
+            case 3 : playerController.gameObject.layer = 12;
+                break;
+            case 4 : playerController.gameObject.layer = 13;
+                break;
+            default : playerController.gameObject.layer = 10;
+                break;
+        }
+
         if(playersList.Count != tempPlayerNb.howManyPlayer)return;
         AudioSource readyGo = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Ready Go"], this.transform.position, AudioManager.instance.soundEffectMixer, true);
         AudioSource ost = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("OST"), transform.position, AudioManager.instance.ostMixer, false);
         ost.loop = true;
         StartCoroutine(WaitBeforeGameStart(readyGo.clip.length - 1.3f));
+
     }
     
     private void OnPlayerLeft(PlayerInput playerInput)

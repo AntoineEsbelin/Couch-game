@@ -442,8 +442,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6418380827523340167}
   - component: {fileID: 6959657218611326838}
-  - component: {fileID: 5967234634689061280}
-  - component: {fileID: 5582999284895815253}
   m_Layer: 0
   m_Name: YellowRobot
   m_TagString: Player
@@ -489,33 +487,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!136 &5967234634689061280
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5933910288364768573}
-  m_Material: {fileID: 13400000, guid: 70aff830f49f6a748b7f75aba431d125, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 1.3856261
-  m_Height: 5.1518135
-  m_Direction: 1
-  m_Center: {x: 0, y: 2.5049124, z: 0}
---- !u!135 &5582999284895815253
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5933910288364768573}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 2.4827561
-  m_Center: {x: 0, y: 2.4107032, z: 0}
 --- !u!1 &6583657174761976001
 GameObject:
   m_ObjectHideFlags: 0
@@ -935,7 +906,7 @@ MeshCollider:
   m_GameObject: {fileID: 1614754717892245538}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 1
   m_CookingOptions: 30
