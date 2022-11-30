@@ -190,10 +190,12 @@ MonoBehaviour:
   dashDurationReduction: 2
   playerFBX: {fileID: 0}
   toupieFBX: {fileID: 0}
+  troupieVFX: {fileID: 5131705808110797491, guid: 89dd00848dc657f46ab78b330e957c5a, type: 3}
   move: {x: 0, y: 0, z: 0}
-  normalizedWall: {x: 0, y: 0, z: 0}
+  wallNormal: {x: 0, y: 0, z: 0}
   playerDirection: {x: 0, y: 0, z: 0}
   walled: 0
+  timer: 0
   timerCount: 0.1
 --- !u!114 &1966433780568224511
 MonoBehaviour:

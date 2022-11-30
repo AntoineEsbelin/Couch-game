@@ -236,6 +236,7 @@ public class GameManager : MonoBehaviour
         tempPlayerNb.howManyPlayer = int.Parse(inputField.text);
         inputField.transform.parent.gameObject.SetActive(false);
         gameStarted = true;
+        AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Title"], this.transform.position, AudioManager.instance.soundEffectMixer, true);
     }
 
     private IEnumerator WaitBeforeGameStart(float length)
