@@ -113,7 +113,6 @@ public class PlayerController : MonoBehaviour
         {
             if(ctx.performed)
             {
-                if(GameManager.instance.allPlayer.Count != GameManager.instance.tempPlayerNb.howManyPlayer || !GameManager.instance.gameStarted)return;
                 if(walled)return;
                 move = ctx.ReadValue<Vector3>();
                 playerAnimator.SetBool("IsWalking", true);
@@ -123,7 +122,6 @@ public class PlayerController : MonoBehaviour
 
         public void OnSpin(InputAction.CallbackContext ctx)
         {
-            if(GameManager.instance.allPlayer.Count != GameManager.instance.tempPlayerNb.howManyPlayer || !GameManager.instance.gameStarted)return;
             if (ctx.performed)
             {
                 if(currentState == NormalState)
@@ -169,7 +167,6 @@ public class PlayerController : MonoBehaviour
 
         public void OnBrake(InputAction.CallbackContext ctx)
         {
-            if(GameManager.instance.allPlayer.Count != GameManager.instance.tempPlayerNb.howManyPlayer)return;
             if (currentState != SpinnerState) return;
 
             if (ctx.performed)

@@ -460,8 +460,3 @@ MonoBehaviour:
     timeOut: 0
     timerTXT: {fileID: 0}
     comparetimerTXT: {fileID: 0}
-    nearTimeOut: 0
-  tempPlayerNb:
-    howManyPlayer: 0
-    oneMinute: 0
-  gameStarted: 0
