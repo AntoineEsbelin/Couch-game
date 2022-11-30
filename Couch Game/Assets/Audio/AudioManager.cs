@@ -31,7 +31,7 @@ public class AudioManager : MonoBehaviour
         
     }
 
-    public AudioSource PlayClipAt(AudioClip clip, Vector3 pos)
+    public AudioSource PlayClipAt(AudioClip clip, Vector3 pos, AudioMixerGroup whatMixer)
     {
         //Create GameObject
         GameObject tempGO = new GameObject("TempAudio");
@@ -41,7 +41,7 @@ public class AudioManager : MonoBehaviour
         AudioSource audioSource = tempGO.AddComponent<AudioSource>();
         audioSource.clip = clip;
         //Get the audio mixer
-        audioSource.outputAudioMixerGroup = soundEffectMixer;
+        audioSource.outputAudioMixerGroup = whatMixer;
         if(audioSource.isPlaying)audioSource.PlayOneShot(audioSource.clip);
         else audioSource.Play();
         //Destroy at the lenght of the clip
