@@ -13,6 +13,7 @@ public class DeathState : PlayerState
         player.cameraTarget.targets.Remove(player.transform);
         respawnTime = maxRespawnTime;
         //visuel off :
+        ResetAnimator(player.PlayerAnimator);
         player.playerFBX.SetActive(false);
     }
     public override void UpdateState(PlayerController player)
@@ -24,7 +25,20 @@ public class DeathState : PlayerState
     {
         //visuel on :
         player.cameraTarget.targets.Add(transform);
+        player.PlayerAnimator.enabled = true;
         player.playerFBX.SetActive(true);
         player.RespawnPlayer();
+    }
+
+
+    private void ResetAnimator(Animator playerAnim)
+    {
+        
+        playerAnim.Play("Idle");
+        playerAnim.SetBool("IsWalking", false);
+        playerAnim.SetBool("IsSpinning", false);
+        playerAnim.SetBool("Counter", false);
+        playerAnim.SetBool("ChargingSpin", false);
+        playerAnim.enabled = false;
     }
 }

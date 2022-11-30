@@ -16,9 +16,9 @@ public class PointZone : MonoBehaviour
     {
         if(coll.CompareTag("Player"))
         {
-            if(isField)return;
-            CameraShaker.Instance.ShakeOnce(4f, 4f, 0.1f, 1f);
             PlayerController deadPlayer = coll.GetComponentInParent<PlayerController>();
+            if(isField || deadPlayer.currentState == deadPlayer.DeathState)return;
+            CameraShaker.Instance.ShakeOnce(4f, 4f, 0.1f, 1f);
             GameObject expl = Instantiate(explosion, this.transform.position, Quaternion.identity);
             expl.transform.localScale *= explosionMultiplier;
             DispawnPlayer(deadPlayer);
@@ -29,10 +29,11 @@ public class PointZone : MonoBehaviour
     {
         if(coll.CompareTag("Player"))
         {
-            if(!isField)return;
             PlayerController deadPlayer = coll.GetComponentInParent<PlayerController>();
+            if(!isField || deadPlayer.currentState == deadPlayer.DeathState)return;
             GameObject expl = Instantiate(explosion, deadPlayer.transform.position, Quaternion.identity);
             expl.transform.localScale *= 2;
+
             DispawnPlayer(deadPlayer);
 
         }
@@ -41,6 +42,7 @@ public class PointZone : MonoBehaviour
 
     private void DispawnPlayer(PlayerController deadPlayer)
     {
+        if(deadPlayer.currentState == deadPlayer.DeathState)return;
         AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("Goal"), this.transform.position, AudioManager.instance.soundEffectMixer, true);
         if(deadPlayer.lastPlayerContacted != null)
         {
