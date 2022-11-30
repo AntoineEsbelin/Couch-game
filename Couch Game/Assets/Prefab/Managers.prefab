@@ -243,6 +243,18 @@ MonoBehaviour:
     audio: {fileID: 8300000, guid: 27640502765e9d145aaa6d4b77511d66, type: 3}
   - audioName: Voice Victory
     audio: {fileID: 8300000, guid: b4231318a0d24e440a6820505cccc409, type: 3}
+  - audioName: 1 Win
+    audio: {fileID: 8300000, guid: bc602a1768069bc4eabaf485101e1917, type: 3}
+  - audioName: 2 Win
+    audio: {fileID: 8300000, guid: fa8b3ba02738d5844a24e1d58d589fff, type: 3}
+  - audioName: 3 Win
+    audio: {fileID: 8300000, guid: cea9d27281df57c4caa4621e5324e1ef, type: 3}
+  - audioName: 4 Win
+    audio: {fileID: 8300000, guid: ab4d39c187278ea41b3b79c350d15cf0, type: 3}
+  - audioName: Ready Go
+    audio: {fileID: 8300000, guid: dce07e5d96a69714e8c912faebd5d947, type: 3}
+  - audioName: One Minute Remaining
+    audio: {fileID: 8300000, guid: 431ec080570900041858a539e91f3cef, type: 3}
 --- !u!1 &1896850882551273286
 GameObject:
   m_ObjectHideFlags: 0
@@ -446,3 +458,8 @@ MonoBehaviour:
     timeOut: 0
     timerTXT: {fileID: 0}
     comparetimerTXT: {fileID: 0}
+    nearTimeOut: 0
+  tempPlayerNb:
+    howManyPlayer: 0
+    oneMinute: 0
+  gameStarted: 0
