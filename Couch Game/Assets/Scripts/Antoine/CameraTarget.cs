@@ -11,11 +11,14 @@ public class CameraTarget : MonoBehaviour
 
     public float smoothTime = 0.5f;
 
-    public float minZoom = 85f;
-    public float maxZoom = 55f;
-    public float zoomLimiter = 50f;
-
     public float boundsSize;
+    public float BoundSizeLimiter = 6f;
+
+    public float CamClampXMin = -26f;
+    public float CamClampXMax = 32f;
+
+    public float CamCampZMin = 34f;
+    public float CamCampZMax = 60f;
 
     private Camera cam;
 
@@ -30,22 +33,22 @@ public class CameraTarget : MonoBehaviour
             return;
 
         CamMove();
-        CamZoom();
+               
     }
 
-    void CamZoom()
-    {
-        float newZoom = Mathf.Lerp(maxZoom, minZoom, boundsSize / zoomLimiter);
-        cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, newZoom, Time.deltaTime);
-    }
 
     void CamMove()
     {
         Vector3 centerPoint = GetCenterPoint();
 
-        Vector3 newPosition = centerPoint + offset;
+        Vector3 newPosition = centerPoint + ( offset + new Vector3(0, boundsSize /BoundSizeLimiter ,0) );
+
 
         transform.position = Vector3.SmoothDamp(transform.position, newPosition, ref velocity, smoothTime);
+        transform.position = new Vector3(
+            Mathf.Clamp(transform.position.x, CamClampXMin, CamClampXMax) , transform.position.y, Mathf.Clamp(transform.position.z, CamCampZMin, CamCampZMax)
+            );
+        
     }
     
 
@@ -64,7 +67,9 @@ public class CameraTarget : MonoBehaviour
         }
 
         boundsSize = bounds.size.x;
+        
         return bounds.center;
+        
     }
 
 }
