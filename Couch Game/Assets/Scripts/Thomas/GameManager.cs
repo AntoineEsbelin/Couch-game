@@ -7,17 +7,10 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     public List<PlayerController> allPlayer;
-    public List<PlayerInput> playersList = new List<PlayerInput>();
+    
 
     public static GameManager instance;
     
-    //Input Join and Leave
-    public InputAction joinAction;
-    public InputAction leftAction;
-
-    //Event
-    public event System.Action<PlayerInput> PlayerJoinedGame;
-    public event System.Action<PlayerInput> PlayerLeftGame;
 
     public Transform[] spawnPoints;
     public GameObject[] charactersFBX;
@@ -49,16 +42,20 @@ public class GameManager : MonoBehaviour
     public TempPlayerNb tempPlayerNb;
     public bool gameStarted;
     
-    private void OnPlayerJoined(PlayerInput playerInput)
+    public void InitializePlayer(PlayerInput playerInput,int index)
     {
+<<<<<<< Updated upstream
         if(tempPlayerNb.howManyPlayer == 0)return;
         playersList.Add(playerInput);
         if (PlayerJoinedGame != null)
             PlayerJoinedGame(playerInput);
+=======
+        
+>>>>>>> Stashed changes
         PlayerController playerController = playerInput.GetComponent<PlayerController>(); 
-        playerController.playerId = playersList.Count;
-        playerController.transform.position = spawnPoints[playerController.playerId - 1].position;
-        playerController.playerFBX = Instantiate(charactersFBX[playerController.playerId - 1], playerController.transform);    
+        playerController.playerId = index ;
+        // playerController.transform.position = spawnPoints[playerController.playerId - 1].position;
+        playerController.playerFBX = Instantiate(charactersFBX[playerController.playerId], playerController.transform);    
         playerController.toupieFBX = playerController.playerFBX.GetComponentInChildren<SpinningAnim>().gameObject;
         playerController.toupieFBX.SetActive(false);
         if(playersList.Count != tempPlayerNb.howManyPlayer)return;
@@ -68,15 +65,13 @@ public class GameManager : MonoBehaviour
         //audio ready go
     }
     
-    private void OnPlayerLeft(PlayerInput playerInput)
-    {
-        print("aled");
-    }
+    
     private void Awake()
     {
         if(instance != null)Destroy(gameObject);
         instance = this;
         
+<<<<<<< Updated upstream
         joinAction.Enable();
         joinAction.performed += ctx => JoinAction(ctx);
         
@@ -121,8 +116,9 @@ public class GameManager : MonoBehaviour
             PlayerLeftGame(playerInput);
         
         Destroy(playerInput.transform.gameObject);
+=======
+>>>>>>> Stashed changes
     }
-
 
     // Start is called before the first frame update
     private void Start()

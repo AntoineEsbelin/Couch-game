@@ -9,8 +9,8 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        GameManager.instance.PlayerJoinedGame += PlayerJoinedGame;
-        GameManager.instance.PlayerLeftGame += PlayerLeftGame;
+        PlayerConfigManager.Instance.PlayerJoinedGame += PlayerJoinedGame;
+        PlayerConfigManager.Instance.PlayerLeftGame += PlayerLeftGame;
     }
     
     private void PlayerJoinedGame(PlayerInput playerInput)

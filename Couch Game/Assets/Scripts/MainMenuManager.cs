@@ -4,14 +4,29 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MainMenuManager : MonoBehaviour
 {
     public GameObject selectPlayerMenu;
     public GameObject optionMenu;
-    public GameObject playMenu;
+    public GameObject MapSelectionMenu;
     
+    public static MainMenuManager Instance { get; private set;}
+
+    private void Awake()
+    {
+        if (Instance != null)
+        {
+            print("SINGLETON - Trying to create another instance");
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
+
 
     public void StartButton()
     {
@@ -23,14 +38,19 @@ public class MainMenuManager : MonoBehaviour
         optionMenu.SetActive(true);
     }
     
-    public void PlayButton()
+    public void MapSelectButton()
     {
-        playMenu.SetActive(true);
+        MapSelectionMenu.SetActive(true);
     }
 
     private void CloseMenu(GameObject menu)
     {
         menu.SetActive(false);
+    }
+
+    public void LoadScene(string name)
+    {
+        SceneManager.LoadScene(name);
     }
 
     public void Quit()
@@ -55,10 +75,10 @@ public class MainMenuManager : MonoBehaviour
                 CloseMenu(optionMenu);
         }
         
-        if (playMenu.activeInHierarchy)
+        if (MapSelectionMenu.activeInHierarchy)
         {
             if(cancel.WasPressedThisFrame())
-                CloseMenu(playMenu);
+                CloseMenu(MapSelectionMenu);
         }
     }
 }

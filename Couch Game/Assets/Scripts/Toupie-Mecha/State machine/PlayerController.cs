@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-
+    
     #region States
         public PlayerStateMachine stateMachine;
 
@@ -66,13 +66,13 @@ public class PlayerController : MonoBehaviour
 
         cameraTarget = GameObject.FindWithTag("MainCamera").GetComponent<CameraTarget>();
         cameraTarget.targets.Add(transform);
-        playerAnimator = this.GetComponentInChildren<Animator>();
+        // playerAnimator = this.GetComponentInChildren<Animator>();
         //transform.position = spawnPlayer.spawnPoints[playerId].position;
     }
 
     void Start()
     {
-        
+        playerAnimator = this.GetComponentInChildren<Animator>();
         GameManager.instance.allPlayer.Add(this);
 
         // normalSkins[playerId].SetActive(true);
@@ -309,6 +309,6 @@ public class PlayerController : MonoBehaviour
 
     public void RespawnPlayer()
     {
-        transform.position = GameManager.instance.spawnPoints[playerId - 1].position;
+        transform.position = GameManager.instance.spawnPoints[playerId].position;
     }
 }

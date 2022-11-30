@@ -2862,6 +2862,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 14.250001
       objectReference: {fileID: 0}
+    - target: {fileID: 1896850882735031341, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
+      propertyPath: m_JoinBehavior
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1896850882735031343, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
       propertyPath: gameTimer.timerTXT
       value: 
@@ -2869,9 +2873,58 @@ PrefabInstance:
     - target: {fileID: 1896850882735031343, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
       propertyPath: gameTimer.comparetimerTXT
       value: 
+<<<<<<< Updated upstream
       objectReference: {fileID: 361946753}
     m_RemovedComponents: []
+=======
+      objectReference: {fileID: 733953431}
+    m_RemovedComponents:
+    - {fileID: 1896850882735031341, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
+>>>>>>> Stashed changes
   m_SourcePrefab: {fileID: 100100000, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
+--- !u!4 &1896850881032272868 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1896850881195566479, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
+  m_PrefabInstance: {fileID: 1896850881032272867}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1896850881032272869 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1896850881923787489, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
+  m_PrefabInstance: {fileID: 1896850881032272867}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1896850881032272870 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1896850881039351318, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
+  m_PrefabInstance: {fileID: 1896850881032272867}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1896850881032272871 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1896850882551273285, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
+  m_PrefabInstance: {fileID: 1896850881032272867}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1896850881032272872 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1896850882735031337, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
+  m_PrefabInstance: {fileID: 1896850881032272867}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1896850881032272873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1896850881032272872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1a28693f0b3c754b9ece0ebab83bcda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerSpawns:
+  - {fileID: 1896850881032272871}
+  - {fileID: 1896850881032272870}
+  - {fileID: 1896850881032272869}
+  - {fileID: 1896850881032272868}
+  playerprefab: {fileID: 2402394259002358207, guid: 8947993157ff3f64babc11fc86b4ce3d, type: 3}
 --- !u!1001 &7832659003485163989
 PrefabInstance:
   m_ObjectHideFlags: 0
