@@ -39,7 +39,7 @@ public class PointZone : MonoBehaviour
 
     private void DispawnPlayer(PlayerController deadPlayer)
     {
-        AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("Goal"), this.transform.position, AudioManager.instance.soundEffectMixer);
+        AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("Goal"), this.transform.position, AudioManager.instance.soundEffectMixer, true);
         if(deadPlayer.lastPlayerContacted != null)
         {
             deadPlayer.lastPlayerContacted.playerPoint += pointGiven;
@@ -48,7 +48,7 @@ public class PointZone : MonoBehaviour
             Debug.Log($"{deadPlayer.name} EJECTED !");
             Debug.Log($"GIVE {pointGiven} points to {deadPlayer.lastPlayerContacted.name}");
 
-            AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Crowd Shouting"]/*.GetValueOrDefault("Crowd Shouting")*/, this.transform.position, AudioManager.instance.soundEffectMixer);
+            AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Crowd Shouting"]/*.GetValueOrDefault("Crowd Shouting")*/, this.transform.position, AudioManager.instance.soundEffectMixer, true);
             
             if(GameManager.instance.gameTimer.drawTimer)
             {
@@ -61,7 +61,7 @@ public class PointZone : MonoBehaviour
             else
             {
                 int randomPraise = Random.Range(0, 8);
-                AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"Voice Praise {randomPraise}"], this.transform.position, AudioManager.instance.soundEffectMixer);
+                AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"Voice Praise {randomPraise}"], this.transform.position, AudioManager.instance.soundEffectMixer, true);
             }
         }
         else
