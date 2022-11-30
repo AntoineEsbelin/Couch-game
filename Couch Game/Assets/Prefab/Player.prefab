@@ -26,6 +26,8 @@ GameObject:
   - component: {fileID: 4340636590591539494}
   - component: {fileID: 2709634326568635591}
   - component: {fileID: 7715067853923158762}
+  - component: {fileID: 6539273088687812290}
+  - component: {fileID: 4337712178464787206}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -457,6 +459,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   counterAtk: {fileID: 0}
+--- !u!136 &6539273088687812290
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2402394259002358207}
+  m_Material: {fileID: 13400000, guid: 70aff830f49f6a748b7f75aba431d125, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1.3856261
+  m_Height: 5.1518135
+  m_Direction: 1
+  m_Center: {x: 0, y: 2.5049124, z: 0}
+--- !u!135 &4337712178464787206
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2402394259002358207}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2.4827561
+  m_Center: {x: 0, y: 2.4107032, z: 0}
 --- !u!1 &6961087132073683184
 GameObject:
   m_ObjectHideFlags: 0

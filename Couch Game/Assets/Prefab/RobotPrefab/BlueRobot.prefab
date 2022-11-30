@@ -660,8 +660,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8660693064061087585}
   - component: {fileID: 9203755691306294299}
-  - component: {fileID: 8529479815651787941}
-  - component: {fileID: 6388193887424937841}
   m_Layer: 0
   m_Name: BlueRobot
   m_TagString: Player
@@ -707,33 +705,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!136 &8529479815651787941
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8321287445697836507}
-  m_Material: {fileID: 13400000, guid: 70aff830f49f6a748b7f75aba431d125, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 1.3856261
-  m_Height: 5.1518135
-  m_Direction: 1
-  m_Center: {x: 0, y: 2.5049124, z: 0}
---- !u!135 &6388193887424937841
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8321287445697836507}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 2.4827561
-  m_Center: {x: 0, y: 2.4107032, z: 0}
 --- !u!1 &8725055323095865642
 GameObject:
   m_ObjectHideFlags: 0
@@ -934,7 +905,7 @@ MeshCollider:
   m_GameObject: {fileID: 6185292624416925265}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 1
   m_CookingOptions: 30
