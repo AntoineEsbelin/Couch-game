@@ -498,7 +498,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectPlayerMenu: {fileID: 1408399470}
   optionMenu: {fileID: 691884953}
-  playMenu: {fileID: 466963586}
+  mapSelectMenu: {fileID: 466963586}
 --- !u!1 &452218557
 GameObject:
   m_ObjectHideFlags: 0

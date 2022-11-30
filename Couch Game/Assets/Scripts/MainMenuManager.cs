@@ -10,7 +10,7 @@ public class MainMenuManager : MonoBehaviour
 {
     public GameObject selectPlayerMenu;
     public GameObject optionMenu;
-    public GameObject playMenu;
+    public GameObject mapSelectMenu;
     
 
     public void StartButton()
@@ -23,9 +23,9 @@ public class MainMenuManager : MonoBehaviour
         optionMenu.SetActive(true);
     }
     
-    public void PlayButton()
+    public void MapSelectButton()
     {
-        playMenu.SetActive(true);
+        mapSelectMenu.SetActive(true);
     }
 
     private void CloseMenu(GameObject menu)
@@ -55,10 +55,10 @@ public class MainMenuManager : MonoBehaviour
                 CloseMenu(optionMenu);
         }
         
-        if (playMenu.activeInHierarchy)
+        if (mapSelectMenu.activeInHierarchy)
         {
             if(cancel.WasPressedThisFrame())
-                CloseMenu(playMenu);
+                CloseMenu(mapSelectMenu);
         }
     }
 }
