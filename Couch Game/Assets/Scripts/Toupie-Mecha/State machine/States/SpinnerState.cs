@@ -15,10 +15,12 @@ public class SpinnerState : PlayerState
         
         mSettings.brakeManiability = 1f;
         mSettings.brakeSpeed = 1f;
+        playerController.trailRenderer.enabled = true;
         playerController.PlayerAnimator.SetBool("IsSpinning", true);
         repoussed = false;
         playerController.transform.position = new Vector3(playerController.transform.position.x, playerController.transform.position.y + 3f, playerController.transform.position.z);
-        playerController.toupieFBX.SetActive(true);
+        playerController.spinningAnim.SetRotate(true);
+        playerController.GetComponentInChildren<SpinningAnim>().SetRotate(true);
         audioSource = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("Spin Move"), playerController.transform.position, AudioManager.instance.soundEffectMixer, true);
         //vfx = Instantiate(playerController.troupieVFX, playerController.toupieFBX.GetComponent<SpinningAnim>().transform);
     }
@@ -99,8 +101,9 @@ public class SpinnerState : PlayerState
         mSettings.brakeSpeed = 1f;
         playerController.PlayerAnimator.SetBool("IsSpinning", false);
         playerController.transform.position = new Vector3(playerController.transform.position.x, playerController.transform.position.y - 3f, playerController.transform.position.z);
+        playerController.spinningAnim.SetRotate(false);
         Destroy(this.vfx);
-        playerController.toupieFBX.SetActive(false);
+        playerController.trailRenderer.enabled = false;
         Destroy(audioSource.gameObject);
     }
 }

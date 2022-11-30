@@ -60,8 +60,10 @@ public class GameManager : MonoBehaviour
         playerController.playerId = playersList.Count;
         playerController.transform.position = spawnPoints[playerController.playerId - 1].position;
         playerController.playerFBX = Instantiate(charactersFBX[playerController.playerId - 1], playerController.transform);    
-        playerController.toupieFBX = playerController.playerFBX.GetComponentInChildren<SpinningAnim>().gameObject;
-        playerController.toupieFBX.SetActive(false);
+    
+        playerController.trailRenderer = playerController.playerFBX.GetComponentInChildren<TrailRenderer>(true);
+        playerController.spinningAnim = playerController.playerFBX.GetComponentInChildren<SpinningAnim>();
+        //playerController.toupieFBX.SetActive(false);
         
         switch(playerController.playerId)
         {
@@ -176,11 +178,9 @@ public class GameManager : MonoBehaviour
                     
                         PlayVoiceAtTime(3, ref gameTimer.nearTimeOut, AudioManager.instance.allAudio["Voice 321"]);
                     break;
-
-                    case < 60 :
-                        OneMinuteRemaining();
-                    break;
                 }
+                if(gameTimer.timer > 60)return;
+                OneMinuteRemaining();
             }
             else
             {

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -57,7 +58,8 @@ public class PlayerController : MonoBehaviour
     }
 
     public GameObject playerFBX;
-    public GameObject toupieFBX;
+    public TrailRenderer trailRenderer;
+    public SpinningAnim spinningAnim;
 
     public GameObject troupieVFX;
     private CapsuleCollider capsuleCol;
@@ -148,6 +150,7 @@ public class PlayerController : MonoBehaviour
                     //NormalState.SetSpeedModifier(NormalState.mSettings.slowSpeed);
                     NormalState.SlowSpeedModifier();
                     startCharging = true;
+                    playerAnimator.SetBool("ChargingSpin", true);
                 }
             }
 
@@ -164,6 +167,7 @@ public class PlayerController : MonoBehaviour
                                 //transform to spin
                                 stateMachine.SwitchState(SpinnerState);
                                 SpinnerState.mSettings.bonusMoveSpeed = bonusSpeedPerPhase[i];
+                                playerAnimator.SetBool("ChargingSpin", false);
                                 //Debug.Log("VROUM");
                                 break;
                             }
@@ -265,7 +269,8 @@ public class PlayerController : MonoBehaviour
                         Instantiate(explosion, this.transform.position, Quaternion.identity);
                         triggerPlayer.StunState.timerMax = triggerPlayer.stunDurationKnockback;
                         triggerPlayer.lastPlayerContacted = this;
-                        AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("Spin Hit Spin"), transform.position, AudioManager.instance.soundEffectMixer, true);
+                        int randomSpinHitPlayer = Random.Range(0, 8);
+                        AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault($"Spin Hit Player {randomSpinHitPlayer}"), transform.position, AudioManager.instance.soundEffectMixer, true);
                         triggerPlayer.stateMachine.SwitchState(triggerPlayer.StunState);
 
                         StunState.timerMax = stunDurationSpinEnd;
@@ -337,7 +342,7 @@ public class PlayerController : MonoBehaviour
             Physics.IgnoreLayerCollision(gameObject.layer, i);
         }
 
-        MeshCollider[] cols = toupieFBX.GetComponentsInChildren<MeshCollider>();
+        MeshCollider[] cols = trailRenderer.GetComponentsInChildren<MeshCollider>();
         foreach(MeshCollider c in cols)
         {
             c.enabled = false;
@@ -355,5 +360,10 @@ public class PlayerController : MonoBehaviour
         {
             Physics.IgnoreLayerCollision(gameObject.layer, i, false);
         }
+    }
+
+    public void OnRechargeGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

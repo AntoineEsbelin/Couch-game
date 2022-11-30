@@ -257,6 +257,20 @@ MonoBehaviour:
     audio: {fileID: 8300000, guid: 431ec080570900041858a539e91f3cef, type: 3}
   - audioName: Title
     audio: {fileID: 8300000, guid: a77ab1f8ff3d79545b2869b1109dbd0a, type: 3}
+  - audioName: Spin Hit Player 1
+    audio: {fileID: 8300000, guid: e2c94968f9bebbb46928aeed75191655, type: 3}
+  - audioName: Spin Hit Player 2
+    audio: {fileID: 8300000, guid: dbae913dd25b60e4396339996cc67d73, type: 3}
+  - audioName: Spin Hit Player 3
+    audio: {fileID: 8300000, guid: ca0a82e40d98d9b488b3941a71a37d87, type: 3}
+  - audioName: Spin Hit Player 4
+    audio: {fileID: 8300000, guid: 44a8b5517239903429070e8294722d4d, type: 3}
+  - audioName: Spin Hit Player 5
+    audio: {fileID: 8300000, guid: 4c1942d0c4a14064a8adc369240c37a7, type: 3}
+  - audioName: Spin Hit Player 6
+    audio: {fileID: 8300000, guid: 2bd76240c6663724a9b57ff8a39cd6a7, type: 3}
+  - audioName: Spin Hit Player 7
+    audio: {fileID: 8300000, guid: 825d235ef2c2ccf4ca00c6258ea65e72, type: 3}
 --- !u!1 &1896850882551273286
 GameObject:
   m_ObjectHideFlags: 0
