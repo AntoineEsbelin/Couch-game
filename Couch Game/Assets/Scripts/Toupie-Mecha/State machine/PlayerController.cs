@@ -58,6 +58,8 @@ public class PlayerController : MonoBehaviour
 
     public GameObject playerFBX;
     public GameObject toupieFBX;
+
+    public GameObject troupieVFX;
     void OnEnable()
     {
         currentState = NormalState;

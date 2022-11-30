@@ -255,6 +255,8 @@ MonoBehaviour:
     audio: {fileID: 8300000, guid: dce07e5d96a69714e8c912faebd5d947, type: 3}
   - audioName: One Minute Remaining
     audio: {fileID: 8300000, guid: 431ec080570900041858a539e91f3cef, type: 3}
+  - audioName: Title
+    audio: {fileID: 8300000, guid: a77ab1f8ff3d79545b2869b1109dbd0a, type: 3}
 --- !u!1 &1896850882551273286
 GameObject:
   m_ObjectHideFlags: 0
