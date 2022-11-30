@@ -31,7 +31,7 @@ public class AudioManager : MonoBehaviour
         
     }
 
-    public AudioSource PlayClipAt(AudioClip clip, Vector3 pos, AudioMixerGroup whatMixer)
+    public AudioSource PlayClipAt(AudioClip clip, Vector3 pos, AudioMixerGroup whatMixer, bool isSFX)
     {
         //Create GameObject
         GameObject tempGO = new GameObject("TempAudio");
@@ -42,7 +42,7 @@ public class AudioManager : MonoBehaviour
         audioSource.clip = clip;
         //Get the audio mixer
         audioSource.outputAudioMixerGroup = whatMixer;
-        if(audioSource.isPlaying)audioSource.PlayOneShot(audioSource.clip);
+        if(isSFX)audioSource.PlayOneShot(audioSource.clip);
         else audioSource.Play();
         //Destroy at the lenght of the clip
         Destroy(tempGO, clip.length);

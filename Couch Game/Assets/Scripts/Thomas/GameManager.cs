@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
     public class TempPlayerNb
     {
         public int howManyPlayer = 0;
+        public bool oneMinute = false;
     }
 
     public TempPlayerNb tempPlayerNb;
@@ -45,7 +46,7 @@ public class GameManager : MonoBehaviour
     public void InitializePlayer(PlayerInput playerInput,int index)
     {
 
-        if(tempPlayerNb.howManyPlayer == 0)return;
+        
         
         PlayerController playerController = playerInput.GetComponent<PlayerController>(); 
         playerController.playerId = index ;
@@ -53,10 +54,14 @@ public class GameManager : MonoBehaviour
         playerController.playerFBX = Instantiate(charactersFBX[playerController.playerId], playerController.transform);    
         playerController.toupieFBX = playerController.playerFBX.GetComponentInChildren<SpinningAnim>().gameObject;
         playerController.toupieFBX.SetActive(false);
-        gameTimer.drawTimer = false;
-        AudioSource ost = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("OST"), transform.position, AudioManager.instance.ostMixer);
+
+
+        if(playersList.Count != tempPlayerNb.howManyPlayer)return;
+        AudioSource readyGo = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Ready Go"], this.transform.position, AudioManager.instance.soundEffectMixer, true);
+        AudioSource ost = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("OST"), transform.position, AudioManager.instance.ostMixer, false);
+
         ost.loop = true;
-        //audio ready go
+        StartCoroutine(WaitBeforeGameStart(readyGo.clip.length - 1.3f));
     }
     
     
@@ -87,18 +92,23 @@ public class GameManager : MonoBehaviour
             if(gameTimer.timer > 0)
             {
                 gameTimer.timer -= Time.deltaTime;
-                if(gameTimer.timer > 10)
+                switch(gameTimer.timer)
                 {
-                    gameTimer.timerTXT.text = Mathf.Round(gameTimer.timer).ToString();
-                    gameTimer.comparetimerTXT.text = Mathf.Round(gameTimer.timer).ToString();
-                }
-                else
-                {
-                    gameTimer.timerTXT.text = gameTimer.timer.ToString("0.00");
-                    gameTimer.comparetimerTXT.text = gameTimer.timer.ToString("0.0");
+                    case > 10 :
+                        gameTimer.timerTXT.text = Mathf.Round(gameTimer.timer).ToString();
+                        gameTimer.comparetimerTXT.text = Mathf.Round(gameTimer.timer).ToString();
+                    break;
+
+                    case < 10 :
+                        gameTimer.timerTXT.text = gameTimer.timer.ToString("0.00");
+                        gameTimer.comparetimerTXT.text = gameTimer.timer.ToString("0.0");
                     
-                    PlayVoiceAtTime(3, ref gameTimer.nearTimeOut, AudioManager.instance.allAudio["Voice 321"]);
-                    
+                        PlayVoiceAtTime(3, ref gameTimer.nearTimeOut, AudioManager.instance.allAudio["Voice 321"]);
+                    break;
+
+                    case < 60 :
+                        OneMinuteRemaining();
+                    break;
                 }
             }
             else
@@ -128,7 +138,7 @@ public class GameManager : MonoBehaviour
                     gameTimer.drawTimer = true;
                     gameTimer.drawMaxPoint = playerPoint;
                     gameTimer.timerTXT.text = "SUDDEN DEATH !";
-                    AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Voice Sudden Death"], this.transform.position, AudioManager.instance.soundEffectMixer);
+                    AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Voice Sudden Death"], this.transform.position, AudioManager.instance.soundEffectMixer, true);
                 }
                 else
                 {
@@ -146,7 +156,7 @@ public class GameManager : MonoBehaviour
         Debug.Log($"{playerWinner.name} WIN WITH {playerWinner.playerPoint} POINTS !");
 
         //general victory voice sound
-        AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Voice Victory"], this.transform.position, AudioManager.instance.soundEffectMixer);
+        AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"{allPlayer.IndexOf(playerWinner) + 1} Win"], this.transform.position, AudioManager.instance.soundEffectMixer, true);
         gameTimer.timeOut = true;
         gameStarted = false;
         foreach(PlayerController player in allPlayer)
@@ -159,7 +169,7 @@ public class GameManager : MonoBehaviour
     {
         if(alreadyPlayed)return;
         if(gameTimer.timer > time)return;
-        AudioManager.instance.PlayClipAt(voice, this.transform.position, AudioManager.instance.soundEffectMixer);
+        AudioManager.instance.PlayClipAt(voice, this.transform.position, AudioManager.instance.soundEffectMixer, true);
         alreadyPlayed = true;
     }
 
@@ -171,5 +181,21 @@ public class GameManager : MonoBehaviour
         tempPlayerNb.howManyPlayer = int.Parse(inputField.text);
         inputField.transform.parent.gameObject.SetActive(false);
         gameStarted = true;
+        AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Title"], this.transform.position, AudioManager.instance.soundEffectMixer, true);
+    }
+
+    private IEnumerator WaitBeforeGameStart(float length)
+    {
+        gameStarted = false;
+        yield return new WaitForSeconds(length);
+        gameStarted = true;
+        gameTimer.drawTimer = false;
+    }
+
+    private void OneMinuteRemaining()
+    {
+        if(tempPlayerNb.oneMinute)return;
+        AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["One Minute Remaining"], this.transform.position, AudioManager.instance.soundEffectMixer, true);
+        tempPlayerNb.oneMinute = true;
     }
 }
