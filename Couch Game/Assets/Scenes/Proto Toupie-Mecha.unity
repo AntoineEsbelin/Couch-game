@@ -2764,10 +2764,6 @@ PrefabInstance:
       value: 14.250001
       objectReference: {fileID: 0}
     - target: {fileID: 1896850882735031343, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
-      propertyPath: gameTimer.maxTimer
-      value: 180
-      objectReference: {fileID: 0}
-    - target: {fileID: 1896850882735031343, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
       propertyPath: gameTimer.timerTXT
       value: 
       objectReference: {fileID: 1279541469}
@@ -2776,14 +2772,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 361946753}
     m_RemovedComponents: []
-<<<<<<< HEAD
+
       objectReference: {fileID: 733953431}
     m_RemovedComponents:
     - {fileID: 1896850882735031341, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
-=======
->>>>>>> parent of 2bddf0b (MultiPlayer menu)
+
+
   m_SourcePrefab: {fileID: 100100000, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
---- !u!1001 &7832659003485163989
+
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2

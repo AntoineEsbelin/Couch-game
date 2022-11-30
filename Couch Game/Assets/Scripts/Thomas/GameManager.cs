@@ -52,16 +52,12 @@ public class GameManager : MonoBehaviour
     
     private void OnPlayerJoined(PlayerInput playerInput)
     {
-<<<<<<< HEAD
 
-        
-        
-=======
         if(tempPlayerNb.howManyPlayer == 0)return;
         playersList.Add(playerInput);
         if (PlayerJoinedGame != null)
             PlayerJoinedGame(playerInput);
->>>>>>> parent of 2bddf0b (MultiPlayer menu)
+
         PlayerController playerController = playerInput.GetComponent<PlayerController>(); 
         playerController.playerId = playersList.Count;
         playerController.transform.position = spawnPoints[playerController.playerId - 1].position;
@@ -78,9 +74,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(WaitBeforeGameStart(readyGo.clip.length - 1.3f));
     }
     
-<<<<<<< HEAD
-    
-=======
+
     private void OnPlayerLeft(PlayerInput playerInput)
     {
         print("aled");
@@ -102,13 +96,7 @@ public class GameManager : MonoBehaviour
         joinAction.Disable();
         leftAction.Disable();
     }
->>>>>>> parent of 2bddf0b (MultiPlayer menu)
 
-   
-
-<<<<<<< HEAD
-   
-=======
     private void UnregisterPlayer(PlayerInput playerInput)
     {
         playersList.Remove(playerInput);
@@ -117,8 +105,6 @@ public class GameManager : MonoBehaviour
         
         Destroy(playerInput.transform.gameObject);
     }
->>>>>>> parent of 2bddf0b (MultiPlayer menu)
-
 
     // Start is called before the first frame update
     private void Start()
