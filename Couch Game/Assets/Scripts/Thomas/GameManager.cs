@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
         playerController.toupieFBX.SetActive(false);
 
 
-        if(playersList.Count != tempPlayerNb.howManyPlayer)return;
+        if(PlayerConfigManager.Instance.playersList.Count != tempPlayerNb.howManyPlayer)return;
         AudioSource readyGo = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Ready Go"], this.transform.position, AudioManager.instance.soundEffectMixer, true);
         AudioSource ost = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("OST"), transform.position, AudioManager.instance.ostMixer, false);
 

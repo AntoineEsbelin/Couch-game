@@ -2778,14 +2778,11 @@ PrefabInstance:
     - target: {fileID: 1896850882735031343, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
       propertyPath: gameTimer.comparetimerTXT
       value: 
-<<<<<<< Updated upstream
       objectReference: {fileID: 361946753}
     m_RemovedComponents: []
-=======
       objectReference: {fileID: 733953431}
     m_RemovedComponents:
     - {fileID: 1896850882735031341, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
->>>>>>> Stashed changes
   m_SourcePrefab: {fileID: 100100000, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
 --- !u!4 &1896850881032272868 stripped
 Transform:
