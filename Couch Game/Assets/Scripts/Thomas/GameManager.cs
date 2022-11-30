@@ -44,21 +44,15 @@ public class GameManager : MonoBehaviour
     
     public void InitializePlayer(PlayerInput playerInput,int index)
     {
-<<<<<<< Updated upstream
+
         if(tempPlayerNb.howManyPlayer == 0)return;
-        playersList.Add(playerInput);
-        if (PlayerJoinedGame != null)
-            PlayerJoinedGame(playerInput);
-=======
         
->>>>>>> Stashed changes
         PlayerController playerController = playerInput.GetComponent<PlayerController>(); 
         playerController.playerId = index ;
         // playerController.transform.position = spawnPoints[playerController.playerId - 1].position;
         playerController.playerFBX = Instantiate(charactersFBX[playerController.playerId], playerController.transform);    
         playerController.toupieFBX = playerController.playerFBX.GetComponentInChildren<SpinningAnim>().gameObject;
         playerController.toupieFBX.SetActive(false);
-        if(playersList.Count != tempPlayerNb.howManyPlayer)return;
         gameTimer.drawTimer = false;
         AudioSource ost = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("OST"), transform.position, AudioManager.instance.ostMixer);
         ost.loop = true;
@@ -66,59 +60,10 @@ public class GameManager : MonoBehaviour
     }
     
     
-    private void Awake()
-    {
-        if(instance != null)Destroy(gameObject);
-        instance = this;
-        
-<<<<<<< Updated upstream
-        joinAction.Enable();
-        joinAction.performed += ctx => JoinAction(ctx);
-        
-        leftAction.Enable();
-        leftAction.performed += ctx => LeftAction(ctx);
-    }
-    
-    private void OnDisable()
-    {
-        joinAction.Disable();
-        leftAction.Disable();
-    }
 
-    private void JoinAction(InputAction.CallbackContext ctx)
-    {
-        if(!gameStarted || playersList.Count >= tempPlayerNb.howManyPlayer)return;
-        PlayerInputManager.instance.JoinPlayerFromActionIfNotAlreadyJoined(ctx);
-    }
-    
-    private void LeftAction(InputAction.CallbackContext ctx)
-    {
-        if (playersList.Count > 1)
-        {
-            foreach (var player in playersList)
-            {
-                foreach (var device in player.devices)
-                {
-                    if (device != null && ctx.control.device == device)
-                    {
-                        UnregisterPlayer(player);
-                        return;
-                    }
-                }
-            }
-        }
-    }
+   
 
-    private void UnregisterPlayer(PlayerInput playerInput)
-    {
-        playersList.Remove(playerInput);
-        if (PlayerLeftGame != null)
-            PlayerLeftGame(playerInput);
-        
-        Destroy(playerInput.transform.gameObject);
-=======
->>>>>>> Stashed changes
-    }
+   
 
     // Start is called before the first frame update
     private void Start()
