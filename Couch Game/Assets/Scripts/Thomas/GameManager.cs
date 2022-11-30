@@ -39,23 +39,54 @@ public class GameManager : MonoBehaviour
         public bool nearTimeOut = false;
     }
     public GameTimer gameTimer;
+
+    [System.Serializable]
+    public class TempPlayerNb
+    {
+        public int howManyPlayer = 0;
+        public bool oneMinute = false;
+    }
+
+    public TempPlayerNb tempPlayerNb;
+    public bool gameStarted;
     
     private void OnPlayerJoined(PlayerInput playerInput)
     {
-        
+        if(tempPlayerNb.howManyPlayer == 0)return;
         playersList.Add(playerInput);
         if (PlayerJoinedGame != null)
             PlayerJoinedGame(playerInput);
-
         PlayerController playerController = playerInput.GetComponent<PlayerController>(); 
         playerController.playerId = playersList.Count;
         playerController.transform.position = spawnPoints[playerController.playerId - 1].position;
         playerController.playerFBX = Instantiate(charactersFBX[playerController.playerId - 1], playerController.transform);    
-        playerController.toupieFBX = playerController.playerFBX.GetComponentInChildren<SpinningAnim>().gameObject;
-        playerController.toupieFBX.SetActive(false);
+    
+        playerController.trailRenderer = playerController.playerFBX.GetComponentInChildren<TrailRenderer>(true);
+        playerController.spinningAnim = playerController.playerFBX.GetComponentInChildren<SpinningAnim>();
+        //playerController.toupieFBX.SetActive(false);
+        
+        switch(playerController.playerId)
+        {
+            case 1 : playerController.gameObject.layer = 10;
+                break;
+            case 2 : playerController.gameObject.layer = 11;
+                break;
+            case 3 : playerController.gameObject.layer = 12;
+                break;
+            case 4 : playerController.gameObject.layer = 13;
+                break;
+            default : playerController.gameObject.layer = 10;
+                break;
+        }
+
+        if(playersList.Count != tempPlayerNb.howManyPlayer)return;
+        AudioSource readyGo = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Ready Go"], this.transform.position, AudioManager.instance.soundEffectMixer, true);
+        AudioSource ost = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("OST"), transform.position, AudioManager.instance.ostMixer, false);
+        ost.loop = true;
+        StartCoroutine(WaitBeforeGameStart(readyGo.clip.length - 1.3f));
+
     }
     
-
     private void OnPlayerLeft(PlayerInput playerInput)
     {
         print("aled");
@@ -80,6 +111,7 @@ public class GameManager : MonoBehaviour
 
     private void JoinAction(InputAction.CallbackContext ctx)
     {
+        if(!gameStarted || playersList.Count >= tempPlayerNb.howManyPlayer)return;
         PlayerInputManager.instance.JoinPlayerFromActionIfNotAlreadyJoined(ctx);
     }
     
@@ -110,12 +142,13 @@ public class GameManager : MonoBehaviour
         Destroy(playerInput.transform.gameObject);
     }
 
+
     // Start is called before the first frame update
     private void Start()
     {
         gameTimer.timer = gameTimer.maxTimer;
-        AudioSource ost = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("OST"), transform.position, AudioManager.instance.ostMixer);
-        ost.loop = true;
+        gameStarted = false;
+        gameTimer.drawTimer = true;
     }
 
     // Update is called once per frame
@@ -126,6 +159,7 @@ public class GameManager : MonoBehaviour
 
     private void RoundTimer()
     {
+        if(!gameStarted)return;
         if(!gameTimer.drawTimer)
         {
             if(gameTimer.timer > 0)
@@ -144,11 +178,9 @@ public class GameManager : MonoBehaviour
                     
                         PlayVoiceAtTime(3, ref gameTimer.nearTimeOut, AudioManager.instance.allAudio["Voice 321"]);
                     break;
-
-                    case < 60 :
-                        OneMinuteRemaining();
-                    break;
                 }
+                if(gameTimer.timer > 60)return;
+                OneMinuteRemaining();
             }
             else
             {
@@ -172,7 +204,7 @@ public class GameManager : MonoBehaviour
                 }
 
                 //it's draw time !
-                if(equalTime >= 1)
+                if(equalTime > 1)
                 {
                     gameTimer.drawTimer = true;
                     gameTimer.drawMaxPoint = playerPoint;
@@ -190,11 +222,18 @@ public class GameManager : MonoBehaviour
 
     public void PlayerWin(PlayerController playerWinner)
     {
+        if(gameTimer.timeOut)return;
+        gameTimer.timerTXT.text = $"Player {allPlayer.IndexOf(playerWinner) + 1} WIN !";
         Debug.Log($"{playerWinner.name} WIN WITH {playerWinner.playerPoint} POINTS !");
-        gameTimer.timeOut = true;
-        
+
         //general victory voice sound
-        AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Voice Victory"], this.transform.position, AudioManager.instance.soundEffectMixer);
+        AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"{allPlayer.IndexOf(playerWinner) + 1} Win"], this.transform.position, AudioManager.instance.soundEffectMixer, true);
+        gameTimer.timeOut = true;
+        gameStarted = false;
+        foreach(PlayerController player in allPlayer)
+        {
+            player.move = Vector3.zero;
+        }
     }
 
     private void PlayVoiceAtTime(float time, ref bool alreadyPlayed, AudioClip voice)
@@ -203,5 +242,31 @@ public class GameManager : MonoBehaviour
         if(gameTimer.timer > time)return;
         AudioManager.instance.PlayClipAt(voice, this.transform.position, AudioManager.instance.soundEffectMixer, true);
         alreadyPlayed = true;
+    }
+
+    public void StartGame(TMP_InputField inputField)
+    {
+        if(inputField.contentType != TMP_InputField.ContentType.IntegerNumber)return;
+        if(int.Parse(inputField.text) < 1 || int.Parse(inputField.text) > 4)return;
+
+        tempPlayerNb.howManyPlayer = int.Parse(inputField.text);
+        inputField.transform.parent.gameObject.SetActive(false);
+        gameStarted = true;
+        AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Title"], this.transform.position, AudioManager.instance.soundEffectMixer, true);
+    }
+
+    private IEnumerator WaitBeforeGameStart(float length)
+    {
+        gameStarted = false;
+        yield return new WaitForSeconds(length);
+        gameStarted = true;
+        gameTimer.drawTimer = false;
+    }
+
+    private void OneMinuteRemaining()
+    {
+        if(tempPlayerNb.oneMinute)return;
+        AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["One Minute Remaining"], this.transform.position, AudioManager.instance.soundEffectMixer, true);
+        tempPlayerNb.oneMinute = true;
     }
 }

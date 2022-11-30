@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -57,9 +58,19 @@ public class PlayerController : MonoBehaviour
     }
 
     public GameObject playerFBX;
-    public GameObject toupieFBX;
+    public TrailRenderer trailRenderer;
+    public SpinningAnim spinningAnim;
 
     public GameObject troupieVFX;
+    private CapsuleCollider capsuleCol;
+    private SphereCollider sphereCol;
+
+    [Header("Respawn invincibility")]
+
+    public float invincibilityTimerMax = 3f;
+    float invincibilityTimer;
+    bool invincible;
+
     void OnEnable()
     {
         currentState = NormalState;
@@ -79,9 +90,14 @@ public class PlayerController : MonoBehaviour
 
         // normalSkins[playerId].SetActive(true);
         // spinSkins[playerId].SetActive(true);
+
+        capsuleCol = GetComponent<CapsuleCollider>();
+        sphereCol = GetComponent<SphereCollider>();
         
         if (OnScoreChanged != null)
             OnScoreChanged(playerPoint);
+        
+        invincibilityTimer = 0;
     }
 
     void FixedUpdate()
@@ -93,6 +109,9 @@ public class PlayerController : MonoBehaviour
         currentState.UpdateState(this);
 
         BounceWallTimer();
+
+        if (invincibilityTimer > 0) invincibilityTimer = Mathf.Clamp(invincibilityTimer - Time.deltaTime, 0, invincibilityTimerMax);
+        else if (invincible) StopInvincibility();
     }
 
     private void UpdateLastPlayer()
@@ -129,6 +148,7 @@ public class PlayerController : MonoBehaviour
                     //NormalState.SetSpeedModifier(NormalState.mSettings.slowSpeed);
                     NormalState.SlowSpeedModifier();
                     startCharging = true;
+                    playerAnimator.SetBool("ChargingSpin", true);
                 }
             }
 
@@ -145,6 +165,7 @@ public class PlayerController : MonoBehaviour
                                 //transform to spin
                                 stateMachine.SwitchState(SpinnerState);
                                 SpinnerState.mSettings.bonusMoveSpeed = bonusSpeedPerPhase[i];
+                                playerAnimator.SetBool("ChargingSpin", false);
                                 //Debug.Log("VROUM");
                                 break;
                             }
@@ -208,8 +229,7 @@ public class PlayerController : MonoBehaviour
                     wallNormal.y = 0;
                     playerDirection.y = 0;
                     timer = timerCount;
-                    //Debug.Log("I");
-                    if(Vector3.Dot(wallNormal, playerDirection) < 0)
+                    if(Vector3.Dot(wallNormal, playerDirection) < 0) //produit scalaire
                     {
                         BounceWall();
                     }
@@ -230,7 +250,7 @@ public class PlayerController : MonoBehaviour
             if (!other.isTrigger) return;
             if (other.gameObject.tag == "Player")
             {
-                
+                Debug.Log("haha");
                 if(currentState == SpinnerState)
                 {
                     PlayerController triggerPlayer = other.GetComponentInParent<PlayerController>();
@@ -246,7 +266,8 @@ public class PlayerController : MonoBehaviour
                         Instantiate(explosion, this.transform.position, Quaternion.identity);
                         triggerPlayer.StunState.timerMax = triggerPlayer.stunDurationKnockback;
                         triggerPlayer.lastPlayerContacted = this;
-                        AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("Spin Hit Spin"), transform.position, AudioManager.instance.soundEffectMixer, true);
+                        int randomSpinHitPlayer = Random.Range(0, 8);
+                        AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault($"Spin Hit Player {randomSpinHitPlayer}"), transform.position, AudioManager.instance.soundEffectMixer, true);
                         triggerPlayer.stateMachine.SwitchState(triggerPlayer.StunState);
 
                         StunState.timerMax = stunDurationSpinEnd;
@@ -309,5 +330,37 @@ public class PlayerController : MonoBehaviour
     public void RespawnPlayer()
     {
         transform.position = GameManager.instance.spawnPoints[playerId - 1].position;
+        //capsuleCol.enabled = false;
+        sphereCol.enabled = false;
+        //Physics.IgnoreLayerCollision(6, 6);
+
+        for (int i=10; i < 14; i++)
+        {
+            Physics.IgnoreLayerCollision(gameObject.layer, i);
+        }
+
+        MeshCollider[] cols = trailRenderer.GetComponentsInChildren<MeshCollider>();
+        foreach(MeshCollider c in cols)
+        {
+            c.enabled = false;
+        }
+
+        invincibilityTimer = invincibilityTimerMax;
+        invincible = true;
+    }
+
+    void StopInvincibility()
+    {
+        invincible = false;
+        sphereCol.enabled = true;
+        for (int i=10; i < 14; i++)
+        {
+            Physics.IgnoreLayerCollision(gameObject.layer, i, false);
+        }
+    }
+
+    public void OnRechargeGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
