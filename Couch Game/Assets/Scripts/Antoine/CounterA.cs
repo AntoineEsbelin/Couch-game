@@ -43,6 +43,7 @@ public class CounterA : MonoBehaviour
 
     public void OnStartAttack(InputAction.CallbackContext ctx)
     {
+        if(!GameManager.instance.gameStarted)return;
         if(ctx.performed)
         {
             if(plctrl.currentState == plctrl.NormalState)canAtk = true;

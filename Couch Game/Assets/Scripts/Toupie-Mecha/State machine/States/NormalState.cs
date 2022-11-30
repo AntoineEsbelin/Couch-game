@@ -40,7 +40,6 @@ public class NormalState : PlayerState
 
     public void Moving()
     {
-
         if (playerController.isMoving)
         {
             playerController.PlayerAnimator.SetBool("IsWalking", true);
