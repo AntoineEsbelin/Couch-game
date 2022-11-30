@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using EZCameraShake;
 
 public class PointZone : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class PointZone : MonoBehaviour
         if(coll.CompareTag("Player"))
         {
             if(isField)return;
+            CameraShaker.Instance.ShakeOnce(4f, 4f, 0.1f, 1f);
             PlayerController deadPlayer = coll.GetComponentInParent<PlayerController>();
             GameObject expl = Instantiate(explosion, this.transform.position, Quaternion.identity);
             expl.transform.localScale *= explosionMultiplier;
