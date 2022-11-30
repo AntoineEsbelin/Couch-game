@@ -28,6 +28,7 @@ public class Hitbox : MonoBehaviour
         {
             counterAtk.rb = null;
             counterAtk.pm = null;
+            counterAtk.plctrl.hasCountered = false;
         }
     }
 

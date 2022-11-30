@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour
     public float[] timerPerPhase;
 
     public PlayerController lastPlayerContacted;
+    public bool hasCountered;
     public float maxTimeLastPlayer = 5f;
     public float timeLastPlayer;
 
@@ -253,7 +254,6 @@ public class PlayerController : MonoBehaviour
             if (!other.isTrigger) return;
             if (other.gameObject.tag == "Player")
             {
-                Debug.Log("haha");
                 if(currentState == SpinnerState)
                 {
                     PlayerController triggerPlayer = other.GetComponentInParent<PlayerController>();
@@ -263,8 +263,9 @@ public class PlayerController : MonoBehaviour
 
                     //Si le joueur est pas stun [???]
 
-                    if (triggerPlayer.currentState == triggerPlayer.NormalState)
+                    if (triggerPlayer.currentState == triggerPlayer.NormalState && !triggerPlayer.hasCountered)
                     {
+                        triggerPlayer.hasCountered = false;
                         //activate bounce player of this spinner
                         Instantiate(explosion, this.transform.position, Quaternion.identity);
                         triggerPlayer.StunState.timerMax = triggerPlayer.stunDurationKnockback;

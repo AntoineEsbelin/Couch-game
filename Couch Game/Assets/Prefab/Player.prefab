@@ -199,6 +199,7 @@ MonoBehaviour:
   - 0.3
   - 1
   lastPlayerContacted: {fileID: 0}
+  hasCountered: 0
   maxTimeLastPlayer: 5
   timeLastPlayer: 0
   isMoving: 0
@@ -207,8 +208,10 @@ MonoBehaviour:
   explosion: {fileID: 3438996937471707301, guid: a2be7fac82fbeea43911cac21ce707ef, type: 3}
   dashDurationReduction: 2
   playerFBX: {fileID: 0}
-  toupieFBX: {fileID: 0}
+  trailRenderer: {fileID: 0}
+  spinningAnim: {fileID: 0}
   troupieVFX: {fileID: 5131705808110797491, guid: 89dd00848dc657f46ab78b330e957c5a, type: 3}
+  invincibilityTimerMax: 3
   move: {x: 0, y: 0, z: 0}
   wallNormal: {x: 0, y: 0, z: 0}
   playerDirection: {x: 0, y: 0, z: 0}
@@ -527,7 +530,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6961087132073683184}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: -0.00000004371139}
-  m_LocalPosition: {x: 0, y: 0.52, z: 2.52}
+  m_LocalPosition: {x: 0, y: 0.52, z: 4.71}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -545,5 +548,5 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.93, y: 1, z: 3.716092}
-  m_Center: {x: -1.0144541e-15, y: 2.13, z: 0.88695383}
+  m_Size: {x: 3.28, y: 1, z: 4.623394}
+  m_Center: {x: -8.1426294e-16, y: 2.13, z: 1.3406048}

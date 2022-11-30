@@ -54,7 +54,7 @@ public class CounterA : MonoBehaviour
     {
         if(canAtk && !inCD)
         {
-            
+            //Debug.Log("attack");
             if(!plctrl.PlayerAnimator.GetBool("Counter"))plctrl.PlayerAnimator.SetBool("Counter", true);
             Vector3 forceToApply = orientation.forward * forceApplied;
             
@@ -67,6 +67,7 @@ public class CounterA : MonoBehaviour
                 pm.stateMachine.SwitchState(pm.StunState);
                 //rb.AddForce(forceToApply / 4 * Time.deltaTime, ForceMode.Impulse);
                 Debug.Log("YEE");
+                plctrl.hasCountered = true;
                 
             }
             else if (pm != null && pm.currentState == pm.NormalState)
