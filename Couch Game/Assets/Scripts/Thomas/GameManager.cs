@@ -7,10 +7,17 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     public List<PlayerController> allPlayer;
-    
+    public List<PlayerInput> playersList = new List<PlayerInput>();
 
     public static GameManager instance;
     
+    //Input Join and Leave
+    public InputAction joinAction;
+    public InputAction leftAction;
+
+    //Event
+    public event System.Action<PlayerInput> PlayerJoinedGame;
+    public event System.Action<PlayerInput> PlayerLeftGame;
 
     public Transform[] spawnPoints;
     public GameObject[] charactersFBX;
@@ -43,15 +50,22 @@ public class GameManager : MonoBehaviour
     public TempPlayerNb tempPlayerNb;
     public bool gameStarted;
     
-    public void InitializePlayer(PlayerInput playerInput,int index)
+    private void OnPlayerJoined(PlayerInput playerInput)
     {
+<<<<<<< HEAD
 
         
         
+=======
+        if(tempPlayerNb.howManyPlayer == 0)return;
+        playersList.Add(playerInput);
+        if (PlayerJoinedGame != null)
+            PlayerJoinedGame(playerInput);
+>>>>>>> parent of 2bddf0b (MultiPlayer menu)
         PlayerController playerController = playerInput.GetComponent<PlayerController>(); 
-        playerController.playerId = index ;
-        // playerController.transform.position = spawnPoints[playerController.playerId - 1].position;
-        playerController.playerFBX = Instantiate(charactersFBX[playerController.playerId], playerController.transform);    
+        playerController.playerId = playersList.Count;
+        playerController.transform.position = spawnPoints[playerController.playerId - 1].position;
+        playerController.playerFBX = Instantiate(charactersFBX[playerController.playerId - 1], playerController.transform);    
         playerController.toupieFBX = playerController.playerFBX.GetComponentInChildren<SpinningAnim>().gameObject;
         playerController.toupieFBX.SetActive(false);
 
@@ -64,11 +78,47 @@ public class GameManager : MonoBehaviour
         StartCoroutine(WaitBeforeGameStart(readyGo.clip.length - 1.3f));
     }
     
+<<<<<<< HEAD
     
+=======
+    private void OnPlayerLeft(PlayerInput playerInput)
+    {
+        print("aled");
+    }
+    private void Awake()
+    {
+        if(instance != null)Destroy(gameObject);
+        instance = this;
+        
+        joinAction.Enable();
+        joinAction.performed += ctx => JoinAction(ctx);
+        
+        leftAction.Enable();
+        leftAction.performed += ctx => LeftAction(ctx);
+    }
+    
+    private void OnDisable()
+    {
+        joinAction.Disable();
+        leftAction.Disable();
+    }
+>>>>>>> parent of 2bddf0b (MultiPlayer menu)
 
    
 
+<<<<<<< HEAD
    
+=======
+    private void UnregisterPlayer(PlayerInput playerInput)
+    {
+        playersList.Remove(playerInput);
+        if (PlayerLeftGame != null)
+            PlayerLeftGame(playerInput);
+        
+        Destroy(playerInput.transform.gameObject);
+    }
+>>>>>>> parent of 2bddf0b (MultiPlayer menu)
+
 
     // Start is called before the first frame update
     private void Start()
