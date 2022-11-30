@@ -1,0 +1,370 @@
+fileFormatVersion: 2
+guid: 81592888a3cc9d441a4b71b7db5f6b7c
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 2048
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: PrefabCrowdRobotBleu_0
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 1246
+        width: 774
+        height: 766
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd6e766f89855504eb06fbe8f21a6949
+      internalID: 670690813
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrefabCrowdRobotBleu_1
+      rect:
+        serializedVersion: 2
+        x: 1125
+        y: 1266
+        width: 766
+        height: 736
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8461bf86da3a9b449a90cfd6dd948ef
+      internalID: -174798670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrefabCrowdRobotBleu_2
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 804
+        width: 283
+        height: 354
+      alignment: 9
+      pivot: {x: 0.47367987, y: 0.81562}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 80c72fb0585600646b2856b00b909a61
+      internalID: -1416074749
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrefabCrowdRobotBleu_3
+      rect:
+        serializedVersion: 2
+        x: 411
+        y: 804
+        width: 284
+        height: 352
+      alignment: 9
+      pivot: {x: 0.53934145, y: 0.8279936}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c217ea960c182dd49a80d47e708c1551
+      internalID: -321381722
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrefabCrowdRobotBleu_10
+      rect:
+        serializedVersion: 2
+        x: 1181
+        y: 732
+        width: 302
+        height: 407
+      alignment: 9
+      pivot: {x: 0.47533613, y: 0.86602616}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 93fb5c7623372ca4588e581408f21da0
+      internalID: -1900148970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrefabCrowdRobotBleu_11
+      rect:
+        serializedVersion: 2
+        x: 1622
+        y: 732
+        width: 302
+        height: 407
+      alignment: 9
+      pivot: {x: 0.5493289, y: 0.8111224}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cfa45daf72f2ac64199f0541495560c1
+      internalID: -1921279374
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrefabCrowdRobotBleu_33
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 244
+        width: 783
+        height: 421
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10862deee78bf4a4ebf55358705e23db
+      internalID: -1466310190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrefabCrowdRobotBleu_34
+      rect:
+        serializedVersion: 2
+        x: 1231
+        y: 193
+        width: 660
+        height: 464
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a956abe6374c324a97e60b5949260c2
+      internalID: 1352338173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrefabCrowdRobotBleu_35
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 46
+        width: 82
+        height: 147
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c0ff48d239936e4097f2f2a066914e9
+      internalID: -1357463519
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrefabCrowdRobotBleu_36
+      rect:
+        serializedVersion: 2
+        x: 1074
+        y: 46
+        width: 103
+        height: 112
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 789dd12bebc135549bf7451a7985d28a
+      internalID: -21486289
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      PrefabCrowdRobotBleu_3: -321381722
+      PrefabCrowdRobotBleu_27: 1160228786
+      PrefabCrowdRobotBleu_11: -1921279374
+      PrefabCrowdRobotBleu_0: 670690813
+      PrefabCrowdRobotBleu_9: -225754009
+      PrefabCrowdRobotBleu_35: -1357463519
+      PrefabCrowdRobotBleu_36: -21486289
+      PrefabCrowdRobotBleu_22: 1250947307
+      PrefabCrowdRobotBleu_25: -676412132
+      PrefabCrowdRobotBleu_20: 1275250522
+      PrefabCrowdRobotBleu_30: 704127834
+      PrefabCrowdRobotBleu_12: -1396832147
+      PrefabCrowdRobotBleu_7: -1311213628
+      PrefabCrowdRobotBleu_15: -414921886
+      PrefabCrowdRobotBleu_17: -1405639520
+      PrefabCrowdRobotBleu_19: 301765231
+      PrefabCrowdRobotBleu_8: 102412103
+      PrefabCrowdRobotBleu_28: -283708978
+      PrefabCrowdRobotBleu_31: -545037029
+      PrefabCrowdRobotBleu_4: 889131745
+      PrefabCrowdRobotBleu_13: 280804697
+      PrefabCrowdRobotBleu_18: 158868730
+      PrefabCrowdRobotBleu_1: -174798670
+      PrefabCrowdRobotBleu_10: -1900148970
+      PrefabCrowdRobotBleu_29: -382160459
+      PrefabCrowdRobotBleu_14: -733301480
+      PrefabCrowdRobotBleu_24: 1759403656
+      PrefabCrowdRobotBleu_32: -136001958
+      PrefabCrowdRobotBleu_23: 105656687
+      PrefabCrowdRobotBleu_21: 1333975807
+      PrefabCrowdRobotBleu_26: -240446231
+      PrefabCrowdRobotBleu_34: 1352338173
+      PrefabCrowdRobotBleu_33: -1466310190
+      PrefabCrowdRobotBleu_2: -1416074749
+      PrefabCrowdRobotBleu_16: 670852583
+      PrefabCrowdRobotBleu_5: 1575876455
+      PrefabCrowdRobotBleu_6: -475275934
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
