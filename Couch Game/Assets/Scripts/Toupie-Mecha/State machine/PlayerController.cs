@@ -347,6 +347,7 @@ public class PlayerController : MonoBehaviour
 
         invincibilityTimer = invincibilityTimerMax;
         invincible = true;
+        playerAnimator.enabled = true;
     }
 
     void StopInvincibility()
