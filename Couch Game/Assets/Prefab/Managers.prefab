@@ -468,7 +468,7 @@ MonoBehaviour:
   clip: {fileID: 0}
   gameTimer:
     timer: 0
-    maxTimer: 60
+    maxTimer: 180
     drawTimer: 0
     drawMaxPoint: 0
     timeOut: 0
