@@ -71,6 +71,8 @@ public class PlayerController : MonoBehaviour
     float invincibilityTimer;
     bool invincible;
 
+    public GameObject arrow;
+
     void OnEnable()
     {
         currentState = NormalState;
@@ -150,6 +152,7 @@ public class PlayerController : MonoBehaviour
                     //NormalState.SetSpeedModifier(NormalState.mSettings.slowSpeed);
                     NormalState.SlowSpeedModifier();
                     startCharging = true;
+                    arrow.GetComponent<SpriteRenderer>().enabled = true;
                     playerAnimator.SetBool("ChargingSpin", true);
                 }
             }
@@ -175,7 +178,7 @@ public class PlayerController : MonoBehaviour
                         }
 
                         ResetCharging();
-                    }
+                }
                 }
             }
         }
@@ -187,6 +190,7 @@ public class PlayerController : MonoBehaviour
             //normalPlayer.spinCharging = false;   ANNULER QUAND ON SE FAIT STUN
             startCharging = false;
             spinTimer = 0f;
+            arrow.GetComponent<SpriteRenderer>().enabled = false;
         }
 
         public void OnBrake(InputAction.CallbackContext ctx)
