@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using EZCameraShake;
 
 public class BounceSpinner : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class BounceSpinner : MonoBehaviour
     public int dashDurationReduction = 2;
     private void OnEnable()
     {
+        CameraShaker.Instance.ShakeOnce(1f, 4f, 0.1f, 0.5f);
         //Debug.Log(this.GetComponent<SpinnerControler>().moveDir);
         Instantiate(explosion, this.transform.position, Quaternion.identity);
         spinnerControler.moveDir = -spinnerControler.moveDir;
