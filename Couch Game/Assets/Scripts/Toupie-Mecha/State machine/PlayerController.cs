@@ -170,6 +170,7 @@ public class PlayerController : MonoBehaviour
                                 SpinnerState.mSettings.bonusMoveSpeed = bonusSpeedPerPhase[i];
                                 playerAnimator.SetBool("ChargingSpin", false);
                                 //Debug.Log("VROUM");
+                                Debug.Log(bonusSpeedPerPhase[i]);
                                 break;
                             }
                         }

@@ -195,9 +195,13 @@ MonoBehaviour:
   bonusSpeedPerPhase:
   - 300
   - 600
+  - 800
+  - 1000
   timerPerPhase:
   - 0.3
-  - 1
+  - 2
+  - 3
+  - 4
   lastPlayerContacted: {fileID: 0}
   hasCountered: 0
   maxTimeLastPlayer: 5
