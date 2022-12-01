@@ -271,7 +271,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointGiven: 1
   isField: 0
-  explosion: {fileID: 3438996937471707301, guid: a2be7fac82fbeea43911cac21ce707ef, type: 3}
+  explosion: {fileID: 3193864383826838676, guid: c8aa708196a029140916b05a1fb82638, type: 3}
   explosionMultiplier: 5
 --- !u!136 &367022723
 CapsuleCollider:
@@ -334,7 +334,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointGiven: 1
   isField: 0
-  explosion: {fileID: 3438996937471707301, guid: a2be7fac82fbeea43911cac21ce707ef, type: 3}
+  explosion: {fileID: 3193864383826838676, guid: c8aa708196a029140916b05a1fb82638, type: 3}
   explosionMultiplier: 5
 --- !u!136 &377751227
 CapsuleCollider:
@@ -904,7 +904,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointGiven: 1
   isField: 0
-  explosion: {fileID: 3438996937471707301, guid: a2be7fac82fbeea43911cac21ce707ef, type: 3}
+  explosion: {fileID: 3193864383826838676, guid: c8aa708196a029140916b05a1fb82638, type: 3}
   explosionMultiplier: 5
 --- !u!136 &593961365
 CapsuleCollider:
@@ -967,7 +967,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointGiven: 1
   isField: 0
-  explosion: {fileID: 3438996937471707301, guid: a2be7fac82fbeea43911cac21ce707ef, type: 3}
+  explosion: {fileID: 3193864383826838676, guid: c8aa708196a029140916b05a1fb82638, type: 3}
   explosionMultiplier: 5
 --- !u!136 &621241626
 CapsuleCollider:
@@ -1643,7 +1643,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointGiven: 0
   isField: 1
-  explosion: {fileID: 3438996937471707301, guid: a2be7fac82fbeea43911cac21ce707ef, type: 3}
+  explosion: {fileID: 3193864383826838676, guid: c8aa708196a029140916b05a1fb82638, type: 3}
   explosionMultiplier: 0
 --- !u!65 &1316811824
 BoxCollider:
@@ -1755,7 +1755,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointGiven: 1
   isField: 0
-  explosion: {fileID: 3438996937471707301, guid: a2be7fac82fbeea43911cac21ce707ef, type: 3}
+  explosion: {fileID: 3193864383826838676, guid: c8aa708196a029140916b05a1fb82638, type: 3}
   explosionMultiplier: 5
 --- !u!136 &1389730770
 CapsuleCollider:
@@ -2734,7 +2734,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointGiven: 1
   isField: 0
-  explosion: {fileID: 3438996937471707301, guid: a2be7fac82fbeea43911cac21ce707ef, type: 3}
+  explosion: {fileID: 3193864383826838676, guid: c8aa708196a029140916b05a1fb82638, type: 3}
   explosionMultiplier: 5
 --- !u!136 &1961641643
 CapsuleCollider:

@@ -15,6 +15,7 @@ public class DeathState : PlayerState
         //visuel off :
         ResetAnimator(player.PlayerAnimator);
         player.playerFBX.SetActive(false);
+        player.GetComponentInChildren<SpinningAnim>(true).transform.localScale = Vector3.one;
     }
     public override void UpdateState(PlayerController player)
     {

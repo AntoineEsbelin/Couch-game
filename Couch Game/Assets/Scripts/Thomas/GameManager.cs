@@ -247,7 +247,7 @@ public class GameManager : MonoBehaviour
     public void StartGame(TMP_InputField inputField)
     {
         if(inputField.contentType != TMP_InputField.ContentType.IntegerNumber)return;
-        if(int.Parse(inputField.text) < 1 || int.Parse(inputField.text) > 4)return;
+        if(inputField.text.Length == 0 || int.Parse(inputField.text) < 1 || int.Parse(inputField.text) > 4)return;
 
         tempPlayerNb.howManyPlayer = int.Parse(inputField.text);
         inputField.transform.parent.gameObject.SetActive(false);
