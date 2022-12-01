@@ -195,9 +195,13 @@ MonoBehaviour:
   bonusSpeedPerPhase:
   - 300
   - 600
+  - 800
+  - 1000
   timerPerPhase:
   - 0.3
-  - 1
+  - 2
+  - 3
+  - 4
   lastPlayerContacted: {fileID: 0}
   maxTimeLastPlayer: 5
   timeLastPlayer: 0
@@ -207,8 +211,10 @@ MonoBehaviour:
   explosion: {fileID: 3438996937471707301, guid: a2be7fac82fbeea43911cac21ce707ef, type: 3}
   dashDurationReduction: 2
   playerFBX: {fileID: 0}
-  toupieFBX: {fileID: 0}
+  trailRenderer: {fileID: 0}
+  spinningAnim: {fileID: 0}
   troupieVFX: {fileID: 5131705808110797491, guid: 89dd00848dc657f46ab78b330e957c5a, type: 3}
+  invincibilityTimerMax: 3
   move: {x: 0, y: 0, z: 0}
   wallNormal: {x: 0, y: 0, z: 0}
   playerDirection: {x: 0, y: 0, z: 0}
