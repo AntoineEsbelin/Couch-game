@@ -8,6 +8,8 @@ public class Hitbox : MonoBehaviour
     private void Awake()
     {
         counterAtk = GetComponent<CounterA>();
+        Debug.Log(this.GetComponentInChildren<BoxCollider>().center);
+        Debug.Log(this.GetComponentInChildren<BoxCollider>().size);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -19,6 +21,7 @@ public class Hitbox : MonoBehaviour
             counterAtk.rb = rb;
             counterAtk.pm = rb.GetComponent<PlayerController>();
             if (other.GetComponentInParent<PlayerController>().playerId == this.GetComponent<PlayerController>().playerId) counterAtk.pm = null;
+            //Debug.Log("ENTER IN TRIGGER");
         }
     }
 
@@ -28,8 +31,14 @@ public class Hitbox : MonoBehaviour
         {
             counterAtk.rb = null;
             counterAtk.pm = null;
-            counterAtk.plctrl.hasCountered = false;
+            //counterAtk.plctrl.hasCountered = false;
+            //Debug.Log("LEAVING TRIGGER");
+
         }
     }
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireCube(this.GetComponentInChildren<BoxCollider>().gameObject.transform.position, this.GetComponentInChildren<BoxCollider>().size);
+    }
 }

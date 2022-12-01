@@ -240,7 +240,8 @@ public class PlayerController : MonoBehaviour
                     timer = timerCount;
                     if(Vector3.Dot(wallNormal, playerDirection) < 0) //produit scalaire
                     {
-                        BounceWall();
+                        Animator wallAnim = other.gameObject.GetComponentInParent<WallEvent>().wallAnim;
+                        BounceWall(wallAnim);
                     }
                     //mettre timer
                 }
@@ -268,9 +269,11 @@ public class PlayerController : MonoBehaviour
 
                     //Si le joueur est pas stun [???]
 
-                    if (triggerPlayer.currentState == triggerPlayer.NormalState && !triggerPlayer.hasCountered)
+                    if ((triggerPlayer.currentState == triggerPlayer.NormalState || triggerPlayer.currentState == triggerPlayer.StunState) && !triggerPlayer.hasCountered)
                     {
-                        triggerPlayer.hasCountered = false;
+                        Debug.Log(triggerPlayer);
+                        triggerPlayer.PlayerAnimator.SetBool("IsStunned", true);
+                        //triggerPlayer.hasCountered = false;
                         //activate bounce player of this spinner
                         Instantiate(explosion, this.transform.position, Quaternion.identity);
                         triggerPlayer.StunState.timerMax = triggerPlayer.stunDurationKnockback;
@@ -291,7 +294,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        void BounceWall()
+        void BounceWall(Animator wallAnim)
         {
             SpinnerState.moveDir = Vector3.Reflect(playerDirection, wallNormal);
             float newAngle = Vector3.SignedAngle(playerDirection, SpinnerState.moveDir, Vector3.up);
@@ -299,6 +302,8 @@ public class PlayerController : MonoBehaviour
             Vector3 newVector = new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y + newAngle, transform.rotation.eulerAngles.z);
             transform.rotation = Quaternion.Euler(newVector);
             AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("Spin Hit Wall"), transform.position, AudioManager.instance.soundEffectMixer, true);
+            wallAnim.ResetTrigger("BounceWall");
+            wallAnim.SetTrigger("BounceWall");
             walled = true;
         }
 

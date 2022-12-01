@@ -54,20 +54,20 @@ public class CounterA : MonoBehaviour
     {
         if(canAtk && !inCD)
         {
+            if(!plctrl.PlayerAnimator.GetBool("Counter"))plctrl.PlayerAnimator.SetTrigger("Counter");
             //Debug.Log("attack");
-            if(!plctrl.PlayerAnimator.GetBool("Counter"))plctrl.PlayerAnimator.SetBool("Counter", true);
             Vector3 forceToApply = orientation.forward * forceApplied;
             
              
             if (pm != null && pm.currentState == pm.SpinnerState)
             {
                 pm.StunState.timerMax = spinStun;
+                pm.timeLastPlayer = spinStun;
                 pm.lastPlayerContacted = plctrl;
-                pm.StunState.knockbackDir = forceToApply;
+                plctrl.hasCountered = true;
                 pm.stateMachine.SwitchState(pm.StunState);
                 //rb.AddForce(forceToApply / 4 * Time.deltaTime, ForceMode.Impulse);
-                Debug.Log("YEE");
-                plctrl.hasCountered = true;
+                Debug.Log($"COUNTERED {pm}");
                 
             }
             else if (pm != null && pm.currentState == pm.NormalState)
@@ -78,7 +78,7 @@ public class CounterA : MonoBehaviour
                 pm.StunState.knockbackDir = forceToApply;
                 pm.stateMachine.SwitchState(pm.StunState);
                 //rb.AddForce(forceToApply * Time.deltaTime, ForceMode.Impulse);
-                Debug.Log("EE");
+                //Debug.Log("EE");
             }
 
             

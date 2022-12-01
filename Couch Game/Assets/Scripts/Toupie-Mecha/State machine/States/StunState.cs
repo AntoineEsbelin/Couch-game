@@ -21,8 +21,16 @@ public class StunState : PlayerState
         timer = timerMax;
         if(player.lastPlayerContacted == null)return;
         stunplayer = player.lastPlayerContacted;
-        knockbackDir = (playerController.transform.position - stunplayer.transform.position).normalized;
+        playerController.isMoving = false;
+        if(!stunplayer.hasCountered)knockbackDir = (playerController.transform.position - stunplayer.transform.position).normalized;
+        else knockbackDir = Vector3.zero;
         kbSpeed = stunplayer.SpinnerState.mSettings.moveSpeed;
+        if(stunplayer.hasCountered)
+        {
+            stunplayer.hasCountered = false;
+            playerController.rb.velocity = Vector3.zero;
+            Debug.Log("NE BOUGE PAS");
+        }
     }
 
     public override void UpdateState(PlayerController player)
@@ -34,6 +42,7 @@ public class StunState : PlayerState
     public override void ExitState(PlayerController player)
     {
         
+        playerController.PlayerAnimator.SetBool("IsStunned", false);
     }
 
     [System.Serializable] public class MovementSettings
