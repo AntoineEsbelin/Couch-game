@@ -63,6 +63,8 @@ public class SpinnerState : PlayerState
         [Range(0.1f, 0.9f)]
         public float brakeSpeedModifier = 0.5f;
         [HideInInspector] public float brakeSpeed;
+
+        public float glueSpeedModifier = 1f;
     }
 
     public MovementSettings mSettings;
@@ -90,7 +92,7 @@ public class SpinnerState : PlayerState
 
         //Vector3 moveDir = mSettings.rb.transform.forward;
 
-        playerController.rb.velocity = new Vector3(moveDir.x,0f,moveDir.z)* (mSettings.moveSpeed) * mSettings.brakeSpeed * Time.fixedDeltaTime;
+        playerController.rb.velocity = new Vector3(moveDir.x,0f,moveDir.z)* (mSettings.moveSpeed) * mSettings.brakeSpeed * mSettings.glueSpeedModifier * Time.fixedDeltaTime;
 
     }
 

@@ -28,6 +28,7 @@ public class NormalState : PlayerState
         public float speedModifier = 1;
         public float slowSpeedModifier = .5f;
         public float normalSpeedModifier = 1f;
+        public float glueSpeedModifier = 1f;
 
         [Range(.01f, .5f)]public float turnSmoothTime = 0.1f;
         [HideInInspector] public float turnSmoothVelocity;
@@ -48,7 +49,7 @@ public class NormalState : PlayerState
                 ref mSettings.turnSmoothVelocity, mSettings.turnSmoothTime);
             playerController.rb.transform.rotation = Quaternion.Euler(0f, angle, 0f);
             moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            theMove = new Vector3(moveDir.x,0f,moveDir.z)* (mSettings.moveSpeed * mSettings.speedModifier) * Time.fixedDeltaTime;
+            theMove = new Vector3(moveDir.x,0f,moveDir.z)* (mSettings.moveSpeed * mSettings.speedModifier * mSettings.glueSpeedModifier) * Time.fixedDeltaTime;
         }
         else if (theMove != Vector3.zero)
         {
