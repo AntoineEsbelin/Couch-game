@@ -286,8 +286,8 @@ public class PlayerController : MonoBehaviour
                         Instantiate(explosion, this.transform.position, Quaternion.identity);
                         triggerPlayer.StunState.timerMax = triggerPlayer.stunDurationKnockback;
                         triggerPlayer.lastPlayerContacted = this;
-                        int randomSpinHitPlayer = Random.Range(0, 8);
-                        AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault($"Spin Hit Player {randomSpinHitPlayer}"), transform.position, AudioManager.instance.soundEffectMixer, true, false);
+                        int randomSpinHitPlayer = Random.Range(0, 7);
+                        AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault($"Spin Hit Player {randomSpinHitPlayer + 1}"), transform.position, AudioManager.instance.soundEffectMixer, true, false);
                         triggerPlayer.stateMachine.SwitchState(triggerPlayer.StunState);
 
                         StunState.timerMax = stunDurationSpinEnd;

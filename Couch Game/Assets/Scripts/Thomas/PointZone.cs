@@ -46,7 +46,8 @@ public class PointZone : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (controller != null)
+        //controller vibration
+        /*if (controller != null)
         {
             if(controller.GetDevice<Gamepad>() == null)return;
             Gamepad gamePad = controller.GetDevice<Gamepad>();
@@ -62,7 +63,7 @@ public class PointZone : MonoBehaviour
                 }
                 
             }
-        }
+        }*/
         
     }
 
@@ -70,7 +71,7 @@ public class PointZone : MonoBehaviour
     private void DispawnPlayer(PlayerController deadPlayer)
     {
         if(deadPlayer.currentState == deadPlayer.DeathState)return;
-        VibroTimer = maxVibroTimer; 
+        //VibroTimer = maxVibroTimer; 
         AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("Goal"), this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
         
         if(deadPlayer.lastPlayerContacted != null)
