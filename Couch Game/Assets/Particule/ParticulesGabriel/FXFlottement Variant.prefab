@@ -76,6 +76,10 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5131705808110797485, guid: 89dd00848dc657f46ab78b330e957c5a, type: 3}
+      propertyPath: ShapeModule.angle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5131705808110797485, guid: 89dd00848dc657f46ab78b330e957c5a, type: 3}
       propertyPath: SizeModule.enabled
       value: 1
       objectReference: {fileID: 0}
