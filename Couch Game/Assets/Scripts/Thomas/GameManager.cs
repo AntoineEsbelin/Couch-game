@@ -262,7 +262,7 @@ public class GameManager : MonoBehaviour
     {
         gameStarted = false;
         yield return new WaitForSeconds(length);
-        AudioSource ost = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("OST"), transform.position, AudioManager.instance.ostMixer, false, true);
+        AudioSource ost = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("OST"), transform.position, AudioManager.instance.ostMixer, false, false);
         gameStarted = true;
         gameTimer.drawTimer = false;
     }

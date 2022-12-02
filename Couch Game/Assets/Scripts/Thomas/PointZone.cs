@@ -84,6 +84,8 @@ public class PointZone : MonoBehaviour
 
             AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Crowd Shouting"]/*.GetValueOrDefault("Crowd Shouting")*/, this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
             
+            CheckBestPlayer();
+
             if(GameManager.instance.gameTimer.drawTimer)
             {
                 if(deadPlayer.lastPlayerContacted.playerPoint > GameManager.instance.gameTimer.drawMaxPoint)
@@ -94,8 +96,8 @@ public class PointZone : MonoBehaviour
             }
             else
             {
-                int randomPraise = Random.Range(0, 8);
-                AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"Voice Praise {randomPraise}"], this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
+                int randomPraise = Random.Range(0, 7);
+                AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"Voice Praise {randomPraise + 1}"], this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
             }
         }
         else
@@ -110,5 +112,32 @@ public class PointZone : MonoBehaviour
         }
         
         
+    }
+
+    private void CheckBestPlayer()
+    {
+        int playerPoint = 0;
+        //get max point + player
+        for(int i = 0; i < GameManager.instance.allPlayer.Count; i++)
+        {
+            if(GameManager.instance.allPlayer[i].playerPoint >= playerPoint)
+            {
+                playerPoint = GameManager.instance.allPlayer[i].playerPoint;
+            }
+        }
+        
+        for(int i = 0; i < GameManager.instance.allPlayer.Count; i++)
+        {
+            if(GameManager.instance.allPlayer[i].playerPoint >= playerPoint)
+            {
+                GameManager.instance.allPlayer[i].hasDaCrown = true;
+                GameManager.instance.allPlayer[i].playerCrown.SetActive(true);
+            }
+            else
+            {
+                GameManager.instance.allPlayer[i].hasDaCrown = false;
+                GameManager.instance.allPlayer[i].playerCrown.SetActive(false);
+            }
+        }
     }
 }
