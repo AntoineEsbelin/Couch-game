@@ -67,7 +67,7 @@ public class CounterA : MonoBehaviour
             Vector3 SmallForce = orientation.forward * forceSmall;
             
              
-            if (pm != null && pm.currentState == pm.SpinnerState)
+            if (pm != null && pm.currentState == pm.SpinnerState && pm.invincibilityTimer <= 0)
             {
                 pm.StunState.timerMax = spinStun;
                 Debug.Log(forceToApply);
@@ -81,7 +81,7 @@ public class CounterA : MonoBehaviour
                 Debug.Log($"COUNTERED {pm}");
                 
             }
-            else if (pm != null && pm.currentState == pm.NormalState)
+            else if (pm != null && pm.currentState == pm.NormalState && pm.invincibilityTimer <= 0)
             {
                 pm.StunState.timerMax = normalStun;
                 Debug.Log(SmallForce);
@@ -91,6 +91,7 @@ public class CounterA : MonoBehaviour
                 Instantiate(atkVFX, pm.transform);
 
                 pm.stateMachine.SwitchState(pm.StunState);
+                pm.ResetCharging();
                 AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"Counter Hit {randomAtk + 1}"], transform.position, AudioManager.instance.soundEffectMixer, true, false);
 
                 //rb.AddForce(forceToApply * Time.deltaTime, ForceMode.Impulse);
