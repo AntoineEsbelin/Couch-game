@@ -126,13 +126,13 @@ public class PlayerController : MonoBehaviour
             case 0:
                 arrow.GetComponent<SpriteRenderer>().color = new Color(0, 1, 1, 1);
                 break;
-            case 2:
+            case 1:
                 arrow.GetComponent<SpriteRenderer>().color = new Color(1, 0.8f, 0, 1);
                 break;
-            case 3:
+            case 2:
                 arrow.GetComponent<SpriteRenderer>().color = new Color(1, 0.3f, 0, 1);
                 break;
-            case 5:
+            case 4:
                 arrow.GetComponent<SpriteRenderer>().color = new Color(1, 0, 0.05f, 1);
                 break;
         }

@@ -286,10 +286,10 @@ MonoBehaviour:
   - 1500
   timerPerPhase:
   - 0.3
+  - 1
   - 2
   - 3
-  - 4
-  - 6
+  - 5
   lastPlayerContacted: {fileID: 0}
   hasCountered: 0
   maxTimeLastPlayer: 5
