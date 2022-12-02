@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour
     [Header("Respawn invincibility")]
 
     public float invincibilityTimerMax = 3f;
-    float invincibilityTimer;
+    public float invincibilityTimer;
     bool invincible;
 
     public bool stopBumpKb;
