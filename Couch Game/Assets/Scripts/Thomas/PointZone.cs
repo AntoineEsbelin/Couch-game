@@ -40,6 +40,7 @@ public class PointZone : MonoBehaviour
     {
         if(coll.CompareTag("Player"))
         {
+            CameraShaker.Instance.ShakeOnce(4f, 4f, 0.1f, 1f);
             PlayerController deadPlayer = coll.GetComponentInParent<PlayerController>();
             if(!isField || deadPlayer.currentState == deadPlayer.DeathState)return;
             GameObject expl = Instantiate(explosion, deadPlayer.transform.position, Quaternion.identity);
