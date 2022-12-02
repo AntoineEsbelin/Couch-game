@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 631306401378782006}
   - component: {fileID: 738394975343998950}
   m_Layer: 0
-  m_Name: PrefabCrowdRobotVert_9
+  m_Name: "T\xEAte"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 615092378645530121}
   - component: {fileID: 5755305435681476200}
   m_Layer: 0
-  m_Name: PrefabCrowdRobotVert_1
+  m_Name: Corps
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -215,7 +215,7 @@ GameObject:
   - component: {fileID: 4616085280653215846}
   - component: {fileID: 1471499849282930590}
   m_Layer: 0
-  m_Name: PrefabCrowdRobotVert_2
+  m_Name: BrasDroit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -299,7 +299,7 @@ GameObject:
   - component: {fileID: 3113987199322216923}
   - component: {fileID: 8662215866140291966}
   m_Layer: 0
-  m_Name: PrefabCrowdRobotVert_7
+  m_Name: Cou
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -383,7 +383,7 @@ GameObject:
   - component: {fileID: 3424292192303953226}
   - component: {fileID: 2528210870342667810}
   m_Layer: 0
-  m_Name: PrefabCrowdRobotVert_3
+  m_Name: BrasGauche
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
