@@ -33,7 +33,7 @@ public class StunState : PlayerState
         {
             stunplayer.hasCountered = false;
             playerController.rb.velocity = Vector3.zero;
-            sfx = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Stun"], player.transform.position, AudioManager.instance.soundEffectMixer, true);
+            sfx = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Stun"], player.transform.position, AudioManager.instance.soundEffectMixer, true, true);
             Debug.Log("NE BOUGE PAS");
         }
     }

@@ -28,7 +28,7 @@ public class SpinnerState : PlayerState
         playerController.GetComponentInChildren<SpinningAnim>().SetRotate(true);
         
         int randomMoveSFX = Random.Range(0,2);
-        audioSource = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault($"Spin Move {randomMoveSFX + 1}"), playerController.transform.position, AudioManager.instance.soundEffectMixer, true);
+        audioSource = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault($"Spin Move {randomMoveSFX + 1}"), playerController.transform.position, AudioManager.instance.soundEffectMixer, true, true);
     }
 
     public override void UpdateState(PlayerController player)

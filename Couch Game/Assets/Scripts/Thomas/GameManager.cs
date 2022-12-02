@@ -50,8 +50,6 @@ public class GameManager : MonoBehaviour
 
     public TempPlayerNb tempPlayerNb;
     public bool gameStarted;
-
-    public List<GameObject> allActualSFX;
     
     private void OnPlayerJoined(PlayerInput playerInput)
     {
@@ -83,9 +81,8 @@ public class GameManager : MonoBehaviour
         }
 
         if(playersList.Count != tempPlayerNb.howManyPlayer)return;
-        AudioSource readyGo = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Ready Go"], this.transform.position, AudioManager.instance.soundEffectMixer, true);
-        AudioSource ost = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("OST"), transform.position, AudioManager.instance.ostMixer, false);
-        ost.loop = true;
+        AudioSource readyGo = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Ready Go"], this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
+        AudioSource ost = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("OST"), transform.position, AudioManager.instance.ostMixer, false, true);
         StartCoroutine(WaitBeforeGameStart(readyGo.clip.length - 1.3f));
 
     }
@@ -216,7 +213,7 @@ public class GameManager : MonoBehaviour
                     gameTimer.drawTimer = true;
                     gameTimer.drawMaxPoint = playerPoint;
                     gameTimer.timerTXT.text = "SUDDEN DEATH !";
-                    AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Voice Sudden Death"], this.transform.position, AudioManager.instance.soundEffectMixer, true);
+                    AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Voice Sudden Death"], this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
                 }
                 else
                 {
@@ -234,7 +231,7 @@ public class GameManager : MonoBehaviour
         Debug.Log($"{playerWinner.name} WIN WITH {playerWinner.playerPoint} POINTS !");
 
         //general victory voice sound
-        AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"{allPlayer.IndexOf(playerWinner) + 1} Win"], this.transform.position, AudioManager.instance.soundEffectMixer, true);
+        AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"{allPlayer.IndexOf(playerWinner) + 1} Win"], this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
         gameTimer.timeOut = true;
         gameStarted = false;
         foreach(PlayerController player in allPlayer)
@@ -247,7 +244,7 @@ public class GameManager : MonoBehaviour
     {
         if(alreadyPlayed)return;
         if(gameTimer.timer > time)return;
-        AudioManager.instance.PlayClipAt(voice, this.transform.position, AudioManager.instance.soundEffectMixer, true);
+        AudioManager.instance.PlayClipAt(voice, this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
         alreadyPlayed = true;
     }
 
@@ -259,7 +256,7 @@ public class GameManager : MonoBehaviour
         tempPlayerNb.howManyPlayer = int.Parse(inputField.text);
         inputField.transform.parent.gameObject.SetActive(false);
         gameStarted = true;
-        AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Title"], this.transform.position, AudioManager.instance.soundEffectMixer, true);
+        AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Title"], this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
     }
 
     private IEnumerator WaitBeforeGameStart(float length)
@@ -273,7 +270,7 @@ public class GameManager : MonoBehaviour
     private void OneMinuteRemaining()
     {
         if(tempPlayerNb.oneMinute)return;
-        AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["One Minute Remaining"], this.transform.position, AudioManager.instance.soundEffectMixer, true);
+        AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["One Minute Remaining"], this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
         tempPlayerNb.oneMinute = true;
     }
 

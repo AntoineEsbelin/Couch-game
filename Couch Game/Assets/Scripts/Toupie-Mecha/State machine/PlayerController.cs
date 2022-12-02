@@ -154,7 +154,7 @@ public class PlayerController : MonoBehaviour
                     startCharging = true;
                     arrow.GetComponent<SpriteRenderer>().enabled = true;
                     playerAnimator.SetBool("ChargingSpin", true);
-                    sfx = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"Spin Charge"], transform.position, AudioManager.instance.soundEffectMixer, true);
+                    sfx = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"Spin Charge"], transform.position, AudioManager.instance.soundEffectMixer, false, true);
                     SpinnerState.vfx = Instantiate(SpinnerState.spinnerVFX, this.transform);
 
                 }
@@ -176,6 +176,7 @@ public class PlayerController : MonoBehaviour
                                 playerAnimator.SetBool("ChargingSpin", false);
                                 //Debug.Log("VROUM");
                                 Debug.Log(bonusSpeedPerPhase[i]);
+                                if(sfx != null)Destroy(sfx.gameObject);
                                 break;
                             }
                         }
@@ -193,7 +194,6 @@ public class PlayerController : MonoBehaviour
             //normalPlayer.spinCharging = false;   ANNULER QUAND ON SE FAIT STUN
             startCharging = false;
             spinTimer = 0f;
-            if(sfx != null)Destroy(sfx.gameObject);
             arrow.GetComponent<SpriteRenderer>().enabled = false;
         }
 
@@ -209,7 +209,7 @@ public class PlayerController : MonoBehaviour
                 SpinnerState.mSettings.brakeSpeed = SpinnerState.mSettings.brakeSpeedModifier;
 
                 int randomBrake = Random.Range(0, 7);
-                AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"Spin Brake {randomBrake + 1}"], transform.position, AudioManager.instance.soundEffectMixer, true);
+                AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"Spin Brake {randomBrake + 1}"], transform.position, AudioManager.instance.soundEffectMixer, true, false);
                 
             }
 
@@ -287,7 +287,7 @@ public class PlayerController : MonoBehaviour
                         triggerPlayer.StunState.timerMax = triggerPlayer.stunDurationKnockback;
                         triggerPlayer.lastPlayerContacted = this;
                         int randomSpinHitPlayer = Random.Range(0, 8);
-                        AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault($"Spin Hit Player {randomSpinHitPlayer}"), transform.position, AudioManager.instance.soundEffectMixer, true);
+                        AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault($"Spin Hit Player {randomSpinHitPlayer}"), transform.position, AudioManager.instance.soundEffectMixer, true, false);
                         triggerPlayer.stateMachine.SwitchState(triggerPlayer.StunState);
 
                         StunState.timerMax = stunDurationSpinEnd;
@@ -309,7 +309,7 @@ public class PlayerController : MonoBehaviour
 
             Vector3 newVector = new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y + newAngle, transform.rotation.eulerAngles.z);
             transform.rotation = Quaternion.Euler(newVector);
-            AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("Spin Hit Wall"), transform.position, AudioManager.instance.soundEffectMixer, true);
+             AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("Spin Hit Wall"), transform.position, AudioManager.instance.soundEffectMixer, true, false);
             
             //Anim billard and button
             NeonBugBounce(wallEvent);
@@ -340,7 +340,7 @@ public class PlayerController : MonoBehaviour
             //transform.rotation = Quaternion.Euler(-transform.rotation.eulerAngles);
             //SpinnerState.mSettings.dashDuration /= dashDurationReduction;
             SpinnerState.repoussed = true;
-            AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("Spin Hit Spin"), transform.position, AudioManager.instance.soundEffectMixer, true);
+            AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("Spin Hit Spin"), transform.position, AudioManager.instance.soundEffectMixer, true, false);
         }
 
     #endregion
