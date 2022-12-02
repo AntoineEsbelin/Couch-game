@@ -123,12 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &199543150 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6386044599906584494, guid: 14b5faa7b68b27c49814921cf3e3d0eb, type: 3}
-  m_PrefabInstance: {fileID: 460978815}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
 --- !u!1 &182214614
 GameObject:
   m_ObjectHideFlags: 0
@@ -266,6 +260,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 182214614}
   m_CullTransparentMesh: 1
+--- !u!114 &199543150 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6386044599906584494, guid: 14b5faa7b68b27c49814921cf3e3d0eb, type: 3}
+  m_PrefabInstance: {fileID: 460978815}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &281155069
 GameObject:
   m_ObjectHideFlags: 0
@@ -405,6 +410,7 @@ MonoBehaviour:
   isField: 0
   explosion: {fileID: 3193864383826838676, guid: c8aa708196a029140916b05a1fb82638, type: 3}
   explosionMultiplier: 5
+  maxVibroTimer: 2
 --- !u!136 &367022723
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -468,6 +474,7 @@ MonoBehaviour:
   isField: 0
   explosion: {fileID: 3193864383826838676, guid: c8aa708196a029140916b05a1fb82638, type: 3}
   explosionMultiplier: 5
+  maxVibroTimer: 2
 --- !u!136 &377751227
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1037,6 +1044,7 @@ MonoBehaviour:
   isField: 0
   explosion: {fileID: 3193864383826838676, guid: c8aa708196a029140916b05a1fb82638, type: 3}
   explosionMultiplier: 5
+  maxVibroTimer: 2
 --- !u!136 &593961365
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1100,6 +1108,7 @@ MonoBehaviour:
   isField: 0
   explosion: {fileID: 3193864383826838676, guid: c8aa708196a029140916b05a1fb82638, type: 3}
   explosionMultiplier: 5
+  maxVibroTimer: 2
 --- !u!136 &621241626
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1776,6 +1785,7 @@ MonoBehaviour:
   isField: 1
   explosion: {fileID: 3193864383826838676, guid: c8aa708196a029140916b05a1fb82638, type: 3}
   explosionMultiplier: 0
+  maxVibroTimer: 2
 --- !u!65 &1316811824
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1889,6 +1899,7 @@ MonoBehaviour:
   isField: 0
   explosion: {fileID: 3193864383826838676, guid: c8aa708196a029140916b05a1fb82638, type: 3}
   explosionMultiplier: 5
+  maxVibroTimer: 2
 --- !u!136 &1389730770
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3082,6 +3093,7 @@ MonoBehaviour:
   isField: 0
   explosion: {fileID: 3193864383826838676, guid: c8aa708196a029140916b05a1fb82638, type: 3}
   explosionMultiplier: 5
+  maxVibroTimer: 2
 --- !u!136 &1961641643
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3324,10 +3336,6 @@ PrefabInstance:
     - target: {fileID: 1896850882551273285, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
       propertyPath: m_LocalPosition.z
       value: 14.250001
-      objectReference: {fileID: 0}
-    - target: {fileID: 1896850882735031343, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
-      propertyPath: gameTimer.maxTimer
-      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 1896850882735031343, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
       propertyPath: gameTimer.timerTXT

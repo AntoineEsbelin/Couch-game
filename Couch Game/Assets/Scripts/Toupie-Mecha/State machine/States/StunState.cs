@@ -48,7 +48,7 @@ public class StunState : PlayerState
     {
         
         playerController.PlayerAnimator.SetBool("IsStunned", false);
-        Destroy(sfx.gameObject);
+        if(sfx != null)Destroy(sfx.gameObject);
     }
 
     [System.Serializable] public class MovementSettings

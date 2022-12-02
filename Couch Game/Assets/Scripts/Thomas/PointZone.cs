@@ -44,16 +44,20 @@ public class PointZone : MonoBehaviour
         }
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (controller != null)
         {
-            if (controller.GetDevice<Gamepad>() == Gamepad.current)
+            if(controller.GetDevice<Gamepad>() == null)return;
+            Gamepad gamePad = controller.GetDevice<Gamepad>();
+
+            if (gamePad == Gamepad.current)
             {
                 if (VibroTimer > 0)
                 {
                     VibroTimer -= Time.deltaTime;
-                    controller.GetDevice<Gamepad>().SetMotorSpeeds(0.5f, 1.5f);
+                    
+                    gamePad.SetMotorSpeeds(0.5f, 1.5f);
                     
                 }
                 
