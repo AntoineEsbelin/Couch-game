@@ -5,4 +5,5 @@ using UnityEngine;
 public class WallEvent : MonoBehaviour
 {
     public Animator wallAnim;
+    public Animator billardAnim;
 }

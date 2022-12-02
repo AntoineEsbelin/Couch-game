@@ -5,7 +5,12 @@ using UnityEngine;
 public class SpinnerState : PlayerState
 {
     private AudioSource audioSource;
-    private GameObject vfx;
+    
+    [Header("VFX")]
+    public GameObject spinnerVFX;
+    public GameObject vfx;
+
+
     public override void EnterState(PlayerController player)
     {
         playerController = player;
@@ -22,7 +27,6 @@ public class SpinnerState : PlayerState
         playerController.spinningAnim.SetRotate(true);
         playerController.GetComponentInChildren<SpinningAnim>().SetRotate(true);
         audioSource = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("Spin Move"), playerController.transform.position, AudioManager.instance.soundEffectMixer, true);
-        //vfx = Instantiate(playerController.troupieVFX, playerController.toupieFBX.GetComponent<SpinningAnim>().transform);
     }
 
     public override void UpdateState(PlayerController player)

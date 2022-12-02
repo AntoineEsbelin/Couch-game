@@ -215,7 +215,6 @@ MonoBehaviour:
   playerFBX: {fileID: 0}
   trailRenderer: {fileID: 0}
   spinningAnim: {fileID: 0}
-  troupieVFX: {fileID: 5131705808110797491, guid: 89dd00848dc657f46ab78b330e957c5a, type: 3}
   invincibilityTimerMax: 3
   arrow: {fileID: 8194550404549101532}
   move: {x: 0, y: 0, z: 0}
@@ -256,6 +255,7 @@ MonoBehaviour:
     speedModifier: 1
     slowSpeedModifier: 0.2
     normalSpeedModifier: 1
+    glueSpeedModifier: 1
     turnSmoothTime: 0.01
     turnSmoothVelocity: 0
   moveDir: {x: 0, y: 0, z: 0}
@@ -272,6 +272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 0}
+  spinnerVFX: {fileID: 5131705808110797491, guid: 89dd00848dc657f46ab78b330e957c5a, type: 3}
   mSettings:
     dashDuration: 0
     dashDurationMax: 2
@@ -285,6 +286,7 @@ MonoBehaviour:
     brakeManiability: 0
     brakeSpeedModifier: 0.5
     brakeSpeed: 0
+    glueSpeedModifier: 1
   moveDir: {x: 0, y: 0, z: 0}
   spinnerAngle: 0
   repoussed: 0
@@ -471,6 +473,7 @@ MonoBehaviour:
   canAtk: 0
   normalStun: 1
   spinStun: 3
+  atkVFX: {fileID: 4524051271069648140, guid: 69620bc75a9fe864ebbe4919c3a1bacc, type: 3}
 --- !u!114 &7715067853923158762
 MonoBehaviour:
   m_ObjectHideFlags: 0

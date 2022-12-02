@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-
 public class PlayerController : MonoBehaviour
 {
 
@@ -62,7 +61,6 @@ public class PlayerController : MonoBehaviour
     public TrailRenderer trailRenderer;
     public SpinningAnim spinningAnim;
 
-    public GameObject troupieVFX;
     private CapsuleCollider capsuleCol;
     private SphereCollider sphereCol;
 
@@ -73,7 +71,6 @@ public class PlayerController : MonoBehaviour
     bool invincible;
 
     public GameObject arrow;
-
     void OnEnable()
     {
         currentState = NormalState;
@@ -155,6 +152,9 @@ public class PlayerController : MonoBehaviour
                     startCharging = true;
                     arrow.GetComponent<SpriteRenderer>().enabled = true;
                     playerAnimator.SetBool("ChargingSpin", true);
+
+                    SpinnerState.vfx = Instantiate(SpinnerState.spinnerVFX, this.transform);
+
                 }
             }
 
@@ -240,8 +240,9 @@ public class PlayerController : MonoBehaviour
                     timer = timerCount;
                     if(Vector3.Dot(wallNormal, playerDirection) < 0) //produit scalaire
                     {
-                        Animator wallAnim = other.gameObject.GetComponentInParent<WallEvent>().wallAnim;
-                        BounceWall(wallAnim);
+                        WallEvent wallEvent = other.gameObject.GetComponentInParent<WallEvent>();
+                        if(wallEvent == null)return;
+                        BounceWall(wallEvent);
                     }
                     //mettre timer
                 }
@@ -294,7 +295,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        void BounceWall(Animator wallAnim)
+        void BounceWall(WallEvent wallEvent)
         {
             SpinnerState.moveDir = Vector3.Reflect(playerDirection, wallNormal);
             float newAngle = Vector3.SignedAngle(playerDirection, SpinnerState.moveDir, Vector3.up);
@@ -302,8 +303,10 @@ public class PlayerController : MonoBehaviour
             Vector3 newVector = new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y + newAngle, transform.rotation.eulerAngles.z);
             transform.rotation = Quaternion.Euler(newVector);
             AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("Spin Hit Wall"), transform.position, AudioManager.instance.soundEffectMixer, true);
-            wallAnim.ResetTrigger("BounceWall");
-            wallAnim.SetTrigger("BounceWall");
+            
+            //Anim billard and button
+            NeonBugBounce(wallEvent);
+            
             walled = true;
         }
 
@@ -374,6 +377,17 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+
+    public void NeonBugBounce(WallEvent wallEvent)
+    {
+        wallEvent.wallAnim.ResetTrigger("BounceWall");
+        wallEvent.billardAnim.ResetTrigger("BounceWall");
+        
+        wallEvent.wallAnim.SetTrigger("BounceWall");
+        wallEvent.billardAnim.SetTrigger("BounceWall");
+    }
+
+    //A enlever après prod
     public void OnRechargeGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);

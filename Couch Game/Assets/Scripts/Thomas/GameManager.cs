@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -155,6 +156,10 @@ public class GameManager : MonoBehaviour
     private void FixedUpdate()
     {
         RoundTimer();
+
+        if(gameTimer.drawTimer || !gameStarted)return;
+        if(Input.GetKey(KeyCode.Alpha1))ChangingMap(1);
+        if(Input.GetKey(KeyCode.Alpha2))ChangingMap(2);
     }
 
     private void RoundTimer()
@@ -268,5 +273,29 @@ public class GameManager : MonoBehaviour
         if(tempPlayerNb.oneMinute)return;
         AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["One Minute Remaining"], this.transform.position, AudioManager.instance.soundEffectMixer, true);
         tempPlayerNb.oneMinute = true;
+    }
+
+
+    //A ENLEVER APRES PROD
+
+    public void ChangingMap(int input)
+    {
+        string sceneName;
+        switch(input)
+        {
+            case 1 :
+                sceneName = "Proto Toupie-Mecha";
+            break;
+
+            case 2 :
+                sceneName = "LastMouf";
+            break;
+
+            default :
+                sceneName = "Proto Toupie-Mecha";
+            break;
+        }
+
+        SceneManager.LoadScene(sceneName);
     }
 }

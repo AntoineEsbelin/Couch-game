@@ -26,6 +26,10 @@ public class CounterA : MonoBehaviour
 
     bool inCD = false;
 
+    [Header("VFX")]
+    [SerializeField] private GameObject atkVFX;
+
+
 
     private void Awake()
     {
@@ -67,6 +71,7 @@ public class CounterA : MonoBehaviour
                 plctrl.hasCountered = true;
                 pm.stateMachine.SwitchState(pm.StunState);
                 //rb.AddForce(forceToApply / 4 * Time.deltaTime, ForceMode.Impulse);
+                Instantiate(atkVFX, pm.transform);
                 Debug.Log($"COUNTERED {pm}");
                 
             }
@@ -76,6 +81,8 @@ public class CounterA : MonoBehaviour
                 Debug.Log(forceToApply);
                 pm.lastPlayerContacted = plctrl;
                 pm.StunState.knockbackDir = forceToApply;
+                Instantiate(atkVFX, pm.transform);
+
                 pm.stateMachine.SwitchState(pm.StunState);
                 //rb.AddForce(forceToApply * Time.deltaTime, ForceMode.Impulse);
                 //Debug.Log("EE");
