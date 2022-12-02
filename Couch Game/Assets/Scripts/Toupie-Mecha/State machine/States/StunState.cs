@@ -15,6 +15,10 @@ public class StunState : PlayerState
     public float timerMax = 1f;
 
     public PlayerController stunplayer;
+
+    private AudioSource sfx;
+
+
     public override void EnterState(PlayerController player)
     {
         playerController = player;
@@ -29,6 +33,7 @@ public class StunState : PlayerState
         {
             stunplayer.hasCountered = false;
             playerController.rb.velocity = Vector3.zero;
+            sfx = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Stun"], player.transform.position, AudioManager.instance.soundEffectMixer, true);
             Debug.Log("NE BOUGE PAS");
         }
     }
@@ -43,6 +48,7 @@ public class StunState : PlayerState
     {
         
         playerController.PlayerAnimator.SetBool("IsStunned", false);
+        Destroy(sfx.gameObject);
     }
 
     [System.Serializable] public class MovementSettings

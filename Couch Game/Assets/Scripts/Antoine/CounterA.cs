@@ -59,6 +59,8 @@ public class CounterA : MonoBehaviour
         if(canAtk && !inCD)
         {
             if(!plctrl.PlayerAnimator.GetBool("Counter"))plctrl.PlayerAnimator.SetTrigger("Counter");
+            int randomAtk = Random.Range(0, 6);
+            AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"Counter {randomAtk + 1}"], transform.position, AudioManager.instance.soundEffectMixer, true);
             //Debug.Log("attack");
             Vector3 forceToApply = orientation.forward * forceApplied;
             
@@ -72,6 +74,7 @@ public class CounterA : MonoBehaviour
                 pm.stateMachine.SwitchState(pm.StunState);
                 //rb.AddForce(forceToApply / 4 * Time.deltaTime, ForceMode.Impulse);
                 Instantiate(atkVFX, pm.transform);
+                AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"Counter Hit {randomAtk + 1}"], transform.position, AudioManager.instance.soundEffectMixer, true);
                 Debug.Log($"COUNTERED {pm}");
                 
             }
@@ -84,6 +87,8 @@ public class CounterA : MonoBehaviour
                 Instantiate(atkVFX, pm.transform);
 
                 pm.stateMachine.SwitchState(pm.StunState);
+                AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"Counter Hit {randomAtk + 1}"], transform.position, AudioManager.instance.soundEffectMixer, true);
+
                 //rb.AddForce(forceToApply * Time.deltaTime, ForceMode.Impulse);
                 //Debug.Log("EE");
             }

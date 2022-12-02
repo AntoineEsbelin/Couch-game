@@ -71,6 +71,8 @@ public class PlayerController : MonoBehaviour
     bool invincible;
 
     public GameObject arrow;
+
+    private AudioSource sfx;
     void OnEnable()
     {
         currentState = NormalState;
@@ -152,7 +154,7 @@ public class PlayerController : MonoBehaviour
                     startCharging = true;
                     arrow.GetComponent<SpriteRenderer>().enabled = true;
                     playerAnimator.SetBool("ChargingSpin", true);
-
+                    sfx = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"Spin Charge"], transform.position, AudioManager.instance.soundEffectMixer, true);
                     SpinnerState.vfx = Instantiate(SpinnerState.spinnerVFX, this.transform);
 
                 }
@@ -191,6 +193,7 @@ public class PlayerController : MonoBehaviour
             //normalPlayer.spinCharging = false;   ANNULER QUAND ON SE FAIT STUN
             startCharging = false;
             spinTimer = 0f;
+            if(sfx != null)Destroy(sfx.gameObject);
             arrow.GetComponent<SpriteRenderer>().enabled = false;
         }
 
@@ -204,6 +207,10 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("start brake");
                 SpinnerState.mSettings.brakeManiability = SpinnerState.mSettings.brakeManiabilityModifier;
                 SpinnerState.mSettings.brakeSpeed = SpinnerState.mSettings.brakeSpeedModifier;
+
+                int randomBrake = Random.Range(0, 7);
+                AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"Spin Brake {randomBrake + 1}"], transform.position, AudioManager.instance.soundEffectMixer, true);
+                
             }
 
             if (ctx.canceled)

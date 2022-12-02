@@ -50,6 +50,8 @@ public class GameManager : MonoBehaviour
 
     public TempPlayerNb tempPlayerNb;
     public bool gameStarted;
+
+    public List<GameObject> allActualSFX;
     
     private void OnPlayerJoined(PlayerInput playerInput)
     {
