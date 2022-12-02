@@ -119,7 +119,6 @@ public class PlayerController : MonoBehaviour
         else if (invincible) StopInvincibility();
 
         var realTimer = ((int)spinTimer);
-        print(realTimer);
 
         switch (realTimer)
         {
