@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using EZCameraShake;
 public class PlayerController : MonoBehaviour
 {
 
@@ -116,6 +117,25 @@ public class PlayerController : MonoBehaviour
 
         if (invincibilityTimer > 0) invincibilityTimer = Mathf.Clamp(invincibilityTimer - Time.deltaTime, 0, invincibilityTimerMax);
         else if (invincible) StopInvincibility();
+
+        var realTimer = ((int)spinTimer);
+        print(realTimer);
+
+        switch (realTimer)
+        {
+            case 0:
+                arrow.GetComponent<SpriteRenderer>().color = new Color(0, 1, 1, 1);
+                break;
+            case 2:
+                arrow.GetComponent<SpriteRenderer>().color = new Color(1, 0.8f, 0, 1);
+                break;
+            case 3:
+                arrow.GetComponent<SpriteRenderer>().color = new Color(1, 0.3f, 0, 1);
+                break;
+            case 5:
+                arrow.GetComponent<SpriteRenderer>().color = new Color(1, 0, 0.05f, 1);
+                break;
+        }
     }
 
     private void UpdateLastPlayer()
@@ -242,6 +262,7 @@ public class PlayerController : MonoBehaviour
                 if(currentState == SpinnerState)
                 {
 
+                    CameraShaker.Instance.ShakeOnce(1f, 4f, 0.1f, 0.5f);
                     wallNormal = other.contacts[0].normal;
                     playerDirection = SpinnerState.moveDir;
                     wallNormal.y = 0;
@@ -258,6 +279,7 @@ public class PlayerController : MonoBehaviour
 
                 if (currentState == StunState)
                 {
+                    CameraShaker.Instance.ShakeOnce(1f, 4f, 0.1f, 0.5f);
                     wallNormal = other.contacts[0].normal;
                     playerDirection = StunState.knockbackDir;
                     BounceWallStuned();
@@ -272,6 +294,7 @@ public class PlayerController : MonoBehaviour
             {
                 if(currentState == SpinnerState)
                 {
+                    CameraShaker.Instance.ShakeOnce(1f, 4f, 0.1f, 0.5f);
                     PlayerController triggerPlayer = other.GetComponentInParent<PlayerController>();
 
                     triggerPlayer.lastPlayerContacted = this;
@@ -333,6 +356,7 @@ public class PlayerController : MonoBehaviour
 
         void BounceSpinner()
         {
+            CameraShaker.Instance.ShakeOnce(1f, 4f, 0.1f, 0.5f);
             //Bounce against other player
             Instantiate(explosion, this.transform.position, Quaternion.identity);
             //Debug.Log("bounce");
