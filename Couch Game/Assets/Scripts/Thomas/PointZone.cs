@@ -15,6 +15,12 @@ public class PointZone : MonoBehaviour
     private float VibroTimer;
     [SerializeField] private float maxVibroTimer = 2f;
     private PlayerInput controller;
+    private GameObject followCam;
+
+    private void Start()
+    {
+        followCam = GameObject.Find("followCam");
+    }
 
     private void OnTriggerEnter(Collider coll)
     {
@@ -132,6 +138,7 @@ public class PointZone : MonoBehaviour
             {
                 GameManager.instance.allPlayer[i].hasDaCrown = true;
                 GameManager.instance.allPlayer[i].playerCrown.SetActive(true);
+                followCam.GetComponent<FollowPlayer>().follow(GameManager.instance.allPlayer[i].gameObject);
             }
             else
             {
