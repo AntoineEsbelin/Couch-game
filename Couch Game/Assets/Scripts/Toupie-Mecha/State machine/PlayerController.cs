@@ -73,6 +73,8 @@ public class PlayerController : MonoBehaviour
     float invincibilityTimer;
     bool invincible;
 
+    public bool stopBumpKb;
+
     public GameObject arrow;
 
     private AudioSource sfx;
