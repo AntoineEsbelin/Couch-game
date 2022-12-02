@@ -15,14 +15,29 @@ public class StunState : PlayerState
     public float timerMax = 1f;
 
     public PlayerController stunplayer;
+
+    private AudioSource sfx;
+
+
     public override void EnterState(PlayerController player)
     {
         playerController = player;
         timer = timerMax;
         if(player.lastPlayerContacted == null)return;
         stunplayer = player.lastPlayerContacted;
-        knockbackDir = (playerController.transform.position - stunplayer.transform.position).normalized;
+        playerController.isMoving = false;
+        if(!stunplayer.hasCountered)knockbackDir = (playerController.transform.position - stunplayer.transform.position).normalized;
+        else knockbackDir = Vector3.zero;
         kbSpeed = stunplayer.SpinnerState.mSettings.moveSpeed;
+        if(stunplayer.hasCountered)
+        {
+            stunplayer.hasCountered = false;
+            playerController.PlayerAnimator.SetBool("IsStunned", true);
+
+            playerController.rb.velocity = Vector3.zero;
+            sfx = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Stun"], player.transform.position, AudioManager.instance.soundEffectMixer, true, true);
+            Debug.Log("NE BOUGE PAS");
+        }
     }
 
     public override void UpdateState(PlayerController player)
@@ -34,6 +49,8 @@ public class StunState : PlayerState
     public override void ExitState(PlayerController player)
     {
         
+        playerController.PlayerAnimator.SetBool("IsStunned", false);
+        if(sfx != null)Destroy(sfx.gameObject);
     }
 
     [System.Serializable] public class MovementSettings

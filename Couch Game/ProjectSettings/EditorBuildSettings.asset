@@ -53,7 +53,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Gaetan.unity
     guid: a7553712a37d1bb43abcf0648440da5a
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/LastMouf.unity
     guid: 02034a751494ac340b7cd8bdaba7b0db
   - enabled: 0

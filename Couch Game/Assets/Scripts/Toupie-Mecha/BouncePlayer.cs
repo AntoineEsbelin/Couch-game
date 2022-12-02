@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using EZCameraShake;
 
 public class BouncePlayer : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class BouncePlayer : MonoBehaviour
 
     private void OnEnable()
     {
+        CameraShaker.Instance.ShakeOnce(1f, 4f, 0.1f, 0.5f);
         //Particle spawned
         Instantiate(explosion, this.transform.position, Quaternion.identity);
         

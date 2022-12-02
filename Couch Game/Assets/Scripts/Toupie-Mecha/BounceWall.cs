@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using EZCameraShake;
 
 public class BounceWall : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class BounceWall : MonoBehaviour
     public Transform playerRotation;
     void OnEnable()
     {
+        CameraShaker.Instance.ShakeOnce(1f, 4f, 0.1f, 0.5f);
         //Debug.Log("A " + spinerControler.moveDir);
         spinerControler.moveDir = Vector3.Reflect(playerDirection, normalizedWall);
         float newAngle = Vector3.SignedAngle(playerDirection, spinerControler.moveDir, Vector3.up);

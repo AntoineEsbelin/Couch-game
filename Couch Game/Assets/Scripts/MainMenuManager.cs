@@ -11,8 +11,8 @@ public class MainMenuManager : MonoBehaviour
     public GameObject selectPlayerMenu;
     public GameObject optionMenu;
     public GameObject playMenu;
-    
 
+    
     public void StartButton()
     {
         selectPlayerMenu.SetActive(true);

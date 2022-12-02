@@ -5,7 +5,12 @@ using UnityEngine;
 public class SpinnerState : PlayerState
 {
     private AudioSource audioSource;
-    private GameObject vfx;
+    
+    [Header("VFX")]
+    public GameObject spinnerVFX;
+    public GameObject vfx;
+
+
     public override void EnterState(PlayerController player)
     {
         playerController = player;
@@ -15,12 +20,15 @@ public class SpinnerState : PlayerState
         
         mSettings.brakeManiability = 1f;
         mSettings.brakeSpeed = 1f;
+        playerController.trailRenderer.enabled = true;
         playerController.PlayerAnimator.SetBool("IsSpinning", true);
         repoussed = false;
         playerController.transform.position = new Vector3(playerController.transform.position.x, playerController.transform.position.y + 3f, playerController.transform.position.z);
-        playerController.toupieFBX.SetActive(true);
-        audioSource = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("Spin Move"), playerController.transform.position, AudioManager.instance.soundEffectMixer, true);
-        //vfx = Instantiate(playerController.troupieVFX, playerController.toupieFBX.GetComponent<SpinningAnim>().transform);
+        playerController.spinningAnim.SetRotate(true);
+        playerController.GetComponentInChildren<SpinningAnim>().SetRotate(true);
+        
+        int randomMoveSFX = Random.Range(0,2);
+        audioSource = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault($"Spin Move {randomMoveSFX + 1}"), playerController.transform.position, AudioManager.instance.soundEffectMixer, true, true);
     }
 
     public override void UpdateState(PlayerController player)
@@ -61,6 +69,8 @@ public class SpinnerState : PlayerState
         [Range(0.1f, 0.9f)]
         public float brakeSpeedModifier = 0.5f;
         [HideInInspector] public float brakeSpeed;
+
+        public float glueSpeedModifier = 1f;
     }
 
     public MovementSettings mSettings;
@@ -88,7 +98,7 @@ public class SpinnerState : PlayerState
 
         //Vector3 moveDir = mSettings.rb.transform.forward;
 
-        playerController.rb.velocity = new Vector3(moveDir.x,0f,moveDir.z)* (mSettings.moveSpeed) * mSettings.brakeSpeed * Time.fixedDeltaTime;
+        playerController.rb.velocity = new Vector3(moveDir.x,0f,moveDir.z)* (mSettings.moveSpeed) * mSettings.brakeSpeed * mSettings.glueSpeedModifier * Time.fixedDeltaTime;
 
     }
 
@@ -99,8 +109,9 @@ public class SpinnerState : PlayerState
         mSettings.brakeSpeed = 1f;
         playerController.PlayerAnimator.SetBool("IsSpinning", false);
         playerController.transform.position = new Vector3(playerController.transform.position.x, playerController.transform.position.y - 3f, playerController.transform.position.z);
+        playerController.spinningAnim.SetRotate(false);
         Destroy(this.vfx);
-        playerController.toupieFBX.SetActive(false);
+        playerController.trailRenderer.enabled = false;
         Destroy(audioSource.gameObject);
     }
 }

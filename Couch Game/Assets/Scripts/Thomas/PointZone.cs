@@ -12,13 +12,24 @@ public class PointZone : MonoBehaviour
     [SerializeField] private GameObject explosion;
     [SerializeField] private int explosionMultiplier = 1;
 
+    private float VibroTimer;
+    [SerializeField] private float maxVibroTimer = 2f;
+    private PlayerInput controller;
+    private GameObject followCam;
+
+    private void Start()
+    {
+        followCam = GameObject.Find("followCam");
+    }
+
     private void OnTriggerEnter(Collider coll)
     {
         if(coll.CompareTag("Player"))
         {
-            if(isField)return;
-            CameraShaker.Instance.ShakeOnce(4f, 4f, 0.1f, 1f);
+            controller = coll.GetComponent<PlayerInput>();
             PlayerController deadPlayer = coll.GetComponentInParent<PlayerController>();
+            if(isField || deadPlayer.currentState == deadPlayer.DeathState)return;
+            CameraShaker.Instance.ShakeOnce(4f, 4f, 0.1f, 1f);
             GameObject expl = Instantiate(explosion, this.transform.position, Quaternion.identity);
             expl.transform.localScale *= explosionMultiplier;
             DispawnPlayer(deadPlayer);
@@ -29,19 +40,46 @@ public class PointZone : MonoBehaviour
     {
         if(coll.CompareTag("Player"))
         {
-            if(!isField)return;
             PlayerController deadPlayer = coll.GetComponentInParent<PlayerController>();
+            if(!isField || deadPlayer.currentState == deadPlayer.DeathState)return;
             GameObject expl = Instantiate(explosion, deadPlayer.transform.position, Quaternion.identity);
             expl.transform.localScale *= 2;
+
             DispawnPlayer(deadPlayer);
 
         }
     }
 
+    private void FixedUpdate()
+    {
+        //controller vibration
+        /*if (controller != null)
+        {
+            if(controller.GetDevice<Gamepad>() == null)return;
+            Gamepad gamePad = controller.GetDevice<Gamepad>();
+
+            if (gamePad == Gamepad.current)
+            {
+                if (VibroTimer > 0)
+                {
+                    VibroTimer -= Time.deltaTime;
+                    
+                    gamePad.SetMotorSpeeds(0.5f, 1.5f);
+                    
+                }
+                
+            }
+        }*/
+        
+    }
+
 
     private void DispawnPlayer(PlayerController deadPlayer)
     {
-        AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("Goal"), this.transform.position, AudioManager.instance.soundEffectMixer, true);
+        if(deadPlayer.currentState == deadPlayer.DeathState)return;
+        //VibroTimer = maxVibroTimer; 
+        AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("Goal"), this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
+        
         if(deadPlayer.lastPlayerContacted != null)
         {
             deadPlayer.lastPlayerContacted.playerPoint += pointGiven;
@@ -50,8 +88,10 @@ public class PointZone : MonoBehaviour
             Debug.Log($"{deadPlayer.name} EJECTED !");
             Debug.Log($"GIVE {pointGiven} points to {deadPlayer.lastPlayerContacted.name}");
 
-            AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Crowd Shouting"]/*.GetValueOrDefault("Crowd Shouting")*/, this.transform.position, AudioManager.instance.soundEffectMixer, true);
+            AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Crowd Shouting"]/*.GetValueOrDefault("Crowd Shouting")*/, this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
             
+            CheckBestPlayer();
+
             if(GameManager.instance.gameTimer.drawTimer)
             {
                 if(deadPlayer.lastPlayerContacted.playerPoint > GameManager.instance.gameTimer.drawMaxPoint)
@@ -62,8 +102,8 @@ public class PointZone : MonoBehaviour
             }
             else
             {
-                int randomPraise = Random.Range(0, 8);
-                AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"Voice Praise {randomPraise}"], this.transform.position, AudioManager.instance.soundEffectMixer, true);
+                int randomPraise = Random.Range(0, 7);
+                AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"Voice Praise {randomPraise + 1}"], this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
             }
         }
         else
@@ -73,9 +113,38 @@ public class PointZone : MonoBehaviour
         }
         if(deadPlayer.gameObject.activeSelf)
         {
+            
             deadPlayer.stateMachine.SwitchState(deadPlayer.DeathState);
         }
         
         
+    }
+
+    private void CheckBestPlayer()
+    {
+        int playerPoint = 0;
+        //get max point + player
+        for(int i = 0; i < GameManager.instance.allPlayer.Count; i++)
+        {
+            if(GameManager.instance.allPlayer[i].playerPoint >= playerPoint)
+            {
+                playerPoint = GameManager.instance.allPlayer[i].playerPoint;
+            }
+        }
+        
+        for(int i = 0; i < GameManager.instance.allPlayer.Count; i++)
+        {
+            if(GameManager.instance.allPlayer[i].playerPoint >= playerPoint)
+            {
+                GameManager.instance.allPlayer[i].hasDaCrown = true;
+                GameManager.instance.allPlayer[i].playerCrown.SetActive(true);
+                followCam.GetComponent<FollowPlayer>().follow(GameManager.instance.allPlayer[i].gameObject);
+            }
+            else
+            {
+                GameManager.instance.allPlayer[i].hasDaCrown = false;
+                GameManager.instance.allPlayer[i].playerCrown.SetActive(false);
+            }
+        }
     }
 }
