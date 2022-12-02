@@ -210,7 +210,7 @@ MonoBehaviour:
   isMoving: 0
   stunDurationKnockback: 1
   stunDurationSpinEnd: 0.3
-  explosion: {fileID: 3438996937471707301, guid: a2be7fac82fbeea43911cac21ce707ef, type: 3}
+  explosion: {fileID: 3193864383826838676, guid: c8aa708196a029140916b05a1fb82638, type: 3}
   dashDurationReduction: 2
   playerFBX: {fileID: 0}
   trailRenderer: {fileID: 0}
@@ -273,6 +273,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerController: {fileID: 0}
   spinnerVFX: {fileID: 5131705808110797491, guid: 89dd00848dc657f46ab78b330e957c5a, type: 3}
+  vfx: {fileID: 0}
   mSettings:
     dashDuration: 0
     dashDurationMax: 2
