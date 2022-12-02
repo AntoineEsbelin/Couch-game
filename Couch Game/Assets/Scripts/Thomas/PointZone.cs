@@ -137,6 +137,7 @@ public class PointZone : MonoBehaviour
         {
             if(GameManager.instance.allPlayer[i].playerPoint >= playerPoint)
             {
+                if(GameManager.instance.allPlayer[i].hasDaCrown == true)return;
                 GameManager.instance.allPlayer[i].hasDaCrown = true;
                 GameManager.instance.allPlayer[i].playerCrown.SetActive(true);
                 followCam.GetComponent<FollowPlayer>().follow(GameManager.instance.allPlayer[i].gameObject);
