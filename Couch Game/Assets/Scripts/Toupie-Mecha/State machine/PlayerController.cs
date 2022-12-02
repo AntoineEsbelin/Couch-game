@@ -70,12 +70,14 @@ public class PlayerController : MonoBehaviour
     [Header("Respawn invincibility")]
 
     public float invincibilityTimerMax = 3f;
-    float invincibilityTimer;
+    public float invincibilityTimer;
     bool invincible;
+
+    public bool stopBumpKb;
 
     public GameObject arrow;
 
-    private AudioSource sfx;
+    public AudioSource sfx;
     void OnEnable()
     {
         currentState = NormalState;
@@ -119,7 +121,6 @@ public class PlayerController : MonoBehaviour
         else if (invincible) StopInvincibility();
 
         var realTimer = ((int)spinTimer);
-        print(realTimer);
 
         switch (realTimer)
         {

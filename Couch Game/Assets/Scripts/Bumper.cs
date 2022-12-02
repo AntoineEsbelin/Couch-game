@@ -8,6 +8,8 @@ public class Bumper : MonoBehaviour
     private Vector3 knockback;
     public float force;
     private GameObject player;
+    private Rigidbody playerRb;
+    private PlayerController playerCtrl;
 
     private float timer;
     [SerializeField] private float maxTimer;
@@ -28,13 +30,21 @@ public class Bumper : MonoBehaviour
     
     private void Timer()
     {
+        
         if(timer > 0)
         {
+            if (playerCtrl.stopBumpKb)
+            {
+                playerCtrl.stopBumpKb = false;
+                timer = 0;
+                return;
+            }
+
             timer -= Time.deltaTime;
             knockback = dir * force *(player.GetComponentInChildren<NormalState>().mSettings.moveSpeed * Time.deltaTime);
 
-            player.GetComponent<Rigidbody>().AddForce(knockback.x, 0f, knockback.z, ForceMode.Impulse);
-            
+            playerRb.AddForce(knockback.x, 0f, knockback.z, ForceMode.Impulse);
+
         }
         
         
@@ -45,6 +55,8 @@ public class Bumper : MonoBehaviour
         if (col.collider.CompareTag("Player"))
         {
             player = col.gameObject;
+            playerRb = player.GetComponent<Rigidbody>();
+            playerCtrl = player.GetComponent<PlayerController>();
             
             dir = transform.position - col.transform.position;
             dir.Normalize();
