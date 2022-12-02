@@ -19,6 +19,7 @@ public class DeathState : PlayerState
         player.playerFBX.SetActive(false);
         if(player.hasDaCrown)player.playerCrown.SetActive(false);
         player.GetComponentInChildren<SpinningAnim>(true).transform.localScale = Vector3.one;
+        player.stopBumpKb = true;
     }
     public override void UpdateState(PlayerController player)
     {
