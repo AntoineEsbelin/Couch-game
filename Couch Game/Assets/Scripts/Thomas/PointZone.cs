@@ -12,10 +12,15 @@ public class PointZone : MonoBehaviour
     [SerializeField] private GameObject explosion;
     [SerializeField] private int explosionMultiplier = 1;
 
+    private float VibroTimer;
+    [SerializeField] private float maxVibroTimer = 2f;
+    private PlayerInput controller;
+
     private void OnTriggerEnter(Collider coll)
     {
         if(coll.CompareTag("Player"))
         {
+            controller = coll.GetComponent<PlayerInput>();
             PlayerController deadPlayer = coll.GetComponentInParent<PlayerController>();
             if(isField || deadPlayer.currentState == deadPlayer.DeathState)return;
             CameraShaker.Instance.ShakeOnce(4f, 4f, 0.1f, 1f);
@@ -39,10 +44,29 @@ public class PointZone : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (controller != null)
+        {
+            if (controller.GetDevice<Gamepad>() == Gamepad.current)
+            {
+                if (VibroTimer > 0)
+                {
+                    VibroTimer -= Time.deltaTime;
+                    controller.GetDevice<Gamepad>().SetMotorSpeeds(0.5f, 1.5f);
+                    
+                }
+                
+            }
+        }
+        
+    }
+
 
     private void DispawnPlayer(PlayerController deadPlayer)
     {
         if(deadPlayer.currentState == deadPlayer.DeathState)return;
+        VibroTimer = maxVibroTimer; 
         AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("Goal"), this.transform.position, AudioManager.instance.soundEffectMixer, true);
         if(deadPlayer.lastPlayerContacted != null)
         {
@@ -75,6 +99,7 @@ public class PointZone : MonoBehaviour
         }
         if(deadPlayer.gameObject.activeSelf)
         {
+            
             deadPlayer.stateMachine.SwitchState(deadPlayer.DeathState);
         }
         
