@@ -77,7 +77,7 @@ public class PlayerController : MonoBehaviour
 
     public GameObject arrow;
 
-    private AudioSource sfx;
+    public AudioSource sfx;
     void OnEnable()
     {
         currentState = NormalState;

@@ -237,6 +237,12 @@ public class GameManager : MonoBehaviour
         {
             player.move = Vector3.zero;
         }
+
+        
+        foreach(PlayerController player in allPlayer)
+        {
+            Destroy(player.sfx);
+        }
     }
 
     private void PlayVoiceAtTime(float time, ref bool alreadyPlayed, AudioClip voice)
