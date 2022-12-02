@@ -58,6 +58,8 @@ public class PlayerController : MonoBehaviour
     }
 
     public GameObject playerFBX;
+    public GameObject playerCrown;
+    public bool hasDaCrown;
     public TrailRenderer trailRenderer;
     public SpinningAnim spinningAnim;
 
