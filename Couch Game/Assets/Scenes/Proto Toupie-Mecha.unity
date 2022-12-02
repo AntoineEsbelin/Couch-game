@@ -1133,7 +1133,6 @@ GameObject:
   m_Component:
   - component: {fileID: 699776027}
   - component: {fileID: 699776026}
-  - component: {fileID: 699776025}
   - component: {fileID: 699776024}
   - component: {fileID: 699776023}
   m_Layer: 0
@@ -1193,14 +1192,6 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
---- !u!81 &699776025
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 699776022}
-  m_Enabled: 1
 --- !u!20 &699776026
 Camera:
   m_ObjectHideFlags: 0
@@ -3502,6 +3493,10 @@ PrefabInstance:
     - target: {fileID: 4251007238508292986, guid: 1d2b799c589184a4aa1e3161983a01a9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4251007240360499100, guid: 1d2b799c589184a4aa1e3161983a01a9, type: 3}
+      propertyPath: offset.y
+      value: 40
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d2b799c589184a4aa1e3161983a01a9, type: 3}
