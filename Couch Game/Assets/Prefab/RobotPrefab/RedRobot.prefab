@@ -314,7 +314,7 @@ GameObject:
   - component: {fileID: 5947966158906831980}
   m_Layer: 0
   m_Name: RedRobot
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -347,7 +347,7 @@ Animator:
   m_GameObject: {fileID: 3349722740465586604}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 5aa09bb5bc8bb024fbbe9dc9b42212f4, type: 2}
+  m_Controller: {fileID: 9100000, guid: cba1157e82f605947b27244d9b9aab27, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

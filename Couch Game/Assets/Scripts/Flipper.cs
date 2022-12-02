@@ -57,7 +57,7 @@ public class Flipper : MonoBehaviour
         timer -= Time.deltaTime;
 
 
-            if (knockBacktimer > 0)
+        if (knockBacktimer > 0)
         {
             knockBacktimer -= Time.deltaTime;
             knockback = dir * KnockbackForce *
