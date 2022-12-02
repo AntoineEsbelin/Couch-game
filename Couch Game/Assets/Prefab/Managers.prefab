@@ -209,8 +209,12 @@ MonoBehaviour:
   soundEffectMixer: {fileID: -1790053248417640825, guid: 888a97718594b1c4190024e5ca1c5dec, type: 2}
   ostMixer: {fileID: 234327515679976517, guid: 888a97718594b1c4190024e5ca1c5dec, type: 2}
   yes:
-  - audioName: Spin Move
+  - audioName: Spin Move 1
     audio: {fileID: 8300000, guid: 23da58f2adc269448986303f4a9a6c0e, type: 3}
+  - audioName: Spin Move 2
+    audio: {fileID: 8300000, guid: be1a8d3b52df677458b24461b4b54493, type: 3}
+  - audioName: Spin Charge
+    audio: {fileID: 8300000, guid: 77335f2fb6c965f469f9274aa85bfdb7, type: 3}
   - audioName: Spin Hit Wall
     audio: {fileID: 8300000, guid: 999a13961c6f5da40a774ae9b6dc98c9, type: 3}
   - audioName: Spin Hit Spin
@@ -271,6 +275,42 @@ MonoBehaviour:
     audio: {fileID: 8300000, guid: 2bd76240c6663724a9b57ff8a39cd6a7, type: 3}
   - audioName: Spin Hit Player 7
     audio: {fileID: 8300000, guid: 825d235ef2c2ccf4ca00c6258ea65e72, type: 3}
+  - audioName: Spin Brake 1
+    audio: {fileID: 8300000, guid: 3d483e3e10eeeeb4cbab6d2f1854b7c0, type: 3}
+  - audioName: Spin Brake 2
+    audio: {fileID: 8300000, guid: 557ed568681db7b4eb6244e5ba904bf5, type: 3}
+  - audioName: Spin Brake 3
+    audio: {fileID: 8300000, guid: 54fbf7f0528e5ec44869cd4111bb81d2, type: 3}
+  - audioName: Spin Brake 4
+    audio: {fileID: 8300000, guid: 5b73782aee157ab42aaf2ef88939bade, type: 3}
+  - audioName: Spin Brake 5
+    audio: {fileID: 8300000, guid: 699cff93533fab7478f97ec53ea03e15, type: 3}
+  - audioName: Spin Brake 6
+    audio: {fileID: 8300000, guid: 001ca3dec0faadc4dab496c3ad9f941d, type: 3}
+  - audioName: Counter 1
+    audio: {fileID: 8300000, guid: 21958a483de9b1644af75b44a986f6bb, type: 3}
+  - audioName: Counter 2
+    audio: {fileID: 8300000, guid: 12e665e1d87322843909f73414beeda2, type: 3}
+  - audioName: Counter 3
+    audio: {fileID: 8300000, guid: 6f37f9edd4be96e499174e22a577aa58, type: 3}
+  - audioName: Counter 4
+    audio: {fileID: 8300000, guid: f9d14c73346c5b44cab6d40ec5f9bc09, type: 3}
+  - audioName: Counter 5
+    audio: {fileID: 8300000, guid: b48725c9ff7abcb44b154aad4475b731, type: 3}
+  - audioName: Counter 6
+    audio: {fileID: 8300000, guid: eec6f1e36cd107a4aab86bb7efeea687, type: 3}
+  - audioName: Counter Hit 1
+    audio: {fileID: 8300000, guid: 37848c7d9dc731d41b872b058e640323, type: 3}
+  - audioName: Counter Hit 2
+    audio: {fileID: 8300000, guid: c6e876bfd048aba4ab795ca904d3bcb6, type: 3}
+  - audioName: Counter Hit 3
+    audio: {fileID: 8300000, guid: e25bf4003c9f7dd4e8162612b7d42d2b, type: 3}
+  - audioName: Counter Hit 4
+    audio: {fileID: 8300000, guid: e53ed3aae0362ee49a3f8e3ea7d3837e, type: 3}
+  - audioName: Counter Hit 5
+    audio: {fileID: 8300000, guid: d3f26e3b642bbfc458ae99e221b64a9a, type: 3}
+  - audioName: Counter Hit 6
+    audio: {fileID: 8300000, guid: 193e7756990bb664c8581069d95a1339, type: 3}
 --- !u!1 &1896850882551273286
 GameObject:
   m_ObjectHideFlags: 0
@@ -479,3 +519,4 @@ MonoBehaviour:
     howManyPlayer: 0
     oneMinute: 0
   gameStarted: 0
+  allActualSFX: []

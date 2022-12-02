@@ -364,7 +364,7 @@ GameObject:
   - component: {fileID: 6959657218611326838}
   m_Layer: 0
   m_Name: YellowRobot
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -397,7 +397,7 @@ Animator:
   m_GameObject: {fileID: 5933910288364768573}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: cc4463d6396b75f45be88559331c943d, type: 2}
+  m_Controller: {fileID: 9100000, guid: a25c04177de6a9542add35e682b901c4, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

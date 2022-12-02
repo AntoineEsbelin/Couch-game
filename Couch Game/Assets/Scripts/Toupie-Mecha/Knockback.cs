@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using EZCameraShake;
 
 public class Knockback : MonoBehaviour
 {
@@ -16,7 +17,8 @@ public class Knockback : MonoBehaviour
 
     private void OnEnable()
     {
-        if(normalControler.spinCharging)
+        CameraShaker.Instance.ShakeOnce(1f, 4f, 0.1f, 0.5f);
+        if (normalControler.spinCharging)
         {
             PlayerManager playerManager = normalControler.GetComponentInParent<PlayerManager>();
             /////playerManager.ResetCharging();

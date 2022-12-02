@@ -25,15 +25,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5131705808110797484, guid: 89dd00848dc657f46ab78b330e957c5a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.116
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5131705808110797484, guid: 89dd00848dc657f46ab78b330e957c5a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.068
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5131705808110797484, guid: 89dd00848dc657f46ab78b330e957c5a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6.302
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5131705808110797484, guid: 89dd00848dc657f46ab78b330e957c5a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -213,7 +213,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: b0e1c842a0d1aaf408cff23c1d1a212f, type: 2}
     - target: {fileID: 5131705808110797491, guid: 89dd00848dc657f46ab78b330e957c5a, type: 3}
       propertyPath: m_Name
-      value: FXFlottement
+      value: FXFlottement Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89dd00848dc657f46ab78b330e957c5a, type: 3}

@@ -26,6 +26,10 @@ public class CounterA : MonoBehaviour
 
     bool inCD = false;
 
+    [Header("VFX")]
+    [SerializeField] private GameObject atkVFX;
+
+
 
     private void Awake()
     {
@@ -54,19 +58,24 @@ public class CounterA : MonoBehaviour
     {
         if(canAtk && !inCD)
         {
-            
-            if(!plctrl.PlayerAnimator.GetBool("Counter"))plctrl.PlayerAnimator.SetBool("Counter", true);
+            if(!plctrl.PlayerAnimator.GetBool("Counter"))plctrl.PlayerAnimator.SetTrigger("Counter");
+            int randomAtk = Random.Range(0, 6);
+            AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"Counter {randomAtk + 1}"], transform.position, AudioManager.instance.soundEffectMixer, true);
+            //Debug.Log("attack");
             Vector3 forceToApply = orientation.forward * forceApplied;
             
              
             if (pm != null && pm.currentState == pm.SpinnerState)
             {
                 pm.StunState.timerMax = spinStun;
+                pm.timeLastPlayer = spinStun;
                 pm.lastPlayerContacted = plctrl;
-                pm.StunState.knockbackDir = forceToApply;
+                plctrl.hasCountered = true;
                 pm.stateMachine.SwitchState(pm.StunState);
                 //rb.AddForce(forceToApply / 4 * Time.deltaTime, ForceMode.Impulse);
-                Debug.Log("YEE");
+                Instantiate(atkVFX, pm.transform);
+                AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"Counter Hit {randomAtk + 1}"], transform.position, AudioManager.instance.soundEffectMixer, true);
+                Debug.Log($"COUNTERED {pm}");
                 
             }
             else if (pm != null && pm.currentState == pm.NormalState)
@@ -75,9 +84,13 @@ public class CounterA : MonoBehaviour
                 Debug.Log(forceToApply);
                 pm.lastPlayerContacted = plctrl;
                 pm.StunState.knockbackDir = forceToApply;
+                Instantiate(atkVFX, pm.transform);
+
                 pm.stateMachine.SwitchState(pm.StunState);
+                AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"Counter Hit {randomAtk + 1}"], transform.position, AudioManager.instance.soundEffectMixer, true);
+
                 //rb.AddForce(forceToApply * Time.deltaTime, ForceMode.Impulse);
-                Debug.Log("EE");
+                //Debug.Log("EE");
             }
 
             
