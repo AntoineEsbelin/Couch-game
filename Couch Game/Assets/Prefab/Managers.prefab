@@ -226,7 +226,7 @@ MonoBehaviour:
   - audioName: Goal
     audio: {fileID: 8300000, guid: 6594efde3d3198f4ba6e15a19adb2c21, type: 3}
   - audioName: OST
-    audio: {fileID: 8300000, guid: f15216cce73356c49b5481c28cffea69, type: 3}
+    audio: {fileID: 8300000, guid: 68ead9d265c5b704fb9699c0840af61f, type: 3}
   - audioName: Voice 321
     audio: {fileID: 8300000, guid: d6e237adeb244cd43825b4b10329a738, type: 3}
   - audioName: Voice Praise 1
@@ -519,4 +519,3 @@ MonoBehaviour:
     howManyPlayer: 0
     oneMinute: 0
   gameStarted: 0
-  allActualSFX: []

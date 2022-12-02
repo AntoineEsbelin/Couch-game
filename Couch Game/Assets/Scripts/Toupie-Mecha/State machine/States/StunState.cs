@@ -32,6 +32,8 @@ public class StunState : PlayerState
         if(stunplayer.hasCountered)
         {
             stunplayer.hasCountered = false;
+            playerController.PlayerAnimator.SetBool("IsStunned", true);
+
             playerController.rb.velocity = Vector3.zero;
             sfx = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Stun"], player.transform.position, AudioManager.instance.soundEffectMixer, true, true);
             Debug.Log("NE BOUGE PAS");

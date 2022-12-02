@@ -82,7 +82,6 @@ public class GameManager : MonoBehaviour
 
         if(playersList.Count != tempPlayerNb.howManyPlayer)return;
         AudioSource readyGo = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Ready Go"], this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
-        AudioSource ost = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("OST"), transform.position, AudioManager.instance.ostMixer, false, true);
         StartCoroutine(WaitBeforeGameStart(readyGo.clip.length - 1.3f));
 
     }
@@ -263,6 +262,7 @@ public class GameManager : MonoBehaviour
     {
         gameStarted = false;
         yield return new WaitForSeconds(length);
+        AudioSource ost = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("OST"), transform.position, AudioManager.instance.ostMixer, false, true);
         gameStarted = true;
         gameTimer.drawTimer = false;
     }

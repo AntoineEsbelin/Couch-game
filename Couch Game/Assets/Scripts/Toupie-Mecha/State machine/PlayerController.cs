@@ -208,7 +208,7 @@ public class PlayerController : MonoBehaviour
                 SpinnerState.mSettings.brakeManiability = SpinnerState.mSettings.brakeManiabilityModifier;
                 SpinnerState.mSettings.brakeSpeed = SpinnerState.mSettings.brakeSpeedModifier;
 
-                int randomBrake = Random.Range(0, 7);
+                int randomBrake = Random.Range(0, 6);
                 AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"Spin Brake {randomBrake + 1}"], transform.position, AudioManager.instance.soundEffectMixer, true, false);
                 
             }
@@ -280,7 +280,6 @@ public class PlayerController : MonoBehaviour
                     if ((triggerPlayer.currentState == triggerPlayer.NormalState || triggerPlayer.currentState == triggerPlayer.StunState) && !triggerPlayer.hasCountered)
                     {
                         Debug.Log(triggerPlayer);
-                        triggerPlayer.PlayerAnimator.SetBool("IsStunned", true);
                         //triggerPlayer.hasCountered = false;
                         //activate bounce player of this spinner
                         Instantiate(explosion, this.transform.position, Quaternion.identity);
