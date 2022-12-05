@@ -208,6 +208,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundEffectMixer: {fileID: -1790053248417640825, guid: 888a97718594b1c4190024e5ca1c5dec, type: 2}
   ostMixer: {fileID: 234327515679976517, guid: 888a97718594b1c4190024e5ca1c5dec, type: 2}
+  announcerMixer: {fileID: 7415576026941925476, guid: 888a97718594b1c4190024e5ca1c5dec, type: 2}
   yes:
   - audioName: Spin Move
     audio: {fileID: 8300000, guid: be1a8d3b52df677458b24461b4b54493, type: 3}
@@ -225,6 +226,10 @@ MonoBehaviour:
     audio: {fileID: 8300000, guid: 6594efde3d3198f4ba6e15a19adb2c21, type: 3}
   - audioName: OST
     audio: {fileID: 8300000, guid: 68ead9d265c5b704fb9699c0840af61f, type: 3}
+  - audioName: Game Timer
+    audio: {fileID: 8300000, guid: f7abe3e0332927c41a28b9d4a761b28d, type: 3}
+  - audioName: Overtime
+    audio: {fileID: 8300000, guid: e20134a87d9a15f42bac10b64e02a441, type: 3}
   - audioName: Voice 321
     audio: {fileID: 8300000, guid: d6e237adeb244cd43825b4b10329a738, type: 3}
   - audioName: Voice Praise 1
@@ -513,6 +518,9 @@ MonoBehaviour:
     timerTXT: {fileID: 0}
     comparetimerTXT: {fileID: 0}
     nearTimeOut: 0
+    timer3: 0
+    timer2: 0
+    timer1: 0
   tempPlayerNb:
     howManyPlayer: 0
     oneMinute: 0
@@ -520,4 +528,3 @@ MonoBehaviour:
   allCrowd: []
   cheerMinTime: 0
   cheerMaxTime: 1
-  howManyAnimated: 0

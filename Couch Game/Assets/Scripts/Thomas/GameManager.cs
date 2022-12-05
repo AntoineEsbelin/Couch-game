@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
 
     public Transform[] spawnPoints;
     public GameObject[] charactersFBX;
-    public AudioClip clip;
+    public AudioSource ost;
 
     [System.Serializable]
     public class GameTimer
@@ -38,6 +38,11 @@ public class GameManager : MonoBehaviour
         public TMP_Text comparetimerTXT;
 
         public bool nearTimeOut = false;
+
+        public bool timer3 = false;
+        public bool timer2 = false;
+        public bool timer1 = false;
+
     }
     public GameTimer gameTimer;
 
@@ -85,7 +90,7 @@ public class GameManager : MonoBehaviour
         }
 
         if(playersList.Count != tempPlayerNb.howManyPlayer)return;
-        AudioSource readyGo = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Ready Go"], this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
+        AudioSource readyGo = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Ready Go"], this.transform.position, AudioManager.instance.announcerMixer, true, false);
         StartCoroutine(WaitBeforeGameStart(readyGo.clip.length - 1.3f));
 
     }
@@ -183,7 +188,10 @@ public class GameManager : MonoBehaviour
                         gameTimer.timerTXT.text = gameTimer.timer.ToString("0.00");
                         gameTimer.comparetimerTXT.text = gameTimer.timer.ToString("0.0");
                     
-                        PlayVoiceAtTime(3, ref gameTimer.nearTimeOut, AudioManager.instance.allAudio["Voice 321"]);
+                        PlayVoiceAtTime(3, ref gameTimer.nearTimeOut, AudioManager.instance.allAudio["Voice 321"], AudioManager.instance.announcerMixer);
+                        PlayVoiceAtTime(3, ref gameTimer.timer3, AudioManager.instance.allAudio["Game Timer"], AudioManager.instance.soundEffectMixer);
+                        PlayVoiceAtTime(2, ref gameTimer.timer2, AudioManager.instance.allAudio["Game Timer"], AudioManager.instance.soundEffectMixer);
+                        PlayVoiceAtTime(1, ref gameTimer.timer1, AudioManager.instance.allAudio["Game Timer"], AudioManager.instance.soundEffectMixer);
                     break;
                 }
                 if(gameTimer.timer > 60)return;
@@ -217,6 +225,8 @@ public class GameManager : MonoBehaviour
                     gameTimer.drawMaxPoint = playerPoint;
                     gameTimer.timerTXT.text = "SUDDEN DEATH !";
                     AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Voice Sudden Death"], this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
+                    Destroy(ost);
+                    AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Overtime"], this.transform.position, AudioManager.instance.ostMixer, false, true);
                 }
                 else
                 {
@@ -249,11 +259,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void PlayVoiceAtTime(float time, ref bool alreadyPlayed, AudioClip voice)
+    private void PlayVoiceAtTime(float time, ref bool alreadyPlayed, AudioClip voice, UnityEngine.Audio.AudioMixerGroup soundMixer)
     {
         if(alreadyPlayed)return;
         if(gameTimer.timer > time)return;
-        AudioManager.instance.PlayClipAt(voice, this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
+        AudioManager.instance.PlayClipAt(voice, this.transform.position, soundMixer, true, false);
         alreadyPlayed = true;
     }
 
@@ -265,14 +275,14 @@ public class GameManager : MonoBehaviour
         tempPlayerNb.howManyPlayer = int.Parse(inputField.text);
         inputField.transform.parent.gameObject.SetActive(false);
         gameStarted = true;
-        AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Title"], this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
+        AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Title"], this.transform.position, AudioManager.instance.announcerMixer, true, false);
     }
 
     private IEnumerator WaitBeforeGameStart(float length)
     {
         gameStarted = false;
         yield return new WaitForSeconds(length);
-        AudioSource ost = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("OST"), transform.position, AudioManager.instance.ostMixer, false, false);
+        ost = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("OST"), transform.position, AudioManager.instance.ostMixer, false, false);
         gameStarted = true;
         gameTimer.drawTimer = false;
     }
