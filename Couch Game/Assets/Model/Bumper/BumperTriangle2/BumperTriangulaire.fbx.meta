@@ -1,9 +1,24 @@
 fileFormatVersion: 2
-guid: cbdc01e12ca607d4bbe864ec4d0ee8f7
+guid: 0c1ceb31aef1cd348b9265969b4bab9a
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DessusBumper
+    second: {fileID: 2100000, guid: 349a4cb73c91e93458dcb6c08fd2025b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: "N\xE9on"
+    second: {fileID: 2100000, guid: bba7a74f16d8dbf4f8397ba6118fea28, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pneu
+    second: {fileID: 2100000, guid: a97dab7985fc15f48b2e0bc2dd6860ed, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
