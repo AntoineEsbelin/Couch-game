@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
+
 
 public class CounterA : MonoBehaviour
 {    
@@ -10,61 +12,101 @@ public class CounterA : MonoBehaviour
     public Transform orientation;
     public BoxCollider hitbox;
     public Rigidbody rb;
-    public PlayerManager pm;
-    public NormalControler norm;
+    public PlayerController pm;
+
+    public PlayerController plctrl;
 
     [Header("AttackStats")]
     public float attackCD = 3.0f;
     public float forceApplied = 20;
-    public bool canAtk;
+    public float forceSmall = 5;
+    public bool canAtk = false;
+
+    public int normalStun;
+    public int spinStun;
+
+    bool inCD = false;
+
+    [Header("VFX")]
+    [SerializeField] private GameObject atkVFX;
+
+
 
     private void Awake()
     {
+        pm = null;
         rb = null;
-        //pm = GetComponent<PlayerManager>();
+        //pm = GetComponent<PlayerController>();
         hitbox = GameObject.FindGameObjectWithTag("hitbox").GetComponent<BoxCollider>();
         orientation = transform;
-        canAtk = true;
+        canAtk = false;
     }
-
     private void FixedUpdate()
-    {       
-
-    }
-    private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            if (canAtk && rb != null)
-            {
-                canAtk = false;
-                StartCoroutine(Attack());
-            }
-        }
+        StartCoroutine(Attack());
+    }
 
+    public void OnStartAttack(InputAction.CallbackContext ctx)
+    {
+        if(!GameManager.instance.gameStarted)return;
+        if(ctx.performed)
+        {
+            if(plctrl.currentState == plctrl.NormalState)canAtk = true;
+        }
     }
 
     public IEnumerator Attack()
     {
-        Debug.Log("Attack");
-        Vector3 forceToApply = orientation.forward * forceApplied;
-        norm.stunned = true;
-        norm.stunDuration = 1;
+        if(canAtk && !inCD)
+        {
+            if(!plctrl.PlayerAnimator.GetBool("Counter"))plctrl.PlayerAnimator.SetTrigger("Counter");
+            int randomAtk = Random.Range(0, 6);
+            AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"Counter {randomAtk + 1}"], transform.position, AudioManager.instance.soundEffectMixer, true, false);
+            //Debug.Log("attack");
+            Vector3 forceToApply = orientation.forward * forceApplied;
+            Vector3 SmallForce = orientation.forward * forceSmall;
+            
+             
+            if (pm != null && pm.currentState == pm.SpinnerState && pm.invincibilityTimer <= 0)
+            {
+                pm.StunState.timerMax = spinStun;
+                Debug.Log(forceToApply);
+                pm.timeLastPlayer = pm.maxTimeLastPlayer;
+                pm.lastPlayerContacted = plctrl;
+                plctrl.hasCountered = true;
+                pm.stateMachine.SwitchState(pm.StunState);
+                //rb.AddForce(forceToApply / 4 * Time.deltaTime, ForceMode.Impulse);
+                Instantiate(atkVFX, pm.transform);
+                AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"Counter Hit {randomAtk + 1}"], transform.position, AudioManager.instance.soundEffectMixer, true, false);
+                Debug.Log($"COUNTERED {pm}");
+                
+            }
+            else if (pm != null && pm.currentState == pm.NormalState && pm.invincibilityTimer <= 0)
+            {
+                pm.StunState.timerMax = normalStun;
+                Debug.Log(SmallForce);
+                pm.timeLastPlayer = pm.maxTimeLastPlayer;
+                pm.lastPlayerContacted = plctrl;
+                pm.StunState.knockbackDir = SmallForce;
+                Instantiate(atkVFX, pm.transform);
 
-        // Quand les states seront là. 
-        //if (pm.spin)
-        //{
-        //    norm.stunned = true;
-        //    norm.stunDuration = 2;
-        //    rb.AddForce(forceToApply / 4 * Time.deltaTime, ForceMode.Impulse);
-        //    norm.state = normal;
+                pm.stateMachine.SwitchState(pm.StunState);
+                pm.ResetCharging();
+                AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"Counter Hit {randomAtk + 1}"], transform.position, AudioManager.instance.soundEffectMixer, true, false);
 
-        //}
+                //rb.AddForce(forceToApply * Time.deltaTime, ForceMode.Impulse);
+                //Debug.Log("EE");
+            }
 
-        rb.AddForce(forceToApply * Time.deltaTime, ForceMode.Impulse);
-        yield return new WaitForSeconds(attackCD);
-        Debug.Log("CD applied");
-        canAtk = true;
+            
+            //Debug.Log("CD applied");
+            canAtk = false;
+            inCD = true;
+            yield return new WaitForSeconds(attackCD);
+            plctrl.PlayerAnimator.SetBool("Counter", false);
+            inCD = false;
+        }
+        
     }
 
 }

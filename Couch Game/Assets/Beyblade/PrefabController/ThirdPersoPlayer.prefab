@@ -181,7 +181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 3506582711729914389}
-  body: {fileID: 0}
+  body: {fileID: 377318658546534604}
   playerID: 0
   startPos: {x: 0, y: 2.4, z: 0}
   moveParam:
@@ -193,6 +193,7 @@ MonoBehaviour:
   repulseForce: 5
   playerDead: 0
   spinDurationLimit: 4
+  playerScore: 2
 --- !u!1 &4090859830285618529
 GameObject:
   m_ObjectHideFlags: 0
@@ -297,6 +298,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c3b224b7a1047a240872e5fd860e413a, type: 3}
+--- !u!1 &377318658546534604 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c3b224b7a1047a240872e5fd860e413a, type: 3}
+  m_PrefabInstance: {fileID: 719987168105608605}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1042391993268523638 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c3b224b7a1047a240872e5fd860e413a, type: 3}

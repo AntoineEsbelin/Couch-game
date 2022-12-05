@@ -16,7 +16,6 @@ public class PlayerRespawn : MonoBehaviour
         respawnTime = maxRespawnTime;
         normalPlayer.SetActive(false);
         playerManager.enabled = false;
-        playerManager.GetComponent<Stretch>().enabled = false;
         normalPlayer.GetComponent<NormalControler>().enabled = true;
     }
 
@@ -24,6 +23,7 @@ public class PlayerRespawn : MonoBehaviour
     {
         normalPlayer.SetActive(true);
         playerManager.enabled = true;
+        //rb.velocity = Vector3.zero;
     }
 
     // Update is called once per frame

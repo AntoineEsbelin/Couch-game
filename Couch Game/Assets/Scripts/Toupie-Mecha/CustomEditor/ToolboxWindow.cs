@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,7 +21,6 @@ public class ToolboxWindow : EditorWindow
 
 
     private string aled = "Assets/Scenes/";
-    private string entitiesPath = "Script/BattleRelated/Entity/";
     private Vector2 scrollPos;
     private void OnGUI()
     {
@@ -84,6 +84,33 @@ public class ToolboxWindow : EditorWindow
             {
                 EditorGUILayout.HelpBox($"No path existing in path {aled}", MessageType.Warning);
             }
+        
+            GUILayout.BeginHorizontal();
+            if(GUILayout.Button("Make all wall convex"))
+            {
+                GameObject[] allMeshColl = GameObject.FindGameObjectsWithTag("Wall");
+                int numberOfConvexConverted = 0;
+                for(int i = 0; i < allMeshColl.Length; i++)
+                {
+                    MeshCollider aMesh = allMeshColl[i].GetComponent<MeshCollider>();
+                    if(aMesh.convex)continue;
+                    else
+                    {
+                        aMesh.convex = true;
+                        numberOfConvexConverted += 1;
+                    }
+                }
+                EditorSceneManager.SaveScene(EditorSceneManager.GetActiveScene());
+                Debug.Log($"Make {numberOfConvexConverted} Mesh Collider into convex");
+                numberOfConvexConverted = 0;
+
+            }
+
+            if(GUILayout.Button("Open Player Prefab"))
+            {
+                AssetDatabase.OpenAsset(AssetDatabase.LoadMainAssetAtPath("Assets/Prefab/Player.prefab"));
+            }
+            GUILayout.EndHorizontal();
         }
         else
         {
@@ -101,3 +128,4 @@ public class ToolboxWindow : EditorWindow
         return removedExtension;
     }
 }
+#endif

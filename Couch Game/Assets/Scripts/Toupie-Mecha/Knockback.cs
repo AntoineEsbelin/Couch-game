@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using EZCameraShake;
 
 public class Knockback : MonoBehaviour
 {
@@ -16,7 +17,12 @@ public class Knockback : MonoBehaviour
 
     private void OnEnable()
     {
-
+        CameraShaker.Instance.ShakeOnce(1f, 4f, 0.1f, 0.5f);
+        if (normalControler.spinCharging)
+        {
+            PlayerManager playerManager = normalControler.GetComponentInParent<PlayerManager>();
+            /////playerManager.ResetCharging();
+        }
         //cancel charge if charging
         knockbackDir = (this.transform.position - spinnerKnockbacking.transform.position).normalized;
         
@@ -43,7 +49,7 @@ public class Knockback : MonoBehaviour
             timer -= Time.deltaTime;
             knockback = knockbackDir * (spinnerKnockbacking.refs.moveSpeed * Time.deltaTime);
 
-            this.normalControler.rb.AddForce(knockback, ForceMode.Impulse);
+            this.normalControler.rb.AddForce(knockback.x, 0f, knockback.z, ForceMode.Impulse);
         }
         else this.enabled = false;
     }

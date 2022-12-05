@@ -38,7 +38,7 @@ public class NormalControler : MonoBehaviour
     {
         //prend les paramètres de mouvements de la data
         canMove = true;
-        stunned = false;
+        //stunned = false;
     }
 
     public void OnMove(InputAction.CallbackContext ctx)
@@ -56,7 +56,6 @@ public class NormalControler : MonoBehaviour
         if (stunned)
         {
             StartCoroutine(StunCountdown());
-            stunned = false;
         }
     }
 
@@ -108,6 +107,7 @@ public class NormalControler : MonoBehaviour
     {
         canMove = false;
         yield return new WaitForSeconds(stunDuration);
+        stunned = false;
         canMove = true;
     }
 }

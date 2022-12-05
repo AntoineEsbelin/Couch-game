@@ -7,16 +7,21 @@ public class Hitbox : MonoBehaviour
     public CounterA counterAtk;
     private void Awake()
     {
-        counterAtk = GetComponentInParent<CounterA>();
+        counterAtk = GetComponent<CounterA>();
+        Debug.Log(this.GetComponentInChildren<BoxCollider>().center);
+        Debug.Log(this.GetComponentInChildren<BoxCollider>().size);
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            counterAtk.rb = other.attachedRigidbody;
-            counterAtk.pm = other.attachedRigidbody.GetComponent<PlayerManager>();
-            counterAtk.norm = other.attachedRigidbody.GetComponentInChildren<NormalControler>();
+            other.GetComponentInParent<PlayerController>().lastPlayerContacted = GetComponent<PlayerController>();//ça marche pas à refaire (pb de collision point d'interrogation)
+            Rigidbody rb = other.GetComponentInParent<Rigidbody>();
+            counterAtk.rb = rb;
+            counterAtk.pm = rb.GetComponent<PlayerController>();
+            if (other.GetComponentInParent<PlayerController>().playerId == this.GetComponent<PlayerController>().playerId) counterAtk.pm = null;
+            //Debug.Log("ENTER IN TRIGGER");
         }
     }
 
@@ -26,8 +31,14 @@ public class Hitbox : MonoBehaviour
         {
             counterAtk.rb = null;
             counterAtk.pm = null;
-            counterAtk.norm = null;
+            //counterAtk.plctrl.hasCountered = false;
+            //Debug.Log("LEAVING TRIGGER");
+
         }
     }
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireCube(this.GetComponentInChildren<BoxCollider>().gameObject.transform.position, this.GetComponentInChildren<BoxCollider>().size);
+    }
 }

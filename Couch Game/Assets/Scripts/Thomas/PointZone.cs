@@ -2,54 +2,151 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using EZCameraShake;
 
 public class PointZone : MonoBehaviour
 {
+    
     [SerializeField] private int pointGiven;
+    [SerializeField] private bool isField;
+    [SerializeField] private GameObject explosion;
+    [SerializeField] private int explosionMultiplier = 1;
+
+    private float VibroTimer;
+    [SerializeField] private float maxVibroTimer = 2f;
+    private PlayerInput controller;
+    private GameObject followCam;
+
+    private void Start()
+    {
+        followCam = GameObject.Find("followCam");
+    }
 
     private void OnTriggerEnter(Collider coll)
     {
         if(coll.CompareTag("Player"))
         {
-            PlayerManager deadPlayer = coll.GetComponentInParent<PlayerManager>();
-            if(deadPlayer.normalPlayer.activeSelf)
-            {
-                deadPlayer.normalPlayer.SetActive(false);
-                deadPlayer.normalPlayer.GetComponent<NormalControler>().enabled = false;
-            }
-            else if(deadPlayer.spinnerPlayer.activeSelf)
-            {
-                deadPlayer.spinnerPlayer.SetActive(false);
-                deadPlayer.spinnerControler.GetComponent<SpinnerControler>().enabled = false;
-            }
-            deadPlayer.GetComponent<Rigidbody>().velocity = Vector3.zero;
-            deadPlayer.cameraTarget.targets.Remove(deadPlayer.transform);
-            //Give a certain amount of point at the last player touched
-            if(deadPlayer.lastPlayerContacted != null)
-            {
-                deadPlayer.lastPlayerContacted.playerPoint += pointGiven;
-            
-                //DEBUG
-                Debug.Log($"{deadPlayer.name} EJECTED !");
-                Debug.Log($"GIVE {pointGiven} points to {deadPlayer.lastPlayerContacted.name}");
+            controller = coll.GetComponent<PlayerInput>();
+            PlayerController deadPlayer = coll.GetComponentInParent<PlayerController>();
+            if(isField || deadPlayer.currentState == deadPlayer.DeathState)return;
+            CameraShaker.Instance.ShakeOnce(4f, 4f, 0.1f, 1f);
+            GameObject expl = Instantiate(explosion, this.transform.position, Quaternion.identity);
+            expl.transform.localScale *= explosionMultiplier;
+            DispawnPlayer(deadPlayer);
+        }
+    }
 
-                if(GameManager.instance.drawTimer)
+    private void OnTriggerExit(Collider coll)
+    {
+        if(coll.CompareTag("Player"))
+        {
+            CameraShaker.Instance.ShakeOnce(4f, 4f, 0.1f, 1f);
+            PlayerController deadPlayer = coll.GetComponentInParent<PlayerController>();
+            if(!isField || deadPlayer.currentState == deadPlayer.DeathState)return;
+            GameObject expl = Instantiate(explosion, deadPlayer.transform.position, Quaternion.identity);
+            expl.transform.localScale *= 2;
+
+            DispawnPlayer(deadPlayer);
+
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        //controller vibration
+        /*if (controller != null)
+        {
+            if(controller.GetDevice<Gamepad>() == null)return;
+            Gamepad gamePad = controller.GetDevice<Gamepad>();
+
+            if (gamePad == Gamepad.current)
+            {
+                if (VibroTimer > 0)
                 {
-                    if(deadPlayer.lastPlayerContacted.playerPoint > GameManager.instance.drawMaxPoint)
-                    {
-                        Debug.Log($"{deadPlayer.lastPlayerContacted.name} WINNN");
-                        GameManager.instance.timeOut = true;
-                        //STOP THE ROUND
-                    }
+                    VibroTimer -= Time.deltaTime;
+                    
+                    gamePad.SetMotorSpeeds(0.5f, 1.5f);
+                    
+                }
+                
+            }
+        }*/
+        
+    }
+
+
+    private void DispawnPlayer(PlayerController deadPlayer)
+    {
+        if(deadPlayer.currentState == deadPlayer.DeathState)return;
+        //VibroTimer = maxVibroTimer; 
+        AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("Goal"), this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
+        
+        if(deadPlayer.lastPlayerContacted != null)
+        {
+            deadPlayer.lastPlayerContacted.playerPoint += pointGiven;
+            deadPlayer.lastPlayerContacted.UpdateScore(deadPlayer.lastPlayerContacted.playerPoint);
+            //DEBUG
+            Debug.Log($"{deadPlayer.name} EJECTED !");
+            Debug.Log($"GIVE {pointGiven} points to {deadPlayer.lastPlayerContacted.name}");
+
+            AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Crowd Shouting"]/*.GetValueOrDefault("Crowd Shouting")*/, this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
+            
+            CheckBestPlayer();
+
+            if(GameManager.instance.gameTimer.drawTimer)
+            {
+                if(deadPlayer.lastPlayerContacted.playerPoint > GameManager.instance.gameTimer.drawMaxPoint)
+                {
+                    GameManager.instance.PlayerWin(deadPlayer.lastPlayerContacted);
+                    //STOP THE ROUND
                 }
             }
             else
             {
-                //DEBUG
-                Debug.Log($"{deadPlayer.name} SUICIDED !");
+                int randomPraise = Random.Range(0, 7);
+                AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"Voice Praise {randomPraise + 1}"], this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
             }
-            deadPlayer.GetComponent<PlayerRespawn>().enabled = true;
-                
+        }
+        else
+        {
+            //DEBUG
+            Debug.Log($"{deadPlayer.name} SUICIDED !");
+        }
+        if(deadPlayer.gameObject.activeSelf)
+        {
+            
+            deadPlayer.stateMachine.SwitchState(deadPlayer.DeathState);
+        }
+        
+        
+    }
+
+    private void CheckBestPlayer()
+    {
+        int playerPoint = 0;
+        //get max point + player
+        for(int i = 0; i < GameManager.instance.allPlayer.Count; i++)
+        {
+            if(GameManager.instance.allPlayer[i].playerPoint >= playerPoint)
+            {
+                playerPoint = GameManager.instance.allPlayer[i].playerPoint;
+            }
+        }
+        
+        for(int i = 0; i < GameManager.instance.allPlayer.Count; i++)
+        {
+            if(GameManager.instance.allPlayer[i].playerPoint >= playerPoint)
+            {
+                if(GameManager.instance.allPlayer[i].hasDaCrown == true)return;
+                GameManager.instance.allPlayer[i].hasDaCrown = true;
+                GameManager.instance.allPlayer[i].playerCrown.SetActive(true);
+                followCam.GetComponent<FollowPlayer>().follow(GameManager.instance.allPlayer[i].gameObject);
+            }
+            else
+            {
+                GameManager.instance.allPlayer[i].hasDaCrown = false;
+                GameManager.instance.allPlayer[i].playerCrown.SetActive(false);
+            }
         }
     }
 }

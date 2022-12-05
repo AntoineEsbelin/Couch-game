@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using EZCameraShake;
 
 public class SpinCollision : MonoBehaviour
 {
@@ -24,7 +25,7 @@ public class SpinCollision : MonoBehaviour
 
     void OnDisable()
     {
-        playerManager.ResetAllInteraction();
+        /////playerManager.ResetAllInteraction();
     }
 
     private void FixedUpdate()
@@ -40,8 +41,8 @@ public class SpinCollision : MonoBehaviour
             
             if(spinnerControler.gameObject.activeSelf)
             {
-                other.GetComponentInParent<PlayerManager>().lastPlayerContacted = this.GetComponent<PlayerManager>();
-                other.GetComponentInParent<PlayerManager>().timeLastPlayer = other.GetComponentInParent<PlayerManager>().maxTimeLastPlayer;
+                ////other.GetComponentInParent<PlayerManager>().lastPlayerContacted = this.GetComponent<PlayerManager>();
+                ////other.GetComponentInParent<PlayerManager>().timeLastPlayer = other.GetComponentInParent<PlayerManager>().maxTimeLastPlayer;
 
 
                 //Debug.Log(other.name);
@@ -76,7 +77,7 @@ public class SpinCollision : MonoBehaviour
             {
                 //Debug.Log("Walled");
                 bounceWall.normalizedWall = other.contacts[0].normal;
-                other.gameObject.GetComponent<DrawRayWall>().normal = other.contacts[0].normal;
+                //other.gameObject.GetComponent<DrawRayWall>().normal = other.contacts[0].normal;
                 bounceWall.playerDirection = spinnerControler.moveDir;
                 timer = timerCount;
                 bounceWall.enabled = true;

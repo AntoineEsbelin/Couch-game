@@ -11,13 +11,20 @@ public class SpawnPlayer : MonoBehaviour
 
     [SerializeField] private List<GameObject> characterFBXAlreadySpawned;
     public int playerJoined = 0;
+    public static SpawnPlayer instance;
+    private void Awake()
+    {
+        if(instance != null)Destroy(gameObject);
+        instance = this;
+    }
 
     public void OnPlayerJoined(PlayerInput input)
     {   
         if(playerJoined < this.GetComponent<PlayerInputManager>().maxPlayerCount)
         {
-            input.GetComponent<PlayerManager>().playerId = playerJoined;
-            input.GetComponent<PlayerManager>().spawnPlayer = this;
+            input.GetComponent<PlayerController>().playerId = playerJoined;
+            input.GetComponent<PlayerController>().spawnPlayer = this;
+            input.GetComponent<PlayerController>().RespawnPlayer();
             RandomSpawnFBX(input);
             //assigne le model 3D selon le joueur
             playerJoined+= 1;
@@ -35,13 +42,9 @@ public class SpawnPlayer : MonoBehaviour
                 return;
             }
         }
-        input.GetComponent<PlayerManager>().normalFBX = charactersFBX[randomCharacter];
-        input.GetComponent<PlayerManager>().spinnerFBX = spinnersFBX[randomCharacter];
+        ////input.GetComponent<PlayerManager>().normalFBX = charactersFBX[randomCharacter];
+        ////input.GetComponent<PlayerManager>().spinnerFBX = spinnersFBX[randomCharacter];
         characterFBXAlreadySpawned.Add(charactersFBX[randomCharacter]);
     }
-
-    private void FixedUpdate()
-    {
-        
-    }
+    
 }

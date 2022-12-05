@@ -6,6 +6,8 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(CharacterController))]
 public class ToupieBehaviour : MonoBehaviour
 {
+    float mass = 3f; // defines the character mass
+    Vector3 impact = Vector3.zero;
     private float t;
     private float SaveSpinSpeed;
     private float SaveSpinDuration;
@@ -23,7 +25,7 @@ public class ToupieBehaviour : MonoBehaviour
     [Header("Input")]
     public PlayerControll playerControl;
     private InputAction spinState;
-    [HideInInspector]public int playerID = 0;
+    public int playerID = 0;
     public Vector3 startPos;
     private float spinDuration;
     private bool isSpinning;
@@ -49,6 +51,9 @@ public class ToupieBehaviour : MonoBehaviour
     [HideInInspector]public bool playerDead;
     public int spinDurationLimit = 4;
 
+    public int playerScore;
+
+    public event System.Action<int> OnScoreChanged;
 
     private void Awake()
     {
@@ -59,6 +64,9 @@ public class ToupieBehaviour : MonoBehaviour
     {
         transform.position = startPos;
         input = GetComponent<PlayerInput>();
+        
+        if (OnScoreChanged != null)
+            OnScoreChanged(playerScore);
     }
 
     private void OnEnable()
@@ -171,6 +179,7 @@ public class ToupieBehaviour : MonoBehaviour
         //         accel.z += 0.2f;
         // }
         
+        
        
         controller.Move(accel * moveParam.spinSpeed * Time.deltaTime);
         
@@ -184,7 +193,17 @@ public class ToupieBehaviour : MonoBehaviour
     
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.A) && playerID == 1)
+        {
+            IncreaseScore(1);   
+        }
+        else if (Input.GetKeyDown(KeyCode.C) && playerID == 2)
+        {
+            IncreaseScore(1);
+        }
         
+        
+        impact = Vector3.Lerp(impact, Vector3.zero, 5*Time.deltaTime);   
         if(spin_Pressed)
         {
             moveParam.speed = 1;
@@ -245,30 +264,32 @@ public class ToupieBehaviour : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         playerHit = false;
     }
-
+    
+    private Vector3 AddImpact(Vector3 dir, float force){
+        dir.Normalize();
+        if (dir.y < 0) dir.y = -dir.y; // reflect down force on the ground
+        impact += dir.normalized * force / mass;
+        return impact;
+    }
     private void OnControllerColliderHit(ControllerColliderHit coll)
     {
-        
+        float force = 10f;   
         if (coll.collider.CompareTag("Wall"))
         {
             playerHit = true;
             
             reflect = Quaternion.AngleAxis(180, coll.normal) * transform.forward * -1;
             reflect.Normalize();
-            
-            
-
         }
 
-        if (coll.collider.CompareTag("Player"))
-        {
-            playerHit = true;
-
-            Vector3 collDir = coll.transform.position - transform.position;
-            reflect = Quaternion.AngleAxis(180, coll.normal) * transform.forward * -1 + collDir;
-            reflect.Normalize();
-            
-        }
+        // if (coll.collider.CompareTag("Player"))
+        // {
+        //     Vector3 dir = coll.point - transform.position;
+        //     dir = -dir.normalized;
+        //     float addForce = AddImpact(dir,force);
+        //     Debug.Log("Forced");
+        //     
+        // }
         
     }
     
@@ -277,13 +298,20 @@ public class ToupieBehaviour : MonoBehaviour
         body.SetActive(false);
         controller.enabled = false;
         moveParam.speed = 0;
-        transform.position = PlayerSpawnManager.instance.spawnLocations[playerID - 1].position;
+        //transform.position = PlayerSpawnManager.instance.spawnLocations[playerID - 1].position;
         yield return new WaitForSeconds(3f);
         body.SetActive(true);
         controller.enabled = true;
         moveParam.speed = 6;
     }
-    
-    
-    
+
+    public void IncreaseScore(int value)
+    {
+        playerScore += value;
+        if (OnScoreChanged != null)
+            OnScoreChanged(playerScore);
+    }
+
+
+
 }
