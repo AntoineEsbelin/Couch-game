@@ -281,7 +281,6 @@ public class GameManager : MonoBehaviour
         
         playersRoom.SetActive(false);
         gameStarted = true;
-        AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Title"], this.transform.position, AudioManager.instance.announcerMixer, true, false);
     }
     
     public int count(List<PlayerController> players, bool flag){

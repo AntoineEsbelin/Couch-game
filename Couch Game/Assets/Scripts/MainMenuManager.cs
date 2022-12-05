@@ -53,6 +53,11 @@ public class MainMenuManager : MonoBehaviour
         Application.Quit();
     }
 
+    private void Start()
+    {
+            AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Title"], this.transform.position, AudioManager.instance.announcerMixer, true, false);
+    }
+
     private void Update()
     {
         var uiModule = (InputSystemUIInputModule)EventSystem.current.currentInputModule;
