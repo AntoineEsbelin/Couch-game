@@ -11,6 +11,8 @@ public class Bumper : MonoBehaviour
     private Rigidbody playerRb;
     private PlayerController playerCtrl;
 
+    private Animator animate;
+
     private float timer;
     [SerializeField] private float maxTimer;
 
@@ -57,6 +59,9 @@ public class Bumper : MonoBehaviour
             player = col.gameObject;
             playerRb = player.GetComponent<Rigidbody>();
             playerCtrl = player.GetComponent<PlayerController>();
+            animate = GetComponent<Animator>();
+
+            StartCoroutine(AnimBumper());
             
             dir = transform.position - col.transform.position;
             dir.Normalize();
@@ -66,6 +71,13 @@ public class Bumper : MonoBehaviour
             timer = maxTimer;
             
         }
+    }
+
+    IEnumerator AnimBumper()
+    {
+        animate.SetBool("PlayerCol", true);
+        yield return new WaitForSeconds(1f);
+        animate.SetBool("PlayerCol", false);
     }
 }
 
