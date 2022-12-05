@@ -104,7 +104,7 @@ public class PointZone : MonoBehaviour
             else
             {
                 int randomPraise = Random.Range(0, 7);
-                AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"Voice Praise {randomPraise + 1}"], this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
+                AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"Voice Praise {randomPraise + 1}"], this.transform.position, AudioManager.instance.announcerMixer, true, false);
             }
         }
         else

@@ -8,6 +8,7 @@ public class AudioManager : MonoBehaviour
     public static AudioManager instance;
     public AudioMixerGroup soundEffectMixer;
     public AudioMixerGroup ostMixer;
+    public AudioMixerGroup announcerMixer;
 
     [System.Serializable]
     public class KeyValue
