@@ -1039,7 +1039,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Proto Toupie-Mecha
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &684555029
@@ -1978,6 +1978,8 @@ MonoBehaviour:
     audio: {fileID: 8300000, guid: 6594efde3d3198f4ba6e15a19adb2c21, type: 3}
   - audioName: OST
     audio: {fileID: 8300000, guid: 68ead9d265c5b704fb9699c0840af61f, type: 3}
+  - audioName: Title OST
+    audio: {fileID: 8300000, guid: 5d2bb39f1f1e462438b9e9dbc908533d, type: 3}
   - audioName: Game Timer
     audio: {fileID: 8300000, guid: f7abe3e0332927c41a28b9d4a761b28d, type: 3}
   - audioName: Overtime
