@@ -1929,6 +1929,158 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1383764255}
   m_CullTransparentMesh: 1
+--- !u!1 &1554714987
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1554714989}
+  - component: {fileID: 1554714988}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1554714988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1554714987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 417ec13ff501411449e2103a2d8e6fb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundEffectMixer: {fileID: -1790053248417640825, guid: 888a97718594b1c4190024e5ca1c5dec, type: 2}
+  ostMixer: {fileID: 234327515679976517, guid: 888a97718594b1c4190024e5ca1c5dec, type: 2}
+  announcerMixer: {fileID: 7415576026941925476, guid: 888a97718594b1c4190024e5ca1c5dec, type: 2}
+  yes:
+  - audioName: Spin Move
+    audio: {fileID: 8300000, guid: be1a8d3b52df677458b24461b4b54493, type: 3}
+  - audioName: Spin Charge
+    audio: {fileID: 8300000, guid: 77335f2fb6c965f469f9274aa85bfdb7, type: 3}
+  - audioName: Spin Hit Wall
+    audio: {fileID: 8300000, guid: 999a13961c6f5da40a774ae9b6dc98c9, type: 3}
+  - audioName: Spin Hit Spin
+    audio: {fileID: 8300000, guid: d21fb84d2c47b3e4fbacf58928e4fbd8, type: 3}
+  - audioName: Crowd Shouting
+    audio: {fileID: 8300000, guid: 8d06ce04a2d2ad148a35df8937898a20, type: 3}
+  - audioName: Stun
+    audio: {fileID: 8300000, guid: 6a14638fb23736940a1f3592ba29d726, type: 3}
+  - audioName: Goal
+    audio: {fileID: 8300000, guid: 6594efde3d3198f4ba6e15a19adb2c21, type: 3}
+  - audioName: OST
+    audio: {fileID: 8300000, guid: 68ead9d265c5b704fb9699c0840af61f, type: 3}
+  - audioName: Game Timer
+    audio: {fileID: 8300000, guid: f7abe3e0332927c41a28b9d4a761b28d, type: 3}
+  - audioName: Overtime
+    audio: {fileID: 8300000, guid: e20134a87d9a15f42bac10b64e02a441, type: 3}
+  - audioName: Voice 321
+    audio: {fileID: 8300000, guid: d6e237adeb244cd43825b4b10329a738, type: 3}
+  - audioName: Voice Praise 1
+    audio: {fileID: 8300000, guid: 2dd057c2646cf2d4a9a99ba1df8279c0, type: 3}
+  - audioName: Voice Praise 2
+    audio: {fileID: 8300000, guid: 2824c00cbaa48d14aa115750d0679387, type: 3}
+  - audioName: Voice Praise 3
+    audio: {fileID: 8300000, guid: c529331ebb31e6b459666c20b3c7d0e3, type: 3}
+  - audioName: Voice Praise 4
+    audio: {fileID: 8300000, guid: af6aa620cd549374dab09d0333279e8d, type: 3}
+  - audioName: Voice Praise 5
+    audio: {fileID: 8300000, guid: 60591c195858caf4eb374453b2d8d059, type: 3}
+  - audioName: Voice Praise 6
+    audio: {fileID: 8300000, guid: 8b951f75425e115428a80ea3c83b5003, type: 3}
+  - audioName: Voice Praise 7
+    audio: {fileID: 8300000, guid: 0b00043615ed17d42860a08081a1d10b, type: 3}
+  - audioName: Voice Sudden Death
+    audio: {fileID: 8300000, guid: 27640502765e9d145aaa6d4b77511d66, type: 3}
+  - audioName: Voice Victory
+    audio: {fileID: 8300000, guid: b4231318a0d24e440a6820505cccc409, type: 3}
+  - audioName: 1 Win
+    audio: {fileID: 8300000, guid: bc602a1768069bc4eabaf485101e1917, type: 3}
+  - audioName: 2 Win
+    audio: {fileID: 8300000, guid: fa8b3ba02738d5844a24e1d58d589fff, type: 3}
+  - audioName: 3 Win
+    audio: {fileID: 8300000, guid: cea9d27281df57c4caa4621e5324e1ef, type: 3}
+  - audioName: 4 Win
+    audio: {fileID: 8300000, guid: ab4d39c187278ea41b3b79c350d15cf0, type: 3}
+  - audioName: Ready Go
+    audio: {fileID: 8300000, guid: dce07e5d96a69714e8c912faebd5d947, type: 3}
+  - audioName: One Minute Remaining
+    audio: {fileID: 8300000, guid: 431ec080570900041858a539e91f3cef, type: 3}
+  - audioName: Title
+    audio: {fileID: 8300000, guid: a77ab1f8ff3d79545b2869b1109dbd0a, type: 3}
+  - audioName: Spin Hit Player 1
+    audio: {fileID: 8300000, guid: e2c94968f9bebbb46928aeed75191655, type: 3}
+  - audioName: Spin Hit Player 2
+    audio: {fileID: 8300000, guid: dbae913dd25b60e4396339996cc67d73, type: 3}
+  - audioName: Spin Hit Player 3
+    audio: {fileID: 8300000, guid: ca0a82e40d98d9b488b3941a71a37d87, type: 3}
+  - audioName: Spin Hit Player 4
+    audio: {fileID: 8300000, guid: 44a8b5517239903429070e8294722d4d, type: 3}
+  - audioName: Spin Hit Player 5
+    audio: {fileID: 8300000, guid: 4c1942d0c4a14064a8adc369240c37a7, type: 3}
+  - audioName: Spin Hit Player 6
+    audio: {fileID: 8300000, guid: 2bd76240c6663724a9b57ff8a39cd6a7, type: 3}
+  - audioName: Spin Hit Player 7
+    audio: {fileID: 8300000, guid: 825d235ef2c2ccf4ca00c6258ea65e72, type: 3}
+  - audioName: Spin Brake 1
+    audio: {fileID: 8300000, guid: 3d483e3e10eeeeb4cbab6d2f1854b7c0, type: 3}
+  - audioName: Spin Brake 2
+    audio: {fileID: 8300000, guid: 557ed568681db7b4eb6244e5ba904bf5, type: 3}
+  - audioName: Spin Brake 3
+    audio: {fileID: 8300000, guid: 54fbf7f0528e5ec44869cd4111bb81d2, type: 3}
+  - audioName: Spin Brake 4
+    audio: {fileID: 8300000, guid: 5b73782aee157ab42aaf2ef88939bade, type: 3}
+  - audioName: Spin Brake 5
+    audio: {fileID: 8300000, guid: 699cff93533fab7478f97ec53ea03e15, type: 3}
+  - audioName: Spin Brake 6
+    audio: {fileID: 8300000, guid: 001ca3dec0faadc4dab496c3ad9f941d, type: 3}
+  - audioName: Counter 1
+    audio: {fileID: 8300000, guid: 21958a483de9b1644af75b44a986f6bb, type: 3}
+  - audioName: Counter 2
+    audio: {fileID: 8300000, guid: 12e665e1d87322843909f73414beeda2, type: 3}
+  - audioName: Counter 3
+    audio: {fileID: 8300000, guid: 6f37f9edd4be96e499174e22a577aa58, type: 3}
+  - audioName: Counter 4
+    audio: {fileID: 8300000, guid: f9d14c73346c5b44cab6d40ec5f9bc09, type: 3}
+  - audioName: Counter 5
+    audio: {fileID: 8300000, guid: b48725c9ff7abcb44b154aad4475b731, type: 3}
+  - audioName: Counter 6
+    audio: {fileID: 8300000, guid: eec6f1e36cd107a4aab86bb7efeea687, type: 3}
+  - audioName: Counter Hit 1
+    audio: {fileID: 8300000, guid: 37848c7d9dc731d41b872b058e640323, type: 3}
+  - audioName: Counter Hit 2
+    audio: {fileID: 8300000, guid: c6e876bfd048aba4ab795ca904d3bcb6, type: 3}
+  - audioName: Counter Hit 3
+    audio: {fileID: 8300000, guid: e25bf4003c9f7dd4e8162612b7d42d2b, type: 3}
+  - audioName: Counter Hit 4
+    audio: {fileID: 8300000, guid: e53ed3aae0362ee49a3f8e3ea7d3837e, type: 3}
+  - audioName: Counter Hit 5
+    audio: {fileID: 8300000, guid: d3f26e3b642bbfc458ae99e221b64a9a, type: 3}
+  - audioName: Counter Hit 6
+    audio: {fileID: 8300000, guid: 193e7756990bb664c8581069d95a1339, type: 3}
+--- !u!4 &1554714989
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1554714987}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -54.500008, z: 47.250004}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1667427318
 GameObject:
   m_ObjectHideFlags: 0

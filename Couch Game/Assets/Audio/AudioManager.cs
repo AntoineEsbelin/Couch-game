@@ -23,7 +23,10 @@ public class AudioManager : MonoBehaviour
     {
         if (instance != null)
             return;
+        else Destroy(this.gameObject);
         instance = this;
+
+        DontDestroyOnLoad(this.gameObject);
 
         foreach(var ui in yes)
         {
