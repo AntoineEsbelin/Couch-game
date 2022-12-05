@@ -8,8 +8,8 @@ public class Hitbox : MonoBehaviour
     private void Awake()
     {
         counterAtk = GetComponent<CounterA>();
-        Debug.Log(this.GetComponentInChildren<BoxCollider>().center);
-        Debug.Log(this.GetComponentInChildren<BoxCollider>().size);
+        //Debug.Log(this.GetComponentInChildren<BoxCollider>().center);
+        //Debug.Log(this.GetComponentInChildren<BoxCollider>().size);
     }
 
     private void OnTriggerEnter(Collider other)

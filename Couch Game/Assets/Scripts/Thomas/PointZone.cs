@@ -40,6 +40,7 @@ public class PointZone : MonoBehaviour
     {
         if(coll.CompareTag("Player"))
         {
+            CameraShaker.Instance.ShakeOnce(4f, 4f, 0.1f, 1f);
             PlayerController deadPlayer = coll.GetComponentInParent<PlayerController>();
             if(!isField || deadPlayer.currentState == deadPlayer.DeathState)return;
             GameObject expl = Instantiate(explosion, deadPlayer.transform.position, Quaternion.identity);
@@ -89,7 +90,7 @@ public class PointZone : MonoBehaviour
             Debug.Log($"GIVE {pointGiven} points to {deadPlayer.lastPlayerContacted.name}");
 
             AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Crowd Shouting"]/*.GetValueOrDefault("Crowd Shouting")*/, this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
-            
+            if(GameManager.instance.allCrowd != null)GameManager.instance.Cheer();
             CheckBestPlayer();
 
             if(GameManager.instance.gameTimer.drawTimer)
