@@ -50,7 +50,11 @@ public class GameManager : MonoBehaviour
 
     public TempPlayerNb tempPlayerNb;
     public bool gameStarted;
-    
+
+    [Header("Crowd")]
+    public Crowd[] allCrowd;
+    public float cheerMinTime = 0;
+    public float cheerMaxTime = .5f;
     private void OnPlayerJoined(PlayerInput playerInput)
     {
         if(tempPlayerNb.howManyPlayer == 0)return;
@@ -302,5 +306,13 @@ public class GameManager : MonoBehaviour
         }
 
         SceneManager.LoadScene(sceneName);
+    }
+
+    public void Cheer()
+    {
+        for(int i = 0; i < allCrowd.Length; i++)
+        {
+            StartCoroutine(allCrowd[i].CrowdCheer());
+        }
     }
 }

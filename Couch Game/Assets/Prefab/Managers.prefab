@@ -209,9 +209,7 @@ MonoBehaviour:
   soundEffectMixer: {fileID: -1790053248417640825, guid: 888a97718594b1c4190024e5ca1c5dec, type: 2}
   ostMixer: {fileID: 234327515679976517, guid: 888a97718594b1c4190024e5ca1c5dec, type: 2}
   yes:
-  - audioName: Spin Move 1
-    audio: {fileID: 8300000, guid: 23da58f2adc269448986303f4a9a6c0e, type: 3}
-  - audioName: Spin Move 2
+  - audioName: Spin Move
     audio: {fileID: 8300000, guid: be1a8d3b52df677458b24461b4b54493, type: 3}
   - audioName: Spin Charge
     audio: {fileID: 8300000, guid: 77335f2fb6c965f469f9274aa85bfdb7, type: 3}
@@ -519,3 +517,7 @@ MonoBehaviour:
     howManyPlayer: 0
     oneMinute: 0
   gameStarted: 0
+  allCrowd: []
+  cheerMinTime: 0
+  cheerMaxTime: 1
+  howManyAnimated: 0

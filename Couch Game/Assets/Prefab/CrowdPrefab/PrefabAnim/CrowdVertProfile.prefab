@@ -346,6 +346,7 @@ GameObject:
   m_Component:
   - component: {fileID: 811281924314484801}
   - component: {fileID: 6769788173933837158}
+  - component: {fileID: 2687532909542622506}
   m_Layer: 0
   m_Name: CrowdVertProfile
   m_TagString: Untagged
@@ -393,6 +394,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2687532909542622506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7687112760301168986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55036d9040e89f14fa52a33e1868e2bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8242331862402629179
 GameObject:
   m_ObjectHideFlags: 0
