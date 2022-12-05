@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public List<TextMeshProUGUI> playerRoomUI;
     public List<PlayerController> allPlayer;
     public List<PlayerInput> playersList = new List<PlayerInput>();
 
@@ -57,8 +58,11 @@ public class GameManager : MonoBehaviour
         playersList.Add(playerInput);
         if (PlayerJoinedGame != null)
             PlayerJoinedGame(playerInput);
-        PlayerController playerController = playerInput.GetComponent<PlayerController>(); 
+        
+        PlayerController playerController = playerInput.GetComponent<PlayerController>();
         playerController.playerId = playersList.Count;
+        playerController.isReady = true;
+        playerRoomUI[playerController.playerId].text = "Ready !"; 
         playerController.transform.position = spawnPoints[playerController.playerId - 1].position;
         playerController.playerFBX = Instantiate(charactersFBX[playerController.playerId - 1], playerController.transform);    
     
@@ -253,15 +257,24 @@ public class GameManager : MonoBehaviour
         alreadyPlayed = true;
     }
 
-    public void StartGame(TMP_InputField inputField)
+    public void StartGame()
     {
-        if(inputField.contentType != TMP_InputField.ContentType.IntegerNumber)return;
-        if(inputField.text.Length == 0 || int.Parse(inputField.text) < 1 || int.Parse(inputField.text) > 4)return;
-
-        tempPlayerNb.howManyPlayer = int.Parse(inputField.text);
-        inputField.transform.parent.gameObject.SetActive(false);
+        // if(inputField.text.Length == 0 || int.Parse(inputField.text) < 1 || int.Parse(inputField.text) > 4)return;
+        print(count(allPlayer, true));
+        if( count(allPlayer, true) == 0 || count(allPlayer, true) < 1 || count(allPlayer, true) > 4) return;
+        
         gameStarted = true;
         AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Title"], this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
+    }
+    
+    public int count(List<PlayerController> players, bool flag){
+        int value = 0;
+ 
+        for(int i = 0; i < players.Count; i++) {
+            if(players[i].isReady == flag) value++;
+        }
+ 
+        return value;
     }
 
     private IEnumerator WaitBeforeGameStart(float length)

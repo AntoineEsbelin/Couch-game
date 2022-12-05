@@ -45,6 +45,7 @@ public class PlayerController : MonoBehaviour
     public float timeLastPlayer;
 
     public bool isMoving;
+    public bool isReady;
 
     public float stunDurationKnockback = 1f;
     public float stunDurationSpinEnd = 0.3f;
