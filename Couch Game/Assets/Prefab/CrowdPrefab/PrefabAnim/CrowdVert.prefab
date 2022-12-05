@@ -178,6 +178,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8794313918069513693}
   - component: {fileID: 7039714766045138904}
+  - component: {fileID: 4075832360944181906}
   m_Layer: 0
   m_Name: CrowdVert
   m_TagString: Untagged
@@ -225,6 +226,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &4075832360944181906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4946577396532988083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55036d9040e89f14fa52a33e1868e2bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7914143929214091489
 GameObject:
   m_ObjectHideFlags: 0
