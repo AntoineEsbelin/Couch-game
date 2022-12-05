@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public List<TextMeshProUGUI> playerRoomUI;
+    public GameObject playersRoom;
     public List<PlayerController> allPlayer;
     public List<PlayerInput> playersList = new List<PlayerInput>();
 
@@ -63,15 +64,14 @@ public class GameManager : MonoBehaviour
     public float cheerMaxTime = .5f;
     private void OnPlayerJoined(PlayerInput playerInput)
     {
-        if(tempPlayerNb.howManyPlayer == 0)return;
+        
         playersList.Add(playerInput);
         if (PlayerJoinedGame != null)
             PlayerJoinedGame(playerInput);
-        
         PlayerController playerController = playerInput.GetComponent<PlayerController>();
         playerController.playerId = playersList.Count;
         playerController.isReady = true;
-        playerRoomUI[playerController.playerId].text = "Ready !"; 
+        playerRoomUI[playerController.playerId - 1].text = "Ready !"; 
         playerController.transform.position = spawnPoints[playerController.playerId - 1].position;
         playerController.playerFBX = Instantiate(charactersFBX[playerController.playerId - 1], playerController.transform);    
     
@@ -123,7 +123,7 @@ public class GameManager : MonoBehaviour
 
     private void JoinAction(InputAction.CallbackContext ctx)
     {
-        if(!gameStarted || playersList.Count >= tempPlayerNb.howManyPlayer)return;
+        
         PlayerInputManager.instance.JoinPlayerFromActionIfNotAlreadyJoined(ctx);
     }
     
@@ -277,6 +277,9 @@ public class GameManager : MonoBehaviour
         print(count(allPlayer, true));
         if( count(allPlayer, true) == 0 || count(allPlayer, true) < 1 || count(allPlayer, true) > 4) return;
         
+        tempPlayerNb.howManyPlayer = count(allPlayer, true);
+        
+        playersRoom.SetActive(false);
         gameStarted = true;
         AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Title"], this.transform.position, AudioManager.instance.announcerMixer, true, false);
     }
