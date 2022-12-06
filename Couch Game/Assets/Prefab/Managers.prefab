@@ -464,7 +464,7 @@ MonoBehaviour:
     m_SingletonActionBindings:
     - m_Name: 
       m_Id: f498e3fe-9f8d-4bd7-a22c-149fe104c24c
-      m_Path: <Keyboard>/enter
+      m_Path: <Keyboard>/space
       m_Interactions: 
       m_Processors: 
       m_Groups: 
