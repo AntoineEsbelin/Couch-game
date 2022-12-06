@@ -252,7 +252,7 @@ MonoBehaviour:
   flipperDamper: 25
   _animator: {fileID: 1249848592988193622}
   NameAnim: Base Layer.FlipperL
-  KnockbackForce: 25
+  KnockbackForce: 1000
   maxKnockBackTimer: 3
 --- !u!95 &1249848592988193622
 Animator:
@@ -448,7 +448,7 @@ MonoBehaviour:
   flipperDamper: 25
   _animator: {fileID: 4095572606672929618}
   NameAnim: Base Layer.FlipperR
-  KnockbackForce: 25
+  KnockbackForce: 1000
   maxKnockBackTimer: 3
 --- !u!95 &4095572606672929618
 Animator:
