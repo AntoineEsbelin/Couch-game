@@ -23,7 +23,6 @@ public class SpinnerState : PlayerState
         playerController.trailRenderer.enabled = true;
         playerController.PlayerAnimator.SetBool("IsSpinning", true);
         repoussed = false;
-        playerController.transform.position = new Vector3(playerController.transform.position.x, playerController.transform.position.y + 3f, playerController.transform.position.z);
         playerController.spinningAnim.SetRotate(true);
         playerController.GetComponentInChildren<SpinningAnim>().SetRotate(true);
         
@@ -107,7 +106,6 @@ public class SpinnerState : PlayerState
         mSettings.brakeManiability = 1f;
         mSettings.brakeSpeed = 1f;
         playerController.PlayerAnimator.SetBool("IsSpinning", false);
-        playerController.transform.position = new Vector3(playerController.transform.position.x, playerController.transform.position.y - 3f, playerController.transform.position.z);
         playerController.spinningAnim.SetRotate(false);
         Destroy(this.vfx);
         playerController.trailRenderer.enabled = false;

@@ -222,7 +222,7 @@ public class PlayerController : MonoBehaviour
                                 SpinnerState.mSettings.bonusMoveSpeed = bonusSpeedPerPhase[i];
                                 playerAnimator.SetBool("ChargingSpin", false);
                                 //Debug.Log("VROUM");
-                                Debug.Log(bonusSpeedPerPhase[i]);
+                                //Debug.Log(bonusSpeedPerPhase[i]);
                                 if(sfx != null)Destroy(sfx.gameObject);
                                 break;
                             }
@@ -251,7 +251,7 @@ public class PlayerController : MonoBehaviour
 
             if (ctx.performed)
             {
-                Debug.Log("start brake");
+                //Debug.Log("start brake");
                 SpinnerState.mSettings.brakeManiability = SpinnerState.mSettings.brakeManiabilityModifier;
                 SpinnerState.mSettings.brakeSpeed = SpinnerState.mSettings.brakeSpeedModifier;
 
@@ -262,7 +262,7 @@ public class PlayerController : MonoBehaviour
 
             if (ctx.canceled)
             {
-                Debug.Log("stop brake");
+                //Debug.Log("stop brake");
                 SpinnerState.mSettings.brakeManiability = 1f;
             }
         }
@@ -329,7 +329,7 @@ public class PlayerController : MonoBehaviour
 
                     if ((triggerPlayer.currentState == triggerPlayer.NormalState || triggerPlayer.currentState == triggerPlayer.StunState) && !triggerPlayer.hasCountered)
                     {
-                        Debug.Log(triggerPlayer);
+                        //Debug.Log(triggerPlayer);
                         //triggerPlayer.hasCountered = false;
                         //activate bounce player of this spinner
                         Instantiate(explosion, this.transform.position, Quaternion.identity);
