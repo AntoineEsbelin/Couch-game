@@ -208,10 +208,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundEffectMixer: {fileID: -1790053248417640825, guid: 888a97718594b1c4190024e5ca1c5dec, type: 2}
   ostMixer: {fileID: 234327515679976517, guid: 888a97718594b1c4190024e5ca1c5dec, type: 2}
+  announcerMixer: {fileID: 7415576026941925476, guid: 888a97718594b1c4190024e5ca1c5dec, type: 2}
   yes:
-  - audioName: Spin Move 1
-    audio: {fileID: 8300000, guid: 23da58f2adc269448986303f4a9a6c0e, type: 3}
-  - audioName: Spin Move 2
+  - audioName: Spin Move
     audio: {fileID: 8300000, guid: be1a8d3b52df677458b24461b4b54493, type: 3}
   - audioName: Spin Charge
     audio: {fileID: 8300000, guid: 77335f2fb6c965f469f9274aa85bfdb7, type: 3}
@@ -227,6 +226,10 @@ MonoBehaviour:
     audio: {fileID: 8300000, guid: 6594efde3d3198f4ba6e15a19adb2c21, type: 3}
   - audioName: OST
     audio: {fileID: 8300000, guid: 68ead9d265c5b704fb9699c0840af61f, type: 3}
+  - audioName: Game Timer
+    audio: {fileID: 8300000, guid: f7abe3e0332927c41a28b9d4a761b28d, type: 3}
+  - audioName: Overtime
+    audio: {fileID: 8300000, guid: e20134a87d9a15f42bac10b64e02a441, type: 3}
   - audioName: Voice 321
     audio: {fileID: 8300000, guid: d6e237adeb244cd43825b4b10329a738, type: 3}
   - audioName: Voice Praise 1
@@ -443,6 +446,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b653e059860d4eb4eb8f21ffa6c657ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerRoomUI:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  playersRoom: {fileID: 0}
   allPlayer: []
   playersList: []
   joinAction:
@@ -454,16 +463,16 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings:
     - m_Name: 
-      m_Id: 539d7243-c1fb-494b-b344-595fc750d0aa
-      m_Path: <Gamepad>/buttonSouth
+      m_Id: f498e3fe-9f8d-4bd7-a22c-149fe104c24c
+      m_Path: <Keyboard>/enter
       m_Interactions: 
       m_Processors: 
       m_Groups: 
       m_Action: Join
       m_Flags: 0
     - m_Name: 
-      m_Id: f498e3fe-9f8d-4bd7-a22c-149fe104c24c
-      m_Path: <Keyboard>/enter
+      m_Id: 75723876-e0ce-4ef3-8051-c1ed819a2339
+      m_Path: <Gamepad>/buttonWest
       m_Interactions: 
       m_Processors: 
       m_Groups: 
@@ -505,7 +514,7 @@ MonoBehaviour:
   - {fileID: 7914357293854163178, guid: d674066afd2e34b4382c1f614c760d61, type: 3}
   - {fileID: 3349722740465586604, guid: 524371afa03209f4782c80dd25a58cd4, type: 3}
   - {fileID: 5933910288364768573, guid: 27d399e6ceeeab648a77e5aff49c4a1b, type: 3}
-  clip: {fileID: 0}
+  ost: {fileID: 0}
   gameTimer:
     timer: 0
     maxTimer: 180
@@ -515,7 +524,13 @@ MonoBehaviour:
     timerTXT: {fileID: 0}
     comparetimerTXT: {fileID: 0}
     nearTimeOut: 0
+    timer3: 0
+    timer2: 0
+    timer1: 0
   tempPlayerNb:
     howManyPlayer: 0
     oneMinute: 0
   gameStarted: 0
+  allCrowd: []
+  cheerMinTime: 0
+  cheerMaxTime: 1

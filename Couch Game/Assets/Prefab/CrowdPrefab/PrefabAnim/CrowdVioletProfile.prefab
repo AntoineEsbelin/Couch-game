@@ -94,6 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8273675018758010950}
   - component: {fileID: 198825367107114929}
+  - component: {fileID: 8425895957420968027}
   m_Layer: 0
   m_Name: CrowdVioletProfile
   m_TagString: Untagged
@@ -141,6 +142,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8425895957420968027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3709619690443000309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55036d9040e89f14fa52a33e1868e2bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5360139339564301591
 GameObject:
   m_ObjectHideFlags: 0

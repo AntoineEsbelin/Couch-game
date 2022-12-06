@@ -94,6 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2191128105134569690}
   - component: {fileID: 8610611492890997658}
+  - component: {fileID: -939319302640655187}
   m_Layer: 0
   m_Name: CrowdBleuProfile
   m_TagString: Untagged
@@ -141,6 +142,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &-939319302640655187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1662925591655861711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55036d9040e89f14fa52a33e1868e2bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3223716476779178978
 GameObject:
   m_ObjectHideFlags: 0

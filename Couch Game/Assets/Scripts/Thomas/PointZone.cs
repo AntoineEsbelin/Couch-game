@@ -90,7 +90,7 @@ public class PointZone : MonoBehaviour
             Debug.Log($"GIVE {pointGiven} points to {deadPlayer.lastPlayerContacted.name}");
 
             AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Crowd Shouting"]/*.GetValueOrDefault("Crowd Shouting")*/, this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
-            
+            if(GameManager.instance.allCrowd != null)GameManager.instance.Cheer();
             CheckBestPlayer();
 
             if(GameManager.instance.gameTimer.drawTimer)
@@ -104,7 +104,7 @@ public class PointZone : MonoBehaviour
             else
             {
                 int randomPraise = Random.Range(0, 7);
-                AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"Voice Praise {randomPraise + 1}"], this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
+                AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"Voice Praise {randomPraise + 1}"], this.transform.position, AudioManager.instance.announcerMixer, true, false);
             }
         }
         else

@@ -4,28 +4,43 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MainMenuManager : MonoBehaviour
 {
-    public GameObject selectPlayerMenu;
-    public GameObject optionMenu;
-    public GameObject playMenu;
 
-    
-    public void StartButton()
+    public GameObject MainMenu;
+    public GameObject StartButton;
+    public GameObject optionMenu;
+    [Header("Map Selection")]
+    public GameObject MapSelectionMenu;
+    public GameObject Map1Button;
+
+    public void MainMenuButton()
     {
-        selectPlayerMenu.SetActive(true);
+        var eventSystem = EventSystem.current;
+        eventSystem.SetSelectedGameObject(StartButton, new BaseEventData(eventSystem));
+        MainMenu.SetActive(true);
     }
-    
     public void OptionButton()
     {
         optionMenu.SetActive(true);
+        CloseMenu(MainMenu);
     }
     
-    public void PlayButton()
+    public void MapSelectionButton()
     {
-        playMenu.SetActive(true);
+        MapSelectionMenu.SetActive(true);
+        CloseMenu(MainMenu);
+        var eventSystem = EventSystem.current;
+        eventSystem.SetSelectedGameObject(Map1Button, new BaseEventData(eventSystem));
+        
+    }
+
+    public void LoadLevel(string name)
+    {
+        SceneManager.LoadScene(name);
     }
 
     private void CloseMenu(GameObject menu)
@@ -38,27 +53,36 @@ public class MainMenuManager : MonoBehaviour
         Application.Quit();
     }
 
+    private void Start()
+    {
+        AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Title"], this.transform.position, AudioManager.instance.announcerMixer, true, false);
+        AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Title OST"], this.transform.position, AudioManager.instance.announcerMixer, false, true);
+    }
+
     private void Update()
     {
         var uiModule = (InputSystemUIInputModule)EventSystem.current.currentInputModule;
         InputAction cancel = uiModule.cancel.action;
         
-        if (selectPlayerMenu.activeInHierarchy)
-        {
-            if(cancel.WasPressedThisFrame())
-                CloseMenu(selectPlayerMenu);
-        }
         
         if (optionMenu.activeInHierarchy)
         {
-            if(cancel.WasPressedThisFrame())
+            if (cancel.WasPressedThisFrame())
+            {
+                MainMenuButton();
                 CloseMenu(optionMenu);
+            }
+                
         }
         
-        if (playMenu.activeInHierarchy)
+        if (MapSelectionMenu.activeInHierarchy)
         {
-            if(cancel.WasPressedThisFrame())
-                CloseMenu(playMenu);
+            if (cancel.WasPressedThisFrame())
+            {
+                MainMenuButton();
+                CloseMenu(MapSelectionMenu);
+            }
+                
         }
     }
 }

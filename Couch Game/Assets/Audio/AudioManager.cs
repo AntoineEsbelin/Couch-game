@@ -8,6 +8,7 @@ public class AudioManager : MonoBehaviour
     public static AudioManager instance;
     public AudioMixerGroup soundEffectMixer;
     public AudioMixerGroup ostMixer;
+    public AudioMixerGroup announcerMixer;
 
     [System.Serializable]
     public class KeyValue
@@ -20,9 +21,10 @@ public class AudioManager : MonoBehaviour
 
     private void Awake()
     {
-        if (instance != null)
-            return;
+        if (instance != null)Destroy(this.gameObject);
         instance = this;
+
+        DontDestroyOnLoad(this.gameObject);
 
         foreach(var ui in yes)
         {
