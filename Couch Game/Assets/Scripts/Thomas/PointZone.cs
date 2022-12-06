@@ -78,16 +78,19 @@ public class PointZone : MonoBehaviour
     private void DispawnPlayer(PlayerController deadPlayer)
     {
         if(deadPlayer.currentState == deadPlayer.DeathState)return;
+        deadPlayer.timeMultiplier = deadPlayer.maxtimeMultiplier + deadPlayer.DeathState.respawnTime;
         //VibroTimer = maxVibroTimer; 
         AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("Goal"), this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
         
         if(deadPlayer.lastPlayerContacted != null)
         {
-            deadPlayer.lastPlayerContacted.playerPoint += pointGiven;
+            int point = (pointGiven * deadPlayer.multiplier);
+            Debug.Log(point);
+            deadPlayer.lastPlayerContacted.playerPoint += point;
             deadPlayer.lastPlayerContacted.UpdateScore(deadPlayer.lastPlayerContacted.playerPoint);
             //DEBUG
             Debug.Log($"{deadPlayer.name} EJECTED !");
-            Debug.Log($"GIVE {pointGiven} points to {deadPlayer.lastPlayerContacted.name}");
+            Debug.Log($"GIVE {(point)} points to {deadPlayer.lastPlayerContacted.name}");
 
             AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Crowd Shouting"]/*.GetValueOrDefault("Crowd Shouting")*/, this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
             if(GameManager.instance.allCrowd != null)GameManager.instance.Cheer();
