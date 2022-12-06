@@ -26,8 +26,10 @@ public class StunState : PlayerState
         if(player.lastPlayerContacted == null)return;
         stunplayer = player.lastPlayerContacted;
         playerController.isMoving = false;
-        if(!stunplayer.hasCountered)knockbackDir = (playerController.transform.position - stunplayer.transform.position).normalized;
+        if(!stunplayer.hasCountered)knockbackDir = /*(playerController.transform.position - stunplayer.transform.position).normalized*/ stunplayer.rb.velocity.normalized;
         else knockbackDir = Vector3.zero;
+        Debug.Log($"Player Dir : {playerController.move }");
+        Debug.Log($"Knockback Dir : {knockbackDir}");
         kbSpeed = stunplayer.SpinnerState.mSettings.moveSpeed;
         if(stunplayer.hasCountered)
         {
@@ -36,7 +38,7 @@ public class StunState : PlayerState
 
             playerController.rb.velocity = Vector3.zero;
             sfx = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Stun"], player.transform.position, AudioManager.instance.soundEffectMixer, true, true);
-            Debug.Log("NE BOUGE PAS");
+            //Debug.Log("NE BOUGE PAS");
         }
     }
 

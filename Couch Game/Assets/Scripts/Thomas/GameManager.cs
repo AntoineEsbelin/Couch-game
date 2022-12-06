@@ -93,10 +93,6 @@ public class GameManager : MonoBehaviour
                 break;
         }
 
-        if(playersList.Count != tempPlayerNb.howManyPlayer)return;
-        AudioSource readyGo = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Ready Go"], this.transform.position, AudioManager.instance.announcerMixer, true, false);
-        StartCoroutine(WaitBeforeGameStart(readyGo.clip.length - 1.3f));
-
     }
     
     private void OnPlayerLeft(PlayerInput playerInput)
@@ -282,6 +278,9 @@ public class GameManager : MonoBehaviour
         playersRoom.SetActive(false);
         gameStarted = true;
         gameTimer.drawTimer = false;
+
+        AudioSource readyGo = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Ready Go"], this.transform.position, AudioManager.instance.announcerMixer, true, false);
+        StartCoroutine(WaitBeforeGameStart(readyGo.clip.length - 1.3f));
     }
     
     public int count(List<PlayerController> players, bool flag){
