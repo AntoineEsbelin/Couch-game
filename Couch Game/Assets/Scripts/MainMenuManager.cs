@@ -56,7 +56,7 @@ public class MainMenuManager : MonoBehaviour
     private void Start()
     {
         AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Title"], this.transform.position, AudioManager.instance.announcerMixer, true, false);
-        AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Title OST"], this.transform.position, AudioManager.instance.announcerMixer, false, true);
+        AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Title OST"], this.transform.position, AudioManager.instance.ostMixer, false, true);
     }
 
     private void Update()
