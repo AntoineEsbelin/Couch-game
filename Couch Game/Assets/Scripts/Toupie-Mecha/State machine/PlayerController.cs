@@ -68,6 +68,13 @@ public class PlayerController : MonoBehaviour
     private CapsuleCollider capsuleCol;
     private SphereCollider sphereCol;
 
+    [Header("multiplier points")]
+    [SerializeField]private int pointMultiplier = 1;
+    /*[HideInInspector]*/public int multiplier = 1;
+    public float maxtimeMultiplier = 30f;
+    /*[HideInInspector]*/public float timeMultiplier;
+
+
     [Header("Respawn invincibility")]
 
     public float invincibilityTimerMax = 3f;
@@ -88,6 +95,7 @@ public class PlayerController : MonoBehaviour
         cameraTarget = GameObject.FindWithTag("MainCamera").GetComponent<CameraTarget>();
         cameraTarget.targets.Add(transform);
         playerAnimator = this.GetComponentInChildren<Animator>();
+        timeMultiplier = maxtimeMultiplier;
         //transform.position = spawnPlayer.spawnPoints[playerId].position;
     }
 
@@ -138,6 +146,21 @@ public class PlayerController : MonoBehaviour
                 arrow.GetComponent<SpriteRenderer>().color = new Color(1, 0, 0.05f, 1);
                 break;
         }
+
+        //point multiplier
+        PointMultiplier();
+    }
+
+    private void PointMultiplier()
+    {
+        if(!GameManager.instance.gameStarted || GameManager.instance.gameTimer.drawTimer)return;
+        
+        if(timeMultiplier > 0)
+        {
+            multiplier = 1;
+            timeMultiplier -= Time.deltaTime;
+        }
+        else multiplier = pointMultiplier;
     }
 
     private void UpdateLastPlayer()
@@ -273,8 +296,8 @@ public class PlayerController : MonoBehaviour
                     if(Vector3.Dot(wallNormal, playerDirection) < 0) //produit scalaire
                     {
                         WallEvent wallEvent = other.gameObject.GetComponentInParent<WallEvent>();
-                        if(wallEvent == null)return;
-                        BounceWall(wallEvent);
+                        if(wallEvent == null)BounceWall(null);
+                        else BounceWall(wallEvent);
                     }
                     //mettre timer
                 }
@@ -338,7 +361,7 @@ public class PlayerController : MonoBehaviour
              AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("Spin Hit Wall"), transform.position, AudioManager.instance.soundEffectMixer, true, false);
             
             //Anim billard and button
-            NeonBugBounce(wallEvent);
+            if(wallEvent != null)NeonBugBounce(wallEvent);
             
             walled = true;
         }
