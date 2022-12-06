@@ -305,6 +305,10 @@ MonoBehaviour:
   hasDaCrown: 0
   trailRenderer: {fileID: 0}
   spinningAnim: {fileID: 0}
+  pointMultiplier: 2
+  multiplier: 1
+  maxtimeMultiplier: 30
+  timeMultiplier: 0
   invincibilityTimerMax: 3
   invincibilityTimer: 0
   stopBumpKb: 0

@@ -9461,7 +9461,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1896850882735031343, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
       propertyPath: joinAction.m_SingletonActionBindings.Array.data[0].m_Path
-      value: <Keyboard>/enter
+      value: <Keyboard>/space
       objectReference: {fileID: 0}
     - target: {fileID: 1896850882735031343, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
       propertyPath: joinAction.m_SingletonActionBindings.Array.data[1].m_Path
