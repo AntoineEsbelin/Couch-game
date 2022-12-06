@@ -281,6 +281,7 @@ public class GameManager : MonoBehaviour
         
         playersRoom.SetActive(false);
         gameStarted = true;
+        gameTimer.drawTimer = false;
     }
     
     public int count(List<PlayerController> players, bool flag){
