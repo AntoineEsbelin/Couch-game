@@ -446,7 +446,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b653e059860d4eb4eb8f21ffa6c657ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRoomUI: []
+  playerRoomUI:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   playersRoom: {fileID: 0}
   allPlayer: []
   playersList: []
