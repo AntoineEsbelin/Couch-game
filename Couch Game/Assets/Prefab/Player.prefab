@@ -347,8 +347,9 @@ MonoBehaviour:
   playerController: {fileID: 0}
   mSettings:
     moveSpeed: 1000
-    dx: 1
-    rotationSpeed: 800
+    dx: 10
+    dxModifier: 1
+    rotationSpeed: 1600
     speedModifier: 1
     slowSpeedModifier: 0.2
     normalSpeedModifier: 1

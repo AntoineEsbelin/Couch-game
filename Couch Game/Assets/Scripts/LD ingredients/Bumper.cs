@@ -69,6 +69,8 @@ public class Bumper : MonoBehaviour
             dir = Vector3.Reflect(dir, col.contacts[0].normal);
             
             timer = maxTimer;
+
+            playerCtrl.stateMachine.SwitchState(playerCtrl.StunState);
             
         }
     }

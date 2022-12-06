@@ -54,6 +54,7 @@ public class SpinnerState : PlayerState
         public float rotationSpeed = 800f;
 
         public float turnSmoothTime = 0.5f;
+        public float turnSmoothTimeModifier = 1f;
         [HideInInspector] public float turnSmoothVelocity;
 
         public float chargeMultiplier;
@@ -89,7 +90,7 @@ public class SpinnerState : PlayerState
         {
             float targetAngle = Mathf.Atan2(playerController.move.x, playerController.move.z) * Mathf.Rad2Deg;
             spinnerAngle = Mathf.SmoothDampAngle(playerController.rb.transform.eulerAngles.y, targetAngle, 
-                ref mSettings.turnSmoothVelocity, mSettings.turnSmoothTime * mSettings.brakeManiability);
+                ref mSettings.turnSmoothVelocity, mSettings.turnSmoothTime * mSettings.brakeManiability * mSettings.turnSmoothTimeModifier);
             playerController.rb.transform.rotation = Quaternion.Euler(0f, spinnerAngle, 0f);
             moveDir = Quaternion.Euler(0f, spinnerAngle, 0f) * Vector3.forward;
         }

@@ -22,8 +22,10 @@ public class NormalState : PlayerState
     {
         public float moveSpeed = 8f;
         //public float slowSpeed;
-        public float dx = 4f; //décélération
+        public float dx = 10f; //décélération
+        public float dxModifier = 1f;
         public float rotationSpeed = 800f;
+        public float rotationSpeedModifier = 1f;
 
         public float speedModifier = 1;
         public float slowSpeedModifier = .5f;
@@ -47,13 +49,19 @@ public class NormalState : PlayerState
             float targetAngle = Mathf.Atan2(playerController.move.x, playerController.move.z) * Mathf.Rad2Deg;
             float angle = Mathf.SmoothDampAngle(playerController.transform.eulerAngles.y, targetAngle,
                 ref mSettings.turnSmoothVelocity, mSettings.turnSmoothTime);
-            playerController.rb.transform.rotation = Quaternion.Euler(0f, angle, 0f);
-            moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+            //playerController.rb.transform.rotation = Quaternion.Euler(0f, angle, 0f);
+            playerController.rb.transform.rotation =
+                Quaternion.RotateTowards(
+                    playerController.rb.transform.rotation,
+                    Quaternion.Euler(0f, angle, 0f),
+                    mSettings.rotationSpeed * mSettings.rotationSpeedModifier * Time.fixedDeltaTime
+                );
+            moveDir = Quaternion.Euler(0f, playerController.rb.transform.rotation.eulerAngles.magnitude, 0f) * Vector3.forward;
             theMove = new Vector3(moveDir.x,0f,moveDir.z)* (mSettings.moveSpeed * mSettings.speedModifier * mSettings.glueSpeedModifier) * Time.fixedDeltaTime;
         }
         else if (theMove != Vector3.zero)
         {
-            theMove = Vector3.MoveTowards(moveDir, Vector3.zero, mSettings.dx);
+            theMove = Vector3.MoveTowards(theMove, Vector3.zero, mSettings.dx * mSettings.dxModifier);
         }
         else playerController.PlayerAnimator.SetBool("IsWalking", false);
 
