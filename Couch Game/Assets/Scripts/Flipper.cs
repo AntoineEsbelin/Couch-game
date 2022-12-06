@@ -64,12 +64,12 @@ public class Flipper : MonoBehaviour
                         (player.GetComponentInChildren<NormalState>().mSettings.moveSpeed * Time.deltaTime);
 
             player.GetComponent<Rigidbody>().AddForce(knockback.x, 0f, knockback.z, ForceMode.Impulse);
-            player.GetComponent<SpinnerState>().repoussed = true;
+            player.GetComponent<StunState>().EnterState(player.GetComponent<PlayerController>());
         }
         else
         {
             if(player == null) return;
-            player.GetComponent<SpinnerState>().repoussed = false;
+            player.GetComponent<StunState>().ExitState(player.GetComponent<PlayerController>());
         }
     }
 
