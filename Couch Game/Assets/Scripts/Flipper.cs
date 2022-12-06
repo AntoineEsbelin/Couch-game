@@ -59,17 +59,13 @@ public class Flipper : MonoBehaviour
 
         if (knockBacktimer > 0)
         {
+            
             knockBacktimer -= Time.deltaTime;
             knockback = dir * KnockbackForce *
                         (player.GetComponentInChildren<NormalState>().mSettings.moveSpeed * Time.deltaTime);
 
             player.GetComponent<Rigidbody>().AddForce(knockback.x, 0f, knockback.z, ForceMode.Impulse);
-            player.GetComponent<StunState>().EnterState(player.GetComponent<PlayerController>());
-        }
-        else
-        {
-            if(player == null) return;
-            player.GetComponent<StunState>().ExitState(player.GetComponent<PlayerController>());
+            
         }
     }
 
@@ -89,10 +85,12 @@ public class Flipper : MonoBehaviour
             dir = transform.position - col.transform.position;
             dir.Normalize();
             
-            
-            
             dir = Vector3.Reflect(dir, col.contacts[0].normal);
             knockBacktimer = maxKnockBackTimer;
+            
+            PlayerController pc = player.GetComponent<PlayerController>();
+            pc.StunState.timerMax = maxKnockBackTimer;
+            pc.stateMachine.SwitchState(pc.StunState);
         }
     }
     
