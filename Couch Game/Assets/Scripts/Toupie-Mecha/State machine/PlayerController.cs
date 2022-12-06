@@ -84,6 +84,8 @@ public class PlayerController : MonoBehaviour
     public bool stopBumpKb;
 
     public GameObject arrow;
+    public GameObject chargeParticles;
+    private ParticleSystem.MainModule settings;
 
     public AudioSource sfx;
     void OnEnable()
@@ -101,9 +103,9 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        
         GameManager.instance.allPlayer.Add(this);
 
+        settings = chargeParticles.GetComponent<ParticleSystem>().main;
         // normalSkins[playerId].SetActive(true);
         // spinSkins[playerId].SetActive(true);
 
@@ -135,15 +137,19 @@ public class PlayerController : MonoBehaviour
         {
             case 0:
                 arrow.GetComponent<SpriteRenderer>().color = new Color(0, 1, 1, 1);
+                settings.startColor = new ParticleSystem.MinMaxGradient(new Color(0, 1, 1, 1));
                 break;
             case 1:
                 arrow.GetComponent<SpriteRenderer>().color = new Color(1, 0.8f, 0, 1);
+                settings.startColor = new ParticleSystem.MinMaxGradient(new Color(1, 0.8f, 0, 1));
                 break;
             case 2:
                 arrow.GetComponent<SpriteRenderer>().color = new Color(1, 0.3f, 0, 1);
+                settings.startColor = new ParticleSystem.MinMaxGradient(new Color(1, 0.3f, 0, 1));
                 break;
             case 4:
                 arrow.GetComponent<SpriteRenderer>().color = new Color(1, 0, 0.05f, 1);
+                settings.startColor = new ParticleSystem.MinMaxGradient(new Color(1, 0, 0.05f, 1));
                 break;
         }
 
@@ -200,6 +206,7 @@ public class PlayerController : MonoBehaviour
                     NormalState.SlowSpeedModifier();
                     startCharging = true;
                     arrow.GetComponent<SpriteRenderer>().enabled = true;
+                    chargeParticles.SetActive(true);
                     playerAnimator.SetBool("ChargingSpin", true);
                     sfx = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"Spin Charge"], transform.position, AudioManager.instance.soundEffectMixer, false, true);
                     SpinnerState.vfx = Instantiate(SpinnerState.spinnerVFX, this.transform);
@@ -242,7 +249,8 @@ public class PlayerController : MonoBehaviour
             startCharging = false;
             spinTimer = 0f;
             arrow.GetComponent<SpriteRenderer>().enabled = false;
-        }
+            chargeParticles.SetActive(false);
+    }
 
         public void OnBrake(InputAction.CallbackContext ctx)
         {
