@@ -9046,6 +9046,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 14
       objectReference: {fileID: 0}
+    - target: {fileID: 5677023541864709910, guid: dbab35e9cfe1684448c0f0c8cca1b8a6, type: 3}
+      propertyPath: KnockbackForce
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 5768220737048366583, guid: dbab35e9cfe1684448c0f0c8cca1b8a6, type: 3}
       propertyPath: m_Layer
       value: 14
