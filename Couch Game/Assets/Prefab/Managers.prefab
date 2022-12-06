@@ -446,6 +446,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b653e059860d4eb4eb8f21ffa6c657ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerRoomUI: []
+  playersRoom: {fileID: 0}
   allPlayer: []
   playersList: []
   joinAction:
@@ -457,16 +459,16 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings:
     - m_Name: 
-      m_Id: 539d7243-c1fb-494b-b344-595fc750d0aa
-      m_Path: <Gamepad>/buttonSouth
+      m_Id: 75723876-e0ce-4ef3-8051-c1ed819a2339
+      m_Path: <Gamepad>/buttonWest
       m_Interactions: 
       m_Processors: 
       m_Groups: 
       m_Action: Join
       m_Flags: 0
     - m_Name: 
-      m_Id: f498e3fe-9f8d-4bd7-a22c-149fe104c24c
-      m_Path: <Keyboard>/enter
+      m_Id: 27ff44a1-67f2-48d0-bcf7-df0128672e63
+      m_Path: <Keyboard>/space
       m_Interactions: 
       m_Processors: 
       m_Groups: 
@@ -508,7 +510,7 @@ MonoBehaviour:
   - {fileID: 7914357293854163178, guid: d674066afd2e34b4382c1f614c760d61, type: 3}
   - {fileID: 3349722740465586604, guid: 524371afa03209f4782c80dd25a58cd4, type: 3}
   - {fileID: 5933910288364768573, guid: 27d399e6ceeeab648a77e5aff49c4a1b, type: 3}
-  clip: {fileID: 0}
+  ost: {fileID: 0}
   gameTimer:
     timer: 0
     maxTimer: 180
