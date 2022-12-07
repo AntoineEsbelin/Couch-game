@@ -2576,6 +2576,10 @@ PrefabInstance:
       propertyPath: m_FillAmount
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3754111866328180711, guid: 14b5faa7b68b27c49814921cf3e3d0eb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4724235554943232978, guid: 14b5faa7b68b27c49814921cf3e3d0eb, type: 3}
       propertyPath: m_FirstSelected
       value: 
