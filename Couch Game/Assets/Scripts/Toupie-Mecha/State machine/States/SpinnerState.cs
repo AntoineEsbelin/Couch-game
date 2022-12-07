@@ -86,7 +86,7 @@ public class SpinnerState : PlayerState
         if(mSettings.moveSpeed < playerController.NormalState.mSettings.moveSpeed) mSettings.dashDuration = 0; 
 
             
-        if (playerController.isMoving && !playerController.walled && !repoussed)
+        if (playerController.isMoving && !playerController.bounceWalled && !repoussed)
         {
             float targetAngle = Mathf.Atan2(playerController.move.x, playerController.move.z) * Mathf.Rad2Deg;
             spinnerAngle = Mathf.SmoothDampAngle(playerController.rb.transform.eulerAngles.y, targetAngle, 

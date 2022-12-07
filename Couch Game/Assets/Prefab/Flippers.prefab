@@ -44,7 +44,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 11.929815, y: 1.8213878, z: 2.2838209}
-  m_Center: {x: 0.18762015, y: 0.4106941, z: 0.05420244}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6758959814051946040
 GameObject:
   m_ObjectHideFlags: 0
@@ -179,7 +179,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 12, y: 1.8213878, z: 2.1602194}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &7832659003151724491
 Rigidbody:
@@ -305,7 +305,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7832659003340255156}
   m_LocalRotation: {x: 0, y: -0.23344536, z: 0, w: 0.97236997}
-  m_LocalPosition: {x: 1.73, y: 5.4300003, z: -24.05}
+  m_LocalPosition: {x: 1.9919183, y: 6.04, z: -24.052422}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -379,7 +379,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 2
+  m_CollisionDetection: 1
 --- !u!59 &7832659003340255153
 HingeJoint:
   m_ObjectHideFlags: 0
@@ -427,7 +427,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 11.929815, y: 1.8213878, z: 2.2838209}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5677023541864709910
 MonoBehaviour:
@@ -514,7 +514,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 12.10803, y: 1.8213878, z: 2.1602194}
-  m_Center: {x: -0.2786293, y: 0.41069221, z: 0.4097745}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &2392434223807827529
 PrefabInstance:
   m_ObjectHideFlags: 0
