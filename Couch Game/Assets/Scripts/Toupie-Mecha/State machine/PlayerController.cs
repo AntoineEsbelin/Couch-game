@@ -212,7 +212,7 @@ public class PlayerController : MonoBehaviour
                     chargeParticles.SetActive(true);
                     playerAnimator.SetBool("ChargingSpin", true);
                     sfx = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"Spin Charge"], transform.position, AudioManager.instance.soundEffectMixer, false, true);
-                    GameObject spinnerVFX = Instantiate(SpinnerState.spinnerVFX, this.transform);
+                    GameObject spinnerVFX = Instantiate(SpinnerState.spinnerVFX.spinningVFX, this.transform);
                     SpinnerState.allSpinnerVFX.Add(spinnerVFX);
                 }
             }
@@ -268,7 +268,7 @@ public class PlayerController : MonoBehaviour
 
                 int randomBrake = Random.Range(0, 6);
                 AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"Spin Brake {randomBrake + 1}"], transform.position, AudioManager.instance.soundEffectMixer, true, false);
-                GameObject brakeVFX = Instantiate(SpinnerState.brakeVFX, transform);
+                GameObject brakeVFX = Instantiate(SpinnerState.spinnerVFX.brakeVFX, transform);
                 SpinnerState.allSpinnerVFX.Add(brakeVFX);
             }
 
@@ -495,9 +495,10 @@ public class PlayerController : MonoBehaviour
 
         void BounceSpinner()
         {
-            CameraShaker.Instance.ShakeOnce(1f, 4f, 0.1f, 0.5f);
             //Bounce against other player
-            Instantiate(explosion, this.transform.position, Quaternion.identity);
+            //Instantiate(explosion, this.transform.position, Quaternion.identity);
+            Instantiate(SpinnerState.spinnerVFX.SpinerVsSpinerVFX, transform);
+            CameraShaker.Instance.ShakeOnce(1f, 4f, 0.1f, 0.5f);
             //Debug.Log("bounce");
             SpinnerState.moveDir = -SpinnerState.moveDir;
             move = -move;

@@ -377,9 +377,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 0}
-  spinnerVFX: {fileID: 5131705808110797491, guid: 89dd00848dc657f46ab78b330e957c5a, type: 3}
-  brakeVFX: {fileID: 241476061616573481, guid: 5590afeded0d1154ab78a5f1a028e45c, type: 3}
   allSpinnerVFX: []
+  spinnerVFX:
+    spinningVFX: {fileID: 5131705808110797491, guid: 89dd00848dc657f46ab78b330e957c5a, type: 3}
+    brakeVFX: {fileID: 241476061616573481, guid: 5590afeded0d1154ab78a5f1a028e45c, type: 3}
+    SpinerVsSpinerVFX: {fileID: 7559075858351329695, guid: 8c929c6c4fe659a44922f9b031a3070e, type: 3}
   mSettings:
     dashDuration: 0
     dashDurationMax: 2
