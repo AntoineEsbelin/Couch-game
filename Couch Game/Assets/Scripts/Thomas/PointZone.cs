@@ -86,12 +86,12 @@ public class PointZone : MonoBehaviour
         if(deadPlayer.lastPlayerContacted != null)
         {
             int point = (pointGiven * deadPlayer.multiplier);
-            Debug.Log(point);
+            //Debug.Log(point);
             deadPlayer.lastPlayerContacted.playerPoint += point;
             deadPlayer.lastPlayerContacted.UpdateScore(deadPlayer.lastPlayerContacted.playerPoint);
             //DEBUG
-            Debug.Log($"{deadPlayer.name} EJECTED !");
-            Debug.Log($"GIVE {(point)} points to {deadPlayer.lastPlayerContacted.name}");
+            //Debug.Log($"{deadPlayer.name} EJECTED !");
+            //Debug.Log($"GIVE {(point)} points to {deadPlayer.lastPlayerContacted.name}");
 
             AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Crowd Shouting"]/*.GetValueOrDefault("Crowd Shouting")*/, this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
             if(GameManager.instance.allCrowd != null)GameManager.instance.Cheer();

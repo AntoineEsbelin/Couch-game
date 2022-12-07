@@ -293,6 +293,8 @@ public class PlayerController : MonoBehaviour
         [Header("Walled")]
         public bool walled = false;
 
+        [SerializeField]private bool bumpPlayer;
+
         private void OnCollisionEnter(Collision other)
         {
             
@@ -379,6 +381,25 @@ public class PlayerController : MonoBehaviour
         void OnTriggerEnter(Collider other)
         {
             if (!other.isTrigger) return;
+            bumpPlayer = true;
+        }
+
+        void OnTriggerStay(Collider other)
+        {
+            if(!other.isTrigger)return;
+            if(bumpPlayer)BumpPlayer(other);
+        }
+
+        void OnTriggerExit(Collider other)
+        {
+            if(!other.isTrigger)return;
+            if(bumpPlayer)bumpPlayer = false;
+        }
+
+        
+
+        void BumpPlayer(Collider other)
+        {
             if (other.gameObject.tag == "Player")
             {
                 if(currentState == SpinnerState)
@@ -390,7 +411,7 @@ public class PlayerController : MonoBehaviour
                     triggerPlayer.timeLastPlayer = triggerPlayer.maxTimeLastPlayer;
 
                     //Si le joueur est pas stun [???]
-
+                    if(triggerPlayer.SpinnerState.repoussed)return;
                     if ((triggerPlayer.currentState == triggerPlayer.NormalState || triggerPlayer.currentState == triggerPlayer.StunState) && !triggerPlayer.hasCountered)
                     {
                         //Debug.Log(triggerPlayer);
@@ -401,8 +422,11 @@ public class PlayerController : MonoBehaviour
                         triggerPlayer.lastPlayerContacted = this;
                         int randomSpinHitPlayer = Random.Range(0, 7);
                         AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault($"Spin Hit Player {randomSpinHitPlayer + 1}"), transform.position, AudioManager.instance.soundEffectMixer, true, false);
+                        //triggerPlayer.SpinnerState.mSettings.moveSpeed = StunState.kbSpeed;
+                        //Debug.Log("MV : " + triggerPlayer.SpinnerState.mSettings.moveSpeed);
+                        //Debug.Log("MV : " + StunState.kbSpeed);
+                        rb.velocity = triggerPlayer.rb.velocity;
                         triggerPlayer.stateMachine.SwitchState(triggerPlayer.StunState);
-
                         StunState.timerMax = stunDurationSpinEnd;
                         stateMachine.SwitchState(StunState);
                         triggerPlayer.SpinnerState.repoussed = true;
@@ -411,52 +435,28 @@ public class PlayerController : MonoBehaviour
                         
                     }
                     if (triggerPlayer.currentState == triggerPlayer.SpinnerState && !SpinnerState.repoussed) BounceSpinner();
+                    bumpPlayer = false;
                 }
                 else if(currentState == StunState)
                 {
 
                     //Si le joueur est pas stun [???]
-
+            
                     PlayerController triggerPlayer = other.GetComponentInParent<PlayerController>();
-                    if(!SpinnerState.repoussed || triggerPlayer.currentState == triggerPlayer.SpinnerState)return;
+                    if((!SpinnerState.repoussed || triggerPlayer.currentState == triggerPlayer.SpinnerState) && lastPlayerContacted == triggerPlayer)return;
                     CameraShaker.Instance.ShakeOnce(1f, 4f, 0.1f, 0.5f);
 
                     triggerPlayer.lastPlayerContacted = this;
                     triggerPlayer.timeLastPlayer = triggerPlayer.maxTimeLastPlayer;
-                    //Debug.Log(triggerPlayer);
-                    //triggerPlayer.hasCountered = false;
-                    //activate bounce player of this spinner
                     Instantiate(explosion, this.transform.position, Quaternion.identity);
                     triggerPlayer.StunState.timerMax = triggerPlayer.stunDurationKnockback;
                     triggerPlayer.lastPlayerContacted = this;
+                    
                     int randomSpinHitPlayer = Random.Range(0, 7);
                     AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault($"Spin Hit Player {randomSpinHitPlayer + 1}"), transform.position, AudioManager.instance.soundEffectMixer, true, false);
                     triggerPlayer.stateMachine.SwitchState(triggerPlayer.StunState);
-                    triggerPlayer.rb.velocity *= 5;
-                    //StunState.timerMax = stunDurationSpinEnd;
-                    //stateMachine.SwitchState(StunState);
                     triggerPlayer.SpinnerState.repoussed = true;
-                    //activate knockback for triggered player >:(
-                    //other.GetComponentInParent<Knockback>().spinnerKnockbacking = this.spinnerControler;
-                        
-
-                    // PlayerController triggeredPlayer = other.GetComponentInParent<PlayerController>();
-                    
-                    // if(!triggeredPlayer.SpinnerState.repoussed)return;
-                    
-                    // StunState.timerMax = triggeredPlayer.StunState.timer;
-                    // stateMachine.SwitchState(StunState);
-                    // //Debug.Log(this.lastPlayerContacted);
-                    // //NormalState.moveDir = Vector3.Reflect(triggeredPlayer.playerDirection, playerDirection);
-                    // float newAngle = Vector3.SignedAngle(playerDirection, SpinnerState.moveDir, Vector3.up);
-
-                    // Vector3 newVector = new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y + newAngle, transform.rotation.eulerAngles.z);
-                    // transform.rotation = Quaternion.Euler(newVector);
-                    
-                    // //rb.velocity *= 100 ;
-                    //Debug.Log($"player velo = {triggeredPlayer.rb.velocity}");
-                    //Debug.Log($"this velo = {rb.velocity}");
-                    
+                    bumpPlayer = false;
                 }
             }
         }

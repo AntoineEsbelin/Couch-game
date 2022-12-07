@@ -32,8 +32,8 @@ public class StunState : PlayerState
         if(!stunplayer.hasCountered)knockbackDir = /*(playerController.transform.position - stunplayer.transform.position).normalized*/ stunplayer.rb.velocity.normalized;
         //else if(isKnockBacked){knockbackDir = kbDirBumper;Debug.Log("bump");}
         else knockbackDir = Vector3.zero;
-        Debug.Log($"Player Dir : {playerController.move }");
-        Debug.Log($"Knockback Dir : {knockbackDir}");
+        //Debug.Log($"Player Dir : {playerController.move }");
+        //Debug.Log($"Knockback Dir : {knockbackDir}");
         if (!isKnockBacked)
             kbSpeed = stunplayer.SpinnerState.mSettings.moveSpeed;
         if(!stunplayer.hasCountered)
@@ -53,7 +53,6 @@ public class StunState : PlayerState
         }
         //Debug.Log($"Player Dir : {playerController.move }");
         //Debug.Log($"Knockback Dir : {knockbackDir}");
-        kbSpeed = stunplayer.SpinnerState.mSettings.moveSpeed;
     }
 
     public override void UpdateState(PlayerController player)
@@ -98,7 +97,7 @@ public class StunState : PlayerState
 
     void Knockback()
     {
-        Debug.Log(knockbackDir);
+        //Debug.Log(knockbackDir);
         //float kbSmooth = (Mathf.Pow((timer / (timerMax - 1)), 3) + 1) * kbSpeed;
         knockback = knockbackDir * kbSpeed * Time.fixedDeltaTime;
         playerController.rb.velocity = new Vector3(knockback.x,0f,knockback.z);
