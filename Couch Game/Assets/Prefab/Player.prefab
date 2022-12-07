@@ -353,6 +353,7 @@ MonoBehaviour:
     dx: 10
     dxModifier: 1
     rotationSpeed: 1600
+    rotationSpeedModifier: 1
     speedModifier: 1
     slowSpeedModifier: 0.2
     normalSpeedModifier: 1
@@ -382,6 +383,7 @@ MonoBehaviour:
     bonusMoveSpeed: 0
     rotationSpeed: 800
     turnSmoothTime: 1.2
+    turnSmoothTimeModifier: 1
     turnSmoothVelocity: 0
     chargeMultiplier: 1
     brakeManiabilityModifier: 0.5
@@ -406,6 +408,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerController: {fileID: 0}
   knockbackDir: {x: 0, y: 0, z: 0}
+  kbDirBumper: {x: 0, y: 0, z: 0}
+  kbSpeed: 0
+  isKnockBacked: 0
   timer: 0
   timerMax: 1
   stunplayer: {fileID: 0}
