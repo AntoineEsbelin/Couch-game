@@ -316,6 +316,7 @@ MonoBehaviour:
   arrow: {fileID: 8194550404549101532}
   chargeParticles: {fileID: 3002823160540143803}
   sfx: {fileID: 0}
+  vfx: {fileID: 0}
   move: {x: 0, y: 0, z: 0}
   wallNormal: {x: 0, y: 0, z: 0}
   playerDirection: {x: 0, y: 0, z: 0}
@@ -377,7 +378,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerController: {fileID: 0}
   spinnerVFX: {fileID: 5131705808110797491, guid: 89dd00848dc657f46ab78b330e957c5a, type: 3}
-  vfx: {fileID: 0}
+  brakeVFX: {fileID: 241476061616573481, guid: 5590afeded0d1154ab78a5f1a028e45c, type: 3}
+  allSpinnerVFX: []
   mSettings:
     dashDuration: 0
     dashDurationMax: 2

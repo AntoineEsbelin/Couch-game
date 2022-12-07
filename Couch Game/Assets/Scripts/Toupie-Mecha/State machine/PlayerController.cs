@@ -89,6 +89,7 @@ public class PlayerController : MonoBehaviour
     private ParticleSystem.MainModule settings;
 
     public AudioSource sfx;
+    public GameObject vfx;
 
     void OnEnable()
     {
@@ -211,8 +212,8 @@ public class PlayerController : MonoBehaviour
                     chargeParticles.SetActive(true);
                     playerAnimator.SetBool("ChargingSpin", true);
                     sfx = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"Spin Charge"], transform.position, AudioManager.instance.soundEffectMixer, false, true);
-                    SpinnerState.vfx = Instantiate(SpinnerState.spinnerVFX, this.transform);
-
+                    GameObject spinnerVFX = Instantiate(SpinnerState.spinnerVFX, this.transform);
+                    SpinnerState.allSpinnerVFX.Add(spinnerVFX);
                 }
             }
 
@@ -267,7 +268,8 @@ public class PlayerController : MonoBehaviour
 
                 int randomBrake = Random.Range(0, 6);
                 AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"Spin Brake {randomBrake + 1}"], transform.position, AudioManager.instance.soundEffectMixer, true, false);
-                
+                GameObject brakeVFX = Instantiate(SpinnerState.brakeVFX, transform);
+                SpinnerState.allSpinnerVFX.Add(brakeVFX);
             }
 
             if (ctx.canceled)

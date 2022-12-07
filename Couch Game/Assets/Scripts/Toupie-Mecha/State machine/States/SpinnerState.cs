@@ -8,7 +8,8 @@ public class SpinnerState : PlayerState
     
     [Header("VFX")]
     public GameObject spinnerVFX;
-    public GameObject vfx;
+    public GameObject brakeVFX;
+    public List<GameObject> allSpinnerVFX;
 
 
     public override void EnterState(PlayerController player)
@@ -108,8 +109,19 @@ public class SpinnerState : PlayerState
         mSettings.brakeSpeed = 1f;
         playerController.PlayerAnimator.SetBool("IsSpinning", false);
         playerController.spinningAnim.SetRotate(false);
-        Destroy(this.vfx);
+        RemoveAllSpinnerVFX();
         playerController.trailRenderer.enabled = false;
         Destroy(audioSource.gameObject);
+    }
+
+    public void RemoveAllSpinnerVFX()
+    {
+        GameObject tempVFX;
+        for(int i = 0; i < allSpinnerVFX.Count;)
+        {
+            tempVFX = allSpinnerVFX[i];
+            allSpinnerVFX.RemoveAt(i);
+            Destroy(tempVFX);
+        }
     }
 }

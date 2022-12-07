@@ -24,7 +24,7 @@ public class DeathState : PlayerState
         player.GetComponentInChildren<SpinningAnim>(true).transform.localScale = Vector3.one;
         player.stopBumpKb = true;
         if(player.sfx != null)Destroy(player.sfx);
-        if(player.SpinnerState.vfx != null)Destroy(player.SpinnerState.vfx);
+        if(player.SpinnerState.allSpinnerVFX.Count > 0)player.SpinnerState.RemoveAllSpinnerVFX();
     }
     public override void UpdateState(PlayerController player)
     {

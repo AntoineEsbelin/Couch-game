@@ -127,7 +127,7 @@ public class GameManager : MonoBehaviour
 
     private void JoinAction(InputAction.CallbackContext ctx)
     {
-        
+        if(gameStarted)return;
         PlayerInputManager.instance.JoinPlayerFromActionIfNotAlreadyJoined(ctx);
     }
     
