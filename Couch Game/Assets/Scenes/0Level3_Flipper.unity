@@ -1986,11 +1986,19 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 712234894296825897, guid: 14b5faa7b68b27c49814921cf3e3d0eb, type: 3}
+      propertyPath: m_MaxValue
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1343443855107890161, guid: 14b5faa7b68b27c49814921cf3e3d0eb, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1421327014964817226, guid: 14b5faa7b68b27c49814921cf3e3d0eb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3754111866328180711, guid: 14b5faa7b68b27c49814921cf3e3d0eb, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -2310,6 +2318,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -0.00036621094
       objectReference: {fileID: 0}
+    - target: {fileID: 7722534425934342580, guid: 14b5faa7b68b27c49814921cf3e3d0eb, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7722534425934342580, guid: 14b5faa7b68b27c49814921cf3e3d0eb, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8672431161065789628, guid: 14b5faa7b68b27c49814921cf3e3d0eb, type: 3}
       propertyPath: m_text
       value: "\u200B"
@@ -2325,6 +2341,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &471825717 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 712234894296825897, guid: 14b5faa7b68b27c49814921cf3e3d0eb, type: 3}
+  m_PrefabInstance: {fileID: 460978815}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &494184253
@@ -4437,7 +4464,7 @@ MonoBehaviour:
   pointGiven: 2
   isField: 1
   explosion: {fileID: 3193864383826838676, guid: c8aa708196a029140916b05a1fb82638, type: 3}
-  explosionMultiplier: 0
+  explosionMultiplier: 1
   maxVibroTimer: 2
 --- !u!65 &1316811824
 BoxCollider:
@@ -5833,11 +5860,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7832659003151724494, guid: dbab35e9cfe1684448c0f0c8cca1b8a6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -16
+      value: -15.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7832659003151724494, guid: dbab35e9cfe1684448c0f0c8cca1b8a6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7832659003151724494, guid: dbab35e9cfe1684448c0f0c8cca1b8a6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -29.872406
+      value: -29.78
       objectReference: {fileID: 0}
     - target: {fileID: 7832659003151724495, guid: dbab35e9cfe1684448c0f0c8cca1b8a6, type: 3}
       propertyPath: m_Layer
@@ -5867,6 +5898,10 @@ PrefabInstance:
       propertyPath: m_ConnectedAnchor.z
       value: 17.688156
       objectReference: {fileID: 0}
+    - target: {fileID: 7832659003340255155, guid: dbab35e9cfe1684448c0f0c8cca1b8a6, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7832659003340255156, guid: dbab35e9cfe1684448c0f0c8cca1b8a6, type: 3}
       propertyPath: m_Layer
       value: 14
@@ -5876,14 +5911,14 @@ PrefabInstance:
       value: 1.9919183
       objectReference: {fileID: 0}
     - target: {fileID: 7832659003340255159, guid: dbab35e9cfe1684448c0f0c8cca1b8a6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 7832659003340255159, guid: dbab35e9cfe1684448c0f0c8cca1b8a6, type: 3}
       propertyPath: m_LocalPosition.z
       value: -24.052422
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4843164318730931502, guid: dbab35e9cfe1684448c0f0c8cca1b8a6, type: 3}
-    - {fileID: 5305834427430349940, guid: dbab35e9cfe1684448c0f0c8cca1b8a6, type: 3}
-    - {fileID: 6685839652387705278, guid: dbab35e9cfe1684448c0f0c8cca1b8a6, type: 3}
-    - {fileID: 4911113848039273849, guid: dbab35e9cfe1684448c0f0c8cca1b8a6, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dbab35e9cfe1684448c0f0c8cca1b8a6, type: 3}
 --- !u!114 &1667078190 stripped
 MonoBehaviour:
@@ -9193,6 +9228,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1923987178}
     - target: {fileID: 1896850882735031343, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
+      propertyPath: startSlider
+      value: 
+      objectReference: {fileID: 471825717}
+    - target: {fileID: 1896850882735031343, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
       propertyPath: cheerMaxTime
       value: 1
       objectReference: {fileID: 0}
@@ -9456,26 +9495,6 @@ PrefabInstance:
       propertyPath: playerRoomUI.Array.data[3]
       value: 
       objectReference: {fileID: 1942792956}
-    - target: {fileID: 1896850882735031343, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
-      propertyPath: joinAction.m_SingletonActionBindings.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1896850882735031343, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
-      propertyPath: joinAction.m_SingletonActionBindings.Array.data[0].m_Id
-      value: f498e3fe-9f8d-4bd7-a22c-149fe104c24c
-      objectReference: {fileID: 0}
-    - target: {fileID: 1896850882735031343, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
-      propertyPath: joinAction.m_SingletonActionBindings.Array.data[1].m_Id
-      value: 75723876-e0ce-4ef3-8051-c1ed819a2339
-      objectReference: {fileID: 0}
-    - target: {fileID: 1896850882735031343, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
-      propertyPath: joinAction.m_SingletonActionBindings.Array.data[0].m_Path
-      value: <Keyboard>/space
-      objectReference: {fileID: 0}
-    - target: {fileID: 1896850882735031343, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
-      propertyPath: joinAction.m_SingletonActionBindings.Array.data[1].m_Path
-      value: <Gamepad>/buttonWest
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
 --- !u!1001 &4251007239225751355
