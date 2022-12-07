@@ -68,8 +68,11 @@ public class Bumper : MonoBehaviour
 
             dir = Vector3.Reflect(dir, col.contacts[0].normal);
             
-            timer = maxTimer;
-
+            //timer = maxTimer;
+            playerCtrl.StunState.isKnockBacked = true;
+            playerCtrl.StunState.kbSpeed = force;
+            playerCtrl.StunState.timerMax = maxTimer;
+            playerCtrl.StunState.kbDirBumper = -col.contacts[0].normal;
             playerCtrl.stateMachine.SwitchState(playerCtrl.StunState);
             
         }
@@ -77,6 +80,7 @@ public class Bumper : MonoBehaviour
 
     IEnumerator AnimBumper()
     {
+        if (animate == null) yield break;
         animate.SetBool("PlayerCol", true);
         yield return new WaitForSeconds(1f);
         animate.SetBool("PlayerCol", false);

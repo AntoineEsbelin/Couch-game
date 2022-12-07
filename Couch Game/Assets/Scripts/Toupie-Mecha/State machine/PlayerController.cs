@@ -366,7 +366,7 @@ public class PlayerController : MonoBehaviour
 
             Vector3 newVector = new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y + newAngle, transform.rotation.eulerAngles.z);
             transform.rotation = Quaternion.Euler(newVector);
-             AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("Spin Hit Wall"), transform.position, AudioManager.instance.soundEffectMixer, true, false);
+            AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("Spin Hit Wall"), transform.position, AudioManager.instance.soundEffectMixer, true, false);
             
             //Anim billard and button
             if(wallEvent != null)NeonBugBounce(wallEvent);
