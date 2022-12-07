@@ -45,7 +45,7 @@ public class SettingMenu : MonoBehaviour
 
     public void SetSuicide(bool SuicideOn)
     {
-        
+        PointZone.isSettingSuicideOn = SuicideOn;
     }
 
     public void SetResolution(int resolutionIndex)

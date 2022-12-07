@@ -47,12 +47,12 @@ public class StunState : PlayerState
             stunplayer.hasCountered = false;
             playerController.PlayerAnimator.SetBool("IsStunned", true);
 
-            playerController.rb.velocity = Vector3.zero;
+            if(playerController.SpinnerState.repoussed)playerController.rb.velocity = Vector3.zero;
             sfx = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Stun"], player.transform.position, AudioManager.instance.soundEffectMixer, true, true);
             //Debug.Log("NE BOUGE PAS");
         }
-        Debug.Log($"Player Dir : {playerController.move }");
-        Debug.Log($"Knockback Dir : {knockbackDir}");
+        //Debug.Log($"Player Dir : {playerController.move }");
+        //Debug.Log($"Knockback Dir : {knockbackDir}");
         kbSpeed = stunplayer.SpinnerState.mSettings.moveSpeed;
     }
 
@@ -69,9 +69,10 @@ public class StunState : PlayerState
         if(player.SpinnerState.repoussed)
         {
             player.SpinnerState.repoussed = false;
-            Debug.Log("EXIT");
+            //Debug.Log("EXIT");
         }
         if(sfx != null)Destroy(sfx.gameObject);
+        player.rb.velocity = Vector3.zero;
     }
 
     [System.Serializable] public class MovementSettings
