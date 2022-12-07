@@ -98,7 +98,7 @@ public class StunState : PlayerState
 
     void Knockback()
     {
-        Debug.Log(knockbackDir);
+        //Debug.Log(knockbackDir);
         //float kbSmooth = (Mathf.Pow((timer / (timerMax - 1)), 3) + 1) * kbSpeed;
         knockback = knockbackDir * kbSpeed * Time.fixedDeltaTime;
         playerController.rb.velocity = new Vector3(knockback.x,0f,knockback.z);
