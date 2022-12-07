@@ -296,28 +296,38 @@ public class PlayerController : MonoBehaviour
         private void OnCollisionEnter(Collision other)
         {
             
-            if(other.gameObject.tag == "Wall")
-            {
-                walled = true;
-                WallBounce(other);
-            }
+            // if(other.gameObject.tag == "Wall")
+            // {
+            //     walled = true;
+            //     WallBounce(other);
+            // }
         }
 
         private void OnCollisionExit(Collision other)
         {
             if(other.gameObject.tag != "Wall")return;
             if(walled)walled = false;
+            bounceWalled = false;
         }
 
         private void OnCollisionStay(Collision other)
         {
             if(other.gameObject.tag != "Wall")return;
-            if(!walled || !SpinnerState.repoussed)return;
-            else if(walled || SpinnerState.repoussed) WallBounce(other);
+            if((walled || NormalState.isKnockbacked) && !bounceWalled)
+            {
+                WallBounce(other);
+                return;
+            }
+            if(!walled || !NormalState.isKnockbacked)
+            {
+                walled = true;
+                return;
+            }   
         }
 
         private void WallBounce(Collision other)
         {
+            if(bounceWalled)return;
             if(currentState == SpinnerState)
             {
 
@@ -327,6 +337,8 @@ public class PlayerController : MonoBehaviour
                 wallNormal.y = 0;
                 playerDirection.y = 0;
                 timer = timerCount;
+                //Debug.Log(Vector3.Distance(this.transform.position, other.transform.position));
+
                 if(Vector3.Dot(wallNormal, playerDirection) < 0) //produit scalaire
                 {
                     WallEvent wallEvent = other.gameObject.GetComponentInParent<WallEvent>();
@@ -341,19 +353,27 @@ public class PlayerController : MonoBehaviour
 
                     Vector3 newVector = new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y + newAngle, transform.rotation.eulerAngles.z);
                     transform.rotation = Quaternion.Euler(newVector);
-                    bounceWalled = true;
                 }
+                bounceWalled = true;
                 walled = false;
+                NormalState.isKnockbacked = false;
+                //Debug.Log(bounceWalled);
+                //Debug.Log(walled);
+                //Debug.Log(NormalState.isKnockbacked);
                 //mettre timer
             }
-
-            if (currentState == StunState)
+            else if (currentState == StunState)
             {
                 CameraShaker.Instance.ShakeOnce(1f, 4f, 0.1f, 0.5f);
                 wallNormal = other.contacts[0].normal;
                 playerDirection = StunState.knockbackDir;
                 BounceWallStuned();
+                bounceWalled = true;
                 walled = false;
+                NormalState.isKnockbacked = false;
+                //Debug.Log(bounceWalled);
+                //Debug.Log(walled);
+                //Debug.Log(NormalState.isKnockbacked);
             }
         }
         void OnTriggerEnter(Collider other)
@@ -391,31 +411,59 @@ public class PlayerController : MonoBehaviour
                         
                     }
                     if (triggerPlayer.currentState == triggerPlayer.SpinnerState && !SpinnerState.repoussed) BounceSpinner();
-                 
                 }
-                /*else if(currentState == NormalState)
+                else if(currentState == StunState)
                 {
-                    PlayerController triggeredPlayer = other.GetComponentInParent<PlayerController>();
-                    
-                    if(!triggeredPlayer.SpinnerState.repoussed)return;
-                    Debug.Log("L");
 
-                    NormalState.moveDir = Vector3.Reflect(triggeredPlayer.playerDirection, playerDirection);
-                    float newAngle = Vector3.SignedAngle(playerDirection, SpinnerState.moveDir, Vector3.up);
+                    //Si le joueur est pas stun [???]
 
-                    Vector3 newVector = new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y + newAngle, transform.rotation.eulerAngles.z);
-                    transform.rotation = Quaternion.Euler(newVector);
-                    rb.AddForce(triggeredPlayer.rb.velocity, ForceMode.Impulse);
+                    PlayerController triggerPlayer = other.GetComponentInParent<PlayerController>();
+                    if(!SpinnerState.repoussed || triggerPlayer.currentState == triggerPlayer.SpinnerState)return;
+                    CameraShaker.Instance.ShakeOnce(1f, 4f, 0.1f, 0.5f);
+
+                    triggerPlayer.lastPlayerContacted = this;
+                    triggerPlayer.timeLastPlayer = triggerPlayer.maxTimeLastPlayer;
+                    //Debug.Log(triggerPlayer);
+                    //triggerPlayer.hasCountered = false;
+                    //activate bounce player of this spinner
+                    Instantiate(explosion, this.transform.position, Quaternion.identity);
+                    triggerPlayer.StunState.timerMax = triggerPlayer.stunDurationKnockback;
+                    triggerPlayer.lastPlayerContacted = this;
+                    int randomSpinHitPlayer = Random.Range(0, 7);
+                    AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault($"Spin Hit Player {randomSpinHitPlayer + 1}"), transform.position, AudioManager.instance.soundEffectMixer, true, false);
+                    triggerPlayer.stateMachine.SwitchState(triggerPlayer.StunState);
+                    triggerPlayer.rb.velocity *= 5;
+                    //StunState.timerMax = stunDurationSpinEnd;
+                    //stateMachine.SwitchState(StunState);
+                    triggerPlayer.SpinnerState.repoussed = true;
+                    //activate knockback for triggered player >:(
+                    //other.GetComponentInParent<Knockback>().spinnerKnockbacking = this.spinnerControler;
+                        
+
+                    // PlayerController triggeredPlayer = other.GetComponentInParent<PlayerController>();
                     
-                    StunState.timerMax = triggeredPlayer.StunState.timer;
-                    stateMachine.SwitchState(StunState);
-                }*/
+                    // if(!triggeredPlayer.SpinnerState.repoussed)return;
+                    
+                    // StunState.timerMax = triggeredPlayer.StunState.timer;
+                    // stateMachine.SwitchState(StunState);
+                    // //Debug.Log(this.lastPlayerContacted);
+                    // //NormalState.moveDir = Vector3.Reflect(triggeredPlayer.playerDirection, playerDirection);
+                    // float newAngle = Vector3.SignedAngle(playerDirection, SpinnerState.moveDir, Vector3.up);
+
+                    // Vector3 newVector = new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y + newAngle, transform.rotation.eulerAngles.z);
+                    // transform.rotation = Quaternion.Euler(newVector);
+                    
+                    // //rb.velocity *= 100 ;
+                    //Debug.Log($"player velo = {triggeredPlayer.rb.velocity}");
+                    //Debug.Log($"this velo = {rb.velocity}");
+                    
+                }
             }
         }
 
         void BounceWall(WallEvent wallEvent)
         {
-            Debug.Log(playerDirection);
+            //Debug.Log(playerDirection);
             SpinnerState.moveDir = Vector3.Reflect(playerDirection, wallNormal);
             float newAngle = Vector3.SignedAngle(playerDirection, SpinnerState.moveDir, Vector3.up);
 
@@ -432,6 +480,7 @@ public class PlayerController : MonoBehaviour
         void BounceWallStuned()
         {
             StunState.knockbackDir = Vector3.Reflect(StunState.knockbackDir, wallNormal);
+            bounceWalled = true;
         }
 
         private void BounceWallTimer()
