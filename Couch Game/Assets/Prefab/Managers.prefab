@@ -446,6 +446,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b653e059860d4eb4eb8f21ffa6c657ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startSlider: {fileID: 0}
   playerRoomUI:
   - {fileID: 0}
   - {fileID: 0}
@@ -464,7 +465,7 @@ MonoBehaviour:
     m_SingletonActionBindings:
     - m_Name: 
       m_Id: f498e3fe-9f8d-4bd7-a22c-149fe104c24c
-      m_Path: <Keyboard>/space
+      m_Path: <Keyboard>/enter
       m_Interactions: 
       m_Processors: 
       m_Groups: 
@@ -472,7 +473,7 @@ MonoBehaviour:
       m_Flags: 0
     - m_Name: 
       m_Id: 75723876-e0ce-4ef3-8051-c1ed819a2339
-      m_Path: <Gamepad>/buttonWest
+      m_Path: <Gamepad>/buttonSouth
       m_Interactions: 
       m_Processors: 
       m_Groups: 
@@ -502,6 +503,31 @@ MonoBehaviour:
       m_Processors: 
       m_Groups: 
       m_Action: Left
+      m_Flags: 0
+    m_Flags: 0
+  StartAction:
+    m_Name: Start
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 7e0afb5e-4bab-4e14-837f-8074bcecd525
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 5fec65b9-c73b-44a8-9deb-00f4aff39e1b
+      m_Path: <Gamepad>/buttonNorth
+      m_Interactions: Hold(duration=2)
+      m_Processors: 
+      m_Groups: 
+      m_Action: Start
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 48bcaf7d-c3e4-402a-ab7d-4cc869197aaa
+      m_Path: <Keyboard>/space
+      m_Interactions: Hold(duration=2)
+      m_Processors: 
+      m_Groups: 
+      m_Action: Start
       m_Flags: 0
     m_Flags: 0
   spawnPoints:
