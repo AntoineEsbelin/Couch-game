@@ -41,6 +41,8 @@ public class NormalState : PlayerState
     public Vector3 moveDir;
     Vector3 theMove;
 
+    [HideInInspector] public bool isKnockbacked; 
+
     public void Moving()
     {
         if (playerController.isMoving)
