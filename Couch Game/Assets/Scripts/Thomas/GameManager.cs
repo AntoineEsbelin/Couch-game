@@ -68,7 +68,7 @@ public class GameManager : MonoBehaviour
     public float cheerMaxTime = .5f;
     private void OnPlayerJoined(PlayerInput playerInput)
     {
-        
+        if(gameStarted)return;
         playersList.Add(playerInput);
         if (PlayerJoinedGame != null)
             PlayerJoinedGame(playerInput);
@@ -125,19 +125,6 @@ public class GameManager : MonoBehaviour
         StartAction.Disable();
     }
 
-    private void Update()
-    {
-        if (StartAction.IsInProgress())
-        {
-            startSlider.value = Mathf.MoveTowards(startSlider.value, startSlider.maxValue, 1f * Time.deltaTime);
-            print(startSlider.value);
-        }
-        else
-        {
-            startSlider.value = Mathf.MoveTowards(startSlider.value, startSlider.minValue, 1f * Time.deltaTime);
-        }
-    }
-    
     private void JoinAction(InputAction.CallbackContext ctx)
     {
         
@@ -185,6 +172,16 @@ public class GameManager : MonoBehaviour
     private void FixedUpdate()
     {
         RoundTimer();
+
+        if (StartAction.IsInProgress())
+        {
+            startSlider.value = Mathf.MoveTowards(startSlider.value, startSlider.maxValue, 1f * Time.deltaTime);
+            print(startSlider.value);
+        }
+        else
+        {
+            startSlider.value = Mathf.MoveTowards(startSlider.value, startSlider.minValue, 1f * Time.deltaTime);
+        }
 
         if(gameTimer.drawTimer || !gameStarted)return;
         if(Input.GetKey(KeyCode.Alpha1))ChangingMap(1);

@@ -6328,6 +6328,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4189217998982134282, guid: c510859adefaa554d8ae1128a9560138, type: 3}
   m_PrefabInstance: {fileID: 813520006}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1201659934 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 712234894296825897, guid: 14b5faa7b68b27c49814921cf3e3d0eb, type: 3}
+  m_PrefabInstance: {fileID: 460978815}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1222147155
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11999,6 +12010,10 @@ PrefabInstance:
       propertyPath: playersRoom
       value: 
       objectReference: {fileID: 1923987178}
+    - target: {fileID: 1896850882735031343, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
+      propertyPath: startSlider
+      value: 
+      objectReference: {fileID: 1201659934}
     - target: {fileID: 1896850882735031343, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
       propertyPath: cheerMaxTime
       value: 1

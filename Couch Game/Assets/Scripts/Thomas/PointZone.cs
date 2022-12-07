@@ -16,6 +16,7 @@ public class PointZone : MonoBehaviour
     [SerializeField] private float maxVibroTimer = 2f;
     private PlayerInput controller;
     private GameObject followCam;
+    public static bool isSettingSuicideOn;
 
     private void Start()
     {
@@ -114,6 +115,12 @@ public class PointZone : MonoBehaviour
         {
             //DEBUG
             Debug.Log($"{deadPlayer.name} SUICIDED !");
+            if (isSettingSuicideOn)
+            {
+                deadPlayer.playerPoint -= 1;
+                deadPlayer.UpdateScore(deadPlayer.playerPoint);
+            }
+
         }
         if(deadPlayer.gameObject.activeSelf)
         {

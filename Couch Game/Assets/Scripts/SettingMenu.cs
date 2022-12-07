@@ -43,6 +43,11 @@ public class SettingMenu : MonoBehaviour
         Screen.fullScreen = isFullScreen;
     }
 
+    public void SetSuicide(bool SuicideOn)
+    {
+        PointZone.isSettingSuicideOn = SuicideOn;
+    }
+
     public void SetResolution(int resolutionIndex)
     {
         Resolution resolution = resolutions[resolutionIndex];

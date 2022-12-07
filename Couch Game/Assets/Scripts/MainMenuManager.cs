@@ -16,6 +16,7 @@ public class MainMenuManager : MonoBehaviour
     [Header("Map Selection")]
     public GameObject MapSelectionMenu;
     public GameObject Map1Button;
+    public GameObject firstObjectOption;
 
     public void MainMenuButton()
     {
@@ -27,6 +28,8 @@ public class MainMenuManager : MonoBehaviour
     {
         optionMenu.SetActive(true);
         CloseMenu(MainMenu);
+        var eventSystem = EventSystem.current;
+        eventSystem.SetSelectedGameObject(firstObjectOption, new BaseEventData(eventSystem));
     }
     
     public void MapSelectionButton()

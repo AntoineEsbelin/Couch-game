@@ -297,7 +297,7 @@ MonoBehaviour:
   timeLastPlayer: 0
   isMoving: 0
   isReady: 0
-  stunDurationKnockback: 1
+  stunDurationKnockback: 1.5
   stunDurationSpinEnd: 0.3
   explosion: {fileID: 3193864383826838676, guid: c8aa708196a029140916b05a1fb82638, type: 3}
   dashDurationReduction: 2
@@ -319,9 +319,10 @@ MonoBehaviour:
   move: {x: 0, y: 0, z: 0}
   wallNormal: {x: 0, y: 0, z: 0}
   playerDirection: {x: 0, y: 0, z: 0}
-  walled: 0
+  bounceWalled: 0
   timer: 0
   timerCount: 0.1
+  walled: 0
 --- !u!114 &1966433780568224511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -405,6 +406,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerController: {fileID: 0}
   knockbackDir: {x: 0, y: 0, z: 0}
+  timer: 0
   timerMax: 1
   stunplayer: {fileID: 0}
 --- !u!114 &1966433780568224504

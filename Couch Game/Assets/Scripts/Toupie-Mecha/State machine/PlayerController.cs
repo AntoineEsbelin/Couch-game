@@ -47,6 +47,7 @@ public class PlayerController : MonoBehaviour
     public bool isMoving;
     public bool isReady;
 
+    [Header("Stun Duration")]
     public float stunDurationKnockback = 1f;
     public float stunDurationSpinEnd = 0.3f;
 
@@ -88,6 +89,7 @@ public class PlayerController : MonoBehaviour
     private ParticleSystem.MainModule settings;
 
     public AudioSource sfx;
+
     void OnEnable()
     {
         currentState = NormalState;
@@ -188,7 +190,7 @@ public class PlayerController : MonoBehaviour
             if(ctx.performed)
             {
                 if(GameManager.instance.allPlayer.Count != GameManager.instance.tempPlayerNb.howManyPlayer || !GameManager.instance.gameStarted)return;
-                if(walled)return;
+                if(bounceWalled)return;
                 move = ctx.ReadValue<Vector3>();
                 playerAnimator.SetBool("IsWalking", true);
             }
@@ -282,44 +284,78 @@ public class PlayerController : MonoBehaviour
         public Vector3 wallNormal;
         public Vector3 playerDirection;
 
-        public bool walled;
+        public bool bounceWalled;
 
         [SerializeField]private float timer;
         public float timerCount;
+
+        
+        [Header("Walled")]
+        public bool walled = false;
 
         private void OnCollisionEnter(Collision other)
         {
             
             if(other.gameObject.tag == "Wall")
             {
-                if(currentState == SpinnerState)
-                {
-
-                    CameraShaker.Instance.ShakeOnce(1f, 4f, 0.1f, 0.5f);
-                    wallNormal = other.contacts[0].normal;
-                    playerDirection = SpinnerState.moveDir;
-                    wallNormal.y = 0;
-                    playerDirection.y = 0;
-                    timer = timerCount;
-                    if(Vector3.Dot(wallNormal, playerDirection) < 0) //produit scalaire
-                    {
-                        WallEvent wallEvent = other.gameObject.GetComponentInParent<WallEvent>();
-                        if(wallEvent == null)BounceWall(null);
-                        else BounceWall(wallEvent);
-                    }
-                    //mettre timer
-                }
-
-                if (currentState == StunState)
-                {
-                    CameraShaker.Instance.ShakeOnce(1f, 4f, 0.1f, 0.5f);
-                    wallNormal = other.contacts[0].normal;
-                    playerDirection = StunState.knockbackDir;
-                    BounceWallStuned();
-                }
+                walled = true;
+                WallBounce(other);
             }
         }
 
+        private void OnCollisionExit(Collision other)
+        {
+            if(other.gameObject.tag != "Wall")return;
+            if(walled)walled = false;
+        }
+
+        private void OnCollisionStay(Collision other)
+        {
+            if(other.gameObject.tag != "Wall")return;
+            if(!walled || !SpinnerState.repoussed)return;
+            else if(walled || SpinnerState.repoussed) WallBounce(other);
+        }
+
+        private void WallBounce(Collision other)
+        {
+            if(currentState == SpinnerState)
+            {
+
+                CameraShaker.Instance.ShakeOnce(1f, 4f, 0.1f, 0.5f);
+                wallNormal = other.contacts[0].normal;
+                playerDirection = SpinnerState.moveDir;
+                wallNormal.y = 0;
+                playerDirection.y = 0;
+                timer = timerCount;
+                if(Vector3.Dot(wallNormal, playerDirection) < 0) //produit scalaire
+                {
+                    WallEvent wallEvent = other.gameObject.GetComponentInParent<WallEvent>();
+                    if(wallEvent == null)BounceWall(null);
+                    else BounceWall(wallEvent);
+                }
+                else
+                {
+                    //test
+                    SpinnerState.moveDir = wallNormal;
+                    float newAngle = Vector3.SignedAngle(playerDirection, SpinnerState.moveDir, Vector3.up);
+
+                    Vector3 newVector = new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y + newAngle, transform.rotation.eulerAngles.z);
+                    transform.rotation = Quaternion.Euler(newVector);
+                    bounceWalled = true;
+                }
+                walled = false;
+                //mettre timer
+            }
+
+            if (currentState == StunState)
+            {
+                CameraShaker.Instance.ShakeOnce(1f, 4f, 0.1f, 0.5f);
+                wallNormal = other.contacts[0].normal;
+                playerDirection = StunState.knockbackDir;
+                BounceWallStuned();
+                walled = false;
+            }
+        }
         void OnTriggerEnter(Collider other)
         {
             if (!other.isTrigger) return;
@@ -349,29 +385,48 @@ public class PlayerController : MonoBehaviour
 
                         StunState.timerMax = stunDurationSpinEnd;
                         stateMachine.SwitchState(StunState);
+                        triggerPlayer.SpinnerState.repoussed = true;
                         //activate knockback for triggered player >:(
                         //other.GetComponentInParent<Knockback>().spinnerKnockbacking = this.spinnerControler;
                         
                     }
                     if (triggerPlayer.currentState == triggerPlayer.SpinnerState && !SpinnerState.repoussed) BounceSpinner();
-                    
+                 
                 }
+                /*else if(currentState == NormalState)
+                {
+                    PlayerController triggeredPlayer = other.GetComponentInParent<PlayerController>();
+                    
+                    if(!triggeredPlayer.SpinnerState.repoussed)return;
+                    Debug.Log("L");
+
+                    NormalState.moveDir = Vector3.Reflect(triggeredPlayer.playerDirection, playerDirection);
+                    float newAngle = Vector3.SignedAngle(playerDirection, SpinnerState.moveDir, Vector3.up);
+
+                    Vector3 newVector = new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y + newAngle, transform.rotation.eulerAngles.z);
+                    transform.rotation = Quaternion.Euler(newVector);
+                    rb.AddForce(triggeredPlayer.rb.velocity, ForceMode.Impulse);
+                    
+                    StunState.timerMax = triggeredPlayer.StunState.timer;
+                    stateMachine.SwitchState(StunState);
+                }*/
             }
         }
 
         void BounceWall(WallEvent wallEvent)
         {
+            Debug.Log(playerDirection);
             SpinnerState.moveDir = Vector3.Reflect(playerDirection, wallNormal);
             float newAngle = Vector3.SignedAngle(playerDirection, SpinnerState.moveDir, Vector3.up);
 
             Vector3 newVector = new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y + newAngle, transform.rotation.eulerAngles.z);
             transform.rotation = Quaternion.Euler(newVector);
-             AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("Spin Hit Wall"), transform.position, AudioManager.instance.soundEffectMixer, true, false);
+            AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("Spin Hit Wall"), transform.position, AudioManager.instance.soundEffectMixer, true, false);
             
             //Anim billard and button
             if(wallEvent != null)NeonBugBounce(wallEvent);
             
-            walled = true;
+            bounceWalled = true;
         }
 
         void BounceWallStuned()
@@ -381,10 +436,10 @@ public class PlayerController : MonoBehaviour
 
         private void BounceWallTimer()
         {
-            if (!walled) return;
+            if (!bounceWalled) return;
             
             if(timer > 0)timer -=Time.deltaTime;
-            else walled = false;
+            else bounceWalled = false;
         }
 
         void BounceSpinner()
@@ -445,6 +500,7 @@ public class PlayerController : MonoBehaviour
 
     public void NeonBugBounce(WallEvent wallEvent)
     {
+        if(wallEvent.wallAnim == null || wallEvent.billardAnim == null)return;
         wallEvent.wallAnim.ResetTrigger("BounceWall");
         wallEvent.billardAnim.ResetTrigger("BounceWall");
         
