@@ -12,7 +12,7 @@ public class StunState : PlayerState
     public float kbSpeed;
     public bool isKnockBacked;
 
-    float timer;
+    [HideInInspector] public float timer;
     public float timerMax = 1f;
 
     public PlayerController stunplayer;
@@ -36,8 +36,14 @@ public class StunState : PlayerState
         Debug.Log($"Knockback Dir : {knockbackDir}");
         if (!isKnockBacked)
             kbSpeed = stunplayer.SpinnerState.mSettings.moveSpeed;
-        if(stunplayer.hasCountered)
+        if(!stunplayer.hasCountered)
         {
+            knockbackDir = (stunplayer.rb == null ? stunplayer.rb.velocity.normalized : (playerController.transform.position - stunplayer.transform.position).normalized);
+        }
+        else
+        {
+            knockbackDir = Vector3.zero;
+            
             stunplayer.hasCountered = false;
             playerController.PlayerAnimator.SetBool("IsStunned", true);
 
@@ -45,6 +51,9 @@ public class StunState : PlayerState
             sfx = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Stun"], player.transform.position, AudioManager.instance.soundEffectMixer, true, true);
             //Debug.Log("NE BOUGE PAS");
         }
+        Debug.Log($"Player Dir : {playerController.move }");
+        Debug.Log($"Knockback Dir : {knockbackDir}");
+        kbSpeed = stunplayer.SpinnerState.mSettings.moveSpeed;
     }
 
     public override void UpdateState(PlayerController player)
@@ -56,7 +65,12 @@ public class StunState : PlayerState
     public override void ExitState(PlayerController player)
     {
         isKnockBacked = false;
-        playerController.PlayerAnimator.SetBool("IsStunned", false);
+        if(playerController.PlayerAnimator.GetBool("IsStunned"))playerController.PlayerAnimator.SetBool("IsStunned", false);
+        if(player.SpinnerState.repoussed)
+        {
+            player.SpinnerState.repoussed = false;
+            Debug.Log("EXIT");
+        }
         if(sfx != null)Destroy(sfx.gameObject);
     }
 

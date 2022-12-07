@@ -82,10 +82,9 @@ public class Flipper : MonoBehaviour
         {
             player = col.gameObject;
             
-            dir = transform.position - col.transform.position;
+            dir = -col.contacts[0].normal;
             dir.Normalize();
             
-            dir = Vector3.Reflect(dir, col.contacts[0].normal);
             knockBacktimer = maxKnockBackTimer;
             
             PlayerController pc = player.GetComponent<PlayerController>();

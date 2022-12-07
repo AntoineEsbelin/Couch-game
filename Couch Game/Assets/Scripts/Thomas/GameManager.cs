@@ -4,9 +4,12 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public Slider startSlider;
+    
     public List<TextMeshProUGUI> playerRoomUI;
     public GameObject playersRoom;
     public List<PlayerController> allPlayer;
@@ -17,6 +20,7 @@ public class GameManager : MonoBehaviour
     //Input Join and Leave
     public InputAction joinAction;
     public InputAction leftAction;
+    public InputAction StartAction;
 
     //Event
     public event System.Action<PlayerInput> PlayerJoinedGame;
@@ -64,7 +68,7 @@ public class GameManager : MonoBehaviour
     public float cheerMaxTime = .5f;
     private void OnPlayerJoined(PlayerInput playerInput)
     {
-        
+        if(gameStarted)return;
         playersList.Add(playerInput);
         if (PlayerJoinedGame != null)
             PlayerJoinedGame(playerInput);
@@ -109,12 +113,16 @@ public class GameManager : MonoBehaviour
         
         leftAction.Enable();
         leftAction.performed += ctx => LeftAction(ctx);
+
+        StartAction.Enable();
+        StartAction.performed += ctx => StartGame();
     }
     
     private void OnDisable()
     {
         joinAction.Disable();
         leftAction.Disable();
+        StartAction.Disable();
     }
 
     private void JoinAction(InputAction.CallbackContext ctx)
@@ -154,6 +162,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        
         gameTimer.timer = gameTimer.maxTimer;
         gameStarted = false;
         gameTimer.drawTimer = true;
@@ -164,10 +173,21 @@ public class GameManager : MonoBehaviour
     {
         RoundTimer();
 
+        if (StartAction.IsInProgress())
+        {
+            startSlider.value = Mathf.MoveTowards(startSlider.value, startSlider.maxValue, 1f * Time.deltaTime);
+            print(startSlider.value);
+        }
+        else
+        {
+            startSlider.value = Mathf.MoveTowards(startSlider.value, startSlider.minValue, 1f * Time.deltaTime);
+        }
+
         if(gameTimer.drawTimer || !gameStarted)return;
         if(Input.GetKey(KeyCode.Alpha1))ChangingMap(1);
         if(Input.GetKey(KeyCode.Alpha2))ChangingMap(2);
     }
+    
 
     private void RoundTimer()
     {
