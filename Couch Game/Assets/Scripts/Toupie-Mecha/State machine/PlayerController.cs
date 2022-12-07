@@ -515,6 +515,7 @@ public class PlayerController : MonoBehaviour
 
     public void RespawnPlayer()
     {
+        playerAnimator.SetTrigger("Respawn");
         transform.position = GameManager.instance.spawnPoints[playerId - 1].position;
         //capsuleCol.enabled = false;
         sphereCol.enabled = false;

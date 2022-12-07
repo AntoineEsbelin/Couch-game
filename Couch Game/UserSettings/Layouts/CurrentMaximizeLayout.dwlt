@@ -254,18 +254,18 @@ MonoBehaviour:
       m_ExpandedIDs: 1e45f7fff0b8f7fff0d9f7fffc71f8fffe71f8fff806faff8ccefaff9acefaff32f7faffb44cfbff104efbff0469fbff626cfbffcc73fbffe099fbff9e9afbff6ab9fbff28bafbff22bdfbff1abefbffd8befbff7ac1fbffb2e8fbff70e9fbffb00bfcff100ffcffcc11fcff8a14fcff7616fcff7864fcffb86afcfff670fcff5674fcffc27bfcff527dfcff96b2fcff60bdfcfff6befcffa4e4fcff3e05fdffe20bfdff102efdff7859fdff147afdff267ffdff6081fdff3883fdff1685fdffd485fdfff687fdff408afdff188cfdff208dfdffde8dfdff76b7fdff30ebfdff4c0bfeff923cfeff8ab7feff38d7feff9ccfffff74edffffce8300005ece010054fb01005878020060780200b6780200
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: 
-        m_OriginalName: 
+        m_Name: Interieur 1
+        m_OriginalName: Interieur 1
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 0
+        m_UserData: 443112
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 11
+        m_OriginalEventType: 0
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 6}
       m_SearchString: 
@@ -283,7 +283,7 @@ MonoBehaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
-  m_EditorHideFlags: 1
+  m_EditorHideFlags: 0
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: SceneView
   m_EditorClassIdentifier: 
@@ -357,7 +357,7 @@ MonoBehaviour:
       floating: 0
       collapsed: 0
       displayed: 1
-      snapOffset: {x: 0, y: 0}
+      snapOffset: {x: 0, y: 25}
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
       id: unity-scene-view-toolbar
@@ -414,7 +414,7 @@ MonoBehaviour:
       displayed: 1
       snapOffset: {x: 2, y: 86}
       snapOffsetDelta: {x: 0, y: 0}
-      snapCorner: 0
+      snapCorner: 1
       id: Orientation
       index: 0
       layout: 4
@@ -533,7 +533,7 @@ MonoBehaviour:
       floating: 0
       collapsed: 0
       displayed: 0
-      snapOffset: {x: 0, y: 0}
+      snapOffset: {x: 0, y: 25}
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
       id: Scene View/Particles
@@ -606,9 +606,9 @@ MonoBehaviour:
     speed: 2
     m_Value: 28.894127
   m_Ortho:
-    m_Target: 0
+    m_Target: 1
     speed: 2
-    m_Value: 0
+    m_Value: 1
   m_CameraSettings:
     m_Speed: 2
     m_SpeedNormalized: 1
@@ -828,7 +828,7 @@ MonoBehaviour:
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
-  m_StartGridSize: 64
+  m_StartGridSize: 62
   m_LastFolders:
   - Assets/Prefab/RealBumpers
   m_LastFoldersGridSize: -1
@@ -856,7 +856,7 @@ MonoBehaviour:
       m_IsRenaming: 0
       m_OriginalEventType: 11
       m_IsRenamingFilename: 1
-      m_ClientGUIView: {fileID: 0}
+      m_ClientGUIView: {fileID: 11}
     m_SearchString: 
     m_CreateAssetUtility:
       m_EndAction: {fileID: 0}
@@ -920,8 +920,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
     m_NewAssetIndexInList: -1
-    m_ScrollPosition: {x: 0, y: 0}
-    m_GridSize: 64
+    m_ScrollPosition: {x: 0, y: 27}
+    m_GridSize: 62
   m_SkipHiddenPackages: 0
   m_DirectoriesAreaWidth: 181
 --- !u!114 &14
