@@ -310,12 +310,13 @@ MonoBehaviour:
   multiplier: 1
   maxtimeMultiplier: 30
   timeMultiplier: 0
-  invincibilityTimerMax: 3
+  invincibilityTimerMax: 2
   invincibilityTimer: 0
   stopBumpKb: 0
   arrow: {fileID: 8194550404549101532}
   chargeParticles: {fileID: 3002823160540143803}
   sfx: {fileID: 0}
+  vfx: {fileID: 0}
   move: {x: 0, y: 0, z: 0}
   wallNormal: {x: 0, y: 0, z: 0}
   playerDirection: {x: 0, y: 0, z: 0}
@@ -323,6 +324,7 @@ MonoBehaviour:
   timer: 0
   timerCount: 0.1
   walled: 0
+  bumpPlayer: 0
 --- !u!114 &1966433780568224511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -353,6 +355,7 @@ MonoBehaviour:
     dx: 10
     dxModifier: 1
     rotationSpeed: 1600
+    rotationSpeedModifier: 1
     speedModifier: 1
     slowSpeedModifier: 0.2
     normalSpeedModifier: 1
@@ -360,6 +363,7 @@ MonoBehaviour:
     turnSmoothTime: 0.01
     turnSmoothVelocity: 0
   moveDir: {x: 0, y: 0, z: 0}
+  isKnockbacked: 0
 --- !u!114 &1966433780568224506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -373,8 +377,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 0}
-  spinnerVFX: {fileID: 5131705808110797491, guid: 89dd00848dc657f46ab78b330e957c5a, type: 3}
-  vfx: {fileID: 0}
+  allSpinnerVFX: []
+  spinnerVFX:
+    spinningVFX: {fileID: 5131705808110797491, guid: 89dd00848dc657f46ab78b330e957c5a, type: 3}
+    brakeVFX: {fileID: 241476061616573481, guid: 5590afeded0d1154ab78a5f1a028e45c, type: 3}
+    SpinerVsSpinerVFX: {fileID: 7559075858351329695, guid: 8c929c6c4fe659a44922f9b031a3070e, type: 3}
   mSettings:
     dashDuration: 0
     dashDurationMax: 2
@@ -382,6 +389,7 @@ MonoBehaviour:
     bonusMoveSpeed: 0
     rotationSpeed: 800
     turnSmoothTime: 1.2
+    turnSmoothTimeModifier: 1
     turnSmoothVelocity: 0
     chargeMultiplier: 1
     brakeManiabilityModifier: 0.5
@@ -406,6 +414,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerController: {fileID: 0}
   knockbackDir: {x: 0, y: 0, z: 0}
+  kbDirBumper: {x: 0, y: 0, z: 0}
+  kbSpeed: 0
+  isKnockBacked: 0
   timer: 0
   timerMax: 1
   stunplayer: {fileID: 0}

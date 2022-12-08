@@ -8,6 +8,9 @@ public class DeathState : PlayerState
     public float respawnTime;
     public override void EnterState(PlayerController player)
     {
+        player.GetComponent<CapsuleCollider>().enabled = false;
+        player.GetComponent<SphereCollider>().enabled = false;
+        player.GetComponentInChildren<BoxCollider>().enabled = false;
         player.rb.velocity = Vector3.zero;
         player.ResetCharging();
         player.cameraTarget.targets.Remove(player.transform);
@@ -16,12 +19,12 @@ public class DeathState : PlayerState
         if(wallEvent != null)player.NeonBugBounce(wallEvent);
         //visuel off :
         ResetAnimator(player.PlayerAnimator);
-        player.playerFBX.SetActive(false);
+       // player.playerFBX.SetActive(false);
         player.playerCrown.SetActive(false);
         player.GetComponentInChildren<SpinningAnim>(true).transform.localScale = Vector3.one;
         player.stopBumpKb = true;
         if(player.sfx != null)Destroy(player.sfx);
-        if(player.SpinnerState.vfx != null)Destroy(player.SpinnerState.vfx);
+        if(player.SpinnerState.allSpinnerVFX.Count > 0)player.SpinnerState.RemoveAllSpinnerVFX();
     }
     public override void UpdateState(PlayerController player)
     {
@@ -30,10 +33,13 @@ public class DeathState : PlayerState
     }
     public override void ExitState(PlayerController player)
     {
+        player.GetComponent<CapsuleCollider>().enabled = true;
+        player.GetComponent<SphereCollider>().enabled = true;
+        player.GetComponentInChildren<BoxCollider>().enabled = true;
         //visuel on :
         player.cameraTarget.targets.Add(transform);
-        player.PlayerAnimator.enabled = true;
-        player.playerFBX.SetActive(true);
+     //   player.PlayerAnimator.enabled = true;
+      //  player.playerFBX.SetActive(true);
         player.RespawnPlayer();
         if(player.hasDaCrown)player.playerCrown.SetActive(true);
     }
@@ -41,12 +47,10 @@ public class DeathState : PlayerState
 
     private void ResetAnimator(Animator playerAnim)
     {
-        
-        playerAnim.Play("Idle");
+        playerAnim.SetTrigger("Death");
         playerAnim.SetBool("IsWalking", false);
         playerAnim.SetBool("IsSpinning", false);
         playerAnim.SetBool("Counter", false);
         playerAnim.SetBool("ChargingSpin", false);
-        playerAnim.enabled = false;
     }
 }

@@ -32,8 +32,8 @@ public class StunState : PlayerState
         if(!stunplayer.hasCountered)knockbackDir = /*(playerController.transform.position - stunplayer.transform.position).normalized*/ stunplayer.rb.velocity.normalized;
         //else if(isKnockBacked){knockbackDir = kbDirBumper;Debug.Log("bump");}
         else knockbackDir = Vector3.zero;
-        Debug.Log($"Player Dir : {playerController.move }");
-        Debug.Log($"Knockback Dir : {knockbackDir}");
+        //Debug.Log($"Player Dir : {playerController.move }");
+        //Debug.Log($"Knockback Dir : {knockbackDir}");
         if (!isKnockBacked)
             kbSpeed = stunplayer.SpinnerState.mSettings.moveSpeed;
         if(!stunplayer.hasCountered)
@@ -47,13 +47,12 @@ public class StunState : PlayerState
             stunplayer.hasCountered = false;
             playerController.PlayerAnimator.SetBool("IsStunned", true);
 
-            playerController.rb.velocity = Vector3.zero;
+            if(playerController.SpinnerState.repoussed)playerController.rb.velocity = Vector3.zero;
             sfx = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Stun"], player.transform.position, AudioManager.instance.soundEffectMixer, true, true);
             //Debug.Log("NE BOUGE PAS");
         }
-        Debug.Log($"Player Dir : {playerController.move }");
-        Debug.Log($"Knockback Dir : {knockbackDir}");
-        kbSpeed = stunplayer.SpinnerState.mSettings.moveSpeed;
+        //Debug.Log($"Player Dir : {playerController.move }");
+        //Debug.Log($"Knockback Dir : {knockbackDir}");
     }
 
     public override void UpdateState(PlayerController player)
@@ -69,9 +68,12 @@ public class StunState : PlayerState
         if(player.SpinnerState.repoussed)
         {
             player.SpinnerState.repoussed = false;
-            Debug.Log("EXIT");
+            //Debug.Log("EXIT");
         }
         if(sfx != null)Destroy(sfx.gameObject);
+        player.rb.velocity = Vector3.zero;
+
+        player.NormalState.isKnockbacked = false;
     }
 
     [System.Serializable] public class MovementSettings
@@ -97,7 +99,7 @@ public class StunState : PlayerState
 
     void Knockback()
     {
-        Debug.Log(knockbackDir);
+        //Debug.Log(knockbackDir);
         //float kbSmooth = (Mathf.Pow((timer / (timerMax - 1)), 3) + 1) * kbSpeed;
         knockback = knockbackDir * kbSpeed * Time.fixedDeltaTime;
         playerController.rb.velocity = new Vector3(knockback.x,0f,knockback.z);

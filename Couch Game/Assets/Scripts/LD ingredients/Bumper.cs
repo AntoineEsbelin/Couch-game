@@ -19,6 +19,7 @@ public class Bumper : MonoBehaviour
     private void Start()
     {
         timer = maxTimer;
+        animate = GetComponent<Animator>();
 
     }
 
@@ -27,7 +28,7 @@ public class Bumper : MonoBehaviour
         if (player == null)
             return;
         
-        Timer();
+        //Timer();
     }
     
     private void Timer()
@@ -59,7 +60,6 @@ public class Bumper : MonoBehaviour
             player = col.gameObject;
             playerRb = player.GetComponent<Rigidbody>();
             playerCtrl = player.GetComponent<PlayerController>();
-            animate = GetComponent<Animator>();
 
             StartCoroutine(AnimBumper());
             
@@ -72,7 +72,10 @@ public class Bumper : MonoBehaviour
             playerCtrl.StunState.isKnockBacked = true;
             playerCtrl.StunState.kbSpeed = force;
             playerCtrl.StunState.timerMax = maxTimer;
+            playerCtrl.StunState.timer = maxTimer;
             playerCtrl.StunState.kbDirBumper = -col.contacts[0].normal;
+            // Debug.Log(-col.contacts[0].normal);
+            // Debug.DrawRay(transform.position, -col.contacts[0].normal * 10, Color.red, 2f);
             playerCtrl.stateMachine.SwitchState(playerCtrl.StunState);
             
         }

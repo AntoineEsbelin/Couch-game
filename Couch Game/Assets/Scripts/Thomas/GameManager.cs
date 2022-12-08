@@ -127,7 +127,7 @@ public class GameManager : MonoBehaviour
 
     private void JoinAction(InputAction.CallbackContext ctx)
     {
-        
+        if(gameStarted)return;
         PlayerInputManager.instance.JoinPlayerFromActionIfNotAlreadyJoined(ctx);
     }
     
@@ -176,7 +176,7 @@ public class GameManager : MonoBehaviour
         if (StartAction.IsInProgress())
         {
             startSlider.value = Mathf.MoveTowards(startSlider.value, startSlider.maxValue, 1f * Time.deltaTime);
-            print(startSlider.value);
+            //print(startSlider.value);
         }
         else
         {

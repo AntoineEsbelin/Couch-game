@@ -89,6 +89,7 @@ public class PlayerController : MonoBehaviour
     private ParticleSystem.MainModule settings;
 
     public AudioSource sfx;
+    public GameObject vfx;
 
     void OnEnable()
     {
@@ -211,8 +212,8 @@ public class PlayerController : MonoBehaviour
                     chargeParticles.SetActive(true);
                     playerAnimator.SetBool("ChargingSpin", true);
                     sfx = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"Spin Charge"], transform.position, AudioManager.instance.soundEffectMixer, false, true);
-                    SpinnerState.vfx = Instantiate(SpinnerState.spinnerVFX, this.transform);
-
+                    GameObject spinnerVFX = Instantiate(SpinnerState.spinnerVFX.spinningVFX, this.transform);
+                    SpinnerState.allSpinnerVFX.Add(spinnerVFX);
                 }
             }
 
@@ -267,7 +268,8 @@ public class PlayerController : MonoBehaviour
 
                 int randomBrake = Random.Range(0, 6);
                 AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"Spin Brake {randomBrake + 1}"], transform.position, AudioManager.instance.soundEffectMixer, true, false);
-                
+                GameObject brakeVFX = Instantiate(SpinnerState.spinnerVFX.brakeVFX, transform);
+                SpinnerState.allSpinnerVFX.Add(brakeVFX);
             }
 
             if (ctx.canceled)
@@ -293,13 +295,14 @@ public class PlayerController : MonoBehaviour
         [Header("Walled")]
         public bool walled = false;
 
+        [SerializeField]private bool bumpPlayer;
+
         private void OnCollisionEnter(Collision other)
         {
             
             if(other.gameObject.tag == "Wall")
             {
                 walled = true;
-                WallBounce(other);
             }
         }
 
@@ -307,17 +310,32 @@ public class PlayerController : MonoBehaviour
         {
             if(other.gameObject.tag != "Wall")return;
             if(walled)walled = false;
+            StartCoroutine(WaitBounceWall());
+        }
+
+        private IEnumerator WaitBounceWall()
+        {
+            yield return new WaitForSeconds(.3f);
+            bounceWalled = false;
         }
 
         private void OnCollisionStay(Collision other)
         {
             if(other.gameObject.tag != "Wall")return;
-            if(!walled || !SpinnerState.repoussed)return;
-            else if(walled || SpinnerState.repoussed) WallBounce(other);
+            if((walled || NormalState.isKnockbacked) && !bounceWalled)
+            {
+                WallBounce(other);
+            }
+            else if(!walled && bounceWalled)
+            {
+                WallBounce(other);
+                return;
+            }
         }
 
         private void WallBounce(Collision other)
         {
+            if(bounceWalled)return;
             if(currentState == SpinnerState)
             {
 
@@ -327,6 +345,8 @@ public class PlayerController : MonoBehaviour
                 wallNormal.y = 0;
                 playerDirection.y = 0;
                 timer = timerCount;
+                //Debug.Log(Vector3.Distance(this.transform.position, other.transform.position));
+
                 if(Vector3.Dot(wallNormal, playerDirection) < 0) //produit scalaire
                 {
                     WallEvent wallEvent = other.gameObject.GetComponentInParent<WallEvent>();
@@ -341,24 +361,51 @@ public class PlayerController : MonoBehaviour
 
                     Vector3 newVector = new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y + newAngle, transform.rotation.eulerAngles.z);
                     transform.rotation = Quaternion.Euler(newVector);
-                    bounceWalled = true;
                 }
+                bounceWalled = true;
                 walled = false;
+                NormalState.isKnockbacked = false;
+                //Debug.Log(bounceWalled);
+                //Debug.Log(walled);
+                //Debug.Log(NormalState.isKnockbacked);
                 //mettre timer
             }
-
-            if (currentState == StunState)
+            else if (currentState == StunState)
             {
                 CameraShaker.Instance.ShakeOnce(1f, 4f, 0.1f, 0.5f);
                 wallNormal = other.contacts[0].normal;
                 playerDirection = StunState.knockbackDir;
                 BounceWallStuned();
+                bounceWalled = true;
                 walled = false;
+                NormalState.isKnockbacked = false;
+                //Debug.Log(bounceWalled);
+                //Debug.Log(walled);
+                //Debug.Log(NormalState.isKnockbacked);
             }
         }
         void OnTriggerEnter(Collider other)
         {
-            if (!other.isTrigger) return;
+            if (!other.isTrigger || other.tag == "hitbox") return;
+            bumpPlayer = true;
+        }
+
+        void OnTriggerStay(Collider other)
+        {
+            if(!other.isTrigger || other.tag == "hitbox")return;
+            if(bumpPlayer)BumpPlayer(other);
+        }
+
+        void OnTriggerExit(Collider other)
+        {
+            if(!other.isTrigger || other.tag == "hitbox")return;
+            if(bumpPlayer)bumpPlayer = false;
+        }
+
+        
+
+        void BumpPlayer(Collider other)
+        {
             if (other.gameObject.tag == "Player")
             {
                 if(currentState == SpinnerState)
@@ -370,7 +417,7 @@ public class PlayerController : MonoBehaviour
                     triggerPlayer.timeLastPlayer = triggerPlayer.maxTimeLastPlayer;
 
                     //Si le joueur est pas stun [???]
-
+                    if(triggerPlayer.SpinnerState.repoussed)return;
                     if ((triggerPlayer.currentState == triggerPlayer.NormalState || triggerPlayer.currentState == triggerPlayer.StunState) && !triggerPlayer.hasCountered)
                     {
                         //Debug.Log(triggerPlayer);
@@ -379,10 +426,14 @@ public class PlayerController : MonoBehaviour
                         Instantiate(explosion, this.transform.position, Quaternion.identity);
                         triggerPlayer.StunState.timerMax = triggerPlayer.stunDurationKnockback;
                         triggerPlayer.lastPlayerContacted = this;
+                        triggerPlayer.NormalState.isKnockbacked = true;
                         int randomSpinHitPlayer = Random.Range(0, 7);
                         AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault($"Spin Hit Player {randomSpinHitPlayer + 1}"), transform.position, AudioManager.instance.soundEffectMixer, true, false);
+                        //triggerPlayer.SpinnerState.mSettings.moveSpeed = StunState.kbSpeed;
+                        //Debug.Log("MV : " + triggerPlayer.SpinnerState.mSettings.moveSpeed);
+                        //Debug.Log("MV : " + StunState.kbSpeed);
+                        rb.velocity = triggerPlayer.rb.velocity;
                         triggerPlayer.stateMachine.SwitchState(triggerPlayer.StunState);
-
                         StunState.timerMax = stunDurationSpinEnd;
                         stateMachine.SwitchState(StunState);
                         triggerPlayer.SpinnerState.repoussed = true;
@@ -391,31 +442,35 @@ public class PlayerController : MonoBehaviour
                         
                     }
                     if (triggerPlayer.currentState == triggerPlayer.SpinnerState && !SpinnerState.repoussed) BounceSpinner();
-                 
+                    bumpPlayer = false;
                 }
-                /*else if(currentState == NormalState)
+                else if(currentState == StunState)
                 {
-                    PlayerController triggeredPlayer = other.GetComponentInParent<PlayerController>();
-                    
-                    if(!triggeredPlayer.SpinnerState.repoussed)return;
-                    Debug.Log("L");
 
-                    NormalState.moveDir = Vector3.Reflect(triggeredPlayer.playerDirection, playerDirection);
-                    float newAngle = Vector3.SignedAngle(playerDirection, SpinnerState.moveDir, Vector3.up);
+                    //Si le joueur est pas stun [???]
+            
+                    PlayerController triggerPlayer = other.GetComponentInParent<PlayerController>();
+                    if((!SpinnerState.repoussed || triggerPlayer.currentState == triggerPlayer.SpinnerState) && lastPlayerContacted == triggerPlayer)return;
+                    CameraShaker.Instance.ShakeOnce(1f, 4f, 0.1f, 0.5f);
 
-                    Vector3 newVector = new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y + newAngle, transform.rotation.eulerAngles.z);
-                    transform.rotation = Quaternion.Euler(newVector);
-                    rb.AddForce(triggeredPlayer.rb.velocity, ForceMode.Impulse);
+                    triggerPlayer.lastPlayerContacted = this;
+                    triggerPlayer.timeLastPlayer = triggerPlayer.maxTimeLastPlayer;
+                    Instantiate(explosion, this.transform.position, Quaternion.identity);
+                    triggerPlayer.StunState.timerMax = triggerPlayer.stunDurationKnockback;
+                    triggerPlayer.lastPlayerContacted = this;
                     
-                    StunState.timerMax = triggeredPlayer.StunState.timer;
-                    stateMachine.SwitchState(StunState);
-                }*/
+                    int randomSpinHitPlayer = Random.Range(0, 7);
+                    AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault($"Spin Hit Player {randomSpinHitPlayer + 1}"), transform.position, AudioManager.instance.soundEffectMixer, true, false);
+                    triggerPlayer.stateMachine.SwitchState(triggerPlayer.StunState);
+                    triggerPlayer.SpinnerState.repoussed = true;
+                    bumpPlayer = false;
+                }
             }
         }
 
         void BounceWall(WallEvent wallEvent)
         {
-            Debug.Log(playerDirection);
+            //Debug.Log(playerDirection);
             SpinnerState.moveDir = Vector3.Reflect(playerDirection, wallNormal);
             float newAngle = Vector3.SignedAngle(playerDirection, SpinnerState.moveDir, Vector3.up);
 
@@ -432,6 +487,7 @@ public class PlayerController : MonoBehaviour
         void BounceWallStuned()
         {
             StunState.knockbackDir = Vector3.Reflect(StunState.knockbackDir, wallNormal);
+            bounceWalled = true;
         }
 
         private void BounceWallTimer()
@@ -444,9 +500,10 @@ public class PlayerController : MonoBehaviour
 
         void BounceSpinner()
         {
-            CameraShaker.Instance.ShakeOnce(1f, 4f, 0.1f, 0.5f);
             //Bounce against other player
-            Instantiate(explosion, this.transform.position, Quaternion.identity);
+            //Instantiate(explosion, this.transform.position, Quaternion.identity);
+            Instantiate(SpinnerState.spinnerVFX.SpinerVsSpinerVFX, transform);
+            CameraShaker.Instance.ShakeOnce(1f, 4f, 0.1f, 0.5f);
             //Debug.Log("bounce");
             SpinnerState.moveDir = -SpinnerState.moveDir;
             move = -move;
@@ -466,6 +523,7 @@ public class PlayerController : MonoBehaviour
 
     public void RespawnPlayer()
     {
+        playerAnimator.SetTrigger("Respawn");
         transform.position = GameManager.instance.spawnPoints[playerId - 1].position;
         //capsuleCol.enabled = false;
         sphereCol.enabled = false;
