@@ -36,7 +36,7 @@ public class LD_Manager : MonoBehaviour
         {
             int element = Random.Range(0, ldElements.Length);
             actualElement = Instantiate(ldElements[element], this.transform);
-            Debug.Log("Element Spawned : " + actualElement.name);
+            //Debug.Log("Element Spawned : " + actualElement.name);
             elementSpawned = true;
         }
 

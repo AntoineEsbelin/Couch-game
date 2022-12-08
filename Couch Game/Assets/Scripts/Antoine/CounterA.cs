@@ -155,6 +155,8 @@ public class CounterA : MonoBehaviour
                 pm.timeLastPlayer = pm.maxTimeLastPlayer;
                 pm.lastPlayerContacted = plctrl;
                 pm.StunState.knockbackDir = SmallForce;
+                pm.bumpPlayer = true;
+                pm.firstBumpPlayer = true;
                 Instantiate(atkVFX, pm.transform);
 
                 pm.stateMachine.SwitchState(pm.StunState);

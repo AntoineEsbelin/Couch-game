@@ -2041,9 +2041,9 @@ MonoBehaviour:
   isField: 0
   explosion: {fileID: 3193864383826838676, guid: c8aa708196a029140916b05a1fb82638, type: 3}
   explosionMultiplier: 5
-  maxVibroTimer: 2
   LeftMotor: 0.3
   RightMotor: 0.4
+  maxVibroTimer: 2
 --- !u!136 &367022723
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2107,9 +2107,9 @@ MonoBehaviour:
   isField: 0
   explosion: {fileID: 3193864383826838676, guid: c8aa708196a029140916b05a1fb82638, type: 3}
   explosionMultiplier: 5
-  maxVibroTimer: 2
   LeftMotor: 0.3
   RightMotor: 0.4
+  maxVibroTimer: 2
 --- !u!136 &377751227
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3592,9 +3592,9 @@ MonoBehaviour:
   isField: 0
   explosion: {fileID: 3193864383826838676, guid: c8aa708196a029140916b05a1fb82638, type: 3}
   explosionMultiplier: 5
-  maxVibroTimer: 2
   LeftMotor: 0.3
   RightMotor: 0.4
+  maxVibroTimer: 2
 --- !u!136 &593961365
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3742,9 +3742,9 @@ MonoBehaviour:
   isField: 0
   explosion: {fileID: 3193864383826838676, guid: c8aa708196a029140916b05a1fb82638, type: 3}
   explosionMultiplier: 5
-  maxVibroTimer: 2
   LeftMotor: 0.3
   RightMotor: 0.4
+  maxVibroTimer: 2
 --- !u!136 &621241626
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -6827,9 +6827,9 @@ MonoBehaviour:
   isField: 1
   explosion: {fileID: 3193864383826838676, guid: c8aa708196a029140916b05a1fb82638, type: 3}
   explosionMultiplier: 0
-  maxVibroTimer: 1
   LeftMotor: 0
   RightMotor: 0
+  maxVibroTimer: 1
 --- !u!65 &1316811824
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7139,9 +7139,9 @@ MonoBehaviour:
   isField: 0
   explosion: {fileID: 3193864383826838676, guid: c8aa708196a029140916b05a1fb82638, type: 3}
   explosionMultiplier: 5
-  maxVibroTimer: 2
   LeftMotor: 0.3
   RightMotor: 0.4
+  maxVibroTimer: 2
 --- !u!136 &1389730770
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -10048,7 +10048,7 @@ GameObject:
   - component: {fileID: 1822725655}
   m_Layer: 0
   m_Name: Cube (8)
-  m_TagString: Wall
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11152,9 +11152,9 @@ MonoBehaviour:
   isField: 0
   explosion: {fileID: 3193864383826838676, guid: c8aa708196a029140916b05a1fb82638, type: 3}
   explosionMultiplier: 5
-  maxVibroTimer: 2
   LeftMotor: 0.3
   RightMotor: 0.4
+  maxVibroTimer: 2
 --- !u!136 &1961641643
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -12651,7 +12651,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3719295868642697711, guid: fcb6e82fdff74e148973d4cdb3c79d74, type: 3}
       propertyPath: m_Size.z
-      value: 16.30442
+      value: 18.9
       objectReference: {fileID: 0}
     - target: {fileID: 3719295868642697711, guid: fcb6e82fdff74e148973d4cdb3c79d74, type: 3}
       propertyPath: m_Center.x
@@ -12671,7 +12671,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3719295868688988844, guid: fcb6e82fdff74e148973d4cdb3c79d74, type: 3}
       propertyPath: m_Size.z
-      value: 16.567175
+      value: 18.9
       objectReference: {fileID: 0}
     - target: {fileID: 3719295868688988844, guid: fcb6e82fdff74e148973d4cdb3c79d74, type: 3}
       propertyPath: m_Center.x
@@ -12691,7 +12691,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3719295869308119577, guid: fcb6e82fdff74e148973d4cdb3c79d74, type: 3}
       propertyPath: m_Size.z
-      value: 14.979114
+      value: 18.9
       objectReference: {fileID: 0}
     - target: {fileID: 3719295869308119577, guid: fcb6e82fdff74e148973d4cdb3c79d74, type: 3}
       propertyPath: m_Center.x
@@ -12711,7 +12711,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3719295869360207382, guid: fcb6e82fdff74e148973d4cdb3c79d74, type: 3}
       propertyPath: m_Size.z
-      value: 16.021715
+      value: 18.9
       objectReference: {fileID: 0}
     - target: {fileID: 3719295869360207382, guid: fcb6e82fdff74e148973d4cdb3c79d74, type: 3}
       propertyPath: m_Center.x
@@ -12731,7 +12731,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3719295869987754102, guid: fcb6e82fdff74e148973d4cdb3c79d74, type: 3}
       propertyPath: m_Size.z
-      value: 15.274681
+      value: 18.9
       objectReference: {fileID: 0}
     - target: {fileID: 3719295869987754102, guid: fcb6e82fdff74e148973d4cdb3c79d74, type: 3}
       propertyPath: m_Center.x

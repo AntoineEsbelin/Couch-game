@@ -395,8 +395,14 @@ MonoBehaviour:
   bounceWalled: 0
   timer: 0
   timerCount: 0.1
-  walled: 0
+  canBump: 0
+  hasBumped: 0
+  stillInWall: 0
+  hasBumpedPlayer: 0
+  firstBumpPlayer: 0
   bumpPlayer: 0
+  maxWallStuckTimer: 0.5
+  wallStuckTimer: 0
 --- !u!114 &1966433780568224511
 MonoBehaviour:
   m_ObjectHideFlags: 0
