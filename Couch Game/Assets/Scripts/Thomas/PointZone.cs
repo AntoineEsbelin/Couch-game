@@ -65,6 +65,7 @@ public class PointZone : MonoBehaviour
           {
               if(controller.GetDevice<Gamepad>() == null)return;
               Gamepad gamePad = controller.GetDevice<Gamepad>();
+              
 
               if (gamePad == Gamepad.current)
               {
