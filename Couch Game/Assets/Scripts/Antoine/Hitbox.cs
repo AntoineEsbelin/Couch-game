@@ -39,6 +39,6 @@ public class Hitbox : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireCube(this.GetComponentInChildren<BoxCollider>().gameObject.transform.position, this.GetComponentInChildren<BoxCollider>().size);
+        //Gizmos.DrawWireCube(this.GetComponentInChildren<BoxCollider>().gameObject.transform.position, this.GetComponentInChildren<BoxCollider>().size);
     }
 }

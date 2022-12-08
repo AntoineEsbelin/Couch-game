@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class DeathState : PlayerState
 {
@@ -10,7 +11,7 @@ public class DeathState : PlayerState
     {
         player.GetComponent<CapsuleCollider>().enabled = false;
         player.GetComponent<SphereCollider>().enabled = false;
-        player.GetComponentInChildren<BoxCollider>().enabled = false;
+        //player.GetComponentInChildren<BoxCollider>().enabled = false;
         player.rb.velocity = Vector3.zero;
         player.ResetCharging();
         player.cameraTarget.targets.Remove(player.transform);
@@ -29,13 +30,13 @@ public class DeathState : PlayerState
     public override void UpdateState(PlayerController player)
     {
         if(respawnTime > 0)respawnTime -= Time.deltaTime;
-        else player.stateMachine.SwitchState(player.NormalState);
+        else player.stateMachine.SwitchState(player.NormalState); 
     }
     public override void ExitState(PlayerController player)
     {
         player.GetComponent<CapsuleCollider>().enabled = true;
         player.GetComponent<SphereCollider>().enabled = true;
-        player.GetComponentInChildren<BoxCollider>().enabled = true;
+        //player.GetComponentInChildren<BoxCollider>().enabled = true;
         //visuel on :
         player.cameraTarget.targets.Add(transform);
      //   player.PlayerAnimator.enabled = true;

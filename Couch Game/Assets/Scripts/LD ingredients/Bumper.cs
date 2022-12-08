@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using EZCameraShake;
+using EZVibrations;
 
 public class Bumper : MonoBehaviour
 {
@@ -58,6 +60,7 @@ public class Bumper : MonoBehaviour
     {
         if (col.collider.CompareTag("Player"))
         {
+            Vibrations.Instance.VibrateOnce(0.5f, 0.5f, PlayerInput.GetPlayerByIndex(0), 0.3f);
             player = col.gameObject;
             CameraShaker.Instance.ShakeOnce(1f, 4f, 0.1f, 0.5f);
             playerRb = player.GetComponent<Rigidbody>();
@@ -69,8 +72,10 @@ public class Bumper : MonoBehaviour
             dir.Normalize();
 
             dir = Vector3.Reflect(dir, col.contacts[0].normal);
-            
+
             //timer = maxTimer;
+            playerCtrl.StunState.isKnockBacked = false;
+            playerCtrl.stateMachine.SwitchState(playerCtrl.NormalState);
             playerCtrl.StunState.isKnockBacked = true;
             playerCtrl.StunState.kbSpeed = force;
             playerCtrl.StunState.timerMax = maxTimer;
