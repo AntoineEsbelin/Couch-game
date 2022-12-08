@@ -18,6 +18,12 @@ public class PointZone : MonoBehaviour
     private GameObject followCam;
     public static bool isSettingSuicideOn;
 
+    [Header("Vibration Controller")] 
+    [Range(0.0f,1.0f)]
+    public float LeftMotor;
+    [Range(0.0f,1.0f)]
+    public float RightMotor;
+
     private void Start()
     {
         followCam = GameObject.Find("followCam");
@@ -66,8 +72,12 @@ public class PointZone : MonoBehaviour
                   {
                       VibroTimer -= Time.deltaTime;
                       
-                      gamePad.SetMotorSpeeds(0.5f, 0.5f);
+                      gamePad.SetMotorSpeeds(LeftMotor, RightMotor);
                       
+                  }
+                  else
+                  {
+                      gamePad.SetMotorSpeeds(0f, 0f);
                   }
                   
               }
