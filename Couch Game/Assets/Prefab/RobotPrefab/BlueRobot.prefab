@@ -123,7 +123,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1332821805498488722}
   m_LocalRotation: {x: 0.70710677, y: 0.00035757507, z: -0.00035767801, w: 0.70710665}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -164,7 +164,7 @@ Transform:
   - {fileID: 7105124376161322603}
   m_Father: {fileID: 4247418617852404901}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 29.884668, y: -97.755806, z: -92.14231}
+  m_LocalEulerAnglesHint: {x: 3.513641, y: 179.99644, z: 179.94193}
 --- !u!1 &2170710233462109621
 GameObject:
   m_ObjectHideFlags: 0
@@ -290,7 +290,7 @@ Transform:
   - {fileID: 8794318751115467048}
   m_Father: {fileID: 638486371682638655}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -0.0000043143236, y: -0.000007884806, z: -12.949097}
+  m_LocalEulerAnglesHint: {x: -0.0000043786945, y: -0.000007675323, z: -13.755161}
 --- !u!1 &3897649155897719428
 GameObject:
   m_ObjectHideFlags: 0
@@ -322,7 +322,7 @@ Transform:
   - {fileID: 850125918496328839}
   m_Father: {fileID: 4247418617852404901}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -29.884672, y: 97.75578, z: -92.14227}
+  m_LocalEulerAnglesHint: {x: -3.5136542, y: -179.99643, z: 179.94193}
 --- !u!1 &4624775513608396951
 GameObject:
   m_ObjectHideFlags: 0
@@ -385,7 +385,7 @@ Transform:
   - {fileID: 3409891530860272222}
   m_Father: {fileID: 4247418617852404901}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0.000010129233, y: -0.0000018913421, z: 7.2813888}
+  m_LocalEulerAnglesHint: {x: 0.0000101055075, y: -0.000002014316, z: 6.584958}
 --- !u!1 &6644047269170290159
 GameObject:
   m_ObjectHideFlags: 0
@@ -578,7 +578,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6cb6095fe61ff0544bf9f2a1068ae7ac, type: 2}
+  - {fileID: 2100000, guid: e08f62ac5c2e93946917f7dabac8701e, type: 2}
   - {fileID: 2100000, guid: 3f3cc517744cefc4bacdf2066e3037b3, type: 2}
   - {fileID: 2100000, guid: c87b834ef2d9965499d321b4912fcc7c, type: 2}
   m_StaticBatchInfo:

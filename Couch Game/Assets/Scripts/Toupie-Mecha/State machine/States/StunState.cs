@@ -72,6 +72,8 @@ public class StunState : PlayerState
         }
         if(sfx != null)Destroy(sfx.gameObject);
         player.rb.velocity = Vector3.zero;
+
+        player.NormalState.isKnockbacked = false;
     }
 
     [System.Serializable] public class MovementSettings

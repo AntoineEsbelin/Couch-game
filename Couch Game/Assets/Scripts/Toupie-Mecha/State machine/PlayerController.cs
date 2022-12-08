@@ -89,6 +89,7 @@ public class PlayerController : MonoBehaviour
     private ParticleSystem.MainModule settings;
 
     public AudioSource sfx;
+    public GameObject vfx;
 
     void OnEnable()
     {
@@ -211,8 +212,8 @@ public class PlayerController : MonoBehaviour
                     chargeParticles.SetActive(true);
                     playerAnimator.SetBool("ChargingSpin", true);
                     sfx = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"Spin Charge"], transform.position, AudioManager.instance.soundEffectMixer, false, true);
-                    SpinnerState.vfx = Instantiate(SpinnerState.spinnerVFX, this.transform);
-
+                    GameObject spinnerVFX = Instantiate(SpinnerState.spinnerVFX.spinningVFX, this.transform);
+                    SpinnerState.allSpinnerVFX.Add(spinnerVFX);
                 }
             }
 
@@ -267,7 +268,8 @@ public class PlayerController : MonoBehaviour
 
                 int randomBrake = Random.Range(0, 6);
                 AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"Spin Brake {randomBrake + 1}"], transform.position, AudioManager.instance.soundEffectMixer, true, false);
-                
+                GameObject brakeVFX = Instantiate(SpinnerState.spinnerVFX.brakeVFX, transform);
+                SpinnerState.allSpinnerVFX.Add(brakeVFX);
             }
 
             if (ctx.canceled)
@@ -298,17 +300,22 @@ public class PlayerController : MonoBehaviour
         private void OnCollisionEnter(Collision other)
         {
             
-            // if(other.gameObject.tag == "Wall")
-            // {
-            //     walled = true;
-            //     WallBounce(other);
-            // }
+            if(other.gameObject.tag == "Wall")
+            {
+                walled = true;
+            }
         }
 
         private void OnCollisionExit(Collision other)
         {
             if(other.gameObject.tag != "Wall")return;
             if(walled)walled = false;
+            StartCoroutine(WaitBounceWall());
+        }
+
+        private IEnumerator WaitBounceWall()
+        {
+            yield return new WaitForSeconds(.3f);
             bounceWalled = false;
         }
 
@@ -318,13 +325,12 @@ public class PlayerController : MonoBehaviour
             if((walled || NormalState.isKnockbacked) && !bounceWalled)
             {
                 WallBounce(other);
+            }
+            else if(!walled && bounceWalled)
+            {
+                WallBounce(other);
                 return;
             }
-            if(!walled || !NormalState.isKnockbacked)
-            {
-                walled = true;
-                return;
-            }   
         }
 
         private void WallBounce(Collision other)
@@ -380,19 +386,19 @@ public class PlayerController : MonoBehaviour
         }
         void OnTriggerEnter(Collider other)
         {
-            if (!other.isTrigger) return;
+            if (!other.isTrigger || other.tag == "hitbox") return;
             bumpPlayer = true;
         }
 
         void OnTriggerStay(Collider other)
         {
-            if(!other.isTrigger)return;
+            if(!other.isTrigger || other.tag == "hitbox")return;
             if(bumpPlayer)BumpPlayer(other);
         }
 
         void OnTriggerExit(Collider other)
         {
-            if(!other.isTrigger)return;
+            if(!other.isTrigger || other.tag == "hitbox")return;
             if(bumpPlayer)bumpPlayer = false;
         }
 
@@ -420,6 +426,7 @@ public class PlayerController : MonoBehaviour
                         Instantiate(explosion, this.transform.position, Quaternion.identity);
                         triggerPlayer.StunState.timerMax = triggerPlayer.stunDurationKnockback;
                         triggerPlayer.lastPlayerContacted = this;
+                        triggerPlayer.NormalState.isKnockbacked = true;
                         int randomSpinHitPlayer = Random.Range(0, 7);
                         AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault($"Spin Hit Player {randomSpinHitPlayer + 1}"), transform.position, AudioManager.instance.soundEffectMixer, true, false);
                         //triggerPlayer.SpinnerState.mSettings.moveSpeed = StunState.kbSpeed;
@@ -493,9 +500,10 @@ public class PlayerController : MonoBehaviour
 
         void BounceSpinner()
         {
-            CameraShaker.Instance.ShakeOnce(1f, 4f, 0.1f, 0.5f);
             //Bounce against other player
-            Instantiate(explosion, this.transform.position, Quaternion.identity);
+            //Instantiate(explosion, this.transform.position, Quaternion.identity);
+            Instantiate(SpinnerState.spinnerVFX.SpinerVsSpinerVFX, transform);
+            CameraShaker.Instance.ShakeOnce(1f, 4f, 0.1f, 0.5f);
             //Debug.Log("bounce");
             SpinnerState.moveDir = -SpinnerState.moveDir;
             move = -move;
@@ -515,6 +523,7 @@ public class PlayerController : MonoBehaviour
 
     public void RespawnPlayer()
     {
+        playerAnimator.SetTrigger("Respawn");
         transform.position = GameManager.instance.spawnPoints[playerId - 1].position;
         //capsuleCol.enabled = false;
         sphereCol.enabled = false;

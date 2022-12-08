@@ -5,36 +5,31 @@ using UnityEngine;
 public class Flipper : MonoBehaviour
 {
     public BoxCollider flipperCollider;
-    [Header("Joint")]
-    public float restPos = 0;
-    public float pressPos = 45f;
-    public float hitForce = 1000f;
-    public float flipperDamper = 150f;
 
-    private HingeJoint hingeJoint;
-    private JointSpring spring;
     public Animator _animator;
     public string NameAnim;
     private float timer;
-    
-    
+
+    [Header("Anim Random Start")] 
+    public float minRandom;
+    public float maxRandom;
     
     [Header("Knockback")]
+    public float maxKnockBackTimer;
+    public float KnockbackForce = 25f;
     private Vector3 dir;
     private Vector3 knockback;
-    public float KnockbackForce = 25f;
+    
     private GameObject player;
     private float knockBacktimer;
-    [SerializeField] private float maxKnockBackTimer;
+    
     
     
     void Start()
     {
         flipperCollider = GetComponent<BoxCollider>();
-        _animator = GetComponent<Animator>();
-        hingeJoint = GetComponent<HingeJoint>();
-        hingeJoint.useSpring = true;
-        timer = Random.Range(2, 10);
+        _animator = GetComponentInParent<Animator>();
+        timer = Random.Range(minRandom, maxRandom);
 
     }
 
@@ -42,11 +37,7 @@ public class Flipper : MonoBehaviour
     void Update()
     {
         
-        spring.spring = hitForce;
-        spring.damper = flipperDamper;
         
-        hingeJoint.spring = spring;
-        hingeJoint.useLimits = true;
 
         if (timer < 0 && timer > -1)
         {
@@ -73,7 +64,7 @@ public class Flipper : MonoBehaviour
     {
         _animator.Play(NameAnim, -1, 0f);
         yield return new WaitForSeconds(2f);
-        timer = Random.Range(2, 10);
+        timer = Random.Range(minRandom, maxRandom);
     }
     
     private void OnCollisionEnter(Collision col)

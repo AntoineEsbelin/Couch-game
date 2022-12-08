@@ -10,35 +10,46 @@ using UnityEngine.UI;
 public class MainMenuManager : MonoBehaviour
 {
 
+    [Header("Main Menu")]
     public GameObject MainMenu;
     public GameObject StartButton;
+    
+    [Header("Options")]
     public GameObject optionMenu;
+    public GameObject firstObjectOption;
+    
     [Header("Map Selection")]
     public GameObject MapSelectionMenu;
     public GameObject Map1Button;
-    public GameObject firstObjectOption;
+
+    [Header("Binding Menu")]
+    public GameObject bindingInputMenu;
+    public GameObject firstBinding;
+    
 
     public void MainMenuButton()
     {
-        var eventSystem = EventSystem.current;
-        eventSystem.SetSelectedGameObject(StartButton, new BaseEventData(eventSystem));
         MainMenu.SetActive(true);
+        StartCoroutine(SelectionMenu(StartButton));
     }
     public void OptionButton()
     {
         optionMenu.SetActive(true);
         CloseMenu(MainMenu);
-        var eventSystem = EventSystem.current;
-        eventSystem.SetSelectedGameObject(firstObjectOption, new BaseEventData(eventSystem));
+        StartCoroutine(SelectionMenu(firstObjectOption));
     }
     
     public void MapSelectionButton()
     {
         MapSelectionMenu.SetActive(true);
         CloseMenu(MainMenu);
-        var eventSystem = EventSystem.current;
-        eventSystem.SetSelectedGameObject(Map1Button, new BaseEventData(eventSystem));
-        
+        StartCoroutine(SelectionMenu(Map1Button));
+    }
+    
+    public void BindingMenu()
+    {
+        bindingInputMenu.SetActive(true);
+        CloseMenu(optionMenu);
     }
 
     public void LoadLevel(string name)
@@ -87,5 +98,12 @@ public class MainMenuManager : MonoBehaviour
             }
                 
         }
+    }
+
+    private IEnumerator SelectionMenu(GameObject SelectButton)
+    {
+        yield return new WaitForSeconds(0.1f);
+        var eventSystem = EventSystem.current;
+        eventSystem.SetSelectedGameObject(SelectButton, new BaseEventData(eventSystem));
     }
 }
