@@ -9,23 +9,27 @@ public class Flipper : MonoBehaviour
     public Animator _animator;
     public string NameAnim;
     private float timer;
-    
-    
+
+    [Header("Anim Random Start")] 
+    public float minRandom;
+    public float maxRandom;
     
     [Header("Knockback")]
+    public float maxKnockBackTimer;
+    public float KnockbackForce = 25f;
     private Vector3 dir;
     private Vector3 knockback;
-    public float KnockbackForce = 25f;
+    
     private GameObject player;
     private float knockBacktimer;
-    [SerializeField] private float maxKnockBackTimer;
+    
     
     
     void Start()
     {
         flipperCollider = GetComponent<BoxCollider>();
-        _animator = GetComponent<Animator>();
-        timer = Random.Range(2, 10);
+        _animator = GetComponentInParent<Animator>();
+        timer = Random.Range(minRandom, maxRandom);
 
     }
 
@@ -60,7 +64,7 @@ public class Flipper : MonoBehaviour
     {
         _animator.Play(NameAnim, -1, 0f);
         yield return new WaitForSeconds(2f);
-        timer = Random.Range(2, 10);
+        timer = Random.Range(minRandom, maxRandom);
     }
     
     private void OnCollisionEnter(Collision col)
