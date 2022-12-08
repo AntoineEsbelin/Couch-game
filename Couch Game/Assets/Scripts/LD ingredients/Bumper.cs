@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using EZCameraShake;
 
 public class Bumper : MonoBehaviour
 {
@@ -58,6 +59,7 @@ public class Bumper : MonoBehaviour
         if (col.collider.CompareTag("Player"))
         {
             player = col.gameObject;
+            CameraShaker.Instance.ShakeOnce(1f, 4f, 0.1f, 0.5f);
             playerRb = player.GetComponent<Rigidbody>();
             playerCtrl = player.GetComponent<PlayerController>();
 

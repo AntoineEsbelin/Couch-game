@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using EZCameraShake;
 
 
 public class CounterA : MonoBehaviour
@@ -69,6 +70,7 @@ public class CounterA : MonoBehaviour
              
             if (pm != null && pm.currentState == pm.SpinnerState && pm.invincibilityTimer <= 0)
             {
+                CameraShaker.Instance.ShakeOnce(2f, 4f, 0.1f, 0.5f);
                 pm.StunState.timerMax = spinStun;
                 Debug.Log(forceToApply);
                 pm.timeLastPlayer = pm.maxTimeLastPlayer;
@@ -83,6 +85,7 @@ public class CounterA : MonoBehaviour
             }
             else if (pm != null && pm.currentState == pm.NormalState && pm.invincibilityTimer <= 0)
             {
+                CameraShaker.Instance.ShakeOnce(1f, 4f, 0.1f, 0.5f);
                 pm.StunState.timerMax = normalStun;
                 Debug.Log(SmallForce);
                 pm.timeLastPlayer = pm.maxTimeLastPlayer;

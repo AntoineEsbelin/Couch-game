@@ -129,6 +129,7 @@ public class PointZone : MonoBehaviour
             {
                 deadPlayer.playerPoint -= 1;
                 deadPlayer.UpdateScore(deadPlayer.playerPoint);
+                CheckBestPlayer();
             }
 
         }
@@ -153,6 +154,7 @@ public class PointZone : MonoBehaviour
             }
         }
         
+        GameManager.instance.UpdateRanking();
         for(int i = 0; i < GameManager.instance.allPlayer.Count; i++)
         {
             if(GameManager.instance.allPlayer[i].playerPoint >= playerPoint)

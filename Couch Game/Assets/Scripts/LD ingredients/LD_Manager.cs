@@ -5,18 +5,20 @@ using UnityEngine;
 public class LD_Manager : MonoBehaviour
 {
     [SerializeField] private GameObject[] ldElements;
-    [SerializeField] [Tooltip("Enlève le dernier élement entre chaque timer")] private bool removeElement = true;
-    [Header("DOIT ETRE DE LA MEME TAILLE QUE LD ELEMENT !")]
+    [SerializeField] [Tooltip("Enlève le dernier élement à la fin du dernier timer")] private bool removeElementInTheEnd = true;
+    [Header("DOIT ETRE DE LA MEME TAILLE QUE LD ELEMENT ! \nLe dernier timer est celui avant le destroy potentiel de l'objet")]
     [SerializeField] private float[] elementTimer;
-    [Header("Actual Element & Timer")]
+    [SerializeField] private float startTimer;
+
+    [Header("DEBUG")]
     [SerializeField] private float actualTimer;
     [SerializeField] private int elementActualPos;
     [SerializeField] private GameObject actualElement;
-    private bool elementSpawned = false;
+    private bool elementSpawned = true;
     // Start is called before the first frame update
     private void Start()
     {
-        actualTimer = elementTimer[0];
+        actualTimer = startTimer;
         
     }
 
@@ -29,21 +31,31 @@ public class LD_Manager : MonoBehaviour
 
     private void Element()
     {
-        if(elementActualPos >= ldElements.Length)return;
+        if(elementActualPos > ldElements.Length || !GameManager.instance.gameStarted)return;
         if(!elementSpawned)
         {
-            actualElement = Instantiate(ldElements[elementActualPos], this.transform);
+            int element = Random.Range(0, ldElements.Length);
+            actualElement = Instantiate(ldElements[element], this.transform);
+            Debug.Log("Element Spawned : " + actualElement.name);
             elementSpawned = true;
         }
 
         if(actualTimer > 0)actualTimer -= Time.deltaTime;
         else
         {
-            elementActualPos += 1;
-            if(elementActualPos >= ldElements.Length)return;
-            if(removeElement)Destroy(actualElement);
-            actualTimer = elementTimer[elementActualPos];
+            if(elementActualPos >= ldElements.Length)
+            {
+                if(actualElement != null && removeElementInTheEnd)Destroy(actualElement);
+                return;
+            }
+            else
+            {
+                if(actualElement != null)Destroy(actualElement);
+            }
             elementSpawned = false;
+            //if(elementActualPos >= ldElements.Length)return;
+            actualTimer = elementTimer[elementActualPos];
+            elementActualPos += 1;
         }
     }
 }
