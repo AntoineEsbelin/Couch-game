@@ -11,7 +11,7 @@ public class DeathState : PlayerState
     {
         player.GetComponent<CapsuleCollider>().enabled = false;
         player.GetComponent<SphereCollider>().enabled = false;
-        player.GetComponentInChildren<BoxCollider>().enabled = false;
+        //player.GetComponentInChildren<BoxCollider>().enabled = false;
         player.rb.velocity = Vector3.zero;
         player.ResetCharging();
         player.cameraTarget.targets.Remove(player.transform);
@@ -36,7 +36,7 @@ public class DeathState : PlayerState
     {
         player.GetComponent<CapsuleCollider>().enabled = true;
         player.GetComponent<SphereCollider>().enabled = true;
-        player.GetComponentInChildren<BoxCollider>().enabled = true;
+        //player.GetComponentInChildren<BoxCollider>().enabled = true;
         //visuel on :
         player.cameraTarget.targets.Add(transform);
      //   player.PlayerAnimator.enabled = true;
