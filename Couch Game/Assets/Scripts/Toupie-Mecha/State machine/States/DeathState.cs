@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class DeathState : PlayerState
 {
@@ -29,7 +30,7 @@ public class DeathState : PlayerState
     public override void UpdateState(PlayerController player)
     {
         if(respawnTime > 0)respawnTime -= Time.deltaTime;
-        else player.stateMachine.SwitchState(player.NormalState);
+        else player.stateMachine.SwitchState(player.NormalState); 
     }
     public override void ExitState(PlayerController player)
     {

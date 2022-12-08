@@ -435,6 +435,9 @@ MonoBehaviour:
   playerController: {fileID: 0}
   maxRespawnTime: 3
   respawnTime: 0
+  LeftMotor: 0.5
+  RightMotor: 0.5
+  maxVibroTimer: 0.5
 --- !u!114 &2402394259002358178
 MonoBehaviour:
   m_ObjectHideFlags: 0

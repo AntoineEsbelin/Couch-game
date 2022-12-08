@@ -2852,6 +2852,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b653e059860d4eb4eb8f21ffa6c657ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &555594112 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4251007238508292868, guid: 1d2b799c589184a4aa1e3161983a01a9, type: 3}
+  m_PrefabInstance: {fileID: 4251007239225751355}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &555594115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 555594112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 458b12f966e1a66489f57c43e77e59d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &558368534
 GameObject:
   m_ObjectHideFlags: 0
@@ -5566,7 +5583,9 @@ MonoBehaviour:
   isField: 1
   explosion: {fileID: 3193864383826838676, guid: c8aa708196a029140916b05a1fb82638, type: 3}
   explosionMultiplier: 1
-  maxVibroTimer: 2
+  LeftMotor: 0.5
+  RightMotor: 0.5
+  maxVibroTimer: 0.3
 --- !u!65 &1316811824
 BoxCollider:
   m_ObjectHideFlags: 0

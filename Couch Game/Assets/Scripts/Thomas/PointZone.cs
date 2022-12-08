@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using EZCameraShake;
+using EZVibrations;
 
 public class PointZone : MonoBehaviour
 {
@@ -11,18 +12,18 @@ public class PointZone : MonoBehaviour
     [SerializeField] private bool isField;
     [SerializeField] private GameObject explosion;
     [SerializeField] private int explosionMultiplier = 1;
-
-    private float VibroTimer;
-    [SerializeField] private float maxVibroTimer = 1f;
-    private PlayerInput controller;
     private GameObject followCam;
     public static bool isSettingSuicideOn;
 
+    private PlayerInput controller;
     [Header("Vibration Controller")] 
     [Range(0.0f,1.0f)]
     public float LeftMotor;
     [Range(0.0f,1.0f)]
     public float RightMotor;
+    private float VibroTimer;
+    [SerializeField] private float maxVibroTimer = 1f;
+
 
     private void Start()
     {
@@ -47,6 +48,7 @@ public class PointZone : MonoBehaviour
     {
         if(coll.CompareTag("Player"))
         {
+            Vibrations.Instance.VibrateOnce(0.5f, 0.5f, PlayerInput.GetPlayerByIndex(0), 0.3f);
             CameraShaker.Instance.ShakeOnce(4f, 4f, 0.1f, 1f);
             PlayerController deadPlayer = coll.GetComponentInParent<PlayerController>();
             if(!isField || deadPlayer.currentState == deadPlayer.DeathState)return;
@@ -60,7 +62,7 @@ public class PointZone : MonoBehaviour
 
     private void Update()
     {
-          //controller vibration
+          /*//controller vibration
           if (controller != null)
           {
               if(controller.GetDevice<Gamepad>() == null)return;
@@ -81,16 +83,15 @@ public class PointZone : MonoBehaviour
                   }
                   
               }
-          }
+          }*/
         
     }
 
 
     private void DispawnPlayer(PlayerController deadPlayer)
     {
-        if(deadPlayer.currentState == deadPlayer.DeathState)return;
+        if (deadPlayer.currentState == deadPlayer.DeathState)return;
         deadPlayer.timeMultiplier = deadPlayer.maxtimeMultiplier + deadPlayer.DeathState.respawnTime;
-        VibroTimer = maxVibroTimer; 
         AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("Goal"), this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
         
         if(deadPlayer.lastPlayerContacted != null)
