@@ -2037,7 +2037,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efea2efe781b13443aa5d40b703f8a4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointGiven: 1
+  pointGiven: 25
+  pointRemoved: 5
   isField: 0
   explosion: {fileID: 3193864383826838676, guid: c8aa708196a029140916b05a1fb82638, type: 3}
   explosionMultiplier: 5
@@ -2103,7 +2104,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efea2efe781b13443aa5d40b703f8a4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointGiven: 1
+  pointGiven: 25
+  pointRemoved: 5
   isField: 0
   explosion: {fileID: 3193864383826838676, guid: c8aa708196a029140916b05a1fb82638, type: 3}
   explosionMultiplier: 5
@@ -3588,7 +3590,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efea2efe781b13443aa5d40b703f8a4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointGiven: 1
+  pointGiven: 25
+  pointRemoved: 5
   isField: 0
   explosion: {fileID: 3193864383826838676, guid: c8aa708196a029140916b05a1fb82638, type: 3}
   explosionMultiplier: 5
@@ -3738,7 +3741,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efea2efe781b13443aa5d40b703f8a4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointGiven: 1
+  pointGiven: 25
+  pointRemoved: 5
   isField: 0
   explosion: {fileID: 3193864383826838676, guid: c8aa708196a029140916b05a1fb82638, type: 3}
   explosionMultiplier: 5
@@ -6824,6 +6828,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pointGiven: 0
+  pointRemoved: 5
   isField: 1
   explosion: {fileID: 3193864383826838676, guid: c8aa708196a029140916b05a1fb82638, type: 3}
   explosionMultiplier: 0
@@ -7135,7 +7140,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efea2efe781b13443aa5d40b703f8a4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointGiven: 1
+  pointGiven: 25
+  pointRemoved: 5
   isField: 0
   explosion: {fileID: 3193864383826838676, guid: c8aa708196a029140916b05a1fb82638, type: 3}
   explosionMultiplier: 5
@@ -11148,7 +11154,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efea2efe781b13443aa5d40b703f8a4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointGiven: 1
+  pointGiven: 25
+  pointRemoved: 5
   isField: 0
   explosion: {fileID: 3193864383826838676, guid: c8aa708196a029140916b05a1fb82638, type: 3}
   explosionMultiplier: 5

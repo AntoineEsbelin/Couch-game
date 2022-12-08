@@ -6,19 +6,20 @@ public class SpinnerState : PlayerState
 {
     private AudioSource audioSource;
     
-    [Header("VFX")]
+    [Header("FX")]
     public List<GameObject> allSpinnerVFX;
+    public List<AudioSource> allSpinnerSFX;
 
     [System.Serializable]
-    public class listedVFX
+    public class listedFX
     {
         public GameObject spinningVFX;
         public GameObject brakeVFX;
-        public GameObject SpinerVsSpinerVFX;
+        public GameObject spinerVsSpinerVFX;
     }
 
     [Header("All VFX for spinner")]
-    public listedVFX spinnerVFX;
+    public listedFX spinnerFX;
 
 
     public override void EnterState(PlayerController player)
@@ -118,19 +119,32 @@ public class SpinnerState : PlayerState
         mSettings.brakeSpeed = 1f;
         playerController.PlayerAnimator.SetBool("IsSpinning", false);
         playerController.spinningAnim.SetRotate(false);
-        RemoveAllSpinnerVFX();
+        RemoveAllSpinnerFX();
         playerController.trailRenderer.enabled = false;
         Destroy(audioSource.gameObject);
     }
 
-    public void RemoveAllSpinnerVFX()
+    public void RemoveAllSpinnerFX()
     {
-        GameObject tempVFX;
+        GameObject tempFX;
+
         for(int i = 0; i < allSpinnerVFX.Count;)
         {
-            tempVFX = allSpinnerVFX[i];
+            tempFX = allSpinnerVFX[i];
             allSpinnerVFX.RemoveAt(i);
-            Destroy(tempVFX);
+            Destroy(tempFX);
+        }
+
+        for(int i = 0; i < allSpinnerSFX.Count;)
+        {
+            if(allSpinnerSFX[i] == null)
+            {
+                allSpinnerSFX.RemoveAt(i);
+                continue;
+            }
+            tempFX = allSpinnerSFX[i].gameObject;
+            allSpinnerSFX.RemoveAt(i);
+            Destroy(tempFX.gameObject);
         }
     }
 }

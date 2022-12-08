@@ -7,8 +7,11 @@ using EZVibrations;
 
 public class PointZone : MonoBehaviour
 {
-    
-    [SerializeField] private int pointGiven;
+    [Header("Point gagné quand marquage")]
+    [SerializeField] private int pointGiven = 25;
+
+    [Header("Point perdu quand suicide")]
+    [SerializeField] private int pointRemoved = 5;
     [SerializeField] private bool isField;
     [SerializeField] private GameObject explosion;
     [SerializeField] private int explosionMultiplier = 1;
@@ -128,7 +131,7 @@ public class PointZone : MonoBehaviour
             Debug.Log($"{deadPlayer.name} SUICIDED !");
             if (isSettingSuicideOn)
             {
-                deadPlayer.playerPoint -= 1;
+                deadPlayer.playerPoint -= pointRemoved;
                 deadPlayer.UpdateScore(deadPlayer.playerPoint);
                 CheckBestPlayer();
             }
