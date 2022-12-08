@@ -69,8 +69,10 @@ public class Bumper : MonoBehaviour
             dir.Normalize();
 
             dir = Vector3.Reflect(dir, col.contacts[0].normal);
-            
+
             //timer = maxTimer;
+            playerCtrl.StunState.isKnockBacked = false;
+            playerCtrl.stateMachine.SwitchState(playerCtrl.NormalState);
             playerCtrl.StunState.isKnockBacked = true;
             playerCtrl.StunState.kbSpeed = force;
             playerCtrl.StunState.timerMax = maxTimer;
