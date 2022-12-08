@@ -2042,6 +2042,8 @@ MonoBehaviour:
   explosion: {fileID: 3193864383826838676, guid: c8aa708196a029140916b05a1fb82638, type: 3}
   explosionMultiplier: 5
   maxVibroTimer: 2
+  LeftMotor: 0.3
+  RightMotor: 0.4
 --- !u!136 &367022723
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2106,6 +2108,8 @@ MonoBehaviour:
   explosion: {fileID: 3193864383826838676, guid: c8aa708196a029140916b05a1fb82638, type: 3}
   explosionMultiplier: 5
   maxVibroTimer: 2
+  LeftMotor: 0.3
+  RightMotor: 0.4
 --- !u!136 &377751227
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3589,6 +3593,8 @@ MonoBehaviour:
   explosion: {fileID: 3193864383826838676, guid: c8aa708196a029140916b05a1fb82638, type: 3}
   explosionMultiplier: 5
   maxVibroTimer: 2
+  LeftMotor: 0.3
+  RightMotor: 0.4
 --- !u!136 &593961365
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3737,6 +3743,8 @@ MonoBehaviour:
   explosion: {fileID: 3193864383826838676, guid: c8aa708196a029140916b05a1fb82638, type: 3}
   explosionMultiplier: 5
   maxVibroTimer: 2
+  LeftMotor: 0.3
+  RightMotor: 0.4
 --- !u!136 &621241626
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -6819,7 +6827,9 @@ MonoBehaviour:
   isField: 1
   explosion: {fileID: 3193864383826838676, guid: c8aa708196a029140916b05a1fb82638, type: 3}
   explosionMultiplier: 0
-  maxVibroTimer: 2
+  maxVibroTimer: 1
+  LeftMotor: 0
+  RightMotor: 0
 --- !u!65 &1316811824
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7130,6 +7140,8 @@ MonoBehaviour:
   explosion: {fileID: 3193864383826838676, guid: c8aa708196a029140916b05a1fb82638, type: 3}
   explosionMultiplier: 5
   maxVibroTimer: 2
+  LeftMotor: 0.3
+  RightMotor: 0.4
 --- !u!136 &1389730770
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -11141,6 +11153,8 @@ MonoBehaviour:
   explosion: {fileID: 3193864383826838676, guid: c8aa708196a029140916b05a1fb82638, type: 3}
   explosionMultiplier: 5
   maxVibroTimer: 2
+  LeftMotor: 0.3
+  RightMotor: 0.4
 --- !u!136 &1961641643
 CapsuleCollider:
   m_ObjectHideFlags: 0
