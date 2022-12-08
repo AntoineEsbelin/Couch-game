@@ -1373,8 +1373,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 259265396}
+  - component: {fileID: 259265397}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: FlipperParent
   m_TagString: Untagged
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -1387,15 +1388,35 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 259265395}
-  m_LocalRotation: {x: -0, y: -0.089843884, z: -0, w: 0.99595594}
-  m_LocalPosition: {x: -0.89999866, y: 0.9400101, z: -51.3}
+  m_LocalRotation: {x: 0, y: -0.38268343, z: 0, w: 0.92387956}
+  m_LocalPosition: {x: 0, y: 0, z: -51.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1687899546}
   m_Father: {fileID: 1034312847}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -45, z: 0}
+--- !u!95 &259265397
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 259265395}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d80284c00f07f784d8b3c1d64ec750b7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &300153593 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7301882346637337067, guid: e9a0d32dbeb8248438ff44f19021b464, type: 3}
@@ -4664,12 +4685,12 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 259265396}
+  - {fileID: 1316811822}
   - {fileID: 626341254}
   - {fileID: 2056443009}
   - {fileID: 863270242}
-  - {fileID: 1316811822}
-  - {fileID: 1081553912}
   - {fileID: 1293774248}
+  - {fileID: 1081553912}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5227,7 +5248,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1034312847}
-  m_RootOrder: 4
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1316811823
 MonoBehaviour:
@@ -6640,15 +6661,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7832659003151724488, guid: dbab35e9cfe1684448c0f0c8cca1b8a6, type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: -14.564556
+      value: -11.450654
       objectReference: {fileID: 0}
     - target: {fileID: 7832659003151724488, guid: dbab35e9cfe1684448c0f0c8cca1b8a6, type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: -62.28781
+      value: -67
       objectReference: {fileID: 0}
     - target: {fileID: 7832659003151724488, guid: dbab35e9cfe1684448c0f0c8cca1b8a6, type: 3}
       propertyPath: m_ConnectedAnchor.z
-      value: 17.611954
+      value: 17.614304
       objectReference: {fileID: 0}
     - target: {fileID: 7832659003151724494, guid: dbab35e9cfe1684448c0f0c8cca1b8a6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6904,11 +6925,8 @@ GameObject:
   - component: {fileID: 1687899546}
   - component: {fileID: 1687899553}
   - component: {fileID: 1687899552}
-  - component: {fileID: 1687899551}
-  - component: {fileID: 1687899550}
   - component: {fileID: 1687899549}
   - component: {fileID: 1687899548}
-  - component: {fileID: 1687899547}
   m_Layer: 14
   m_Name: FlipperTest
   m_TagString: Untagged
@@ -6924,7 +6942,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1687899545}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.45, y: 0, z: -0.67}
+  m_LocalPosition: {x: -4.71, y: 0, z: 0.16}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6933,26 +6951,6 @@ Transform:
   m_Father: {fileID: 259265396}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -61.812, z: 0}
---- !u!95 &1687899547
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1687899545}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 6fd513a36f873324d82f008c908b4597, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &1687899548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6966,11 +6964,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flipperCollider: {fileID: 1687899549}
-  restPos: 0
-  pressPos: 45
-  hitForce: 10000
-  flipperDamper: 25
-  _animator: {fileID: 1687899547}
+  _animator: {fileID: 259265397}
   NameAnim: Base Layer.FlipperR
   KnockbackForce: 1000
   maxKnockBackTimer: 3
@@ -6987,58 +6981,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 11.929815, y: 1.8213878, z: 2.2838209}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!59 &1687899550
-HingeJoint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1687899545}
-  m_ConnectedBody: {fileID: 0}
-  m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 4.78, y: 0, z: -0.24}
-  m_Axis: {x: 0, y: 1, z: 0}
-  m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 16.545784, y: -66.96, z: 17.688156}
-  m_UseSpring: 0
-  m_Spring:
-    spring: 0
-    damper: 0
-    targetPosition: 0
-  m_UseMotor: 0
-  m_Motor:
-    targetVelocity: 0
-    force: 0
-    freeSpin: 0
-  m_UseLimits: 1
-  m_Limits:
-    min: 0
-    max: 45
-    bounciness: 0
-    bounceMinVelocity: 0.2
-    contactDistance: 0
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_EnableCollision: 0
-  m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
---- !u!54 &1687899551
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1687899545}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 1
 --- !u!23 &1687899552
 MeshRenderer:
   m_ObjectHideFlags: 0

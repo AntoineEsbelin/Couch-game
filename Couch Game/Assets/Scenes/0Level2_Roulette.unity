@@ -7118,6 +7118,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1388495278}
   m_CullTransparentMesh: 1
+--- !u!114 &1445775099 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 712234894296825897, guid: 14b5faa7b68b27c49814921cf3e3d0eb, type: 3}
+  m_PrefabInstance: {fileID: 1697411540}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1466981241
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8322,6 +8333,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3754111866328180711, guid: 14b5faa7b68b27c49814921cf3e3d0eb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6064497094890925421, guid: 14b5faa7b68b27c49814921cf3e3d0eb, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 60.054016
@@ -8633,6 +8648,14 @@ PrefabInstance:
     - target: {fileID: 6064497096678937783, guid: 14b5faa7b68b27c49814921cf3e3d0eb, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -0.00036621094
+      objectReference: {fileID: 0}
+    - target: {fileID: 7722534425934342580, guid: 14b5faa7b68b27c49814921cf3e3d0eb, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7722534425934342580, guid: 14b5faa7b68b27c49814921cf3e3d0eb, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8672431161065789628, guid: 14b5faa7b68b27c49814921cf3e3d0eb, type: 3}
       propertyPath: m_text
@@ -10094,6 +10117,10 @@ PrefabInstance:
       propertyPath: playersRoom
       value: 
       objectReference: {fileID: 1858310164}
+    - target: {fileID: 1896850882735031343, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
+      propertyPath: startSlider
+      value: 
+      objectReference: {fileID: 1445775099}
     - target: {fileID: 1896850882735031343, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
       propertyPath: gameTimer.maxTimer
       value: 180

@@ -5,14 +5,7 @@ using UnityEngine;
 public class Flipper : MonoBehaviour
 {
     public BoxCollider flipperCollider;
-    [Header("Joint")]
-    public float restPos = 0;
-    public float pressPos = 45f;
-    public float hitForce = 1000f;
-    public float flipperDamper = 150f;
 
-    private HingeJoint hingeJoint;
-    private JointSpring spring;
     public Animator _animator;
     public string NameAnim;
     private float timer;
@@ -32,8 +25,6 @@ public class Flipper : MonoBehaviour
     {
         flipperCollider = GetComponent<BoxCollider>();
         _animator = GetComponent<Animator>();
-        hingeJoint = GetComponent<HingeJoint>();
-        hingeJoint.useSpring = true;
         timer = Random.Range(2, 10);
 
     }
@@ -42,11 +33,7 @@ public class Flipper : MonoBehaviour
     void Update()
     {
         
-        spring.spring = hitForce;
-        spring.damper = flipperDamper;
         
-        hingeJoint.spring = spring;
-        hingeJoint.useLimits = true;
 
         if (timer < 0 && timer > -1)
         {
