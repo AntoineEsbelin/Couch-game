@@ -9,7 +9,8 @@ public class PlayerUIPanel : MonoBehaviour
 {
     public TextMeshProUGUI playerScore;
     public PlayerController players;
-    
+    public Sprite[] playerScoreIMG;
+    public Image playerIMG;
 
     public void AssignPlayer(int index)
     {

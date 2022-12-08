@@ -2178,7 +2178,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1d83808eb5d557648b753067dd9a7a5d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 98e02a0e4006f024a97af90e2b92a835, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2254,7 +2254,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 07be43ffc41597042817425ea85cad2d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1ac2110a7f55fb548bf69827523b2c82, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2482,6 +2482,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerScore: {fileID: 6064497094890925422}
   players: {fileID: 0}
+  playerScoreIMG:
+  - {fileID: 21300000, guid: 6af4fd325d80fdb4c918a766aa02418f, type: 3}
+  - {fileID: 21300000, guid: 1ac2110a7f55fb548bf69827523b2c82, type: 3}
+  - {fileID: 21300000, guid: af9f7432694f7f24e973c0086b1dfef7, type: 3}
+  - {fileID: 21300000, guid: 4af2c3c0ba9bc144e86816a0bd236427, type: 3}
+  playerIMG: {fileID: 6064497095487829064}
 --- !u!1 &6064497095564860984
 GameObject:
   m_ObjectHideFlags: 0
@@ -2548,7 +2554,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2ef6e2a198c96d148a71e654d182eb5e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a38aff92cc6ff304e82125792732bd57, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2651,6 +2657,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerScore: {fileID: 6064497096678937784}
   players: {fileID: 0}
+  playerScoreIMG:
+  - {fileID: 21300000, guid: e07321d6c58a694489b76d47474dc669, type: 3}
+  - {fileID: 21300000, guid: a38aff92cc6ff304e82125792732bd57, type: 3}
+  - {fileID: 21300000, guid: d3899e0390eb42d44895a9e439e5b6fe, type: 3}
+  - {fileID: 21300000, guid: b6171879e65d7d34787504df73593c03, type: 3}
+  playerIMG: {fileID: 6064497095564860986}
 --- !u!1 &6064497095693972746
 GameObject:
   m_ObjectHideFlags: 0
@@ -2717,7 +2729,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 22ceb2611e8fcbd4e976028fb7b90379, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c42a52c1e11c9344c957fd75cff52c97, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2820,6 +2832,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerScore: {fileID: 6064497095088450813}
   players: {fileID: 0}
+  playerScoreIMG:
+  - {fileID: 21300000, guid: 8be8ca2b92a1ceb40a219e5de3b9da73, type: 3}
+  - {fileID: 21300000, guid: 98e02a0e4006f024a97af90e2b92a835, type: 3}
+  - {fileID: 21300000, guid: 32026d1d80f98164283eab3ed3ed3e6b, type: 3}
+  - {fileID: 21300000, guid: d6bdcbd292e08674997b6c89b204fbca, type: 3}
+  playerIMG: {fileID: 6064497095208473467}
 --- !u!1 &6064497096345451289
 GameObject:
   m_ObjectHideFlags: 0
@@ -2913,6 +2931,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerScore: {fileID: 6064497095183119956}
   players: {fileID: 0}
+  playerScoreIMG:
+  - {fileID: 21300000, guid: 230641c36591c9c49a6353fe6001a0a7, type: 3}
+  - {fileID: 21300000, guid: c42a52c1e11c9344c957fd75cff52c97, type: 3}
+  - {fileID: 21300000, guid: 98bf7c7d566251c47a3766ef0875741e, type: 3}
+  - {fileID: 21300000, guid: 06396adf0248f9b4eb9318f5c86ac469, type: 3}
+  playerIMG: {fileID: 6064497095693972748}
 --- !u!1 &6064497096678937782
 GameObject:
   m_ObjectHideFlags: 0

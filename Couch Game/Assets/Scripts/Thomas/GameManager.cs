@@ -11,8 +11,10 @@ public class GameManager : MonoBehaviour
     public Slider startSlider;
     
     public List<TextMeshProUGUI> playerRoomUI;
+    public PlayerUIPanel[] playerUIPanels;
     public GameObject playersRoom;
     public List<PlayerController> allPlayer;
+    [SerializeField] private List<PlayerController> playerRanking;
     public List<PlayerInput> playersList = new List<PlayerInput>();
 
     public static GameManager instance;
@@ -319,6 +321,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(length);
         ost = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("OST"), transform.position, AudioManager.instance.ostMixer, false, false);
         gameStarted = true;
+        playerRanking = allPlayer;
         gameTimer.drawTimer = false;
     }
 
@@ -358,6 +361,33 @@ public class GameManager : MonoBehaviour
         for(int i = 0; i < allCrowd.Length; i++)
         {
             StartCoroutine(allCrowd[i].CrowdCheer());
+        }
+    }
+
+    public void UpdateRanking()
+    {
+        //tri le ranking
+        for(int i = 1; i < playerRanking.Count; ++i)
+        {
+            PlayerController tempPlayer = playerRanking[i];
+            int j = i - 1;
+            while(j >= 0 && playerRanking[j].playerPoint < tempPlayer.playerPoint)
+            {
+                playerRanking[j + 1] = playerRanking[j];
+                j--;
+            }
+            playerRanking[j + 1] = tempPlayer;
+        }
+
+        //1er du ranking
+        PlayerUIPanel playerUI = playerUIPanels[playerRanking[0].playerId - 1];
+        playerUI.playerIMG.sprite = playerUI.playerScoreIMG[0];
+        for(int i = 1; i < playerRanking.Count; i++)
+        {
+            int j = i;
+            playerUI = playerUIPanels[playerRanking[j].playerId - 1];
+            if(playerRanking[i].playerPoint > playerRanking[i - 1].playerPoint) j -= 1;
+            playerUI.playerIMG.sprite = playerUI.playerScoreIMG[j];
         }
     }
 }
