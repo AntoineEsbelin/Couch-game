@@ -13,7 +13,7 @@ public class PointZone : MonoBehaviour
     [SerializeField] private int explosionMultiplier = 1;
 
     private float VibroTimer;
-    [SerializeField] private float maxVibroTimer = 2f;
+    [SerializeField] private float maxVibroTimer = 1f;
     private PlayerInput controller;
     private GameObject followCam;
     public static bool isSettingSuicideOn;
@@ -52,26 +52,26 @@ public class PointZone : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        //controller vibration
-        /*if (controller != null)
-        {
-            if(controller.GetDevice<Gamepad>() == null)return;
-            Gamepad gamePad = controller.GetDevice<Gamepad>();
+          //controller vibration
+          if (controller != null)
+          {
+              if(controller.GetDevice<Gamepad>() == null)return;
+              Gamepad gamePad = controller.GetDevice<Gamepad>();
 
-            if (gamePad == Gamepad.current)
-            {
-                if (VibroTimer > 0)
-                {
-                    VibroTimer -= Time.deltaTime;
-                    
-                    gamePad.SetMotorSpeeds(0.5f, 1.5f);
-                    
-                }
-                
-            }
-        }*/
+              if (gamePad == Gamepad.current)
+              {
+                  if (VibroTimer > 0)
+                  {
+                      VibroTimer -= Time.deltaTime;
+                      
+                      gamePad.SetMotorSpeeds(0.5f, 0.5f);
+                      
+                  }
+                  
+              }
+          }
         
     }
 
@@ -80,7 +80,7 @@ public class PointZone : MonoBehaviour
     {
         if(deadPlayer.currentState == deadPlayer.DeathState)return;
         deadPlayer.timeMultiplier = deadPlayer.maxtimeMultiplier + deadPlayer.DeathState.respawnTime;
-        //VibroTimer = maxVibroTimer; 
+        VibroTimer = maxVibroTimer; 
         AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("Goal"), this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
         
         if(deadPlayer.lastPlayerContacted != null)
