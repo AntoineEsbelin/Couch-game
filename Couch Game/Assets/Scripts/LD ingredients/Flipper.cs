@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using EZCameraShake;
 
 public class Flipper : MonoBehaviour
 {
@@ -71,6 +72,7 @@ public class Flipper : MonoBehaviour
     {
         if (col.collider.CompareTag("Player") && flipperCollider.enabled)
         {
+            CameraShaker.Instance.ShakeOnce(1f, 4f, 0.1f, 0.5f);
             player = col.gameObject;
             
             dir = -col.contacts[0].normal;
