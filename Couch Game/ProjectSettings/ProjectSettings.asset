@@ -40,26 +40,10 @@ PlayerSettings:
     width: 1
     height: 1
   m_SplashScreenLogos:
+  - logo: {fileID: 21300000, guid: e340e172640b82a4d9defeccb6f5d553, type: 3}
+    duration: 2
   - logo: {fileID: 10404, guid: 0000000000000000e000000000000000, type: 0}
     duration: 2
-  - logo: {fileID: 21300000, guid: 098e72ffd65ce3b48a98947b6aca2568, type: 3}
-    duration: 2
-  - logo: {fileID: 21300000, guid: 997d16181d9d5374f86583cc92e88847, type: 3}
-    duration: 2
-  - logo: {fileID: 21300000, guid: 6e0224c820e6f5d4ba4168d7fb32dc37, type: 3}
-    duration: 2
-  - logo: {fileID: 21300000, guid: 0a941ba9f43d19f438a2b4b61d1fc386, type: 3}
-    duration: 2
-  - logo: {fileID: 21300000, guid: 722d85f56e909ba428ac1d5d89577a12, type: 3}
-    duration: 2
-  - logo: {fileID: 21300000, guid: 1db5188d2ea84464b9897872c3ec896b, type: 3}
-    duration: 2
-  - logo: {fileID: 21300000, guid: e70bdec33a3794847bb6339cb61b4119, type: 3}
-    duration: 2
-  - logo: {fileID: 21300000, guid: 490b378f166cdf2478ea731ee99b1627, type: 3}
-    duration: 2
-  - logo: {fileID: 21300000, guid: 4d80f1edf6accd64f96b9f1fa3900262, type: 3}
-    duration: 3
   m_VirtualRealitySplashScreen: {fileID: 0}
   m_HolographicTrackingLossScreen: {fileID: 0}
   defaultScreenWidth: 1920

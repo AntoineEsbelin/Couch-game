@@ -300,17 +300,22 @@ public class PlayerController : MonoBehaviour
         private void OnCollisionEnter(Collision other)
         {
             
-            // if(other.gameObject.tag == "Wall")
-            // {
-            //     walled = true;
-            //     WallBounce(other);
-            // }
+            if(other.gameObject.tag == "Wall")
+            {
+                walled = true;
+            }
         }
 
         private void OnCollisionExit(Collision other)
         {
             if(other.gameObject.tag != "Wall")return;
             if(walled)walled = false;
+            StartCoroutine(WaitBounceWall());
+        }
+
+        private IEnumerator WaitBounceWall()
+        {
+            yield return new WaitForSeconds(.3f);
             bounceWalled = false;
         }
 
@@ -320,13 +325,12 @@ public class PlayerController : MonoBehaviour
             if((walled || NormalState.isKnockbacked) && !bounceWalled)
             {
                 WallBounce(other);
+            }
+            else if(!walled && bounceWalled)
+            {
+                WallBounce(other);
                 return;
             }
-            if(!walled || !NormalState.isKnockbacked)
-            {
-                walled = true;
-                return;
-            }   
         }
 
         private void WallBounce(Collision other)
@@ -382,19 +386,19 @@ public class PlayerController : MonoBehaviour
         }
         void OnTriggerEnter(Collider other)
         {
-            if (!other.isTrigger) return;
+            if (!other.isTrigger || other.tag == "hitbox") return;
             bumpPlayer = true;
         }
 
         void OnTriggerStay(Collider other)
         {
-            if(!other.isTrigger)return;
+            if(!other.isTrigger || other.tag == "hitbox")return;
             if(bumpPlayer)BumpPlayer(other);
         }
 
         void OnTriggerExit(Collider other)
         {
-            if(!other.isTrigger)return;
+            if(!other.isTrigger || other.tag == "hitbox")return;
             if(bumpPlayer)bumpPlayer = false;
         }
 
@@ -422,6 +426,7 @@ public class PlayerController : MonoBehaviour
                         Instantiate(explosion, this.transform.position, Quaternion.identity);
                         triggerPlayer.StunState.timerMax = triggerPlayer.stunDurationKnockback;
                         triggerPlayer.lastPlayerContacted = this;
+                        triggerPlayer.NormalState.isKnockbacked = true;
                         int randomSpinHitPlayer = Random.Range(0, 7);
                         AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault($"Spin Hit Player {randomSpinHitPlayer + 1}"), transform.position, AudioManager.instance.soundEffectMixer, true, false);
                         //triggerPlayer.SpinnerState.mSettings.moveSpeed = StunState.kbSpeed;
