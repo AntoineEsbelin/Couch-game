@@ -5,14 +5,16 @@ using UnityEngine;
 public class LD_Manager : MonoBehaviour
 {
     [SerializeField] private GameObject[] ldElements;
-    [SerializeField] [Tooltip("Enlève le dernier élement entre chaque timer")] private bool removeElement = true;
+    [SerializeField] [Tooltip("Enlève le dernier élement à la fin du dernier timer")] private bool removeElementInTheEnd = true;
     [Header("DOIT ETRE DE LA MEME TAILLE QUE LD ELEMENT !")]
     [SerializeField] private float[] elementTimer;
     [Header("Actual Element & Timer")]
+
+    [Header("DEBUG")]
     [SerializeField] private float actualTimer;
     [SerializeField] private int elementActualPos;
     [SerializeField] private GameObject actualElement;
-    private bool elementSpawned = false;
+    private bool elementSpawned = true;
     // Start is called before the first frame update
     private void Start()
     {
@@ -29,10 +31,11 @@ public class LD_Manager : MonoBehaviour
 
     private void Element()
     {
-        if(elementActualPos >= ldElements.Length)return;
+        if(elementActualPos > ldElements.Length || !GameManager.instance.gameStarted)return;
         if(!elementSpawned)
         {
-            actualElement = Instantiate(ldElements[elementActualPos], this.transform);
+            int element = Random.Range(0, ldElements.Length);
+            actualElement = Instantiate(ldElements[element], this.transform);
             elementSpawned = true;
         }
 
@@ -40,8 +43,15 @@ public class LD_Manager : MonoBehaviour
         else
         {
             elementActualPos += 1;
-            if(elementActualPos >= ldElements.Length)return;
-            if(removeElement)Destroy(actualElement);
+            if(elementActualPos >= ldElements.Length)
+            {
+                if(actualElement != null && removeElementInTheEnd)Destroy(actualElement);
+                return;
+            }
+            else
+            {
+                if(actualElement != null)Destroy(actualElement);
+            }
             actualTimer = elementTimer[elementActualPos];
             elementSpawned = false;
         }
