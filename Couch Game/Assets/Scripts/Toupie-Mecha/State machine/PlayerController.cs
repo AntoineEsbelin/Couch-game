@@ -459,7 +459,7 @@ public class PlayerController : MonoBehaviour
                 PlayerController triggerPlayer = other.GetComponentInParent<PlayerController>();
 
                 triggerPlayer.lastPlayerContacted = this;
-                triggerPlayer.timeLastPlayer = 0.5f;
+                triggerPlayer.timeLastPlayer = 0.1f;
                 if (currentState == SpinnerState)
                 {
                     CameraShaker.Instance.ShakeOnce(1f, 4f, 0.1f, 0.5f);
