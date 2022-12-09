@@ -592,9 +592,7 @@ public class PlayerController : MonoBehaviour
     public IEnumerator Scoring(int value, float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
-        Debug.Log(value);
-        Debug.Log(playerPoint);
-        int score = playerPoint - 25; //a regler
+        int score = playerPoint - value;
         while(score != playerPoint)
         {
             //Debug.Log(score);
@@ -653,8 +651,8 @@ public class PlayerController : MonoBehaviour
     }
 
     //A enlever après prod
-    public void OnRetourMenu()
+    public void OnRechargeGame()
     {
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

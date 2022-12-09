@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
-using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -16,7 +15,6 @@ public class GameManager : MonoBehaviour
     public List<Image> playerIcon;
     public List<Sprite> playerIconOff;
     public List<Sprite> playerIconOn;
-    public GameObject ControlDisplay;
 
     [Space(5)]
     public PlayerUIPanel[] playerUIPanels;
@@ -119,8 +117,6 @@ public class GameManager : MonoBehaviour
     }
     private void Awake()
     {
-        StartCoroutine(SelectionMenu(ControlDisplay));
-        
         if(instance != null)Destroy(gameObject);
         instance = this;
         
@@ -133,7 +129,6 @@ public class GameManager : MonoBehaviour
         StartAction.Enable();
         StartAction.performed += ctx => StartGame();
     }
-    
     
     private void OnDisable()
     {
@@ -180,8 +175,6 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        var eventSystem = EventSystem.current;
-        eventSystem.SetSelectedGameObject(ControlDisplay, new BaseEventData(eventSystem));
         
         gameTimer.timer = gameTimer.maxTimer;
         gameStarted = false;
@@ -204,6 +197,8 @@ public class GameManager : MonoBehaviour
         }
 
         if(gameTimer.drawTimer || !gameStarted)return;
+        if(Input.GetKey(KeyCode.Alpha1))ChangingMap(1);
+        if(Input.GetKey(KeyCode.Alpha2))ChangingMap(2);
     }
     
 
@@ -268,7 +263,7 @@ public class GameManager : MonoBehaviour
                 }
                 else
                 {
-                    PlayerWin(playerRanking[0]);
+                    PlayerWin(playerMaxPoint);
                 }
             }
         }
@@ -406,15 +401,5 @@ public class GameManager : MonoBehaviour
             playerUI.playerIMG.sprite = playerUI.playerScoreIMG[j];
         }
     }
-
-    public void DisableControlDisplay(GameObject child)
-    {
-        child.transform.parent.gameObject.SetActive(false);
-    }
     
-    private IEnumerator SelectionMenu(GameObject SelectButton)
-    {
-        yield return new WaitForSeconds(0.5f);
-        
-    }
 }

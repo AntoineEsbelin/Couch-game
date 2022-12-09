@@ -225,7 +225,7 @@ MonoBehaviour:
   - audioName: Goal
     audio: {fileID: 8300000, guid: 6594efde3d3198f4ba6e15a19adb2c21, type: 3}
   - audioName: OST
-    audio: {fileID: 8300000, guid: 0c9373f9579696e47a5116c53d42a855, type: 3}
+    audio: {fileID: 8300000, guid: 68ead9d265c5b704fb9699c0840af61f, type: 3}
   - audioName: Game Timer
     audio: {fileID: 8300000, guid: f7abe3e0332927c41a28b9d4a761b28d, type: 3}
   - audioName: Overtime
