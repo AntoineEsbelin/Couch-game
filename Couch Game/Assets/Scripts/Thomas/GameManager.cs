@@ -88,12 +88,6 @@ public class GameManager : MonoBehaviour
         playerController.isReady = true;
         playerIcon[playerController.playerId - 1].sprite = playerIconOn[playerController.playerId - 1];
         playerIcon[playerController.playerId - 1].transform.GetChild(0).gameObject.SetActive(false);
-<<<<<<< Updated upstream
-        playerIcon[playerController.playerId - 1].transform.GetChild(1).gameObject.SetActive(false);
-        // playerRoomUI[playerController.playerId - 1].transform.GetChild(2).gameObject.SetActive(false);
-        // if(playerController.playerId - 1 == 3){playerRoomUI[3].transform.GetChild(3).gameObject.SetActive(false);}
-=======
->>>>>>> Stashed changes
         playerController.transform.position = spawnPoints[playerController.playerId - 1].position;
         playerController.playerFBX = Instantiate(charactersFBX[playerController.playerId - 1], playerController.transform);    
     
