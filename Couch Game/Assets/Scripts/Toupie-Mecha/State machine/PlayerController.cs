@@ -459,14 +459,15 @@ public class PlayerController : MonoBehaviour
                 PlayerController triggerPlayer = other.GetComponentInParent<PlayerController>();
 
                 triggerPlayer.lastPlayerContacted = this;
-                triggerPlayer.timeLastPlayer = triggerPlayer.maxTimeLastPlayer;
+                triggerPlayer.timeLastPlayer = 0.5f;
                 if (currentState == SpinnerState)
                 {
                     CameraShaker.Instance.ShakeOnce(1f, 4f, 0.1f, 0.5f);
-                    
+                    triggerPlayer.timeLastPlayer = triggerPlayer.maxTimeLastPlayer;
 
-                    //Si le joueur est pas stun [???]
-                    if(triggerPlayer.SpinnerState.repoussed)return;
+
+                //Si le joueur est pas stun [???]
+                if (triggerPlayer.SpinnerState.repoussed)return;
                     if ((triggerPlayer.currentState == triggerPlayer.NormalState || triggerPlayer.currentState == triggerPlayer.StunState || triggerPlayer.currentState == triggerPlayer.SpinStunState || triggerPlayer.currentState == triggerPlayer.SpinnerState) && !triggerPlayer.hasCountered)
                     {
                         Debug.Log("2 fois ?");
