@@ -11669,19 +11669,6 @@ PrefabInstance:
       propertyPath: playerIconOff.Array.data[3]
       value: 
       objectReference: {fileID: 21300000, guid: 9e2447b0bcc6cc040843b75d41bc141a, type: 3}
-      objectReference: {fileID: 0}
-    - target: {fileID: 1896850882735031343, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
-      propertyPath: playerRoomUI.Array.data[1]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1896850882735031343, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
-      propertyPath: playerRoomUI.Array.data[2]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1896850882735031343, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
-      propertyPath: playerRoomUI.Array.data[3]
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
 --- !u!114 &2073717783 stripped
