@@ -2597,10 +2597,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4724235554943232978, guid: 14b5faa7b68b27c49814921cf3e3d0eb, type: 3}
-      propertyPath: m_FirstSelected
-      value: 
-      objectReference: {fileID: 1770804673}
     - target: {fileID: 6064497095088450813, guid: 14b5faa7b68b27c49814921cf3e3d0eb, type: 3}
       propertyPath: m_fontSizeBase
       value: 80
@@ -2733,6 +2729,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6899432873825863848, guid: 14b5faa7b68b27c49814921cf3e3d0eb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 552036595}
+    - target: {fileID: 6899432873825863848, guid: 14b5faa7b68b27c49814921cf3e3d0eb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: DisableControlDisplay
+      objectReference: {fileID: 0}
     - target: {fileID: 7722534425934342580, guid: 14b5faa7b68b27c49814921cf3e3d0eb, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -2791,6 +2795,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29dedb06d14b5c546999e6e9dd7da512, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &460978820 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3128441046337635213, guid: 14b5faa7b68b27c49814921cf3e3d0eb, type: 3}
+  m_PrefabInstance: {fileID: 460978815}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &483600814 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7060240869341910123, guid: 2c0f1e1796b66da49819282154fde113, type: 3}
@@ -9101,11 +9110,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6842736498240077222, guid: 5d337fe3d64644c4d87b33ddcd11ceb9, type: 3}
   m_PrefabInstance: {fileID: 1765900118}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1770804673 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3754111866328180711, guid: 14b5faa7b68b27c49814921cf3e3d0eb, type: 3}
-  m_PrefabInstance: {fileID: 460978815}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1770907804
 GameObject:
   m_ObjectHideFlags: 0
@@ -12128,6 +12132,10 @@ PrefabInstance:
       propertyPath: crowdManager
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1896850882735031343, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
+      propertyPath: ControlDisplay
+      value: 
+      objectReference: {fileID: 460978820}
     - target: {fileID: 1896850882735031343, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
       propertyPath: gameTimer.timerTXT
       value: 
