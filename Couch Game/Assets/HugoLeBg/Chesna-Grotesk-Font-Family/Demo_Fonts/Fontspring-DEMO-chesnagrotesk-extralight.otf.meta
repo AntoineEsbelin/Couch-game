@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: ab6d5f49e0bae0d4b872922b34b44e4c
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - FONTSPRING DEMO - Chesna Grotesk Extra Light
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 68dea82a285a1d94c9559d21cdf0a8b5, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
