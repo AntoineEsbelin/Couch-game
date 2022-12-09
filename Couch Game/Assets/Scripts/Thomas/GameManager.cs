@@ -10,7 +10,13 @@ public class GameManager : MonoBehaviour
 {
     public Slider startSlider;
     
-    public List<TextMeshProUGUI> playerRoomUI;
+    [Header("SelectPlayer")]
+    public List<GameObject> playerRoomUI;
+    public List<Image> playerIcon;
+    public List<Sprite> playerIconOff;
+    public List<Sprite> playerIconOn;
+
+    [Space(5)]
     public PlayerUIPanel[] playerUIPanels;
     public GameObject playersRoom;
     public List<PlayerController> allPlayer;
@@ -80,7 +86,9 @@ public class GameManager : MonoBehaviour
         PlayerController playerController = playerInput.GetComponent<PlayerController>();
         playerController.playerId = playersList.Count;
         playerController.isReady = true;
-        playerRoomUI[playerController.playerId - 1].text = "Ready !"; 
+        playerIcon[playerController.playerId - 1].sprite = playerIconOn[playerController.playerId - 1];
+        playerRoomUI[playerController.playerId - 1].transform.GetChild(2).gameObject.SetActive(false);
+        if(playerController.playerId - 1 == 3){playerRoomUI[3].transform.GetChild(3).gameObject.SetActive(false);}
         playerController.transform.position = spawnPoints[playerController.playerId - 1].position;
         playerController.playerFBX = Instantiate(charactersFBX[playerController.playerId - 1], playerController.transform);    
     
@@ -394,4 +402,5 @@ public class GameManager : MonoBehaviour
             playerUI.playerIMG.sprite = playerUI.playerScoreIMG[j];
         }
     }
+    
 }
