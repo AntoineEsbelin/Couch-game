@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4251007238508292986}
   - component: {fileID: 4251007238508292987}
+  - component: {fileID: 9163945180822718231}
   m_Layer: 0
   m_Name: Holder
   m_TagString: Untagged
@@ -49,6 +50,18 @@ MonoBehaviour:
   DefaultRotInfluence: {x: 1, y: 1, z: 1}
   RestPositionOffset: {x: 0, y: 0, z: 0}
   RestRotationOffset: {x: 0, y: 0, z: 0}
+--- !u!114 &9163945180822718231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4251007238508292868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 458b12f966e1a66489f57c43e77e59d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4251007238676574739
 GameObject:
   m_ObjectHideFlags: 0

@@ -35,7 +35,7 @@ public class LD_Manager : MonoBehaviour
         if(!elementSpawned)
         {
             int element = Random.Range(0, ldElements.Length);
-            actualElement = Instantiate(ldElements[element], this.transform);
+            actualElement = Instantiate(ldElements[element], this.transform.position, Quaternion.identity);
             //Debug.Log("Element Spawned : " + actualElement.name);
             elementSpawned = true;
         }

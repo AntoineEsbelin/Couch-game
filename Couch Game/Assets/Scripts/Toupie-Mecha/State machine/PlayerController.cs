@@ -214,8 +214,9 @@ public class PlayerController : MonoBehaviour
                     chargeParticles.SetActive(true);
                     playerAnimator.SetBool("ChargingSpin", true);
                     sfx = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"Spin Charge"], transform.position, AudioManager.instance.soundEffectMixer, false, true);
-                    GameObject spinnerVFX = Instantiate(SpinnerState.spinnerVFX.spinningVFX, this.transform);
+                    GameObject spinnerVFX = Instantiate(SpinnerState.spinnerFX.spinningVFX, this.transform);
                     SpinnerState.allSpinnerVFX.Add(spinnerVFX);
+                    SpinnerState.allSpinnerSFX.Add(sfx);
                 }
             }
 
@@ -270,7 +271,7 @@ public class PlayerController : MonoBehaviour
 
                 int randomBrake = Random.Range(0, 6);
                 AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"Spin Brake {randomBrake + 1}"], transform.position, AudioManager.instance.soundEffectMixer, true, false);
-                GameObject brakeVFX = Instantiate(SpinnerState.spinnerVFX.brakeVFX, transform);
+                GameObject brakeVFX = Instantiate(SpinnerState.spinnerFX.brakeVFX, transform);
                 SpinnerState.allSpinnerVFX.Add(brakeVFX);
             }
 
@@ -566,7 +567,7 @@ public class PlayerController : MonoBehaviour
         {
             //Bounce against other player
             //Instantiate(explosion, this.transform.position, Quaternion.identity);
-            Instantiate(SpinnerState.spinnerVFX.SpinerVsSpinerVFX, transform);
+            Instantiate(SpinnerState.spinnerFX.spinerVsSpinerVFX, transform);
             CameraShaker.Instance.ShakeOnce(1f, 4f, 0.1f, 0.5f);
             //Debug.Log("bounce");
             SpinnerState.moveDir = -SpinnerState.moveDir;
@@ -582,9 +583,27 @@ public class PlayerController : MonoBehaviour
     public void UpdateScore(int value)
     {
         if (OnScoreChanged != null)
-            OnScoreChanged(value);
+        {
+            StartCoroutine(Scoring(value, GameManager.instance.refreshTime));
+        }
     }
 
+    public IEnumerator Scoring(int value, float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        int score = playerPoint - value;
+        while(score != playerPoint)
+        {
+            //Debug.Log(score);
+            if(value >= 0)score++;
+            else score--;
+            OnScoreChanged(score);
+            yield return null;
+        }
+
+    }
+
+    
     public void RespawnPlayer()
     {
         playerAnimator.SetTrigger("Respawn");

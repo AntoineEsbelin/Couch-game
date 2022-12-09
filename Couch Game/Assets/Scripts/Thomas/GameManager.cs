@@ -68,6 +68,9 @@ public class GameManager : MonoBehaviour
     public Crowd[] allCrowd;
     public float cheerMinTime = 0;
     public float cheerMaxTime = .5f;
+
+    [Header("Score Change refresh time")]
+    public float refreshTime = .1f;
     private void OnPlayerJoined(PlayerInput playerInput)
     {
         if(gameStarted)return;
@@ -135,6 +138,7 @@ public class GameManager : MonoBehaviour
     
     private void LeftAction(InputAction.CallbackContext ctx)
     {
+        if(gameStarted)return;
         if (playersList.Count > 1)
         {
             foreach (var player in playersList)
