@@ -8500,7 +8500,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1540868044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11605,15 +11605,15 @@ PrefabInstance:
     - target: {fileID: 1896850882735031343, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
       propertyPath: playerRoomUI.Array.data[1]
       value: 
-      objectReference: {fileID: 1732177595}
+      objectReference: {fileID: 0}
     - target: {fileID: 1896850882735031343, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
       propertyPath: playerRoomUI.Array.data[2]
       value: 
-      objectReference: {fileID: 762654304}
+      objectReference: {fileID: 0}
     - target: {fileID: 1896850882735031343, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
       propertyPath: playerRoomUI.Array.data[3]
       value: 
-      objectReference: {fileID: 555593194}
+      objectReference: {fileID: 0}
     - target: {fileID: 1896850882735031343, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
       propertyPath: playerIconOff.Array.data[0]
       value: 
