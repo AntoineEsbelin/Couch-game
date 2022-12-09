@@ -2111,9 +2111,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pointGiven: 1
+  pointRemoved: 5
   isField: 0
   explosion: {fileID: 3193864383826838676, guid: c8aa708196a029140916b05a1fb82638, type: 3}
   explosionMultiplier: 5
+  LeftMotor: 0
+  RightMotor: 0
   maxVibroTimer: 2
 --- !u!136 &367022723
 CapsuleCollider:
@@ -2175,9 +2178,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pointGiven: 1
+  pointRemoved: 5
   isField: 0
   explosion: {fileID: 3193864383826838676, guid: c8aa708196a029140916b05a1fb82638, type: 3}
   explosionMultiplier: 5
+  LeftMotor: 0
+  RightMotor: 0
   maxVibroTimer: 2
 --- !u!136 &377751227
 CapsuleCollider:
@@ -2953,23 +2959,20 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -0.00036621094
       objectReference: {fileID: 0}
+    - target: {fileID: 7722534425934342580, guid: 14b5faa7b68b27c49814921cf3e3d0eb, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7722534425934342580, guid: 14b5faa7b68b27c49814921cf3e3d0eb, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8672431161065789628, guid: 14b5faa7b68b27c49814921cf3e3d0eb, type: 3}
       propertyPath: m_text
       value: "\u200B"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14b5faa7b68b27c49814921cf3e3d0eb, type: 3}
---- !u!114 &462421831 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2109302833803833294, guid: 14b5faa7b68b27c49814921cf3e3d0eb, type: 3}
-  m_PrefabInstance: {fileID: 460978815}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &483600814 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7060240869341910123, guid: 2c0f1e1796b66da49819282154fde113, type: 3}
@@ -3544,9 +3547,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pointGiven: 1
+  pointRemoved: 5
   isField: 0
   explosion: {fileID: 3193864383826838676, guid: c8aa708196a029140916b05a1fb82638, type: 3}
   explosionMultiplier: 5
+  LeftMotor: 0
+  RightMotor: 0
   maxVibroTimer: 2
 --- !u!136 &593961365
 CapsuleCollider:
@@ -3692,9 +3698,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pointGiven: 1
+  pointRemoved: 5
   isField: 0
   explosion: {fileID: 3193864383826838676, guid: c8aa708196a029140916b05a1fb82638, type: 3}
   explosionMultiplier: 5
+  LeftMotor: 0
+  RightMotor: 0
   maxVibroTimer: 2
 --- !u!136 &621241626
 CapsuleCollider:
@@ -4678,17 +4687,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2191128105134569690, guid: 829ce147df59dbc4899b27bbdb39074f, type: 3}
   m_PrefabInstance: {fileID: 151873092}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &919504577 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1423264834502226891, guid: 14b5faa7b68b27c49814921cf3e3d0eb, type: 3}
-  m_PrefabInstance: {fileID: 460978815}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &928580619
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6893,9 +6891,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pointGiven: 0
+  pointRemoved: 5
   isField: 1
   explosion: {fileID: 3193864383826838676, guid: c8aa708196a029140916b05a1fb82638, type: 3}
   explosionMultiplier: 0
+  LeftMotor: 0
+  RightMotor: 0
   maxVibroTimer: 2
 --- !u!65 &1316811824
 BoxCollider:
@@ -7198,9 +7199,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pointGiven: 1
+  pointRemoved: 5
   isField: 0
   explosion: {fileID: 3193864383826838676, guid: c8aa708196a029140916b05a1fb82638, type: 3}
   explosionMultiplier: 5
+  LeftMotor: 0
+  RightMotor: 0
   maxVibroTimer: 2
 --- !u!136 &1389730770
 CapsuleCollider:
@@ -9476,17 +9480,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6632692683650500826, guid: cd06b60e6a4c62b45b1677a0d3414a4d, type: 3}
   m_PrefabInstance: {fileID: 1742058517}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1745685982 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3950429895072176890, guid: 14b5faa7b68b27c49814921cf3e3d0eb, type: 3}
-  m_PrefabInstance: {fileID: 460978815}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1765900118
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11157,17 +11150,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6842736498240077222, guid: 5d337fe3d64644c4d87b33ddcd11ceb9, type: 3}
   m_PrefabInstance: {fileID: 1942746652}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1942792956 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4372366365400632091, guid: 14b5faa7b68b27c49814921cf3e3d0eb, type: 3}
-  m_PrefabInstance: {fileID: 460978815}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1946561278
 GameObject:
   m_ObjectHideFlags: 0
@@ -11342,9 +11324,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pointGiven: 1
+  pointRemoved: 5
   isField: 0
   explosion: {fileID: 3193864383826838676, guid: c8aa708196a029140916b05a1fb82638, type: 3}
   explosionMultiplier: 5
+  LeftMotor: 0
+  RightMotor: 0
   maxVibroTimer: 2
 --- !u!136 &1961641643
 CapsuleCollider:
@@ -12810,19 +12795,19 @@ PrefabInstance:
     - target: {fileID: 1896850882735031343, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
       propertyPath: playerRoomUI.Array.data[0]
       value: 
-      objectReference: {fileID: 919504577}
+      objectReference: {fileID: 0}
     - target: {fileID: 1896850882735031343, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
       propertyPath: playerRoomUI.Array.data[1]
       value: 
-      objectReference: {fileID: 462421831}
+      objectReference: {fileID: 0}
     - target: {fileID: 1896850882735031343, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
       propertyPath: playerRoomUI.Array.data[2]
       value: 
-      objectReference: {fileID: 1745685982}
+      objectReference: {fileID: 0}
     - target: {fileID: 1896850882735031343, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
       propertyPath: playerRoomUI.Array.data[3]
       value: 
-      objectReference: {fileID: 1942792956}
+      objectReference: {fileID: 0}
     - target: {fileID: 1896850882735031343, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
       propertyPath: joinAction.m_SingletonActionBindings.Array.size
       value: 2
