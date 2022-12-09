@@ -143,6 +143,7 @@ GameObject:
   - component: {fileID: 7715067853923158762}
   - component: {fileID: 6539273088687812290}
   - component: {fileID: 4337712178464787206}
+  - component: {fileID: 271512033613182292}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -342,6 +343,7 @@ MonoBehaviour:
   SpinnerState: {fileID: 1966433780568224506}
   StunState: {fileID: 1966433780568224509}
   DeathState: {fileID: 1966433780568224504}
+  SpinStunState: {fileID: 271512033613182292}
   rb: {fileID: 2402394259002358179}
   cameraTarget: {fileID: 0}
   spawnPlayer: {fileID: 0}
@@ -369,8 +371,8 @@ MonoBehaviour:
   timeLastPlayer: 0
   isMoving: 0
   isReady: 0
-  stunDurationKnockback: 1.5
-  stunDurationSpinEnd: 0.3
+  stunDurationKnockback: 1
+  stunDurationSpinEnd: 0.5
   explosion: {fileID: 3193864383826838676, guid: c8aa708196a029140916b05a1fb82638, type: 3}
   dashDurationReduction: 2
   playerFBX: {fileID: 0}
@@ -456,10 +458,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerController: {fileID: 0}
   allSpinnerVFX: []
-  spinnerVFX:
-    spinningVFX: {fileID: 5131705808110797491, guid: 89dd00848dc657f46ab78b330e957c5a, type: 3}
+  allSpinnerSFX: []
+  spinnerFX:
+    spinningVFX: {fileID: 4100667204398432343, guid: af4dc02eaf1f88d43a6b8fbe8aa23ea5, type: 3}
     brakeVFX: {fileID: 241476061616573481, guid: 5590afeded0d1154ab78a5f1a028e45c, type: 3}
-    SpinerVsSpinerVFX: {fileID: 7559075858351329695, guid: 8c929c6c4fe659a44922f9b031a3070e, type: 3}
+    spinerVsSpinerVFX: {fileID: 7559075858351329695, guid: 8c929c6c4fe659a44922f9b031a3070e, type: 3}
+    spinningSFX: {fileID: 0}
+    chargingSFX: {fileID: 0}
   mSettings:
     dashDuration: 0
     dashDurationMax: 2
@@ -538,7 +543,7 @@ MonoBehaviour:
   forceSmall: 5
   canAtk: 0
   attackHitboxDuration: 0.25
-  normalStun: 1
+  normalStun: 0.5
   spinStun: 3
   atkVFX: {fileID: 4524051271069648140, guid: 69620bc75a9fe864ebbe4919c3a1bacc, type: 3}
 --- !u!114 &2402394259002358178
@@ -711,6 +716,26 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 2.4827561
   m_Center: {x: 0, y: 2.4107032, z: 0}
+--- !u!114 &271512033613182292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2402394259002358207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85b416f0b5f6dcb4d9ef3b8569669cc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerController: {fileID: 0}
+  knockbackDir: {x: 0, y: 0, z: 0}
+  kbDirBumper: {x: 0, y: 0, z: 0}
+  kbSpeed: 0
+  isKnockBacked: 0
+  timer: 0
+  timerMax: 1
+  stunplayer: {fileID: 0}
 --- !u!1 &6961087132073683184
 GameObject:
   m_ObjectHideFlags: 0
