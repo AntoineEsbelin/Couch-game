@@ -9738,10 +9738,6 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 6899432873825863848, guid: 14b5faa7b68b27c49814921cf3e3d0eb, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 2073717783}
     - target: {fileID: 7722534425934342580, guid: 14b5faa7b68b27c49814921cf3e3d0eb, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -9778,11 +9774,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1697411543 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3128441046337635213, guid: 14b5faa7b68b27c49814921cf3e3d0eb, type: 3}
-  m_PrefabInstance: {fileID: 1697411540}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1697411543 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6064497095554243166, guid: 14b5faa7b68b27c49814921cf3e3d0eb, type: 3}
@@ -11136,10 +11127,6 @@ PrefabInstance:
       propertyPath: startSlider
       value: 
       objectReference: {fileID: 1445775099}
-    - target: {fileID: 1896850882735031343, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
-      propertyPath: ControlDisplay
-      value: 
-      objectReference: {fileID: 1697411543}
     - target: {fileID: 1896850882735031343, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
       propertyPath: gameTimer.timerTXT
       value: 
