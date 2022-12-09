@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 150edbe9e938f304d89d3c28e45b5668
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - FONTSPRING DEMO - Chesna Grotesk Book
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: d13132b12dc64ff419998eae82a48bc7, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
