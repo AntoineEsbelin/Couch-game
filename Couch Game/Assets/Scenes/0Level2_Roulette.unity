@@ -3402,6 +3402,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4251007240360499100, guid: 1d2b799c589184a4aa1e3161983a01a9, type: 3}
+      propertyPath: CamCampZMin
+      value: -60
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d2b799c589184a4aa1e3161983a01a9, type: 3}
 --- !u!1001 &750825330
