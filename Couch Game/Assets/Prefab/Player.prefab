@@ -268,7 +268,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1966433780568224508}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: OnRechargeGame
+        m_MethodName: OnRetourMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
