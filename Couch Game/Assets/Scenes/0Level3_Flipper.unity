@@ -437,7 +437,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3893011581260001447, guid: 9f17e19c185bfea4684a386ca0aa5a07, type: 3}
       propertyPath: maxTimer
-      value: 0.3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7042606547427676010, guid: 9f17e19c185bfea4684a386ca0aa5a07, type: 3}
       propertyPath: m_RootOrder
@@ -638,7 +638,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: 5000
-  maxTimer: 0.3
+  maxTimer: 0.75
 --- !u!95 &124850425
 Animator:
   serializedVersion: 4
@@ -1836,7 +1836,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: 5000
-  maxTimer: 0.3
+  maxTimer: 0.75
 --- !u!95 &336242878
 Animator:
   serializedVersion: 4
@@ -4096,7 +4096,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: 5000
-  maxTimer: 0.3
+  maxTimer: 0.75
 --- !u!4 &858332418 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a5178a8a019bd0a419052eb5ad3e1175, type: 3}
@@ -4648,7 +4648,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5777995843703707762, guid: 282edd8c8da72ab40a975d657dc3ec36, type: 3}
       propertyPath: maxTimer
-      value: 0.3
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6880269473987037811, guid: 282edd8c8da72ab40a975d657dc3ec36, type: 3}
       propertyPath: m_Name
@@ -6152,7 +6152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: 5000
-  maxTimer: 0.3
+  maxTimer: 0.75
 --- !u!4 &1385394868 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3a4186809bf8b5b4688d62c5593891e9, type: 3}
@@ -7224,7 +7224,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5777995843703707762, guid: 282edd8c8da72ab40a975d657dc3ec36, type: 3}
       propertyPath: maxTimer
-      value: 0.3
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6880269473987037811, guid: 282edd8c8da72ab40a975d657dc3ec36, type: 3}
       propertyPath: m_Name
