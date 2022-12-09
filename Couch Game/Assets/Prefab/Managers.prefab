@@ -314,6 +314,16 @@ MonoBehaviour:
     audio: {fileID: 8300000, guid: d3f26e3b642bbfc458ae99e221b64a9a, type: 3}
   - audioName: Counter Hit 6
     audio: {fileID: 8300000, guid: 193e7756990bb664c8581069d95a1339, type: 3}
+  - audioName: Bumper 1
+    audio: {fileID: 8300000, guid: 494efaad1483ab64b9e5f379c700caff, type: 3}
+  - audioName: Bumper 2
+    audio: {fileID: 8300000, guid: 6df8cd6fb7165d340800574ff1dc07eb, type: 3}
+  - audioName: Bumper 3
+    audio: {fileID: 8300000, guid: 940c0b0c0668bbc4a8f3a7f59c97b5d0, type: 3}
+  - audioName: Bumper 4
+    audio: {fileID: 8300000, guid: f889caad8a28f4243890fbfdddd892c7, type: 3}
+  - audioName: Bumper 5
+    audio: {fileID: 8300000, guid: ea0dbd8f2c24ccc408378e79fcaad635, type: 3}
 --- !u!1 &1896850882551273286
 GameObject:
   m_ObjectHideFlags: 0
