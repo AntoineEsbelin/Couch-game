@@ -131,7 +131,7 @@ public class CounterA : MonoBehaviour
     {
         int randomAtk = Random.Range(0, 6);
         AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"Counter {randomAtk + 1}"], transform.position, AudioManager.instance.soundEffectMixer, true, false);
-        if (pm != null && pm.currentState == pm.SpinnerState && pm.invincibilityTimer <= 0 && hasHit)
+        if (pm != null && pm.currentState == pm.SpinnerState && pm.invincibilityTimer <= 0 && hasHit && !pm.hasCountered)
         {
             hasHit = false;
             Debug.Log("Stun");
@@ -145,12 +145,13 @@ public class CounterA : MonoBehaviour
             //rb.AddForce(forceToApply / 4 * Time.deltaTime, ForceMode.Impulse);
             Instantiate(atkVFX, pm.transform);
             AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"Counter Hit {randomAtk + 1}"], transform.position, AudioManager.instance.soundEffectMixer, true, false);
-            Debug.Log($"COUNTERED {pm}");
+            hitbox.gameObject.SetActive(false);
+            //Debug.Log($"COUNTERED {pm}");
         }
-        else if (pm != null && (pm.currentState == pm.NormalState || pm.currentState == pm.StunState || pm.currentState == pm.SpinStunState) && pm.invincibilityTimer <= 0 && hasHit)
+        else if (pm != null && (pm.currentState == pm.NormalState || pm.currentState == pm.StunState || pm.currentState == pm.SpinStunState) && pm.invincibilityTimer <= 0 && hasHit && !pm.hasCountered)
         {
             pm.stateMachine.SwitchState(pm.NormalState);
-            Debug.Log("normal :)");
+            //Debug.Log("normal :)");
             CameraShaker.Instance.ShakeOnce(1f, 4f, 0.1f, 0.5f);
             pm.StunState.timerMax = normalStun;
             //Debug.Log(SmallForce);
@@ -165,6 +166,8 @@ public class CounterA : MonoBehaviour
             pm.ResetCharging();
             AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"Counter Hit {randomAtk + 1}"], transform.position, AudioManager.instance.soundEffectMixer, true, false);
             hasHit = false;
+            hitbox.gameObject.SetActive(false);
+
             //rb.AddForce(forceToApply * Time.deltaTime, ForceMode.Impulse);
             //Debug.Log("EE");
         }
