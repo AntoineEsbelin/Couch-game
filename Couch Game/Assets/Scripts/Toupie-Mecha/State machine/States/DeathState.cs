@@ -9,6 +9,10 @@ public class DeathState : PlayerState
     public float respawnTime;
     public override void EnterState(PlayerController player)
     {
+        PlayerController pCtrl = GetComponent<PlayerController>();
+        pCtrl.NormalState.mSettings.glueSpeedModifier = 1f;
+        pCtrl.SpinnerState.mSettings.glueSpeedModifier = 1f;
+
         player.GetComponent<CapsuleCollider>().enabled = false;
         player.GetComponent<SphereCollider>().enabled = false;
         //player.GetComponentInChildren<BoxCollider>().enabled = false;
