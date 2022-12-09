@@ -3356,7 +3356,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4251007238508292868, guid: 1d2b799c589184a4aa1e3161983a01a9, type: 3}
       propertyPath: m_Name
-      value: Holder (1)
+      value: Holder
       objectReference: {fileID: 0}
     - target: {fileID: 4251007238508292986, guid: 1d2b799c589184a4aa1e3161983a01a9, type: 3}
       propertyPath: m_RootOrder
@@ -3401,6 +3401,10 @@ PrefabInstance:
     - target: {fileID: 4251007238508292986, guid: 1d2b799c589184a4aa1e3161983a01a9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4251007240360499100, guid: 1d2b799c589184a4aa1e3161983a01a9, type: 3}
+      propertyPath: CamCampZMin
+      value: -60
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d2b799c589184a4aa1e3161983a01a9, type: 3}
@@ -9771,6 +9775,50 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3128441046337635213, guid: 14b5faa7b68b27c49814921cf3e3d0eb, type: 3}
   m_PrefabInstance: {fileID: 1697411540}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1697411543 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6064497095554243166, guid: 14b5faa7b68b27c49814921cf3e3d0eb, type: 3}
+  m_PrefabInstance: {fileID: 1697411540}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29dedb06d14b5c546999e6e9dd7da512, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1697411544 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6064497095577804829, guid: 14b5faa7b68b27c49814921cf3e3d0eb, type: 3}
+  m_PrefabInstance: {fileID: 1697411540}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29dedb06d14b5c546999e6e9dd7da512, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1697411545 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6064497096345451293, guid: 14b5faa7b68b27c49814921cf3e3d0eb, type: 3}
+  m_PrefabInstance: {fileID: 1697411540}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29dedb06d14b5c546999e6e9dd7da512, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1697411546 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6064497096216547453, guid: 14b5faa7b68b27c49814921cf3e3d0eb, type: 3}
+  m_PrefabInstance: {fileID: 1697411540}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29dedb06d14b5c546999e6e9dd7da512, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1735273059
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11461,6 +11509,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1697411541}
     - target: {fileID: 1896850882735031343, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
+      propertyPath: playerUIPanels.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1896850882735031343, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
       propertyPath: playerRoomUI.Array.data[0]
       value: 
       objectReference: {fileID: 717734521}
@@ -11476,6 +11528,22 @@ PrefabInstance:
       propertyPath: playerRoomUI.Array.data[3]
       value: 
       objectReference: {fileID: 104005259}
+    - target: {fileID: 1896850882735031343, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
+      propertyPath: playerUIPanels.Array.data[0]
+      value: 
+      objectReference: {fileID: 1697411546}
+    - target: {fileID: 1896850882735031343, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
+      propertyPath: playerUIPanels.Array.data[1]
+      value: 
+      objectReference: {fileID: 1697411545}
+    - target: {fileID: 1896850882735031343, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
+      propertyPath: playerUIPanels.Array.data[2]
+      value: 
+      objectReference: {fileID: 1697411544}
+    - target: {fileID: 1896850882735031343, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
+      propertyPath: playerUIPanels.Array.data[3]
+      value: 
+      objectReference: {fileID: 1697411543}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
 --- !u!114 &2073717783 stripped
