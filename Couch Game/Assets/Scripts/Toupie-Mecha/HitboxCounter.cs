@@ -18,6 +18,7 @@ public class HitboxCounter : MonoBehaviour
             //Debug.Log("yeah");
             counter.pm = other.GetComponent<PlayerController>();
             counter.hasHit = true;
+            counter.hitbox = this.GetComponent<BoxCollider>();
             counter.AtkCounter();
         }
     }
