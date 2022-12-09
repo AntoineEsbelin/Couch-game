@@ -31,8 +31,8 @@ public class CounterA : MonoBehaviour
     
     public float attackHitboxDuration = 0.15f;
 
-    public int normalStun;
-    public int spinStun;
+    public float normalStun;
+    public float spinStun;
 
     bool inCD = false;
 
@@ -132,40 +132,42 @@ public class CounterA : MonoBehaviour
         int randomAtk = Random.Range(0, 6);
         AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"Counter {randomAtk + 1}"], transform.position, AudioManager.instance.soundEffectMixer, true, false);
         if (pm != null && pm.currentState == pm.SpinnerState && pm.invincibilityTimer <= 0 && hasHit)
-            {
-                CameraShaker.Instance.ShakeOnce(2f, 4f, 0.1f, 0.5f);
-                pm.StunState.timerMax = spinStun;
-                //Debug.Log(forceToApply);
-                pm.timeLastPlayer = pm.maxTimeLastPlayer;
-                pm.lastPlayerContacted = plctrl;
-                plctrl.hasCountered = true;
-                pm.stateMachine.SwitchState(pm.StunState);
-                //rb.AddForce(forceToApply / 4 * Time.deltaTime, ForceMode.Impulse);
-                Instantiate(atkVFX, pm.transform);
-                AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"Counter Hit {randomAtk + 1}"], transform.position, AudioManager.instance.soundEffectMixer, true, false);
-                Debug.Log($"COUNTERED {pm}");
-                hasHit = false;
-            }
-            else if (pm != null && pm.currentState == pm.NormalState && pm.invincibilityTimer <= 0 && hasHit)
-            {
-                //Debug.Log("normal :)");
-                CameraShaker.Instance.ShakeOnce(1f, 4f, 0.1f, 0.5f);
-                pm.StunState.timerMax = normalStun;
-                //Debug.Log(SmallForce);
-                pm.timeLastPlayer = pm.maxTimeLastPlayer;
-                pm.lastPlayerContacted = plctrl;
-                pm.StunState.knockbackDir = SmallForce;
-                pm.bumpPlayer = true;
-                pm.firstBumpPlayer = true;
-                Instantiate(atkVFX, pm.transform);
+        {
+            hasHit = false;
+            Debug.Log("Stun");
+            CameraShaker.Instance.ShakeOnce(2f, 4f, 0.1f, 0.5f);
+            pm.SpinStunState.timerMax = spinStun;
+            //Debug.Log(forceToApply);
+            pm.timeLastPlayer = pm.maxTimeLastPlayer;
+            pm.lastPlayerContacted = plctrl;
+            plctrl.hasCountered = true;
+            pm.stateMachine.SwitchState(pm.SpinStunState);
+            //rb.AddForce(forceToApply / 4 * Time.deltaTime, ForceMode.Impulse);
+            Instantiate(atkVFX, pm.transform);
+            AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"Counter Hit {randomAtk + 1}"], transform.position, AudioManager.instance.soundEffectMixer, true, false);
+            Debug.Log($"COUNTERED {pm}");
+        }
+        else if (pm != null && (pm.currentState == pm.NormalState || pm.currentState == pm.StunState || pm.currentState == pm.SpinStunState) && pm.invincibilityTimer <= 0 && hasHit)
+        {
+            pm.stateMachine.SwitchState(pm.NormalState);
+            Debug.Log("normal :)");
+            CameraShaker.Instance.ShakeOnce(1f, 4f, 0.1f, 0.5f);
+            pm.StunState.timerMax = normalStun;
+            //Debug.Log(SmallForce);
+            pm.timeLastPlayer = pm.maxTimeLastPlayer;
+            pm.lastPlayerContacted = plctrl;
+            pm.StunState.knockbackDir = SmallForce;
+            pm.bumpPlayer = true;
+            pm.firstBumpPlayer = true;
+            Instantiate(atkVFX, pm.transform);
 
-                pm.stateMachine.SwitchState(pm.StunState);
-                pm.ResetCharging();
-                AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"Counter Hit {randomAtk + 1}"], transform.position, AudioManager.instance.soundEffectMixer, true, false);
-                hasHit = false;
-                //rb.AddForce(forceToApply * Time.deltaTime, ForceMode.Impulse);
-                //Debug.Log("EE");
-            }
+            pm.stateMachine.SwitchState(pm.StunState);
+            pm.ResetCharging();
+            AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"Counter Hit {randomAtk + 1}"], transform.position, AudioManager.instance.soundEffectMixer, true, false);
+            hasHit = false;
+            //rb.AddForce(forceToApply * Time.deltaTime, ForceMode.Impulse);
+            //Debug.Log("EE");
+        }
     }
 
 }
