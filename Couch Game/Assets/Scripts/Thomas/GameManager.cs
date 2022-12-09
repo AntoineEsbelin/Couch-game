@@ -204,8 +204,6 @@ public class GameManager : MonoBehaviour
         }
 
         if(gameTimer.drawTimer || !gameStarted)return;
-        if(Input.GetKey(KeyCode.Alpha1))ChangingMap(1);
-        if(Input.GetKey(KeyCode.Alpha2))ChangingMap(2);
     }
     
 
@@ -270,7 +268,7 @@ public class GameManager : MonoBehaviour
                 }
                 else
                 {
-                    PlayerWin(playerMaxPoint);
+                    PlayerWin(playerRanking[0]);
                 }
             }
         }

@@ -653,8 +653,8 @@ public class PlayerController : MonoBehaviour
     }
 
     //A enlever après prod
-    public void OnRechargeGame()
+    public void OnRetourMenu()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene("MainMenu");
     }
 }
