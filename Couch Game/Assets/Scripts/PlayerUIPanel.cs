@@ -36,6 +36,6 @@ public class PlayerUIPanel : MonoBehaviour
 
     private void UpdateScore(int score)
     {
-        playerScore.text = "Score : " + score.ToString();
+        playerScore.text = /*"Score : " +*/ score.ToString();
     }
 }

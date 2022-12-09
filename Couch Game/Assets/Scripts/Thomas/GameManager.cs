@@ -182,19 +182,19 @@ public class GameManager : MonoBehaviour
         gameTimer.drawTimer = true;
     }
 
-    // Update is called once per frame
-    private void FixedUpdate()
+    
+    private void Update()
     {
         RoundTimer();
 
         if (StartAction.IsInProgress())
         {
-            startSlider.value = Mathf.MoveTowards(startSlider.value, startSlider.maxValue, 1f * Time.deltaTime);
+            startSlider.value = Mathf.MoveTowards(startSlider.value, startSlider.maxValue, 2f * Time.deltaTime);
             
         }
         else
         {
-            startSlider.value = Mathf.MoveTowards(startSlider.value, startSlider.minValue, 1f * Time.deltaTime);
+            startSlider.value = Mathf.MoveTowards(startSlider.value, startSlider.minValue, 10f * Time.deltaTime);
         }
 
         if(gameTimer.drawTimer || !gameStarted)return;
