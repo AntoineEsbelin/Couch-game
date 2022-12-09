@@ -592,7 +592,9 @@ public class PlayerController : MonoBehaviour
     public IEnumerator Scoring(int value, float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
-        int score = playerPoint - value;
+        Debug.Log(value);
+        Debug.Log(playerPoint);
+        int score = playerPoint - 25; //a regler
         while(score != playerPoint)
         {
             //Debug.Log(score);
