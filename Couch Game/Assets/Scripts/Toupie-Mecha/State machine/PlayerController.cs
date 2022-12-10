@@ -650,9 +650,4 @@ public class PlayerController : MonoBehaviour
         wallEvent.billardAnim.SetTrigger("BounceWall");
     }
 
-    //A enlever après prod
-    public void OnRechargeGame()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
 }

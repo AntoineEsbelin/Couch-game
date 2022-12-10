@@ -21,6 +21,11 @@ public class GameManager : MonoBehaviour
     public GameObject playersRoom;
     public List<PlayerController> allPlayer;
     [SerializeField] private List<PlayerController> playerRanking;
+    public List<PlayerController> PlayerRanking
+    {
+        get {return playerRanking;}
+        private set {playerRanking = PlayerRanking;}
+    }
     public List<PlayerInput> playersList = new List<PlayerInput>();
 
     public static GameManager instance;
@@ -29,6 +34,9 @@ public class GameManager : MonoBehaviour
     public InputAction joinAction;
     public InputAction leftAction;
     public InputAction StartAction;
+
+    [Header("ENLEVER APRES PROD")]
+    public InputAction MainMenuAction;
 
     //Event
     public event System.Action<PlayerInput> PlayerJoinedGame;
@@ -128,6 +136,10 @@ public class GameManager : MonoBehaviour
 
         StartAction.Enable();
         StartAction.performed += ctx => StartGame();
+
+        //debug
+        MainMenuAction.Enable();
+        MainMenuAction.performed += ctx => OnReturnMainMenu();
     }
     
     private void OnDisable()
@@ -135,6 +147,7 @@ public class GameManager : MonoBehaviour
         joinAction.Disable();
         leftAction.Disable();
         StartAction.Disable();
+        MainMenuAction.Disable();
     }
 
     private void JoinAction(InputAction.CallbackContext ctx)
@@ -182,7 +195,7 @@ public class GameManager : MonoBehaviour
     }
 
     
-    private void Update()
+    private void FixedUpdate()
     {
         RoundTimer();
 
@@ -197,8 +210,8 @@ public class GameManager : MonoBehaviour
         }
 
         if(gameTimer.drawTimer || !gameStarted)return;
-        if(Input.GetKey(KeyCode.Alpha1))ChangingMap(1);
-        if(Input.GetKey(KeyCode.Alpha2))ChangingMap(2);
+        //if(Input.GetKey(KeyCode.Alpha1))ChangingMap(1);
+        //if(Input.GetKey(KeyCode.Alpha2))ChangingMap(2);
     }
     
 
@@ -232,52 +245,36 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                int playerPoint = 0;
-                PlayerController playerMaxPoint = null;
-                //get max point + player
-                for(int i = 0; i < allPlayer.Count; i++)
-                {
-                    if(allPlayer[i].playerPoint >= playerPoint)
-                    {
-                        playerPoint = allPlayer[i].playerPoint;
-                        playerMaxPoint = allPlayer[i];
-                    }
-                }
-                
-                int equalTime = 0;
-                //if 2 player has same point,
-                for(int i = 0; i < allPlayer.Count; i++)
-                {
-                    if(playerPoint == allPlayer[i].playerPoint)equalTime += 1;
-                }
-
-                //it's draw time !
-                if(equalTime > 1)
-                {
-                    gameTimer.drawTimer = true;
-                    gameTimer.drawMaxPoint = playerPoint;
-                    gameTimer.timerTXT.text = "SUDDEN DEATH !";
-                    AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Voice Sudden Death"], this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
-                    Destroy(ost);
-                    AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Overtime"], this.transform.position, AudioManager.instance.ostMixer, false, true);
-                }
-                else
-                {
-                    PlayerWin(playerMaxPoint);
-                }
+                DrawTime();
             }
         }
+        
+    }
+
+    public void DrawTime()
+    {
+        //get 1st & 2nd points, if the same then draw time
+        if(playerRanking[0].playerPoint == playerRanking[1].playerPoint)
+        {
+            gameTimer.drawTimer = true;
+            gameTimer.timerTXT.text = "SUDDEN DEATH !";
+            AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Voice Sudden Death"], this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
+            Destroy(ost.gameObject);
+            ost = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Overtime"], this.transform.position, AudioManager.instance.ostMixer, false, true);
+        }
+        else PlayerWin(playerRanking[0]);
         
     }
 
     public void PlayerWin(PlayerController playerWinner)
     {
         if(gameTimer.timeOut)return;
-        gameTimer.timerTXT.text = $"Player {allPlayer.IndexOf(playerWinner) + 1} WIN !";
-        Debug.Log($"{playerWinner.name} WIN WITH {playerWinner.playerPoint} POINTS !");
+        if(ost != null)Destroy(ost.gameObject);
+        gameTimer.timerTXT.text = $"Player {playerWinner.playerId} WIN !";
+        //Debug.Log($"{playerWinner.name} WIN WITH {playerWinner.playerPoint} POINTS !");
 
         //general victory voice sound
-        AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"{allPlayer.IndexOf(playerWinner) + 1} Win"], this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
+        AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"{playerWinner.playerId} Win"], this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
         gameTimer.timeOut = true;
         gameStarted = false;
         foreach(PlayerController player in allPlayer)
@@ -288,7 +285,8 @@ public class GameManager : MonoBehaviour
         
         foreach(PlayerController player in allPlayer)
         {
-            Destroy(player.sfx);
+            if(player.sfx != null)Destroy(player.sfx);
+            if(player.vfx != null)Destroy(player.vfx);
         }
     }
 
@@ -365,6 +363,11 @@ public class GameManager : MonoBehaviour
         }
 
         SceneManager.LoadScene(sceneName);
+    }
+
+    public void OnReturnMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void Cheer()

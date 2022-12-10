@@ -557,6 +557,31 @@ MonoBehaviour:
       m_Action: Start
       m_Flags: 0
     m_Flags: 0
+  MainMenuAction:
+    m_Name: Main Menu
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: f05f4801-8c7a-475b-9626-08707fa4a9f3
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 3529f91e-d808-4bea-b7f8-3d85224455ef
+      m_Path: <Keyboard>/backspace
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Main Menu
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 8cade99a-c371-410b-94c4-e78e6630ce00
+      m_Path: <Gamepad>/select
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Main Menu
+      m_Flags: 0
+    m_Flags: 0
   spawnPoints:
   - {fileID: 1896850882551273285}
   - {fileID: 1896850881039351318}
@@ -570,7 +595,7 @@ MonoBehaviour:
   ost: {fileID: 0}
   gameTimer:
     timer: 0
-    maxTimer: 180
+    maxTimer: 120
     drawTimer: 0
     drawMaxPoint: 0
     timeOut: 0

@@ -114,11 +114,8 @@ public class PointZone : MonoBehaviour
 
             if(GameManager.instance.gameTimer.drawTimer)
             {
-                if(deadPlayer.lastPlayerContacted.playerPoint > GameManager.instance.gameTimer.drawMaxPoint)
-                {
-                    GameManager.instance.PlayerWin(deadPlayer.lastPlayerContacted);
-                    //STOP THE ROUND
-                }
+                PlayerController firstRankPlayer = GameManager.instance.PlayerRanking[0];
+                if(firstRankPlayer.playerPoint > GameManager.instance.PlayerRanking[1].playerPoint)GameManager.instance.PlayerWin(firstRankPlayer);
             }
             else
             {
