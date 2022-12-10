@@ -92,6 +92,8 @@ public class PlayerController : MonoBehaviour
     public AudioSource sfx;
     public GameObject vfx;
 
+    [HideInInspector] public int pointChange;
+
 
     void OnEnable()
     {
@@ -581,22 +583,25 @@ public class PlayerController : MonoBehaviour
 
     #endregion
 
-    public void UpdateScore(int value)
+    public void UpdateScore(int zoneValue, bool removePoint)
     {
         if (OnScoreChanged != null)
         {
-            StartCoroutine(Scoring(value, GameManager.instance.refreshTime));
+            StartCoroutine(Scoring(zoneValue, GameManager.instance.refreshTime, removePoint));
         }
     }
 
-    public IEnumerator Scoring(int value, float waitTime)
+    public IEnumerator Scoring(int value, float waitTime, bool removePoint)
     {
         yield return new WaitForSeconds(waitTime);
-        int score = playerPoint - value;
+        int score;
+        if(!removePoint)score = playerPoint - value;
+        else score = playerPoint + value;
+
         while(score != playerPoint)
         {
             //Debug.Log(score);
-            if(value >= 0)score++;
+            if(!removePoint)score++;
             else score--;
             OnScoreChanged(score);
             yield return null;

@@ -103,7 +103,7 @@ public class PointZone : MonoBehaviour
             int point = (pointGiven * deadPlayer.multiplier);
             //Debug.Log(point);
             deadPlayer.lastPlayerContacted.playerPoint += point;
-            deadPlayer.lastPlayerContacted.UpdateScore(deadPlayer.lastPlayerContacted.playerPoint);
+            deadPlayer.lastPlayerContacted.UpdateScore(pointGiven, false);
             //DEBUG
             //Debug.Log($"{deadPlayer.name} EJECTED !");
             //Debug.Log($"GIVE {(point)} points to {deadPlayer.lastPlayerContacted.name}");
@@ -130,7 +130,7 @@ public class PointZone : MonoBehaviour
             if (isSettingSuicideOn)
             {
                 deadPlayer.playerPoint -= pointRemoved;
-                deadPlayer.UpdateScore(deadPlayer.playerPoint);
+                deadPlayer.UpdateScore(pointRemoved, true);
                 CheckBestPlayer();
             }
 
