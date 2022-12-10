@@ -254,6 +254,7 @@ public class GameManager : MonoBehaviour
     public void DrawTime()
     {
         //get 1st & 2nd points, if the same then draw time
+        if(playerRanking.Count <= 1)PlayerWin(playerRanking[0]);
         if(playerRanking[0].playerPoint == playerRanking[1].playerPoint)
         {
             gameTimer.drawTimer = true;

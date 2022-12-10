@@ -575,7 +575,7 @@ MonoBehaviour:
       m_Flags: 0
     - m_Name: 
       m_Id: 8cade99a-c371-410b-94c4-e78e6630ce00
-      m_Path: <Gamepad>/select
+      m_Path: <Gamepad>/start
       m_Interactions: 
       m_Processors: 
       m_Groups: 
