@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 71274724251802772}
   m_Layer: 0
-  m_Name: Bumper_Rond_Mod01
+  m_Name: Bumper_Rond_Mod01_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -146,4 +146,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: 5000
-  maxTimer: 0.8
+  maxTimer: 0.6
