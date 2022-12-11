@@ -192,6 +192,7 @@ public class GameManager : MonoBehaviour
         gameTimer.timer = gameTimer.maxTimer;
         gameStarted = false;
         gameTimer.drawTimer = true;
+        ost = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Choice OST"], this.transform.position, AudioManager.instance.ostMixer, false, true);
     }
 
     
@@ -270,25 +271,7 @@ public class GameManager : MonoBehaviour
     public void PlayerWin(PlayerController playerWinner)
     {
         if(gameTimer.timeOut)return;
-        if(ost != null)Destroy(ost.gameObject);
-        gameTimer.timerTXT.text = $"Player {playerWinner.playerId} WIN !";
-        //Debug.Log($"{playerWinner.name} WIN WITH {playerWinner.playerPoint} POINTS !");
-
-        //general victory voice sound
-        AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"{playerWinner.playerId} Win"], this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
-        gameTimer.timeOut = true;
-        gameStarted = false;
-        foreach(PlayerController player in allPlayer)
-        {
-            player.move = Vector3.zero;
-        }
-
-        
-        foreach(PlayerController player in allPlayer)
-        {
-            if(player.sfx != null)Destroy(player.sfx);
-            if(player.vfx != null)Destroy(player.vfx);
-        }
+        StartCoroutine(WaitBeforeWin(2f, playerWinner));
     }
 
     private void PlayVoiceAtTime(float time, ref bool alreadyPlayed, AudioClip voice, UnityEngine.Audio.AudioMixerGroup soundMixer)
@@ -304,6 +287,7 @@ public class GameManager : MonoBehaviour
         // if(inputField.text.Length == 0 || int.Parse(inputField.text) < 1 || int.Parse(inputField.text) > 4)return;
         print(count(allPlayer, true));
         if( count(allPlayer, true) == 0 || count(allPlayer, true) < 1 || count(allPlayer, true) > 4) return;
+        Destroy(ost.gameObject);
         
         tempPlayerNb.howManyPlayer = count(allPlayer, true);
         
@@ -403,6 +387,36 @@ public class GameManager : MonoBehaviour
             playerUI = playerUIPanels[playerRanking[j].playerId - 1];
             if(playerRanking[i].playerPoint > playerRanking[i - 1].playerPoint) j -= 1;
             playerUI.playerIMG.sprite = playerUI.playerScoreIMG[j];
+        }
+    }
+
+    private IEnumerator WaitBeforeWin(float waitTime, PlayerController playerWinner)
+    {
+        foreach(PlayerController player in allPlayer)
+        {
+            player.move = Vector3.zero;
+        }
+
+        foreach(PlayerController player in allPlayer)
+        {
+            if(player.sfx != null)Destroy(player.sfx);
+            if(player.vfx != null)Destroy(player.vfx);
+        }
+        gameStarted = false;
+        
+
+        yield return new WaitForSeconds(waitTime);
+        if(ost != null)Destroy(ost.gameObject);
+        gameTimer.timerTXT.text = $"Player {playerWinner.playerId} WIN !";
+        
+        if(!gameTimer.timeOut)
+        {
+            AudioSource audio = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Win sfx"], this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
+            yield return new WaitForSeconds(audio.clip.length / 3);
+            
+            //general victory voice sound
+            AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"{playerWinner.playerId} Win"], this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
+            gameTimer.timeOut = true;
         }
     }
     

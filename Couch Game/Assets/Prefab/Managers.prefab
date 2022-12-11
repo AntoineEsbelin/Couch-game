@@ -324,6 +324,24 @@ MonoBehaviour:
     audio: {fileID: 8300000, guid: f889caad8a28f4243890fbfdddd892c7, type: 3}
   - audioName: Bumper 5
     audio: {fileID: 8300000, guid: ea0dbd8f2c24ccc408378e79fcaad635, type: 3}
+  - audioName: Win sfx
+    audio: {fileID: 8300000, guid: 20fc9032f7212a040bf4de85205b95dd, type: 3}
+  - audioName: Respawn
+    audio: {fileID: 8300000, guid: a88079f2c92824a418f2ff6b5f4e18b4, type: 3}
+  - audioName: Choice OST
+    audio: {fileID: 8300000, guid: 57aa8f845ec7c234f82e78033a46b6cb, type: 3}
+  - audioName: Menu Transition
+    audio: {fileID: 8300000, guid: adf26896570a1174686b07cda85d4d97, type: 3}
+  - audioName: UI Navigate
+    audio: {fileID: 8300000, guid: 1469e2670992a9f45aa620697c223c66, type: 3}
+  - audioName: UI Return
+    audio: {fileID: 8300000, guid: d4fd1a52f0607ec4d8dae0a6aab04c6c, type: 3}
+  - audioName: UI Validate
+    audio: {fileID: 8300000, guid: e2300481fea69fc40a9ae1dd6b93a6f4, type: 3}
+  - audioName: UI Back To Game
+    audio: {fileID: 8300000, guid: e20a5a392fbf716478bd729f20a7b00a, type: 3}
+  - audioName: UI Appear
+    audio: {fileID: 8300000, guid: 52a6e45554252664dae3435ee6782fe0, type: 3}
 --- !u!1 &1896850882551273286
 GameObject:
   m_ObjectHideFlags: 0

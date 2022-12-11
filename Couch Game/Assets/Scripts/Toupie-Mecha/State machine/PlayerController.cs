@@ -612,6 +612,7 @@ public class PlayerController : MonoBehaviour
     
     public void RespawnPlayer()
     {
+        AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Respawn"], this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
         playerAnimator.SetTrigger("Respawn");
         transform.position = GameManager.instance.spawnPoints[playerId - 1].position;
         //capsuleCol.enabled = false;
