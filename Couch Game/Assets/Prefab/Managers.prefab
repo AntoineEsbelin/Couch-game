@@ -334,14 +334,16 @@ MonoBehaviour:
     audio: {fileID: 8300000, guid: adf26896570a1174686b07cda85d4d97, type: 3}
   - audioName: UI Navigate
     audio: {fileID: 8300000, guid: 1469e2670992a9f45aa620697c223c66, type: 3}
-  - audioName: UI Return
+  - audioName: UI Exit
     audio: {fileID: 8300000, guid: d4fd1a52f0607ec4d8dae0a6aab04c6c, type: 3}
   - audioName: UI Validate
     audio: {fileID: 8300000, guid: e2300481fea69fc40a9ae1dd6b93a6f4, type: 3}
-  - audioName: UI Back To Game
+  - audioName: UI Back
     audio: {fileID: 8300000, guid: e20a5a392fbf716478bd729f20a7b00a, type: 3}
   - audioName: UI Appear
     audio: {fileID: 8300000, guid: 52a6e45554252664dae3435ee6782fe0, type: 3}
+  - audioName: Title OST
+    audio: {fileID: 8300000, guid: 5d2bb39f1f1e462438b9e9dbc908533d, type: 3}
 --- !u!1 &1896850882551273286
 GameObject:
   m_ObjectHideFlags: 0

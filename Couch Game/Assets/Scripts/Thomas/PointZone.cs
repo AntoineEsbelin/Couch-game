@@ -127,7 +127,7 @@ public class PointZone : MonoBehaviour
         {
             //DEBUG
             Debug.Log($"{deadPlayer.name} SUICIDED !");
-            if (isSettingSuicideOn)
+            if (PointZone.isSettingSuicideOn)
             {
                 deadPlayer.playerPoint -= pointRemoved;
                 deadPlayer.UpdateScore(pointRemoved, true);

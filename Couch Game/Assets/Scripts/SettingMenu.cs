@@ -12,6 +12,10 @@ public class SettingMenu : MonoBehaviour
     
     private Resolution[] resolutions;
     public TMP_Dropdown resolutionDropDown;
+
+   AudioSource sfx;
+    AudioSource ost;
+
     
     public void Start()
     {
@@ -40,27 +44,60 @@ public class SettingMenu : MonoBehaviour
     }
     public void SetFullScreen(bool isFullScreen)
     {
+        if(isFullScreen)SelectSFX();
+        else BackSFX();
+        
         Screen.fullScreen = isFullScreen;
+        
     }
 
-    public void SetSuicide(bool SuicideOn)
+    public void SetSuicide(Toggle toggle)
     {
-        PointZone.isSettingSuicideOn = SuicideOn;
+        if(toggle.isOn)SelectSFX();
+        else BackSFX();
+        PointZone.isSettingSuicideOn = toggle.isOn;
     }
 
     public void SetResolution(int resolutionIndex)
     {
         Resolution resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+        SelectSFX();
     }
 
     public void SetMusicVolume(float volume)
     {
         audioMixer.SetFloat("Music", volume);
+        TestOst();
     }
     public void SetSoundVolume(float volume)
     {
         audioMixer.SetFloat("SFX", volume);
         audioMixer.SetFloat("Announcer", volume);
+        TestSFXAnnouncer();
+    }
+
+    private void SelectSFX()
+    {
+        AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["UI Validate"], this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
+    }
+
+    private void TestOst()
+    {
+        if(ost != null)Destroy(ost.gameObject);
+        AudioSource ostTest = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["UI Validate"], this.transform.position, AudioManager.instance.ostMixer, true, false);
+        ost = ostTest;
+    }
+
+    private void TestSFXAnnouncer()
+    {
+        if(sfx != null)Destroy(sfx.gameObject);
+        AudioSource sfxTest = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Title"], this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
+        sfx = sfxTest;
+    }
+
+    private void BackSFX()
+    {
+        AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["UI Back"], this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
     }
 }

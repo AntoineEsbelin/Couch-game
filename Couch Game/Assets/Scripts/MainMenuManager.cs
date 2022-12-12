@@ -34,6 +34,7 @@ public class MainMenuManager : MonoBehaviour
     }
     public void OptionButton()
     {
+        SelectSFX();
         optionMenu.SetActive(true);
         CloseMenu(MainMenu);
         StartCoroutine(SelectionMenu(firstObjectOption));
@@ -41,6 +42,7 @@ public class MainMenuManager : MonoBehaviour
     
     public void MapSelectionButton()
     {
+        SelectSFX();
         MapSelectionMenu.SetActive(true);
         CloseMenu(MainMenu);
         StartCoroutine(SelectionMenu(Map1Button));
@@ -48,13 +50,14 @@ public class MainMenuManager : MonoBehaviour
     
     public void BindingMenu()
     {
+        SelectSFX();
         bindingInputMenu.SetActive(true);
         CloseMenu(optionMenu);
     }
 
     public void LoadLevel(string name)
     {
-        SceneManager.LoadScene(name);
+        StartCoroutine(OnLoadLevel(name));
     }
 
     private void CloseMenu(GameObject menu)
@@ -64,7 +67,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void Quit()
     {
-        Application.Quit();
+        StartCoroutine(OnQuit());
     }
 
     private void Start()
@@ -85,6 +88,7 @@ public class MainMenuManager : MonoBehaviour
             {
                 MainMenuButton();
                 CloseMenu(optionMenu);
+                ExitSFX();
             }
                 
         }
@@ -95,6 +99,7 @@ public class MainMenuManager : MonoBehaviour
             {
                 MainMenuButton();
                 CloseMenu(MapSelectionMenu);
+                ExitSFX();
             }
                 
         }
@@ -105,5 +110,34 @@ public class MainMenuManager : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         var eventSystem = EventSystem.current;
         eventSystem.SetSelectedGameObject(SelectButton, new BaseEventData(eventSystem));
+    }
+
+    public void OnSelect()
+    {
+        AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["UI Navigate"], this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
+    }
+
+    private void SelectSFX()
+    {
+        AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["UI Validate"], this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
+    }
+
+    private void ExitSFX()
+    {
+        AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["UI Back"], this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
+    }
+
+    private IEnumerator OnQuit()
+    {
+        AudioSource sfx = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["UI Exit"], this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
+        yield return new WaitForSeconds(sfx.clip.length / 2);
+        Application.Quit();
+    }
+
+    private IEnumerator OnLoadLevel(string name)
+    {
+        AudioSource sfx = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Menu Transition"], this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
+        yield return new WaitForSeconds(sfx.clip.length / 2);
+        SceneManager.LoadScene(name);
     }
 }

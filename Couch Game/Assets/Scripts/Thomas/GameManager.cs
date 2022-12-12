@@ -88,6 +88,7 @@ public class GameManager : MonoBehaviour
     private void OnPlayerJoined(PlayerInput playerInput)
     {
         if(gameStarted)return;
+        AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["UI Appear"], this.transform.position, AudioManager.instance.announcerMixer, true, false);
         playersList.Add(playerInput);
         if (PlayerJoinedGame != null)
             PlayerJoinedGame(playerInput);
@@ -122,6 +123,8 @@ public class GameManager : MonoBehaviour
     private void OnPlayerLeft(PlayerInput playerInput)
     {
         print("aled");
+        AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["UI Back"], this.transform.position, AudioManager.instance.announcerMixer, true, false);
+
     }
     private void Awake()
     {
@@ -403,21 +406,18 @@ public class GameManager : MonoBehaviour
             if(player.vfx != null)Destroy(player.vfx);
         }
         gameStarted = false;
+        gameTimer.timeOut = true;
         
 
         yield return new WaitForSeconds(waitTime);
         if(ost != null)Destroy(ost.gameObject);
         gameTimer.timerTXT.text = $"Player {playerWinner.playerId} WIN !";
         
-        if(!gameTimer.timeOut)
-        {
-            AudioSource audio = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Win sfx"], this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
-            yield return new WaitForSeconds(audio.clip.length / 3);
-            
-            //general victory voice sound
-            AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"{playerWinner.playerId} Win"], this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
-            gameTimer.timeOut = true;
-        }
+        AudioSource audio = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Win sfx"], this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
+        yield return new WaitForSeconds(audio.clip.length / 3);
+        
+        //general victory voice sound
+        AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"{playerWinner.playerId} Win"], this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
     }
     
 }
