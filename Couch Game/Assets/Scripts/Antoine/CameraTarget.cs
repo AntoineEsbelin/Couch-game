@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class CameraTarget : MonoBehaviour
 {
@@ -32,6 +33,14 @@ public class CameraTarget : MonoBehaviour
         if (targets.Count == 0)
             return;
 
+        for (int i = 0; i < targets.Count; i++)
+        {
+            if (!targets[i])
+            {
+                targets.Remove(targets[i]);
+            }
+        }
+        
         CamMove();
                
     }
@@ -71,5 +80,6 @@ public class CameraTarget : MonoBehaviour
         return bounds.center;
         
     }
+    
 
 }

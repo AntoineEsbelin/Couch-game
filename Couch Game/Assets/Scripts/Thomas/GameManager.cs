@@ -180,6 +180,11 @@ public class GameManager : MonoBehaviour
 
     private void UnregisterPlayer(PlayerInput playerInput)
     {
+        PlayerController playerController = playerInput.GetComponent<PlayerController>();
+        playerController.playerId = playerInput.playerIndex;
+        playerController.isReady = false;
+        playerIcon[playerInput.playerIndex].sprite = playerIconOff[playerInput.playerIndex];
+        
         playersList.Remove(playerInput);
         if (PlayerLeftGame != null)
             PlayerLeftGame(playerInput);
