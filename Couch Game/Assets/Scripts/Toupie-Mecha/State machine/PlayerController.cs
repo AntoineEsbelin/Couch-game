@@ -118,6 +118,10 @@ public class PlayerController : MonoBehaviour
 
         capsuleCol = GetComponent<CapsuleCollider>();
         sphereCol = GetComponent<SphereCollider>();
+
+        //verif
+        capsuleCol.enabled = true;
+        sphereCol.enabled = true;
         
         if (OnScoreChanged != null)
             OnScoreChanged(playerPoint);
@@ -197,6 +201,7 @@ public class PlayerController : MonoBehaviour
                 if(GameManager.instance.allPlayer.Count != GameManager.instance.tempPlayerNb.howManyPlayer || !GameManager.instance.gameStarted)return;
                 if(bounceWalled)return;
                 move = ctx.ReadValue<Vector3>();
+                playerAnimator.SetFloat("MoveValue", ctx.ReadValue<Vector3>().magnitude);
                 playerAnimator.SetBool("IsWalking", true);
             }
             else if(ctx.canceled)playerAnimator.SetBool("IsWalking", false);
