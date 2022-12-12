@@ -29,6 +29,9 @@ public class GameManager : MonoBehaviour
     public List<PlayerInput> playersList = new List<PlayerInput>();
 
     public static GameManager instance;
+
+    public Image countdown;
+    public Camera cam;
     
     //Input Join and Leave
     public InputAction joinAction;
@@ -304,7 +307,9 @@ public class GameManager : MonoBehaviour
         gameTimer.drawTimer = false;
 
         AudioSource readyGo = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Ready Go"], this.transform.position, AudioManager.instance.announcerMixer, true, false);
-        StartCoroutine(WaitBeforeGameStart(readyGo.clip.length - 1.3f));
+        StartCoroutine(WaitBeforeGameStart(readyGo.clip.length - 1.2f));
+        countdown.GetComponent<Animator>().SetTrigger("Start");
+        cam.GetComponent<Animator>().SetTrigger("Start");
     }
     
     public int count(List<PlayerController> players, bool flag){
@@ -321,6 +326,8 @@ public class GameManager : MonoBehaviour
     {
         gameStarted = false;
         yield return new WaitForSeconds(length);
+        cam.GetComponent<Animator>().enabled = false;
+        cam.GetComponent<CameraTarget>().enabled = true;
         ost = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio.GetValueOrDefault("OST"), transform.position, AudioManager.instance.ostMixer, false, false);
         gameStarted = true;
         playerRanking = allPlayer;
