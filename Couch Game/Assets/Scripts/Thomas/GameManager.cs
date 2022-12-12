@@ -304,7 +304,7 @@ public class GameManager : MonoBehaviour
         gameTimer.drawTimer = false;
 
         AudioSource readyGo = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Ready Go"], this.transform.position, AudioManager.instance.announcerMixer, true, false);
-        StartCoroutine(WaitBeforeGameStart(readyGo.clip.length - 1.3f));
+        StartCoroutine(WaitBeforeGameStart(readyGo.clip.length - 1.2f));
     }
     
     public int count(List<PlayerController> players, bool flag){

@@ -9782,11 +9782,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6496850007462572047, guid: 14b5faa7b68b27c49814921cf3e3d0eb, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 6.3983154
+      value: 6.3984375
       objectReference: {fileID: 0}
     - target: {fileID: 6496850007462572047, guid: 14b5faa7b68b27c49814921cf3e3d0eb, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 52.6774
+      value: 52.67737
       objectReference: {fileID: 0}
     - target: {fileID: 6864751435073608712, guid: 14b5faa7b68b27c49814921cf3e3d0eb, type: 3}
       propertyPath: m_Enabled
@@ -11132,6 +11132,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Managers
       objectReference: {fileID: 0}
+    - target: {fileID: 1896850882324870424, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
+      propertyPath: yes.Array.data[24].audio
+      value: 
+      objectReference: {fileID: 8300000, guid: 5b3c467664647b241a188d9bbab2e4cd, type: 3}
     - target: {fileID: 1896850882551273285, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
       propertyPath: m_LocalPosition.x
       value: 18.9
