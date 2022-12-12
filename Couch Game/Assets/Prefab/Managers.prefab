@@ -259,7 +259,7 @@ MonoBehaviour:
   - audioName: 4 Win
     audio: {fileID: 8300000, guid: ab4d39c187278ea41b3b79c350d15cf0, type: 3}
   - audioName: Ready Go
-    audio: {fileID: 8300000, guid: 5b3c467664647b241a188d9bbab2e4cd, type: 3}
+    audio: {fileID: 8300000, guid: 0e2526ad832a89d468d9636449360df8, type: 3}
   - audioName: One Minute Remaining
     audio: {fileID: 8300000, guid: 431ec080570900041858a539e91f3cef, type: 3}
   - audioName: Title
@@ -502,6 +502,7 @@ MonoBehaviour:
   allPlayer: []
   playerRanking: []
   playersList: []
+  countdown: {fileID: 0}
   joinAction:
     m_Name: Join
     m_Type: 0

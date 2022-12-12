@@ -14322,6 +14322,10 @@ PrefabInstance:
       value: 14.250001
       objectReference: {fileID: 0}
     - target: {fileID: 1896850882735031343, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 4251007239225751356}
+    - target: {fileID: 1896850882735031343, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
       propertyPath: countdown
       value: 
       objectReference: {fileID: 460978820}
@@ -14885,3 +14889,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d2b799c589184a4aa1e3161983a01a9, type: 3}
+--- !u!20 &4251007239225751356 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 4251007240360499090, guid: 1d2b799c589184a4aa1e3161983a01a9, type: 3}
+  m_PrefabInstance: {fileID: 4251007239225751355}
+  m_PrefabAsset: {fileID: 0}
