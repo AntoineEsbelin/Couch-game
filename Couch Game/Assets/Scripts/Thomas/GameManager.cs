@@ -29,6 +29,8 @@ public class GameManager : MonoBehaviour
     public List<PlayerInput> playersList = new List<PlayerInput>();
 
     public static GameManager instance;
+
+    public Image countdown;
     
     //Input Join and Leave
     public InputAction joinAction;
@@ -305,6 +307,7 @@ public class GameManager : MonoBehaviour
 
         AudioSource readyGo = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Ready Go"], this.transform.position, AudioManager.instance.announcerMixer, true, false);
         StartCoroutine(WaitBeforeGameStart(readyGo.clip.length - 1.2f));
+        countdown.GetComponent<Animator>().SetTrigger("Start");
     }
     
     public int count(List<PlayerController> players, bool flag){
