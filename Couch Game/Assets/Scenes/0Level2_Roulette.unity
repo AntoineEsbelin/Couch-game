@@ -9892,6 +9892,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1697411544 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 955643220591893880, guid: 14b5faa7b68b27c49814921cf3e3d0eb, type: 3}
+  m_PrefabInstance: {fileID: 1697411540}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1697411545 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4748510896715042630, guid: 14b5faa7b68b27c49814921cf3e3d0eb, type: 3}
+  m_PrefabInstance: {fileID: 1697411540}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1735273059
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11640,6 +11650,14 @@ PrefabInstance:
       propertyPath: playerUIPanels.Array.data[3]
       value: 
       objectReference: {fileID: 2018630530}
+    - target: {fileID: 2266334016178763723, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
+      propertyPath: PauseUI
+      value: 
+      objectReference: {fileID: 1697411545}
+    - target: {fileID: 2266334016178763723, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
+      propertyPath: ResumeButton
+      value: 
+      objectReference: {fileID: 1697411544}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
 --- !u!114 &2073717783 stripped

@@ -3191,7 +3191,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4748510896715042630, guid: 14b5faa7b68b27c49814921cf3e3d0eb, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5262511309482231140, guid: 14b5faa7b68b27c49814921cf3e3d0eb, type: 3}
       propertyPath: m_Colors.m_SelectedColor.b
@@ -3357,9 +3357,25 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6135867882024529234, guid: 14b5faa7b68b27c49814921cf3e3d0eb, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 6.3983154
+      objectReference: {fileID: 0}
+    - target: {fileID: 6135867882024529234, guid: 14b5faa7b68b27c49814921cf3e3d0eb, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -15.677673
+      objectReference: {fileID: 0}
     - target: {fileID: 6386044599906584494, guid: 14b5faa7b68b27c49814921cf3e3d0eb, type: 3}
       propertyPath: m_fontSize
       value: 72
+      objectReference: {fileID: 0}
+    - target: {fileID: 6496850007462572047, guid: 14b5faa7b68b27c49814921cf3e3d0eb, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 6.3984375
+      objectReference: {fileID: 0}
+    - target: {fileID: 6496850007462572047, guid: 14b5faa7b68b27c49814921cf3e3d0eb, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 52.67737
       objectReference: {fileID: 0}
     - target: {fileID: 6795775025848819703, guid: 14b5faa7b68b27c49814921cf3e3d0eb, type: 3}
       propertyPath: m_AnchorMax.y
@@ -12866,6 +12882,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3724598401901100526, guid: 14b5faa7b68b27c49814921cf3e3d0eb, type: 3}
   m_PrefabInstance: {fileID: 460978815}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1936420899 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 955643220591893880, guid: 14b5faa7b68b27c49814921cf3e3d0eb, type: 3}
+  m_PrefabInstance: {fileID: 460978815}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1942746652
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14782,6 +14803,10 @@ PrefabInstance:
       propertyPath: PauseUI
       value: 
       objectReference: {fileID: 1567433669}
+    - target: {fileID: 2266334016178763723, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
+      propertyPath: ResumeButton
+      value: 
+      objectReference: {fileID: 1936420899}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5036fd4e977332244a91c3405bc262cf, type: 3}
 --- !u!114 &1896850881032272868 stripped
