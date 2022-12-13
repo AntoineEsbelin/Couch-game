@@ -22,6 +22,8 @@ public class MainMenuManager : MonoBehaviour
     [Header("Map Selection")]
     public GameObject MapSelectionMenu;
     public GameObject Map1Button;
+    public List<GameObject> levels = new List<GameObject>();
+    public List<GameObject> Projecteurs = new List<GameObject>();
 
     [Header("Binding Menu")]
     public GameObject bindingInputMenu;
@@ -39,6 +41,7 @@ public class MainMenuManager : MonoBehaviour
         optionMenu.SetActive(true);
         CloseMenu(MainMenu);
         StartCoroutine(SelectionMenu(firstObjectOption));
+        
     }
     
     public void MapSelectionButton()
@@ -83,9 +86,23 @@ public class MainMenuManager : MonoBehaviour
         AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Title"], this.transform.position, AudioManager.instance.announcerMixer, true, false);
         AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Title OST"], this.transform.position, AudioManager.instance.ostMixer, false, true);
     }
-
+    
+    
     private void Update()
     {
+        for (int i = 0; i < levels.Count; i++)
+        {
+            var eventSystem = EventSystem.current;
+            if (eventSystem.currentSelectedGameObject == levels[i])
+            {
+                Projecteurs[i].SetActive(true);
+            }
+            else
+            {
+                Projecteurs[i].SetActive(false);
+            }
+        }
+        
         var uiModule = (InputSystemUIInputModule)EventSystem.current.currentInputModule;
         InputAction cancel = uiModule.cancel.action;
         
