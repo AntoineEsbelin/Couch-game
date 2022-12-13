@@ -16,11 +16,13 @@ public class Hitbox : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            other.GetComponentInParent<PlayerController>().lastPlayerContacted = GetComponent<PlayerController>();//ça marche pas à refaire (pb de collision point d'interrogation)
+            PlayerController otherPlayer = other.GetComponentInParent<PlayerController>();
+            otherPlayer.lastPlayerContacted = GetComponent<PlayerController>();//ça marche pas à refaire (pb de collision point d'interrogation)
             Rigidbody rb = other.GetComponentInParent<Rigidbody>();
             counterAtk.rb = rb;
             counterAtk.pm = rb.GetComponent<PlayerController>();
-            if (other.GetComponentInParent<PlayerController>().playerId == this.GetComponent<PlayerController>().playerId) counterAtk.pm = null;
+            //if(otherPlayer.startCharging)otherPlayer.ResetCharging();            
+            if (otherPlayer.playerId == this.GetComponent<PlayerController>().playerId) counterAtk.pm = null;
             //Debug.Log("ENTER IN TRIGGER");
         }
     }
