@@ -454,6 +454,7 @@ public class PlayerController : MonoBehaviour
         void OnTriggerExit(Collider other)
         {
             if(!other.isTrigger || other.tag == "hitbox")return;
+            if(firstBumpPlayer)firstBumpPlayer = false;
             bumpPlayer = false;
             hasBumpedPlayer = false;
         }
@@ -496,6 +497,9 @@ public class PlayerController : MonoBehaviour
                         rb.velocity = triggerPlayer.rb.velocity;
                         triggerPlayer.stateMachine.SwitchState(triggerPlayer.StunState);
                         StunState.timerMax = 0.1f;
+                        bumpPlayer = false;
+                        hasBumpedPlayer = true;
+                        firstBumpPlayer = true;
                         stateMachine.SwitchState(StunState);
                         //triggerPlayer.SpinnerState.repoussed = true;
                         //activate knockback for triggered player >:(
@@ -503,21 +507,13 @@ public class PlayerController : MonoBehaviour
                         
                     }
                     if (triggerPlayer.currentState == triggerPlayer.SpinnerState && !SpinnerState.repoussed) BounceSpinner();
-                    bumpPlayer = false;
-                    hasBumpedPlayer = true;
-                    firstBumpPlayer = true;
                 }
                 else if(currentState == StunState)
                 {
                     if(!bumpPlayer)return;
                     //Debug.Log("JE SUIS STUNNED NORMALEMENT");
                     if(/*(!SpinnerState.repoussed ||*/ triggerPlayer.currentState == triggerPlayer.SpinnerState/*)*/)return;
-                 if(triggerPlayer.firstBumpPlayer)
-                 {
-                     //WaitBeforeReset(triggerPlayer.firstBumpPlayer, .1f);
-                     triggerPlayer.firstBumpPlayer = false;
-                 }
-                 else
+                 if(!triggerPlayer.firstBumpPlayer)
                  {
                     triggerPlayer.stateMachine.SwitchState(triggerPlayer.NormalState);
                      Debug.Log("HOO");

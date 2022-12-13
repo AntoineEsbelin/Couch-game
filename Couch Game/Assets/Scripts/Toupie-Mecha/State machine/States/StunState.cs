@@ -43,7 +43,7 @@ public class StunState : PlayerState
             kbSpeed = stunplayer.SpinnerState.mSettings.moveSpeed;
         else if(isAttacked) kbSpeed = attackedSpeed;
 
-        Debug.Log("KB SPEED " + kbSpeed);
+        //Debug.Log("KB SPEED " + kbSpeed);
         if(!stunplayer.hasCountered)
         {
             knockbackDir = (stunplayer.rb == null ? stunplayer.rb.velocity.normalized : (playerController.transform.position - stunplayer.transform.position).normalized);
