@@ -17,6 +17,7 @@ public class MainMenuManager : MonoBehaviour
     [Header("Options")]
     public GameObject optionMenu;
     public GameObject firstObjectOption;
+    public GameObject controlDisplay;
     
     [Header("Map Selection")]
     public GameObject MapSelectionMenu;
@@ -65,10 +66,17 @@ public class MainMenuManager : MonoBehaviour
         menu.SetActive(false);
     }
 
+    public void ControlDisplay(GameObject display)
+    {
+        SelectSFX();
+        display.SetActive(true);
+    }
+    
     public void Quit()
     {
         StartCoroutine(OnQuit());
     }
+    
 
     private void Start()
     {
@@ -82,7 +90,7 @@ public class MainMenuManager : MonoBehaviour
         InputAction cancel = uiModule.cancel.action;
         
         
-        if (optionMenu.activeInHierarchy)
+        if (optionMenu.activeInHierarchy && !controlDisplay.activeSelf)
         {
             if (cancel.WasPressedThisFrame())
             {
@@ -101,7 +109,17 @@ public class MainMenuManager : MonoBehaviour
                 CloseMenu(MapSelectionMenu);
                 ExitSFX();
             }
-                
+        }
+        
+        if (controlDisplay.activeInHierarchy)
+        {
+            if (cancel.WasPressedThisFrame())
+            {
+                MainMenuButton();
+                CloseMenu(controlDisplay);
+                StartCoroutine(SelectionMenu(firstObjectOption));
+                ExitSFX();
+            }
         }
     }
 
@@ -140,4 +158,6 @@ public class MainMenuManager : MonoBehaviour
         yield return new WaitForSeconds(sfx.clip.length / 2);
         SceneManager.LoadScene(name);
     }
+    
+    
 }
