@@ -160,6 +160,7 @@ public class CounterA : MonoBehaviour
             pm.StunState.knockbackDir = SmallForce;
             pm.bumpPlayer = true;
             pm.firstBumpPlayer = true;
+            pm.StunState.isAttacked = true;
             pm.ResetCharging();
             Instantiate(atkVFX, pm.transform);
 

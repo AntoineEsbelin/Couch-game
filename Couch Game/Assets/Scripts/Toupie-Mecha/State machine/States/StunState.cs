@@ -11,6 +11,10 @@ public class StunState : PlayerState
     private Vector3 knockback;
     public float kbSpeed;
     public bool isKnockBacked;
+    public bool isAttacked;
+
+    [Header("When Attacked")]
+    public float attackedSpeed = 1000f;
 
     [HideInInspector] public float timer;
     public float timerMax = 1f;
@@ -34,8 +38,12 @@ public class StunState : PlayerState
         else knockbackDir = Vector3.zero;
         //Debug.Log($"Player Dir : {playerController.move }");
         //Debug.Log($"Knockback Dir : {knockbackDir}");
-        if (!isKnockBacked)
+        
+        if (!isKnockBacked && !stunplayer.hasCountered && !isAttacked)
             kbSpeed = stunplayer.SpinnerState.mSettings.moveSpeed;
+        else if(isAttacked) kbSpeed = attackedSpeed;
+
+        Debug.Log("KB SPEED " + kbSpeed);
         if(!stunplayer.hasCountered)
         {
             knockbackDir = (stunplayer.rb == null ? stunplayer.rb.velocity.normalized : (playerController.transform.position - stunplayer.transform.position).normalized);
@@ -64,6 +72,7 @@ public class StunState : PlayerState
     public override void ExitState(PlayerController player)
     {
         isKnockBacked = false;
+        isAttacked = false;
         if(playerController.PlayerAnimator.GetBool("IsStunned"))playerController.PlayerAnimator.SetBool("IsStunned", false);
         if(player.SpinnerState.repoussed)
         {
@@ -72,6 +81,7 @@ public class StunState : PlayerState
         }
         if(sfx != null)Destroy(sfx.gameObject);
         player.rb.velocity = Vector3.zero;
+        
 
         player.NormalState.isKnockbacked = false;
     }

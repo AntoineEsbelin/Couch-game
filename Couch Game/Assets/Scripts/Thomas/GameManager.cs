@@ -62,7 +62,6 @@ public class GameManager : MonoBehaviour
         public bool timeOut = false;
         
         public TMP_Text timerTXT;
-        public TMP_Text comparetimerTXT;
 
         public bool nearTimeOut = false;
 
@@ -269,7 +268,6 @@ public class GameManager : MonoBehaviour
                         gameTimer.timerTXT.GetComponent<Animator>().SetBool("Bump", false);
                         trueTimer = (int)Mathf.Round(gameTimer.timer);
                         gameTimer.timerTXT.text = Mathf.Round(trueTimer).ToString();
-                        gameTimer.comparetimerTXT.text = Mathf.Round(gameTimer.timer).ToString();
                     break;
 
                     case 10:
@@ -292,7 +290,6 @@ public class GameManager : MonoBehaviour
                         trueTimer = (int)Mathf.Round(gameTimer.timer);
                         gameTimer.timerTXT.text = Mathf.Round(trueTimer).ToString();
                         //gameTimer.timerTXT.text = gameTimer.timer.ToString("0.00");
-                        gameTimer.comparetimerTXT.text = gameTimer.timer.ToString("0.0");
                     
                         PlayVoiceAtTime(3, ref gameTimer.nearTimeOut, AudioManager.instance.allAudio["Voice 321"], AudioManager.instance.announcerMixer);
                         PlayVoiceAtTime(3, ref gameTimer.timer3, AudioManager.instance.allAudio["Game Timer"], AudioManager.instance.soundEffectMixer);
