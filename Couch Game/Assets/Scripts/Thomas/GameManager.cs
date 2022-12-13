@@ -97,7 +97,15 @@ public class GameManager : MonoBehaviour
         if (PlayerJoinedGame != null)
             PlayerJoinedGame(playerInput);
         PlayerController playerController = playerInput.GetComponent<PlayerController>();
-        playerController.playerId = playersList.Count;
+        playerController.playerId = 1;
+        if(playersList.Count > 1)
+        {
+            for(int i = 0; i < playersList.Count - 1; i++)
+            {
+                if(playerController.playerId == allPlayer[i].playerId /*&& allPlayer[i] != playerController*/)playerController.playerId += 1;
+            }
+        }
+        Debug.Log(playerController.playerId);
         playerController.isReady = true;
         playerIcon[playerController.playerId - 1].sprite = playerIconOn[playerController.playerId - 1];
         playerIcon[playerController.playerId - 1].transform.GetChild(0).gameObject.SetActive(false);

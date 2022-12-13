@@ -592,7 +592,7 @@ MonoBehaviour:
     m_SingletonActionBindings:
     - m_Name: 
       m_Id: 3529f91e-d808-4bea-b7f8-3d85224455ef
-      m_Path: <Keyboard>/backspace
+      m_Path: <Keyboard>/ctrl
       m_Interactions: 
       m_Processors: 
       m_Groups: 
@@ -625,7 +625,6 @@ MonoBehaviour:
     drawMaxPoint: 0
     timeOut: 0
     timerTXT: {fileID: 0}
-    comparetimerTXT: {fileID: 0}
     nearTimeOut: 0
     timer3: 0
     timer2: 0
