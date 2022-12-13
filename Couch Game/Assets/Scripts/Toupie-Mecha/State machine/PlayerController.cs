@@ -243,7 +243,6 @@ public class PlayerController : MonoBehaviour
                                 playerAnimator.SetBool("ChargingSpin", false);
                                 //Debug.Log("VROUM");
                                 //Debug.Log(bonusSpeedPerPhase[i]);
-                                if(sfx != null)Destroy(sfx.gameObject);
                                 break;
                             }
                         }
@@ -261,6 +260,8 @@ public class PlayerController : MonoBehaviour
             //normalPlayer.spinCharging = false;   ANNULER QUAND ON SE FAIT STUN
             startCharging = false;
             spinTimer = 0f;
+            if(playerAnimator.GetBool("ChargingSpin"))playerAnimator.SetBool("ChargingSpin", false);
+            if(sfx != null)Destroy(sfx.gameObject);
             arrow.GetComponent<SpriteRenderer>().enabled = false;
             chargeParticles.SetActive(false);
     }

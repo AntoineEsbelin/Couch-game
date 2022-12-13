@@ -38,6 +38,7 @@ public class DeathState : PlayerState
     }
     public override void ExitState(PlayerController player)
     {
+        if(!GameManager.instance.gameStarted)return;
         player.GetComponent<CapsuleCollider>().enabled = true;
         player.GetComponent<SphereCollider>().enabled = true;
         //player.GetComponentInChildren<BoxCollider>().enabled = true;

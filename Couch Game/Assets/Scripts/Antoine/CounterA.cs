@@ -160,10 +160,10 @@ public class CounterA : MonoBehaviour
             pm.StunState.knockbackDir = SmallForce;
             pm.bumpPlayer = true;
             pm.firstBumpPlayer = true;
+            pm.ResetCharging();
             Instantiate(atkVFX, pm.transform);
 
             pm.stateMachine.SwitchState(pm.StunState);
-            pm.ResetCharging();
             AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"Counter Hit {randomAtk + 1}"], transform.position, AudioManager.instance.soundEffectMixer, true, false);
             hasHit = false;
             hitbox.gameObject.SetActive(false);
