@@ -11,6 +11,8 @@ public class PauseManager : MonoBehaviour
     public InputAction PauseAction;
     public GameObject PauseUI;
     public GameObject ResumeButton;
+
+    private AudioSource pauseOST;
     
     void Awake()
     {
@@ -22,14 +24,22 @@ public class PauseManager : MonoBehaviour
     {
         PauseAction.Disable();
     }
+
+    private void Start()
+    {
+        gameIsPaused = false;
+    }
     
     public void PauseGame()
     {
-
+        if(!GameManager.instance.gameStarted)return;
         gameIsPaused = !gameIsPaused;
         if (gameIsPaused)
         {
             PauseUI.SetActive(true);
+            AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["UI Appear"], this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
+            if(GameManager.instance.ost != null)GameManager.instance.ost.Pause();
+            pauseOST = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Choice OST"], this.transform.position, AudioManager.instance.soundEffectMixer, false, true);
             StartCoroutine(SelectionMenu(ResumeButton));
             Time.timeScale = 0f;
             
@@ -43,6 +53,10 @@ public class PauseManager : MonoBehaviour
     public void Resume()
     {
         Time.timeScale = 1f;
+        AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["UI Back"], this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
+        if(GameManager.instance.ost != null)GameManager.instance.ost.UnPause();
+        if(pauseOST != null)Destroy(pauseOST.gameObject);
+        gameIsPaused = false;
         PauseUI.SetActive(false);
     }
 

@@ -32,4 +32,9 @@ public class UIManager : MonoBehaviour
     {
         playerUIPanels[playerInput.playerIndex].SetActive(false);
     }
+
+    public void SelectSFX()
+    {
+        AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["UI Navigate"], this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
+    }
 }
