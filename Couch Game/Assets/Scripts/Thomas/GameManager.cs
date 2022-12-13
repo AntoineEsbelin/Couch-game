@@ -8,6 +8,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    
     public Slider startSlider;
     
     [Header("SelectPlayer")]
@@ -37,6 +38,7 @@ public class GameManager : MonoBehaviour
     public InputAction joinAction;
     public InputAction leftAction;
     public InputAction StartAction;
+    
 
     [Header("ENLEVER APRES PROD")]
     public InputAction MainMenuAction;
@@ -142,6 +144,8 @@ public class GameManager : MonoBehaviour
 
         StartAction.Enable();
         StartAction.performed += ctx => StartGame();
+        
+        
 
         //debug
         MainMenuAction.Enable();
@@ -154,6 +158,7 @@ public class GameManager : MonoBehaviour
         leftAction.Disable();
         StartAction.Disable();
         MainMenuAction.Disable();
+        
     }
 
     private void JoinAction(InputAction.CallbackContext ctx)
@@ -438,5 +443,8 @@ public class GameManager : MonoBehaviour
         //general victory voice sound
         AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"{playerWinner.playerId} Win"], this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
     }
+
+
+    
     
 }
