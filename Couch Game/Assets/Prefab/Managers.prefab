@@ -324,8 +324,8 @@ MonoBehaviour:
     audio: {fileID: 8300000, guid: f889caad8a28f4243890fbfdddd892c7, type: 3}
   - audioName: Bumper 5
     audio: {fileID: 8300000, guid: ea0dbd8f2c24ccc408378e79fcaad635, type: 3}
-  - audioName: Win sfx
-    audio: {fileID: 8300000, guid: 20fc9032f7212a040bf4de85205b95dd, type: 3}
+  - audioName: Win
+    audio: {fileID: 8300000, guid: 1c98e73c033d9d2498b3223b79da00f4, type: 3}
   - audioName: Respawn
     audio: {fileID: 8300000, guid: a88079f2c92824a418f2ff6b5f4e18b4, type: 3}
   - audioName: Choice OST
@@ -344,6 +344,8 @@ MonoBehaviour:
     audio: {fileID: 8300000, guid: 52a6e45554252664dae3435ee6782fe0, type: 3}
   - audioName: Title OST
     audio: {fileID: 8300000, guid: 5d2bb39f1f1e462438b9e9dbc908533d, type: 3}
+  - audioName: End Game
+    audio: {fileID: 8300000, guid: d52c2093a924e1f4fa666fe0f95e9d9a, type: 3}
 --- !u!1 &1896850882551273286
 GameObject:
   m_ObjectHideFlags: 0
@@ -503,6 +505,7 @@ MonoBehaviour:
   playerRanking: []
   playersList: []
   countdown: {fileID: 0}
+  cam: {fileID: 0}
   joinAction:
     m_Name: Join
     m_Type: 0

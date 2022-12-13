@@ -282,7 +282,14 @@ public class GameManager : MonoBehaviour
     public void PlayerWin(PlayerController playerWinner)
     {
         if(gameTimer.timeOut)return;
-        StartCoroutine(WaitBeforeWin(2f, playerWinner));
+        gameTimer.timerTXT.text = "GAME !";
+        
+        if(gameTimer.drawTimer)
+        {
+            if(ost != null)Destroy(ost.gameObject);
+            ost = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["End Game"], this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
+        }
+        StartCoroutine(WaitBeforeWin(AudioManager.instance.allAudio["End Game"].length / 2, playerWinner));
     }
 
     private void PlayVoiceAtTime(float time, ref bool alreadyPlayed, AudioClip voice, UnityEngine.Audio.AudioMixerGroup soundMixer)
@@ -296,7 +303,7 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         // if(inputField.text.Length == 0 || int.Parse(inputField.text) < 1 || int.Parse(inputField.text) > 4)return;
-        print(count(allPlayer, true));
+        //print(count(allPlayer, true));
         if( count(allPlayer, true) == 0 || count(allPlayer, true) < 1 || count(allPlayer, true) > 4) return;
         Destroy(ost.gameObject);
         
@@ -310,6 +317,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(WaitBeforeGameStart(readyGo.clip.length - 1.2f));
         countdown.GetComponent<Animator>().SetTrigger("Start");
         cam.GetComponent<Animator>().SetTrigger("Start");
+        AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Crowd Shouting"], this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
     }
     
     public int count(List<PlayerController> players, bool flag){
@@ -414,8 +422,8 @@ public class GameManager : MonoBehaviour
 
         foreach(PlayerController player in allPlayer)
         {
-            if(player.sfx != null)Destroy(player.sfx);
-            if(player.vfx != null)Destroy(player.vfx);
+            if(player.sfx != null)Destroy(player.sfx.gameObject);
+            if(player.vfx != null)Destroy(player.vfx.gameObject);
         }
         gameStarted = false;
         gameTimer.timeOut = true;
@@ -425,8 +433,7 @@ public class GameManager : MonoBehaviour
         if(ost != null)Destroy(ost.gameObject);
         gameTimer.timerTXT.text = $"Player {playerWinner.playerId} WIN !";
         
-        AudioSource audio = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Win sfx"], this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
-        yield return new WaitForSeconds(audio.clip.length / 3);
+        AudioSource audio = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Win"], this.transform.position, AudioManager.instance.soundEffectMixer, false, true);
         
         //general victory voice sound
         AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"{playerWinner.playerId} Win"], this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
