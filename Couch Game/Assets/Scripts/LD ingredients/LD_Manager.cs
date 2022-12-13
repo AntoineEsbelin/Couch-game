@@ -14,11 +14,14 @@ public class LD_Manager : MonoBehaviour
     [SerializeField] private float actualTimer;
     [SerializeField] private int elementActualPos;
     [SerializeField] private GameObject actualElement;
+    [SerializeField] private GameObject warningHasard;
+    [SerializeField] private float warningTimer = 3f;
     private bool elementSpawned = true;
     // Start is called before the first frame update
     private void Start()
     {
         actualTimer = startTimer;
+        warningHasard.SetActive(false);
         
     }
 
@@ -40,9 +43,11 @@ public class LD_Manager : MonoBehaviour
             elementSpawned = true;
         }
 
+        if (actualTimer <= warningTimer) warningHasard.SetActive(true);      
         if(actualTimer > 0)actualTimer -= Time.deltaTime;
         else
         {
+            warningHasard.SetActive(false);
             if(elementActualPos >= ldElements.Length)
             {
                 if(actualElement != null && removeElementInTheEnd)Destroy(actualElement);
