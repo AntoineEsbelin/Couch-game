@@ -239,16 +239,59 @@ public class GameManager : MonoBehaviour
         {
             if(gameTimer.timer > 0)
             {
+                int trueTimer;
                 gameTimer.timer -= Time.deltaTime;
-                switch(gameTimer.timer)
+                switch(Mathf.Round(gameTimer.timer))
                 {
-                    case > 10 :
-                        gameTimer.timerTXT.text = Mathf.Round(gameTimer.timer).ToString();
+                    case > 120 :
+                        gameTimer.timerTXT.fontSize = 72;
+                        trueTimer = (int)Mathf.Round(gameTimer.timer) - 120;
+                        gameTimer.timerTXT.text = "2m" + Mathf.Round(trueTimer).ToString();
+                        break;
+                    case 120:
+                        gameTimer.timerTXT.fontSize = 111;
+                        gameTimer.timerTXT.text = "2m";
+                        gameTimer.timerTXT.GetComponent<Animator>().SetBool("Bump", true);
+                        break;
+                    case > 60:
+                        gameTimer.timerTXT.fontSize = 72;
+                        gameTimer.timerTXT.GetComponent<Animator>().SetBool("Bump", false);
+                        trueTimer = (int)Mathf.Round(gameTimer.timer) - 60;
+                        gameTimer.timerTXT.text = "1m" + Mathf.Round(trueTimer).ToString();
+                        break;
+                    case 60:
+                        gameTimer.timerTXT.fontSize = 111;
+                        gameTimer.timerTXT.text = "1m";
+                        gameTimer.timerTXT.GetComponent<Animator>().SetBool("Bump", true);
+                        break;
+                    case > 10:
+                        gameTimer.timerTXT.fontSize = 111;
+                        gameTimer.timerTXT.GetComponent<Animator>().SetBool("Bump", false);
+                        trueTimer = (int)Mathf.Round(gameTimer.timer);
+                        gameTimer.timerTXT.text = Mathf.Round(trueTimer).ToString();
                         gameTimer.comparetimerTXT.text = Mathf.Round(gameTimer.timer).ToString();
                     break;
 
-                    case < 10 :
-                        gameTimer.timerTXT.text = gameTimer.timer.ToString("0.00");
+                    case 10:
+                        gameTimer.timerTXT.fontSize = 111;
+                        gameTimer.timerTXT.text = "10";
+                        gameTimer.timerTXT.GetComponent<Animator>().SetBool("Bump", true); 
+                        gameTimer.timerTXT.GetComponent<Animator>().SetTrigger("Color");
+                        break;
+                    case 0:
+                        gameTimer.timerTXT.fontSize = 111;
+                        gameTimer.timerTXT.GetComponent<Animator>().enabled = false;
+                        gameTimer.timerTXT.text = "0";
+                        break;
+                    case < 0:
+                        gameTimer.timerTXT.fontSize = 72;
+                        break;
+                    case < 10:
+                        gameTimer.timerTXT.fontSize = 111;
+                        gameTimer.timerTXT.GetComponent<Animator>().SetTrigger("LastBump");
+                        trueTimer = (int)Mathf.Round(gameTimer.timer);
+                        gameTimer.timerTXT.text = Mathf.Round(trueTimer).ToString();
+                        //gameTimer.timerTXT.text = gameTimer.timer.ToString("0.00");
                         gameTimer.comparetimerTXT.text = gameTimer.timer.ToString("0.0");
                     
                         PlayVoiceAtTime(3, ref gameTimer.nearTimeOut, AudioManager.instance.allAudio["Voice 321"], AudioManager.instance.announcerMixer);
@@ -287,7 +330,7 @@ public class GameManager : MonoBehaviour
     public void PlayerWin(PlayerController playerWinner)
     {
         if(gameTimer.timeOut)return;
-        gameTimer.timerTXT.text = "GAME !";
+        gameTimer.timerTXT.text = "END";
         
         if(gameTimer.drawTimer)
         {
@@ -436,7 +479,7 @@ public class GameManager : MonoBehaviour
 
         yield return new WaitForSeconds(waitTime);
         if(ost != null)Destroy(ost.gameObject);
-        gameTimer.timerTXT.text = $"Player {playerWinner.playerId} WIN !";
+        //gameTimer.timerTXT.text = $"Player {playerWinner.playerId} WIN !";
         
         AudioSource audio = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Win"], this.transform.position, AudioManager.instance.soundEffectMixer, false, true);
         
