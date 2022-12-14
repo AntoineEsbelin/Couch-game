@@ -86,7 +86,7 @@ public class Podium : MonoBehaviour
     {
         for (int i = 0; i < places.Length; i++)
         {
-            Debug.Log(places[i]);
+            //Debug.Log(places[i]);
             switch (places[i])
             {
                 case 1:

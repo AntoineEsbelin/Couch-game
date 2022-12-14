@@ -658,4 +658,9 @@ public class PlayerController : MonoBehaviour
         wallEvent.billardAnim.SetTrigger("BounceWall");
     }
 
+    private void OnDestroy()
+    {
+        cameraTarget.targets.Remove(transform);
+    }
+
 }

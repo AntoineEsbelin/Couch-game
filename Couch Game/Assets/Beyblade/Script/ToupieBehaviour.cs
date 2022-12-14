@@ -273,7 +273,6 @@ public class ToupieBehaviour : MonoBehaviour
     }
     private void OnControllerColliderHit(ControllerColliderHit coll)
     {
-        float force = 10f;   
         if (coll.collider.CompareTag("Wall"))
         {
             playerHit = true;

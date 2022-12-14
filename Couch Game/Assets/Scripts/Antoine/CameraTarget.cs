@@ -33,6 +33,7 @@ public class CameraTarget : MonoBehaviour
         if (targets.Count == 0)
             return;
 
+        if(!GameManager.instance.gameStarted)return;
         for (int i = 0; i < targets.Count; i++)
         {
             if (!targets[i])

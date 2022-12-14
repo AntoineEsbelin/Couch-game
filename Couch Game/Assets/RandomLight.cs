@@ -11,7 +11,7 @@ public class RandomLight : MonoBehaviour
     public void changeSprite()
     {
         var randomSprite = Random.Range(0, 2);
-        Debug.Log("changed" + randomSprite);
+        //Debug.Log("changed" + randomSprite);
         lightOff.sprite = lights[randomSprite];
     }
 }

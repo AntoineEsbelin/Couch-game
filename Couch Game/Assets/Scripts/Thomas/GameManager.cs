@@ -110,7 +110,7 @@ public class GameManager : MonoBehaviour
                 if(playerController.playerId == allPlayer[i].playerId /*&& allPlayer[i] != playerController*/)playerController.playerId += 1;
             }
         }
-        Debug.Log(playerController.playerId);
+        //Debug.Log(playerController.playerId);
         playerController.isReady = true;
         playerIcon[playerController.playerId - 1].sprite = playerIconOn[playerController.playerId - 1];
         playerIcon[playerController.playerId - 1].transform.GetChild(0).gameObject.SetActive(false);
@@ -139,7 +139,7 @@ public class GameManager : MonoBehaviour
     
     private void OnPlayerLeft(PlayerInput playerInput)
     {
-        print("aled");
+        //print("aled");
         AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["UI Back"], this.transform.position, AudioManager.instance.announcerMixer, true, false);
 
     }
@@ -181,7 +181,7 @@ public class GameManager : MonoBehaviour
     
     private void LeftAction(InputAction.CallbackContext ctx)
     {
-        if(gameStarted)return;
+        if(gameStarted || cantJoin)return;
         if (playersList.Count > 1)
         {
             foreach (var player in playersList)
@@ -206,6 +206,9 @@ public class GameManager : MonoBehaviour
         playerIcon[playerInput.playerIndex].sprite = playerIconOff[playerInput.playerIndex];
         
         playersList.Remove(playerInput);
+        allPlayer.Remove(playerController);
+        //playerRanking.Remove(playerController);
+        
         if (PlayerLeftGame != null)
             PlayerLeftGame(playerInput);
         

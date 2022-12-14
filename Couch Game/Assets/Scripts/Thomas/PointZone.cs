@@ -25,7 +25,6 @@ public class PointZone : MonoBehaviour
     [Range(0.0f,1.0f)]
     public float RightMotor;
     private float VibroTimer;
-    [SerializeField] private float maxVibroTimer = 1f;
 
 
     private void Start()
