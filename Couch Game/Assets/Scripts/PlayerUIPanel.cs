@@ -37,5 +37,6 @@ public class PlayerUIPanel : MonoBehaviour
     private void UpdateScore(int score)
     {
         playerScore.text = /*"Score : " +*/ score.ToString();
+        playerScore.GetComponent<Animator>().SetTrigger("Up");
     }
 }
