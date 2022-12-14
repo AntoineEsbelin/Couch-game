@@ -252,25 +252,36 @@ public class GameManager : MonoBehaviour
                 gameTimer.timer -= Time.deltaTime;
                 switch(Mathf.Round(gameTimer.timer))
                 {
-                    case > 120 :
+                    case > 129 :
                         gameTimer.timerTXT.fontSize = 72;
                         trueTimer = (int)Mathf.Round(gameTimer.timer) - 120;
-                        gameTimer.timerTXT.text = "2m" + Mathf.Round(trueTimer).ToString();
+                        gameTimer.timerTXT.text = "02:" + Mathf.Round(trueTimer).ToString();
+                        break;
+                    case > 120:
+                        gameTimer.timerTXT.fontSize = 72;
+                        trueTimer = (int)Mathf.Round(gameTimer.timer) - 120;
+                        gameTimer.timerTXT.text = "02:0" + Mathf.Round(trueTimer).ToString();
                         break;
                     case 120:
-                        gameTimer.timerTXT.fontSize = 111;
-                        gameTimer.timerTXT.text = "2m";
+                        gameTimer.timerTXT.fontSize = 72;
+                        gameTimer.timerTXT.text = "02:00";
                         gameTimer.timerTXT.GetComponent<Animator>().SetBool("Bump", true);
+                        break;
+                    case > 69:
+                        gameTimer.timerTXT.fontSize = 72;
+                        gameTimer.timerTXT.GetComponent<Animator>().SetBool("Bump", false);
+                        trueTimer = (int)Mathf.Round(gameTimer.timer) - 60;
+                        gameTimer.timerTXT.text = "01:" + Mathf.Round(trueTimer).ToString();
                         break;
                     case > 60:
                         gameTimer.timerTXT.fontSize = 72;
                         gameTimer.timerTXT.GetComponent<Animator>().SetBool("Bump", false);
                         trueTimer = (int)Mathf.Round(gameTimer.timer) - 60;
-                        gameTimer.timerTXT.text = "1m" + Mathf.Round(trueTimer).ToString();
+                        gameTimer.timerTXT.text = "01:0" + Mathf.Round(trueTimer).ToString();
                         break;
                     case 60:
-                        gameTimer.timerTXT.fontSize = 111;
-                        gameTimer.timerTXT.text = "1m";
+                        gameTimer.timerTXT.fontSize = 72;
+                        gameTimer.timerTXT.text = "01:00";
                         gameTimer.timerTXT.GetComponent<Animator>().SetBool("Bump", true);
                         break;
                     case > 10:
