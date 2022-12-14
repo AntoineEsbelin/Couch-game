@@ -33,7 +33,10 @@ public class GameManager : MonoBehaviour
 
     public Image countdown;
     public Camera cam;
-    
+    public Camera lastCam;
+
+    public GameObject fullUI;
+
     //Input Join and Leave
     public InputAction joinAction;
     public InputAction leftAction;
@@ -355,7 +358,7 @@ public class GameManager : MonoBehaviour
             if(ost != null)Destroy(ost.gameObject);
             ost = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["End Game"], this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
         }
-        StartCoroutine(WaitBeforeWin(AudioManager.instance.allAudio["End Game"].length / 2, playerWinner));
+        StartCoroutine(WaitBeforeWin(5/*AudioManager.instance.allAudio["End Game"].length / 2*/, playerWinner));
     }
 
     private void PlayVoiceAtTime(float time, ref bool alreadyPlayed, AudioClip voice, UnityEngine.Audio.AudioMixerGroup soundMixer)
@@ -502,9 +505,16 @@ public class GameManager : MonoBehaviour
         //gameTimer.timerTXT.text = $"Player {playerWinner.playerId} WIN !";
         
         AudioSource audio = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Win"], this.transform.position, AudioManager.instance.soundEffectMixer, false, true);
+        //Podium scene here
+        fullUI.gameObject.SetActive(false);
+        cam.gameObject.SetActive(false);
+        lastCam.gameObject.SetActive(true);
         
         //general victory voice sound
         AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"{playerWinner.playerId} Win"], this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
+
+        yield return new WaitForSeconds(15f);
+        SceneManager.LoadScene("MainMenu");
     }
 
 
