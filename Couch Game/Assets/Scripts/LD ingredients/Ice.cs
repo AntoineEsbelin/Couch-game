@@ -9,7 +9,7 @@ public class Ice : MonoBehaviour
 
     public float spinnerTurnSmoothTimeModifier = 0.2f;
 
-    private List<PlayerController> playersInIce = new List<PlayerController>();
+    [SerializeField] private List<PlayerController> playersInIce;
 
     void OnTriggerEnter(Collider other)
     {
@@ -41,16 +41,17 @@ public class Ice : MonoBehaviour
         if(pCtrl.startCharging)pCtrl.NormalState.SetSpeedModifier(0.5f);
         pCtrl.NormalState.mSettings.rotationSpeedModifier = 1f;
         pCtrl.SpinnerState.mSettings.turnSmoothTimeModifier = 1f;
-        if(playersInIce.Contains(pCtrl))playersInIce.Remove(pCtrl);
+        playersInIce.Remove(pCtrl);
     }
 
-    private void OnDisable()
-    {
-        if(playersInIce.Count <= 0)return;
 
-        for(int i = 0; i <= playersInIce.Count;)
+    private void OnDestroy()
+    {
+        if(playersInIce.Count < 1)return;
+
+        for(int i = 0; i < playersInIce.Count; i++)
         {
-            ReturnPlayerToNormal(playersInIce[i]);
+            if(playersInIce[i] != null)ReturnPlayerToNormal(playersInIce[i]);
         }
     }
 }

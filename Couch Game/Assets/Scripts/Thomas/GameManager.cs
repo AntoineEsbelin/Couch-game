@@ -89,9 +89,11 @@ public class GameManager : MonoBehaviour
 
     [Header("Score Change refresh time")]
     public float refreshTime = .1f;
+
+    private bool cantJoin = false;
     private void OnPlayerJoined(PlayerInput playerInput)
     {
-        if(gameStarted)return;
+        if(gameStarted && cantJoin)return;
         AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["UI Appear"], this.transform.position, AudioManager.instance.announcerMixer, true, false);
         playersList.Add(playerInput);
         if (PlayerJoinedGame != null)
@@ -170,7 +172,7 @@ public class GameManager : MonoBehaviour
 
     private void JoinAction(InputAction.CallbackContext ctx)
     {
-        if(gameStarted)return;
+        if(gameStarted && cantJoin)return;
         PlayerInputManager.instance.JoinPlayerFromActionIfNotAlreadyJoined(ctx);
     }
     
@@ -211,7 +213,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        
+        cantJoin = false;
         gameTimer.timer = gameTimer.maxTimer;
         gameStarted = false;
         gameTimer.drawTimer = true;
@@ -359,6 +361,8 @@ public class GameManager : MonoBehaviour
         //print(count(allPlayer, true));
         if( count(allPlayer, true) == 0 || count(allPlayer, true) < 1 || count(allPlayer, true) > 4) return;
         Destroy(ost.gameObject);
+
+        cantJoin = true;
         
         tempPlayerNb.howManyPlayer = count(allPlayer, true);
         

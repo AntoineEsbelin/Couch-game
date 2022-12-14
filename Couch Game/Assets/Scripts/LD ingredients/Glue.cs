@@ -7,7 +7,7 @@ public class Glue : MonoBehaviour
     public float glueSpeedModifier = 0.2f;
     public float glueSpeedModifierSpinner = 0.6f;
 
-    private List<PlayerController> playersInGlue = new List<PlayerController>();
+    [SerializeField] private List<PlayerController> playersInGlue;
     
     void OnTriggerEnter(Collider other)
     {
@@ -37,11 +37,11 @@ public class Glue : MonoBehaviour
 
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
-        if(playersInGlue.Count <= 0)return;
+        if(playersInGlue.Count < 1)return;
 
-        for(int i = 0; i <= playersInGlue.Count;)
+        for(int i = 0; i < playersInGlue.Count;)
         {
             ReturnPlayerToNormal(playersInGlue[i]);
         }
