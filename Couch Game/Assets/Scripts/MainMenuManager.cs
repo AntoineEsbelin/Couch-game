@@ -30,6 +30,7 @@ public class MainMenuManager : MonoBehaviour
     public GameObject firstBinding;
 
     public bool stageSelected = false;
+    public GameObject transition;
     
 
     public void MainMenuButton()
@@ -175,6 +176,7 @@ public class MainMenuManager : MonoBehaviour
 
     private IEnumerator OnLoadLevel(string name)
     {
+        transition.GetComponent<Animator>().SetTrigger("In");
         var eventSystem = EventSystem.current;
         eventSystem.enabled = false;
         stageSelected = true;

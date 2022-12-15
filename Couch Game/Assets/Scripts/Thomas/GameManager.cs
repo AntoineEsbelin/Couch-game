@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
     public Image countdown;
     public Camera cam;
     public Camera lastCam;
+    public GameObject transition;
 
     public GameObject fullUI;
 
@@ -355,8 +356,9 @@ public class GameManager : MonoBehaviour
     {
         if(gameTimer.timeOut)return;
         gameTimer.timerTXT.text = "END";
-        
-        if(gameTimer.drawTimer)
+        gameTimer.timerTXT.fontSize = 72;
+
+        if (gameTimer.drawTimer)
         {
             if(ost != null)Destroy(ost.gameObject);
             ost = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["End Game"], this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
@@ -504,11 +506,14 @@ public class GameManager : MonoBehaviour
         
 
         yield return new WaitForSeconds(waitTime);
+        transition.GetComponent<Animator>().SetTrigger("In");
+        yield return new WaitForSeconds(1f);
         if(ost != null)Destroy(ost.gameObject);
         //gameTimer.timerTXT.text = $"Player {playerWinner.playerId} WIN !";
         
         AudioSource audio = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Win"], this.transform.position, AudioManager.instance.soundEffectMixer, false, true);
         //Podium scene here
+        transition.GetComponent<Animator>().SetTrigger("Out");
         fullUI.gameObject.SetActive(false);
         cam.gameObject.SetActive(false);
         lastCam.gameObject.SetActive(true);
@@ -516,7 +521,9 @@ public class GameManager : MonoBehaviour
         //general victory voice sound
         AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio[$"{playerWinner.playerId} Win"], this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
 
-        yield return new WaitForSeconds(15f);
+        yield return new WaitForSeconds(14f);
+        transition.GetComponent<Animator>().SetTrigger("In");
+        yield return new WaitForSeconds(1f);
         SceneManager.LoadScene("MainMenu");
     }
 

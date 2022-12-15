@@ -11,6 +11,7 @@ public class PauseManager : MonoBehaviour
     public InputAction PauseAction;
     public GameObject PauseUI;
     public GameObject ResumeButton;
+    public GameObject transition;
 
     private AudioSource pauseOST;
     
@@ -63,7 +64,9 @@ public class PauseManager : MonoBehaviour
     public void LoadScene(string name)
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene(name);
+        transition.GetComponent<Animator>().SetTrigger("In");
+        StartCoroutine(ChangeScene(name));
+      //  SceneManager.LoadScene(name);
     }
     
     private IEnumerator SelectionMenu(GameObject SelectButton)
@@ -71,5 +74,11 @@ public class PauseManager : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         var eventSystem = EventSystem.current;
         eventSystem.SetSelectedGameObject(SelectButton, new BaseEventData(eventSystem));
+    }
+
+    private IEnumerator ChangeScene(string name)
+    {
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene(name);
     }
 }
