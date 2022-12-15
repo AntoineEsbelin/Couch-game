@@ -28,6 +28,8 @@ public class MainMenuManager : MonoBehaviour
     [Header("Binding Menu")]
     public GameObject bindingInputMenu;
     public GameObject firstBinding;
+
+    public bool stageSelected = false;
     
 
     public void MainMenuButton()
@@ -91,6 +93,7 @@ public class MainMenuManager : MonoBehaviour
     
     private void Update()
     {
+        if(stageSelected)return;
         for (int i = 0; i < levels.Count; i++)
         {
             var eventSystem = EventSystem.current;
@@ -172,6 +175,9 @@ public class MainMenuManager : MonoBehaviour
 
     private IEnumerator OnLoadLevel(string name)
     {
+        var eventSystem = EventSystem.current;
+        eventSystem.enabled = false;
+        stageSelected = true;
         AudioSource sfx = AudioManager.instance.PlayClipAt(AudioManager.instance.allAudio["Menu Transition"], this.transform.position, AudioManager.instance.soundEffectMixer, true, false);
         yield return new WaitForSeconds(sfx.clip.length / 2);
         SceneManager.LoadScene(name);

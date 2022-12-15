@@ -82,6 +82,7 @@ public class Flipper : MonoBehaviour
             
             PlayerController pc = player.GetComponent<PlayerController>();
             pc.StunState.timerMax = maxKnockBackTimer;
+            if(pc.startCharging)pc.ResetCharging();
             pc.stateMachine.SwitchState(pc.StunState);
         }
     }

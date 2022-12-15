@@ -484,6 +484,7 @@ public class PlayerController : MonoBehaviour
                         triggerPlayer.stateMachine.SwitchState(triggerPlayer.NormalState);
                         //Debug.Log(triggerPlayer);
                         //triggerPlayer.hasCountered = false;
+                        if(triggerPlayer.startCharging)ResetCharging();
                         //activate bounce player of this spinner
                         Instantiate(explosion, this.transform.position, Quaternion.identity);
                         triggerPlayer.StunState.timerMax = triggerPlayer.stunDurationKnockback;

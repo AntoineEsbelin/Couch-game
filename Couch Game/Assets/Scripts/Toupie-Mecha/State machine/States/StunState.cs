@@ -27,6 +27,7 @@ public class StunState : PlayerState
     public override void EnterState(PlayerController player)
     {
         playerController = player;
+        playerController.PlayerAnimator.SetFloat("MoveValue", 0);
         timer = timerMax;
         if (isKnockBacked){knockbackDir = kbDirBumper;}
         if(player.lastPlayerContacted == null)return;

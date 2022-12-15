@@ -81,6 +81,7 @@ public class Bumper : MonoBehaviour
             playerCtrl.StunState.timerMax = maxTimer;
             playerCtrl.StunState.timer = maxTimer;
             playerCtrl.StunState.kbDirBumper = -col.contacts[0].normal;
+            if(playerCtrl.startCharging)playerCtrl.ResetCharging();
             // Debug.Log(-col.contacts[0].normal);
             // Debug.DrawRay(transform.position, -col.contacts[0].normal * 10, Color.red, 2f);
             int randomBumper = Random.Range(0, 5);
