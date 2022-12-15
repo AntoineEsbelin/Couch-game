@@ -17,7 +17,7 @@ public class Hitbox : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             PlayerController otherPlayer = other.GetComponentInParent<PlayerController>();
-            otherPlayer.lastPlayerContacted = GetComponent<PlayerController>();//ça marche pas à refaire (pb de collision point d'interrogation)
+            otherPlayer.lastPlayerContacted = GetComponentInParent<PlayerController>();//ça marche pas à refaire (pb de collision point d'interrogation)
             Rigidbody rb = other.GetComponentInParent<Rigidbody>();
             counterAtk.rb = rb;
             counterAtk.pm = rb.GetComponent<PlayerController>();
