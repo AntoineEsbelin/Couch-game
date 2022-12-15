@@ -86,12 +86,6 @@ public class StunState : PlayerState
 
         player.NormalState.isKnockbacked = false;
     }
-
-    [System.Serializable] public class MovementSettings
-    {
-        
-    }
-
     void Timer()
     {
         if (timer > 0)

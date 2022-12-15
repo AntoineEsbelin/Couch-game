@@ -134,7 +134,7 @@ public class CounterA : MonoBehaviour
         if (pm != null && pm.currentState == pm.SpinnerState && pm.invincibilityTimer <= 0 && hasHit && !pm.hasCountered)
         {
             hasHit = false;
-            Debug.Log("Stun");
+            //Debug.Log("Stun");
             CameraShaker.Instance.ShakeOnce(2f, 4f, 0.1f, 0.5f);
             pm.SpinStunState.timerMax = spinStun;
             //Debug.Log(forceToApply);
