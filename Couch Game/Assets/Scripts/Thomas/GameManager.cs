@@ -44,9 +44,6 @@ public class GameManager : MonoBehaviour
     public InputAction StartAction;
     
 
-    [Header("ENLEVER APRES PROD")]
-    public InputAction MainMenuAction;
-
     //Event
     public event System.Action<PlayerInput> PlayerJoinedGame;
     public event System.Action<PlayerInput> PlayerLeftGame;
@@ -159,10 +156,6 @@ public class GameManager : MonoBehaviour
         StartAction.performed += ctx => StartGame();
         
         
-
-        //debug
-        MainMenuAction.Enable();
-        MainMenuAction.performed += ctx => OnReturnMainMenu();
     }
     
     private void OnDisable()
@@ -170,7 +163,6 @@ public class GameManager : MonoBehaviour
         joinAction.Disable();
         leftAction.Disable();
         StartAction.Disable();
-        MainMenuAction.Disable();
         
     }
 
@@ -447,11 +439,6 @@ public class GameManager : MonoBehaviour
         }
 
         SceneManager.LoadScene(sceneName);
-    }
-
-    public void OnReturnMainMenu()
-    {
-        SceneManager.LoadScene("MainMenu");
     }
 
     public void Cheer()
