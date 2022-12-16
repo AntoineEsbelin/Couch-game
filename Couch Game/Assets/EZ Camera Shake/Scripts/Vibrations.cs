@@ -27,13 +27,21 @@ namespace EZVibrations
             //controller vibration
             for (int i = 0; i < vibrationsInstances.Count; i++)
             {
+               /* if (i >= vibrationsInstances.Count)
+                    break;
+                for (int j = 0; j < vibrationsInstances.Count; j++)
+                    if (vibrationsInstances[i] == vibrationsInstances[j] && i != j)
+                    {
+                        Destroy(this);
+                        break;
+                    }*/
                 if (vibrationsInstances[i].whichController != null)
                 {
                     if (vibrationsInstances[i].whichController.GetDevice<Gamepad>() == null) return;
                         Gamepad gamepad = vibrationsInstances[i].whichController.GetDevice<Gamepad>();
 
-                    if (gamepad == Gamepad.current)
-                    {
+                   /* if (gamepad == Gamepad.current)
+                    {*/
                         if (vibrationsInstances[i].vibroTimer > 0)
                         {
                             vibrationsInstances[i].vibroTimer -= Time.deltaTime;
@@ -47,7 +55,7 @@ namespace EZVibrations
                             gamepad.SetMotorSpeeds(0, 0);
                             vibrationsInstances.RemoveAt(i);
                         }
-                    }
+                    /*}*/
                 }
             }
         }

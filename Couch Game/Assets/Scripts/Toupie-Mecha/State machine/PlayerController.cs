@@ -95,7 +95,6 @@ public class PlayerController : MonoBehaviour
 
     [HideInInspector] public int pointChange;
 
-
     void OnEnable()
     {
         currentState = NormalState;

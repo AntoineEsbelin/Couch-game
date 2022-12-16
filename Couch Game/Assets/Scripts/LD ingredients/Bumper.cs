@@ -16,6 +16,7 @@ public class Bumper : MonoBehaviour
 
     private Animator animate;
 
+
     private float timer;
     [SerializeField] private float maxTimer;
 

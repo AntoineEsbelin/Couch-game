@@ -116,7 +116,7 @@ public class GameManager : MonoBehaviour
         playerIcon[playerController.playerId - 1].sprite = playerIconOn[playerController.playerId - 1];
         playerIcon[playerController.playerId - 1].transform.GetChild(0).gameObject.SetActive(false);
         playerController.transform.position = spawnPoints[playerController.playerId - 1].position;
-        playerController.playerFBX = Instantiate(charactersFBX[playerController.playerId - 1], playerController.transform);    
+        playerController.playerFBX = Instantiate(charactersFBX[playerController.playerId - 1], playerController.transform);
     
         playerController.trailRenderer = playerController.playerFBX.GetComponentInChildren<TrailRenderer>(true);
         playerController.spinningAnim = playerController.playerFBX.GetComponentInChildren<SpinningAnim>();
