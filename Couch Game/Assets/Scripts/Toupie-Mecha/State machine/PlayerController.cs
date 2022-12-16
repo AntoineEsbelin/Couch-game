@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using EZCameraShake;
+using EZVibrations;
 public class PlayerController : MonoBehaviour
 {
 
@@ -384,6 +385,8 @@ public class PlayerController : MonoBehaviour
             if(currentState == SpinnerState)
             {
                 CameraShaker.Instance.ShakeOnce(1f, 4f, 0.1f, 0.5f);
+                if (gameObject.GetComponent<PlayerInput>().currentControlScheme != "Keyboard&Mouse")
+                    Vibrations.Instance.VibrateOnce(0.5f, 0.5f, gameObject.GetComponent<PlayerInput>(), 0.1f);
                 wallNormal = other.contacts[0].normal;
                 playerDirection = SpinnerState.moveDir;
                 wallNormal.y = 0;
@@ -422,8 +425,10 @@ public class PlayerController : MonoBehaviour
                 
             }
             else if (currentState == StunState)
-            {
-                CameraShaker.Instance.ShakeOnce(1f, 4f, 0.1f, 0.5f);
+        {
+            if (gameObject.GetComponent<PlayerInput>().currentControlScheme != "Keyboard&Mouse")
+                Vibrations.Instance.VibrateOnce(0.5f, 0.5f, gameObject.GetComponent<PlayerInput>(), 0.1f);
+            CameraShaker.Instance.ShakeOnce(1f, 4f, 0.1f, 0.5f);
                 wallNormal = other.contacts[0].normal;
                 playerDirection = StunState.knockbackDir;
                 BounceWallStuned();
@@ -470,17 +475,21 @@ public class PlayerController : MonoBehaviour
                 //triggerPlayer.lastPlayerContacted = this;
                 //triggerPlayer.timeLastPlayer = 0.1f;
                 if (currentState == SpinnerState)
-                {
-                    CameraShaker.Instance.ShakeOnce(1f, 4f, 0.1f, 0.5f);
+            {
+                if (gameObject.GetComponent<PlayerInput>().currentControlScheme != "Keyboard&Mouse")
+                    Vibrations.Instance.VibrateOnce(0.7f, 0.7f, gameObject.GetComponent<PlayerInput>(), 0.2f);
+                CameraShaker.Instance.ShakeOnce(1f, 4f, 0.1f, 0.5f);
                     triggerPlayer.timeLastPlayer = triggerPlayer.maxTimeLastPlayer;
 
 
                 //Si le joueur est pas stun [???]
                 if (triggerPlayer.SpinnerState.repoussed)return;
                     if ((triggerPlayer.currentState == triggerPlayer.NormalState || triggerPlayer.currentState == triggerPlayer.StunState || triggerPlayer.currentState == triggerPlayer.SpinStunState || triggerPlayer.currentState == triggerPlayer.SpinnerState) && !triggerPlayer.hasCountered)
-                    {
-                        //Debug.Log("2 fois ?");
-                        stateMachine.SwitchState(NormalState);
+                {
+                    if (gameObject.GetComponent<PlayerInput>().currentControlScheme != "Keyboard&Mouse" && currentState != NormalState)
+                        Vibrations.Instance.VibrateOnce(0.6f, 0.6f, gameObject.GetComponent<PlayerInput>(), 0.2f);
+                    //Debug.Log("2 fois ?");
+                    stateMachine.SwitchState(NormalState);
                         triggerPlayer.stateMachine.SwitchState(triggerPlayer.NormalState);
                         //Debug.Log(triggerPlayer);
                         //triggerPlayer.hasCountered = false;
@@ -517,8 +526,10 @@ public class PlayerController : MonoBehaviour
                  if(!triggerPlayer.firstBumpPlayer)
                  {
                     triggerPlayer.stateMachine.SwitchState(triggerPlayer.NormalState);
-                     //Debug.Log("HOO");
-                        CameraShaker.Instance.ShakeOnce(1f, 4f, 0.1f, 0.5f);
+                    //Debug.Log("HOO");
+                    if (gameObject.GetComponent<PlayerInput>().currentControlScheme != "Keyboard&Mouse" && currentState != NormalState)
+                        Vibrations.Instance.VibrateOnce(0.6f, 0.6f, gameObject.GetComponent<PlayerInput>(), 0.2f);
+                    CameraShaker.Instance.ShakeOnce(1f, 4f, 0.1f, 0.5f);
 
                         triggerPlayer.lastPlayerContacted = this;
                         triggerPlayer.timeLastPlayer = triggerPlayer.maxTimeLastPlayer;
@@ -571,9 +582,11 @@ public class PlayerController : MonoBehaviour
 
         void BounceSpinner()
         {
-            //Bounce against other player
-            //Instantiate(explosion, this.transform.position, Quaternion.identity);
-            Instantiate(SpinnerState.spinnerFX.spinerVsSpinerVFX, transform);
+        //Bounce against other player
+        //Instantiate(explosion, this.transform.position, Quaternion.identity);
+        if (gameObject.GetComponent<PlayerInput>().currentControlScheme != "Keyboard&Mouse" && currentState != NormalState)
+            Vibrations.Instance.VibrateOnce(0.6f, 0.6f, gameObject.GetComponent<PlayerInput>(), 0.2f);
+        Instantiate(SpinnerState.spinnerFX.spinerVsSpinerVFX, transform);
             CameraShaker.Instance.ShakeOnce(1f, 4f, 0.1f, 0.5f);
             //Debug.Log("bounce");
             SpinnerState.moveDir = -SpinnerState.moveDir;

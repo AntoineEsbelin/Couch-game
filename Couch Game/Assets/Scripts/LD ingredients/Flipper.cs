@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using EZCameraShake;
+using EZVibrations;
 
 public class Flipper : MonoBehaviour
 {
@@ -72,7 +74,9 @@ public class Flipper : MonoBehaviour
     {
         if (col.collider.CompareTag("Player") && flipperCollider.enabled)
         {
-            CameraShaker.Instance.ShakeOnce(1f, 4f, 0.1f, 0.5f);
+            CameraShaker.Instance.ShakeOnce(1f, 4f, 0.1f, 0.5f); 
+            if (col.gameObject.GetComponent<PlayerInput>().currentControlScheme != "Keyboard&Mouse")
+                Vibrations.Instance.VibrateOnce(0.7f, 0.7f, col.gameObject.GetComponent<PlayerInput>(), 0.2f);
             player = col.gameObject;
             
             dir = -col.contacts[0].normal;

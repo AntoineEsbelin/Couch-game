@@ -21,8 +21,9 @@ namespace EZVibrations
             instanceList.Add(gameObject.name, this);
         }
 
-        void Update()
+        private void Update()
         {
+            Debug.Log(vibrationsInstances.Count);
             //controller vibration
             for (int i = 0; i < vibrationsInstances.Count; i++)
             {
@@ -59,7 +60,7 @@ namespace EZVibrations
 
         void OnDestroy()
         {
-            instanceList.Remove(gameObject.name);
+                instanceList.Remove(gameObject.name);
         }
     }
 }

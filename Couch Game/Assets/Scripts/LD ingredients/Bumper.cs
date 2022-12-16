@@ -60,7 +60,8 @@ public class Bumper : MonoBehaviour
     {
         if (col.collider.CompareTag("Player"))
         {
-            Vibrations.Instance.VibrateOnce(0.5f, 0.5f, PlayerInput.GetPlayerByIndex(0), 0.3f);
+            if (col.gameObject.GetComponent<PlayerInput>().currentControlScheme != "Keyboard&Mouse")
+                Vibrations.Instance.VibrateOnce(0.6f, 0.6f, col.gameObject.GetComponent<PlayerInput>(), 0.2f);
             player = col.gameObject;
             CameraShaker.Instance.ShakeOnce(1f, 4f, 0.1f, 0.5f);
             playerRb = player.GetComponent<Rigidbody>();

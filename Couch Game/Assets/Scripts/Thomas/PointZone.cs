@@ -36,6 +36,8 @@ public class PointZone : MonoBehaviour
     {
         if(coll.CompareTag("Player"))
         {
+            if (coll.GetComponent<PlayerInput>().currentControlScheme != "Keyboard&Mouse" && !isField)
+                Vibrations.Instance.VibrateOnce(0.6f, 0.6f, coll.gameObject.GetComponent<PlayerInput>(), 0.4f);
             controller = coll.GetComponent<PlayerInput>();
             PlayerController deadPlayer = coll.GetComponentInParent<PlayerController>();
             if(isField || deadPlayer.currentState == deadPlayer.DeathState)return;
@@ -50,7 +52,8 @@ public class PointZone : MonoBehaviour
     {
         if(coll.CompareTag("Player"))
         {
-            Vibrations.Instance.VibrateOnce(0.5f, 0.5f, PlayerInput.GetPlayerByIndex(0), 0.3f);
+            if (coll.GetComponent<PlayerInput>().currentControlScheme != "Keyboard&Mouse" && isField)
+                Vibrations.Instance.VibrateOnce(0.6f, 0.6f, coll.gameObject.GetComponent<PlayerInput>(), 0.4f);
             CameraShaker.Instance.ShakeOnce(4f, 4f, 0.1f, 1f);
             PlayerController deadPlayer = coll.GetComponentInParent<PlayerController>();
             if(!isField || deadPlayer.currentState == deadPlayer.DeathState)return;
