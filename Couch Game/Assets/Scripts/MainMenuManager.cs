@@ -31,6 +31,9 @@ public class MainMenuManager : MonoBehaviour
 
     public bool stageSelected = false;
     public GameObject transition;
+
+    [Header("First Player Input")]
+    [SerializeField] private FirstPlayerInputManager firstPlayerInput;
     
 
     public void MainMenuButton()
